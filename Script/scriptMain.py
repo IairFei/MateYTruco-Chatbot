@@ -1,5 +1,15 @@
 """En este archivo se ejecuta el programa principal, se importan las funciones necesarias y se ejecuta el programa."""
 
+'''FALTA
+1) revisar coherencia
+2) consultar escritura archivos
+3)hoja que guarde preguntas no respuestas
+
+opcionales
+1) arrays chewbaca y r2d2
+2) nombre de usuario
+'''
+
 yoda = False
 def eleccionPersonaje(personaje):    
     match personaje.lower():
@@ -107,7 +117,7 @@ def readQuest(userInput, yoda):
 
 
 # --- PROGRAMA PRINCIPAL ---
-#revisar coherencia!!!!!!!!
+
 print("--------------------------------------------------------------")
 print("          BIENVENIDO AL MEJOR ASISTENTE DE STAR WARS          ")
 print("--------------------------------------------------------------")
