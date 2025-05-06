@@ -9,13 +9,13 @@ opcionales
 1) arrays chewbaca y r2d2
 2) nombre de usuario
 '''
-
+import random
 yoda = False
 def eleccionPersonaje(personaje):    
     match personaje.lower():
 
         case 'r2d2':
-
+            frasesR2d2 = ['beep','Beep bep','Bep beep','Bpep','Beep beep beeep']
             while True:
                 entrada = input("Tú: ")
                 if entrada.lower() == "salir" or entrada.lower() == "adios" :
@@ -24,10 +24,10 @@ def eleccionPersonaje(personaje):
                 if entrada.lower() == "cambiar de personaje" or entrada.lower() == "cambiar personaje" :
                     personaje = input('Que personaje desea elegir: ')
                     eleccionPersonaje(personaje)
-                print("R2D2:", 'BEEP BEP BEEP')
+                print("R2D2:", random.choice(frasesR2d2))
                 
         case 'chewbacca':
-
+            frasesChew = ['Grrrrowr','Hwaaurrgh','ghaawwu','huagg','Rrwaahhggg','Grrrruuughhh']
             while True:
                 entrada = input("Tú: ")
                 if entrada.lower() == "salir" or entrada.lower() == "adios" :
@@ -36,7 +36,7 @@ def eleccionPersonaje(personaje):
                 if entrada.lower() == "cambiar de personaje" or entrada.lower() == "cambiar personaje" :
                     personaje = input('Que personaje desea elegir: ')
                     eleccionPersonaje(personaje)
-                print("Chewbacca:", 'OOOAAAW')
+                print("Chewbacca:", random.choice(frasesChew) ) 
         
         
         case 'yoda':
