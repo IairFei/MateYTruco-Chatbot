@@ -9,8 +9,46 @@ opcionales
 1) arrays chewbaca y r2d2
 2) nombre de usuario
 '''
+
 import random
+
 yoda = False
+def agregarPregunta():
+    """Agrega una pregunta al archivo de preguntas.txt."""
+    question = input("Escriba la pregunta que desea agregar:")
+
+    if readQuest(question.lower().strip("¿?#$%&/()!¡"), False) != "No tengo respuesta para esa pregunta, lo siento. Si desea hacerme otra pregunta, porfavor escribala. En caso de querer agregar la pregunta al sistema, escriba: agregar pregunta.":
+        print("La pregunta ya existe en el sistema.")
+        nuevaPregunta = input("Desea agregar una nueva pregunta? (si/no): ")
+        if nuevaPregunta.lower() == "si":
+            return agregarPregunta()
+        else:
+            print("No se agrego la pregunta.")
+            return
+    with open("ArchivosDeLectura/preguntas.txt", "a", encoding="utf-8") as file:
+        file.write(f"Q: {question}\n")
+        answer = input("Escriba la respuesta que desea agregar:")
+        file.write(f"A: {answer}\n")
+        yodaAnswer = input("Desea agregar una respuesta de Yoda? (si/no):")
+        if yodaAnswer.lower() == "si":
+            yodaAnswer = input("Escriba la respuesta que desea agregar:")
+            file.write(f"YA: {yodaAnswer}\n")
+        file.write("\n")
+        print("\nPregunta y respuesta agregadas correctamente.")
+        print("\nPodés chatear con distintos personajes como R2D2, Chewbacca, Yoda o C-3PO. Cuando desees cambiar de personaje, escribí: cambiar personaje: seguido del nombre.\n")
+        personaje = input("Coloque el nombre del personaje con el que desea hablar: ")
+        eleccionPersonaje(personaje)
+
+def buscarPregunta(userInput, questGroup, answGroup):
+    """Busca la pregunta en el grupo de preguntas y devuelve la respuesta correspondiente."""
+    userInput = userInput.strip()
+    
+    for x in range(len(questGroup)):
+        for y in range(len(questGroup[x])):
+            if(questGroup[x][y] == userInput):
+                return answGroup[x][0]
+
+    return "No tengo respuesta para esa pregunta, lo siento. Si desea hacerme otra pregunta, porfavor escribala. En caso de querer agregar la pregunta al sistema, escriba: agregar pregunta."
 def eleccionPersonaje(personaje):    
     match personaje.lower():
 
@@ -61,11 +99,16 @@ def eleccionPersonaje(personaje):
                 if entrada.lower() == "salir" or entrada.lower() == "adios" :
                     print("Conversación finalizada, que la fuerza te acompañe.")
                     break
-                if entrada.lower() == "cambiar de personaje" or entrada.lower() == "cambiar personaje" :
+                elif entrada.lower() == "cambiar de personaje" or entrada.lower() == "cambiar personaje" :
                     personaje = input('Que personaje desea elegir: ')
                     eleccionPersonaje(personaje,)
+                elif entrada.lower() == "agregar pregunta":
+                    agregarPregunta()
+                else:
+                    respuesta = readQuest(entrada.lower().strip("¿?#$%&/()!¡"), False)
+                    if respuesta == -1:
+                        respuesta=("No tengo respuesta para esa pregunta, lo siento. Si desea hacerme otra pregunta, porfavor escribala. En caso de querer agregar la pregunta al sistema, escriba: agregar pregunta.")
 
-                respuesta = readQuest(entrada.lower().strip("¿?#$%&/()!¡"), False)
                 print("C-3PO:", respuesta)
         
         case _:
@@ -101,23 +144,12 @@ def readQuest(userInput, yoda):
                     questGroup.append(quest)
                     answGroup.append(answ)
                     quest = []
-                    answ = [] 
+                    answ = []
+        return buscarPregunta(userInput, questGroup, answGroup)
 
-    userInput = userInput.strip()
-    questPosition = 0
-    for x in range(len(questGroup)):
-        for y in range(len(questGroup[x])):
-
-            if(questGroup[x][y] == userInput):
-                questPosition = x
-
-            
-    answer = answGroup[questPosition][0]
-    return (answer)
 
 
 # --- PROGRAMA PRINCIPAL ---
-
 print("--------------------------------------------------------------")
 print("          BIENVENIDO AL MEJOR ASISTENTE DE STAR WARS          ")
 print("--------------------------------------------------------------")
