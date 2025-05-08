@@ -13,6 +13,12 @@ opcionales
 import random
 
 yoda = False
+
+
+def inicioPrograma():
+    print("Podés chatear con distintos personajes como R2D2, Chewbacca, Yoda o C-3PO. Cuando desees cambiar de personaje, escribí: cambiar personaje: seguido del nombre.\n")
+    personaje = input("Coloque el nombre del personaje con el que desea hablar: ")
+    eleccionPersonaje(personaje)
 def agregarPregunta():
     """Agrega una pregunta al archivo de preguntas.txt."""
     question = input("Escriba la pregunta que desea agregar:")
@@ -24,7 +30,7 @@ def agregarPregunta():
             return agregarPregunta()
         else:
             print("No se agrego la pregunta.")
-            return
+            return inicioPrograma()
     with open("ArchivosDeLectura/preguntas.txt", "a", encoding="utf-8") as file:
         file.write(f"Q: {question}\n")
         answer = input("Escriba la respuesta que desea agregar:")
@@ -35,14 +41,11 @@ def agregarPregunta():
             file.write(f"YA: {yodaAnswer}\n")
         file.write("\n")
         print("\nPregunta y respuesta agregadas correctamente.")
-        print("\nPodés chatear con distintos personajes como R2D2, Chewbacca, Yoda o C-3PO. Cuando desees cambiar de personaje, escribí: cambiar personaje: seguido del nombre.\n")
-        personaje = input("Coloque el nombre del personaje con el que desea hablar: ")
-        eleccionPersonaje(personaje)
+        return inicioPrograma()
 
-def buscarPregunta(userInput, questGroup, answGroup):
+def buscarRespuesta(userInput, questGroup, answGroup):
     """Busca la pregunta en el grupo de preguntas y devuelve la respuesta correspondiente."""
-    userInput = userInput.strip()
-    
+
     for x in range(len(questGroup)):
         for y in range(len(questGroup[x])):
             if(questGroup[x][y] == userInput):
@@ -78,17 +81,18 @@ def eleccionPersonaje(personaje):
         
         
         case 'yoda':
-
             while True:
                 entrada = input("Tú: ")
                 if entrada.lower() == "salir" or entrada.lower() == "adios" :
                     print("Conversación finalizada, Que la fuerza te acompañe, siempre.")
                     break
-                if entrada.lower() == "cambiar de personaje" or entrada.lower() == "cambiar personaje" :
+                elif entrada.lower() == "cambiar de personaje" or entrada.lower() == "cambiar personaje" :
                     personaje = input('Que personaje desea elegir: ')
-                    eleccionPersonaje(personaje)
-
-                respuesta = readQuest(entrada.lower().strip("¿?#$%&/()!¡"), True)
+                    eleccionPersonaje(personaje,)
+                elif entrada.lower() == "agregar pregunta":
+                    agregarPregunta()
+                else:
+                    respuesta = readQuest(entrada.lower().strip("¿?#$%&/()!¡"), True)
                 print("Yoda:", respuesta)
 
         case 'c-3po':
@@ -105,10 +109,7 @@ def eleccionPersonaje(personaje):
                 elif entrada.lower() == "agregar pregunta":
                     agregarPregunta()
                 else:
-                    respuesta = readQuest(entrada.lower().strip("¿?#$%&/()!¡"), False)
-                    if respuesta == -1:
-                        respuesta=("No tengo respuesta para esa pregunta, lo siento. Si desea hacerme otra pregunta, porfavor escribala. En caso de querer agregar la pregunta al sistema, escriba: agregar pregunta.")
-
+                    respuesta = readQuest(entrada.lower().strip("¿?#$%&/()!¡"), False)   
                 print("C-3PO:", respuesta)
         
         case _:
@@ -145,7 +146,7 @@ def readQuest(userInput, yoda):
                     answGroup.append(answ)
                     quest = []
                     answ = []
-        return buscarPregunta(userInput, questGroup, answGroup)
+        return buscarRespuesta(userInput, questGroup, answGroup)
 
 
 
@@ -155,9 +156,7 @@ print("          BIENVENIDO AL MEJOR ASISTENTE DE STAR WARS          ")
 print("--------------------------------------------------------------")
 print("Se inicio el chat, escriba su pregunta. Si desea finalizar el chat escriba salir o adios.")
 print("Porfavor no utilice tildes, Gracias.")
-print("Podés chatear con distintos personajes como R2D2, Chewbacca, Yoda o C-3PO. Cuando desees cambiar de personaje, escribí: cambiar personaje: seguido del nombre.\n")
-personaje = input("Coloque el nombre del personaje con el que desea hablar: ")
-eleccionPersonaje(personaje)
+inicioPrograma()
 
 
 
