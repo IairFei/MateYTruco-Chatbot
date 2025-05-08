@@ -216,3 +216,19 @@ YA: En la luna boscosa de Endor, los Ewoks viven. Contra el Imperio, batalla all
 Q: como se llama la estrella negra grande?
 A: estrella de la muerte
 
+Q: como muere luke
+A: por un sablazo
+YA: sablazo yoda
+
+Q: como muere lukinho
+A: por en sablazo
+YA: salbasa
+
+Q: sablazeado
+A: adios
+YA: sablazeado
+
+Q: como muere lukinho
+A: por en sablazo
+YA: sablazeado
+

@@ -11,6 +11,10 @@ opcionales
 '''
 
 import random
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PREGUNTAS_PATH = os.path.join(BASE_DIR, "ArchivosDeLectura", "preguntas.txt")
 
 yoda = False
 
@@ -22,8 +26,9 @@ def inicioPrograma():
 def agregarPregunta():
     """Agrega una pregunta al archivo de preguntas.txt."""
     question = input("Escriba la pregunta que desea agregar:")
-
-    if readQuest(question.lower().strip("¿?#$%&/()!¡"), False) != "No tengo respuesta para esa pregunta, lo siento. Si desea hacerme otra pregunta, porfavor escribala. En caso de querer agregar la pregunta al sistema, escriba: agregar pregunta.":
+    userInput, questGroup, answGroup = readQuest(question.lower().strip("¿?#$%&/()!¡"), False)
+    respuesta = buscarRespuesta(userInput, questGroup, answGroup)
+    if respuesta != "No tengo respuesta para esa pregunta, lo siento. Si desea hacerme otra pregunta, porfavor escribala. En caso de querer agregar la pregunta al sistema, escriba: agregar pregunta.":
         print("La pregunta ya existe en el sistema.")
         nuevaPregunta = input("Desea agregar una nueva pregunta? (si/no): ")
         if nuevaPregunta.lower() == "si":
@@ -31,7 +36,7 @@ def agregarPregunta():
         else:
             print("No se agrego la pregunta.")
             return inicioPrograma()
-    with open("ArchivosDeLectura/preguntas.txt", "a", encoding="utf-8") as file:
+    with open(PREGUNTAS_PATH, "a", encoding="utf-8") as file:
         file.write(f"Q: {question}\n")
         answer = input("Escriba la respuesta que desea agregar:")
         file.write(f"A: {answer}\n")
@@ -92,7 +97,8 @@ def eleccionPersonaje(personaje):
                 elif entrada.lower() == "agregar pregunta":
                     agregarPregunta()
                 else:
-                    respuesta = readQuest(entrada.lower().strip("¿?#$%&/()!¡"), True)
+                    userInput, questGroup, answGroup = readQuest(entrada.lower().strip("¿?#$%&/()!¡"), True)
+                    respuesta = buscarRespuesta(userInput, questGroup, answGroup)
                 print("Yoda:", respuesta)
 
         case 'c-3po':
@@ -109,7 +115,8 @@ def eleccionPersonaje(personaje):
                 elif entrada.lower() == "agregar pregunta":
                     agregarPregunta()
                 else:
-                    respuesta = readQuest(entrada.lower().strip("¿?#$%&/()!¡"), False)   
+                    userInput, questGroup, answGroup = readQuest(entrada.lower().strip("¿?#$%&/()!¡"), False)
+                    respuesta = buscarRespuesta(userInput, questGroup, answGroup)   
                 print("C-3PO:", respuesta)
         
         case _:
@@ -130,7 +137,7 @@ def readQuest(userInput, yoda):
     quest = []
     answ = []
     
-    with open("ArchivosDeLectura/preguntas.txt", "r", encoding="utf-8") as file:
+    with open(PREGUNTAS_PATH, "r", encoding="utf-8") as file:
     
         for lineas in file:
             lineas = lineas.strip()
@@ -146,7 +153,7 @@ def readQuest(userInput, yoda):
                     answGroup.append(answ)
                     quest = []
                     answ = []
-        return buscarRespuesta(userInput, questGroup, answGroup)
+        return userInput, questGroup, answGroup
 
 
 
