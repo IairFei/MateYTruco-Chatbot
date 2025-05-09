@@ -213,16 +213,4 @@ Q: Donde ocurre la batalla final en El Retorno del Jedi
 A: Los Ewoks viven en la luna boscosa de Endor, donde ocurre la batalla contra el Imperio en Return of the Jedi. 
 YA: En la luna boscosa de Endor, los Ewoks viven. Contra el Imperio, batalla allí hubo, en “Return of the Jedi”.
 
-Q: Quien es Tizi
-A: un boludo
-YA: boludo es
-
-Q: tizi es boludo al cubo
-A: si
-
-Q: tizi es boludo al cuarto
-A: si
-
-Q: gonza tonto
-A: si
 

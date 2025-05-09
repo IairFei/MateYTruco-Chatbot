@@ -15,6 +15,7 @@ import random
 newAnsw =[]
 newQuest= [] 
 yoda = False
+agregoPregunta = False
 
 
 def inicioPrograma():
@@ -24,22 +25,24 @@ def inicioPrograma():
 
 def agregarPregunta(userInput):
     """Agrega una pregunta al archivo de preguntas.txt."""
-
     with open("ArchivosDeLectura/preguntas.txt", "a", encoding="utf-8") as file:
-        file.write(f"Q: {userInput}\n")
-        answer = input("Escriba la respuesta que desea agregar:")
-        file.write(f"A: {answer}\n")
-        yodaAnswer = input("Desea agregar una respuesta de Yoda? (si/no):")
-        if yodaAnswer.lower() == "si":
-            yodaAnswer = input("Escriba la respuesta que desea agregar:")
-            file.write(f"YA: {yodaAnswer}\n")
-            yodaAnswer = "YA: "+ yodaAnswer
-
+        global agregoPregunta
+        agregoPregunta = True
         file.write("\n")
-        print("\nPregunta:",question, "y respuesta: agregadas correctamente.")
-        return (inicioPrograma())
+        file.write(f"\nQ: {userInput}\n")
+        answer = input("Escriba la respuesta que desea agregar para la pregunta '" + userInput + "':")
+        file.write(f"A: {answer}\n")
 
-def buscarRespuesta(userInput, questGroup, answGroup):
+        global newAnsw
+        global newQuest
+        
+        newQuest.append(userInput)
+        newAnsw.append(answer)
+        
+        file.write("\n")
+        print("\nPregunta y respuesta agregadas correctamente.")
+
+def buscarRespuesta(userInput, questGroup, answGroup,newQuest, newAnsw):
     """Busca la pregunta en el grupo de preguntas y devuelve la respuesta correspondiente."""
 
     for x in range(len(questGroup)):
@@ -47,7 +50,7 @@ def buscarRespuesta(userInput, questGroup, answGroup):
             if(questGroup[x][y] == userInput):
                 return answGroup[x][0]
 
-    return "No tengo respuesta para esa pregunta, lo siento. Si desea hacerme otra pregunta, porfavor escribala. En caso de querer agregar la pregunta al sistema, escriba: agregar pregunta."
+    return "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema."
 def eleccionPersonaje(personaje):    
     match personaje.lower():
 
@@ -85,11 +88,13 @@ def eleccionPersonaje(personaje):
                 elif entrada.lower() == "cambiar de personaje" or entrada.lower() == "cambiar personaje" :
                     personaje = input('Que personaje desea elegir: ')
                     eleccionPersonaje(personaje)
-                elif entrada.lower() == "agregar pregunta":
-                    agregarPregunta(entrada)
                 else:
                     userInput, questGroup, answGroup = readQuest(entrada.lower().strip("¿?#$%&/()!¡"), True)
-                    respuesta = buscarRespuesta(userInput, questGroup, answGroup)
+                    respuesta = buscarRespuesta(userInput, questGroup, answGroup, newQuest, newAnsw)
+                    if respuesta == "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.":
+                        print("Yoda: ",respuesta)
+                        agregarPregunta(userInput)
+                        return inicioPrograma()    
                 print("Yoda:", respuesta)
 
         case 'c-3po':
@@ -102,14 +107,18 @@ def eleccionPersonaje(personaje):
                     break
                 elif entrada.lower() == "cambiar de personaje" or entrada.lower() == "cambiar personaje" :
                     personaje = input('Que personaje desea elegir: ')
-                    eleccionPersonaje(personaje,)
-                elif entrada.lower() == "agregar pregunta":
-                    agregarPregunta()
+                    eleccionPersonaje(personaje)
                 else:
                     userInput, questGroup, answGroup = readQuest(entrada.lower().strip("¿?#$%&/()!¡"), False)
-                    respuesta = buscarRespuesta(userInput, questGroup, answGroup)   
+                    respuesta = buscarRespuesta(userInput, questGroup, answGroup, newQuest, newAnsw)
+                    if respuesta == "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.":
+                        print("C-3PO: ",respuesta)
+                        agregarPregunta(userInput)
+                        return inicioPrograma()        
                 print("C-3PO:", respuesta)
-        
+        case ('salir') | ('adios'):
+            print("Conversación finalizada, que la fuerza te acompañe.")
+            return
         case _:
             while True:
                 entrada = input('No entendi, ingrese el personaje nuevamente: ')
@@ -118,7 +127,7 @@ def eleccionPersonaje(personaje):
                     print("Conversación finalizada, que la fuerza te acompañe.")
                     break
                 eleccionPersonaje(entrada)
-                    
+    """inicioPrograma()  """              
 
 # Responder
 def readQuest(userInput, yoda):
@@ -144,8 +153,9 @@ def readQuest(userInput, yoda):
                     answGroup.append(answ)
                     quest = []
                     answ = []
-        questGroup.append(newQuest)
-        answGroup.append(newAnsw)
+        if agregoPregunta == True:
+            questGroup.append(newQuest)
+            answGroup.append(newAnsw)
         return (userInput, questGroup, answGroup)
 
 
