@@ -42,7 +42,7 @@ def agregarPregunta(userInput):
         file.write("\n")
         print("\nPregunta y respuesta agregadas correctamente.")
 
-def buscarRespuesta(userInput, questGroup, answGroup,newQuest, newAnsw):
+def buscarRespuesta(userInput, questGroup, answGroup):
     """Busca la pregunta en el grupo de preguntas y devuelve la respuesta correspondiente."""
 
     for x in range(len(questGroup)):
