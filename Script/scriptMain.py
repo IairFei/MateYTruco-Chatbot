@@ -11,11 +11,9 @@ opcionales
 '''
 
 import random
-import os
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-PREGUNTAS_PATH = os.path.join(BASE_DIR, "ArchivosDeLectura", "preguntas.txt")
-
+newAnsw =[]
+newQuest= [] 
 yoda = False
 
 
@@ -23,30 +21,23 @@ def inicioPrograma():
     print("Podés chatear con distintos personajes como R2D2, Chewbacca, Yoda o C-3PO. Cuando desees cambiar de personaje, escribí: cambiar personaje: seguido del nombre.\n")
     personaje = input("Coloque el nombre del personaje con el que desea hablar: ")
     eleccionPersonaje(personaje)
-def agregarPregunta():
+
+def agregarPregunta(userInput):
     """Agrega una pregunta al archivo de preguntas.txt."""
-    question = input("Escriba la pregunta que desea agregar:")
-    userInput, questGroup, answGroup = readQuest(question.lower().strip("¿?#$%&/()!¡"), False)
-    respuesta = buscarRespuesta(userInput, questGroup, answGroup)
-    if respuesta != "No tengo respuesta para esa pregunta, lo siento. Si desea hacerme otra pregunta, porfavor escribala. En caso de querer agregar la pregunta al sistema, escriba: agregar pregunta.":
-        print("La pregunta ya existe en el sistema.")
-        nuevaPregunta = input("Desea agregar una nueva pregunta? (si/no): ")
-        if nuevaPregunta.lower() == "si":
-            return agregarPregunta()
-        else:
-            print("No se agrego la pregunta.")
-            return inicioPrograma()
-    with open(PREGUNTAS_PATH, "a", encoding="utf-8") as file:
-        file.write(f"Q: {question}\n")
+
+    with open("ArchivosDeLectura/preguntas.txt", "a", encoding="utf-8") as file:
+        file.write(f"Q: {userInput}\n")
         answer = input("Escriba la respuesta que desea agregar:")
         file.write(f"A: {answer}\n")
         yodaAnswer = input("Desea agregar una respuesta de Yoda? (si/no):")
         if yodaAnswer.lower() == "si":
             yodaAnswer = input("Escriba la respuesta que desea agregar:")
             file.write(f"YA: {yodaAnswer}\n")
+            yodaAnswer = "YA: "+ yodaAnswer
+
         file.write("\n")
-        print("\nPregunta y respuesta agregadas correctamente.")
-        return inicioPrograma()
+        print("\nPregunta:",question, "y respuesta: agregadas correctamente.")
+        return (inicioPrograma())
 
 def buscarRespuesta(userInput, questGroup, answGroup):
     """Busca la pregunta en el grupo de preguntas y devuelve la respuesta correspondiente."""
@@ -93,9 +84,9 @@ def eleccionPersonaje(personaje):
                     break
                 elif entrada.lower() == "cambiar de personaje" or entrada.lower() == "cambiar personaje" :
                     personaje = input('Que personaje desea elegir: ')
-                    eleccionPersonaje(personaje,)
+                    eleccionPersonaje(personaje)
                 elif entrada.lower() == "agregar pregunta":
-                    agregarPregunta()
+                    agregarPregunta(entrada)
                 else:
                     userInput, questGroup, answGroup = readQuest(entrada.lower().strip("¿?#$%&/()!¡"), True)
                     respuesta = buscarRespuesta(userInput, questGroup, answGroup)
@@ -137,7 +128,7 @@ def readQuest(userInput, yoda):
     quest = []
     answ = []
     
-    with open(PREGUNTAS_PATH, "r", encoding="utf-8") as file:
+    with open("ArchivosDeLectura/preguntas.txt", "r", encoding="utf-8") as file:
     
         for lineas in file:
             lineas = lineas.strip()
@@ -153,7 +144,9 @@ def readQuest(userInput, yoda):
                     answGroup.append(answ)
                     quest = []
                     answ = []
-        return userInput, questGroup, answGroup
+        questGroup.append(newQuest)
+        answGroup.append(newAnsw)
+        return (userInput, questGroup, answGroup)
 
 
 
