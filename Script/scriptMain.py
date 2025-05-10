@@ -1,7 +1,7 @@
 import random
 
 #Librerias originales
-articulos = ["el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de","que","en",'quien','cuando','como','donde']
+articulos = ["el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de","que","en"]
 vocalesTildes = ["á", "é", "í", "ó", "ú"]
 vocalesSinTilde = ['a','e','i','o','u']
 
@@ -20,45 +20,48 @@ def inicioPrograma():
 def agregarPregunta(userInput):
     """Agrega una pregunta al archivo de preguntas.txt."""
     with open("ArchivosDeLectura/preguntas.txt", "a", encoding="utf-8") as file:
-        global agregoPregunta
-        agregoPregunta = True
-        userInput = ''.join(userInput)
-        file.write("\n")
-        file.write(f"\nQ: {userInput}\n")
-        answer = input("Escriba la respuesta que desea agregar para la pregunta '" + userInput + "':")
-        file.write(f"A: {answer}\n")
-        file.write(f"YA: {answer}")
+        agrPregunta = input("Deseea agregar la pregunta '"+ userInput +"' al sistema? (si/no):").lower().strip("¿?#$%&/()!¡ ")
+        if agrPregunta == 'si':
+            global agregoPregunta
+            agregoPregunta = True
+            userInput = ''.join(userInput)
+            file.write("\n")
+            file.write(f"\nQ: {userInput}\n")
+            answer = input("Escriba la respuesta que desea agregar para la pregunta '" + userInput + "':")
+            file.write(f"A: {answer}\n")
+            file.write(f"YA: {answer}")
 
-        global newAnsw
-        global newQuest
-        
-        newQuest.append(userInput)
-        newAnsw.append(answer)
-        
-        file.write("\n")
-        print("\nPregunta y respuesta agregadas correctamente.")
+            global newAnsw
+            global newQuest
+            
+            newQuest.append(userInput)
+            newAnsw.append(answer)
+            
+            file.write("\n")
+            print("\nPregunta y respuesta agregadas correctamente.")
 
 def buscarRespuesta(userInput, questGroup, answGroup):
     coincidenciaMax = 0
+    cantCoincidencias = (len(userInput) + 1) // 2
     mejorIndice = 0
 
     for i in range(len(questGroup)):
         coincidenciasActuales = 0
         for pregunta in questGroup[i]:
-            palabrasPregunta = limpiadorFrases(pregunta)  # Simplificar la pregunta
+            palabrasPregunta = limpiadorFrases(pregunta)
             for palabra in userInput:
                 if palabra in palabrasPregunta:
                     coincidenciasActuales += 1
                     
-        if coincidenciasActuales > coincidenciaMax:  # Solo actualiza si se encuentran más coincidencias
+        if coincidenciasActuales > coincidenciaMax:
             coincidenciaMax = coincidenciasActuales
             mejorIndice = i
 
-    if mejorIndice != 0 and coincidenciaMax >= 2:
+    if mejorIndice != 0 and coincidenciaMax >= cantCoincidencias:
         return answGroup[mejorIndice][0]
     
-    return  "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema."
-    
+    return "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema."
+
 
 def eleccionPersonaje(personaje):    
     while True:
@@ -162,6 +165,7 @@ print("--------------------------------------------------------------")
 print("          BIENVENIDO AL MEJOR ASISTENTE DE STAR WARS          ")
 print("--------------------------------------------------------------")
 print("Se inicio el chat, escriba su pregunta. Si desea finalizar el chat escriba salir o adios.")
+print((1+2)//2)
 inicioPrograma()
 
 
