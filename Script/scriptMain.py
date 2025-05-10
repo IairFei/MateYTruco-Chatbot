@@ -1,7 +1,7 @@
 import random
 
 #Librerias originales
-articulos = ["el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de","que","en"]
+articulos = ["el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de","que","en",'quien']
 vocalesTildes = ["á", "é", "í", "ó", "ú"]
 vocalesSinTilde = ['a','e','i','o','u']
 
@@ -41,25 +41,33 @@ def agregarPregunta(userInput):
             print("\nPregunta y respuesta agregadas correctamente.")
 
 def buscarRespuesta(userInput, questGroup, answGroup):
-    coincidenciaMax = 0
-    cantCoincidencias = (len(userInput) + 1) // 2
-    mejorIndice = 0
+    mejorIndice = -1
+    mejorPuntaje = 0
 
-    for i in range(len(questGroup)):
-        coincidenciasActuales = 0
-        for pregunta in questGroup[i]:
-            palabrasPregunta = limpiadorFrases(pregunta)
-            for palabra in userInput:
-                if palabra in palabrasPregunta:
-                    coincidenciasActuales += 1
-                    
-        if coincidenciasActuales > coincidenciaMax:
-            coincidenciaMax = coincidenciasActuales
-            mejorIndice = i
+    userSet = set(userInput)  # Evita contar duplicados y mejora velocidad
 
-    if mejorIndice != 0 and coincidenciaMax >= cantCoincidencias:
+    for i, preguntas in enumerate(questGroup):
+        for pregunta in preguntas:
+            palabrasPregunta = set(limpiadorFrases(pregunta))  # También como set
+
+            coincidencias = userSet.intersection(palabrasPregunta)
+            cantidadCoincidencias = len(coincidencias)
+
+            if cantidadCoincidencias == 0:
+                continue
+
+            densidad = cantidadCoincidencias / len(palabrasPregunta)
+
+            # Ponderamos: coincidencias absolutas * densidad relativa
+            puntaje = cantidadCoincidencias + densidad
+
+            if puntaje > mejorPuntaje:
+                mejorPuntaje = puntaje
+                mejorIndice = i
+
+    if mejorIndice != -1:
         return answGroup[mejorIndice][0]
-    
+
     return "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema."
 
 

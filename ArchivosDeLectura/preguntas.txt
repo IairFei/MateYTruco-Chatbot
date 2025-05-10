@@ -1,7 +1,5 @@
 ﻿
-Q: Hola
-A: Hola amo,¿en que lo puedo ayudar?
-YA: Mucho por aprender, tú tienes. Tus preguntas, responderé. Hmmm.
+
 
 Q: Cual fue la primera pelicula
 A: La primera película por orden de estreno fue “Star Wars: Episode IV: A New Hope” (Una Nueva Esperanza), de 1977. Sin embargo, la primera película según el orden cronológico es “Star Wars: Episode I: The Phantom Menace” (La Amenaza Fantasma), de 1999.
@@ -213,8 +211,8 @@ Q: Donde ocurre la batalla final en El Retorno del Jedi
 A: Los Ewoks viven en la luna boscosa de Endor, donde ocurre la batalla contra el Imperio en Return of the Jedi. 
 YA: En la luna boscosa de Endor, los Ewoks viven. Contra el Imperio, batalla allí hubo, en “Return of the Jedi”.
 
+Q: Hola 
+A: Hola amo,¿en que lo puedo ayudar?
+YA: Mucho por aprender, tú tienes. Tus preguntas, responderé. Hmmm.
 
 
-Q: hola
-A: holaa
-YA: holaa
