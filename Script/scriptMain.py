@@ -1,20 +1,14 @@
-"""En este archivo se ejecuta el programa principal, se importan las funciones necesarias y se ejecuta el programa."""
-
-'''FALTA
-1) revisar coherencia
-2) consultar escritura archivos
-3)hoja que guarde preguntas no respuestas
-
-opcionales
-1) arrays chewbaca y r2d2
-2) nombre de usuario
-'''
-
 import random
 
+#Librerias originales
+articulos = ["el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de","que","en",'quien','cuando','como','donde']
+vocalesTildes = ["á", "é", "í", "ó", "ú"]
+vocalesSinTilde = ['a','e','i','o','u']
+
+#Globales
 newAnsw =[]
 newQuest= [] 
-yoda = False
+esYoda = False
 agregoPregunta = False
 
 
@@ -28,10 +22,12 @@ def agregarPregunta(userInput):
     with open("ArchivosDeLectura/preguntas.txt", "a", encoding="utf-8") as file:
         global agregoPregunta
         agregoPregunta = True
+        userInput = ''.join(userInput)
         file.write("\n")
         file.write(f"\nQ: {userInput}\n")
         answer = input("Escriba la respuesta que desea agregar para la pregunta '" + userInput + "':")
         file.write(f"A: {answer}\n")
+        file.write(f"YA: {answer}")
 
         global newAnsw
         global newQuest
@@ -43,121 +39,122 @@ def agregarPregunta(userInput):
         print("\nPregunta y respuesta agregadas correctamente.")
 
 def buscarRespuesta(userInput, questGroup, answGroup):
-    """Busca la pregunta en el grupo de preguntas y devuelve la respuesta correspondiente."""
+    coincidenciaMax = 0
+    mejorIndice = 0
 
-    for x in range(len(questGroup)):
-        for y in range(len(questGroup[x])):
-            if(questGroup[x][y] == userInput):
-                return answGroup[x][0]
+    for i in range(len(questGroup)):
+        coincidenciasActuales = 0
+        for pregunta in questGroup[i]:
+            palabrasPregunta = limpiadorFrases(pregunta)  # Simplificar la pregunta
+            for palabra in userInput:
+                if palabra in palabrasPregunta:
+                    coincidenciasActuales += 1
+                    
+        if coincidenciasActuales > coincidenciaMax:  # Solo actualiza si se encuentran más coincidencias
+            coincidenciaMax = coincidenciasActuales
+            mejorIndice = i
 
-    return "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema."
-def eleccionPersonaje(personaje):    
-    match personaje.lower():
-
-        case 'r2d2':
-            frasesR2d2 = ['beep','Beep bep','Bep beep','Bpep','Beep beep beeep']
-            while True:
-                entrada = input("Tú: ")
-                if entrada.lower() == "salir" or entrada.lower() == "adios" :
-                    print("Conversación finalizada, que la fuerza te acompañe.")
-                    break
-                if entrada.lower() == "cambiar de personaje" or entrada.lower() == "cambiar personaje" :
-                    personaje = input('Que personaje desea elegir: ')
-                    eleccionPersonaje(personaje)
-                print("R2D2:", random.choice(frasesR2d2))
-                
-        case 'chewbacca':
-            frasesChew = ['Grrrrowr','Hwaaurrgh','ghaawwu','huagg','Rrwaahhggg','Grrrruuughhh']
-            while True:
-                entrada = input("Tú: ")
-                if entrada.lower() == "salir" or entrada.lower() == "adios" :
-                    print("Conversación finalizada, que la fuerza te acompañe.")
-                    break
-                if entrada.lower() == "cambiar de personaje" or entrada.lower() == "cambiar personaje" :
-                    personaje = input('Que personaje desea elegir: ')
-                    eleccionPersonaje(personaje)
-                print("Chewbacca:", random.choice(frasesChew) ) 
-        
-        
-        case 'yoda':
-            while True:
-                entrada = input("Tú: ")
-                if entrada.lower() == "salir" or entrada.lower() == "adios" :
-                    print("Conversación finalizada, Que la fuerza te acompañe, siempre.")
-                    break
-                elif entrada.lower() == "cambiar de personaje" or entrada.lower() == "cambiar personaje" :
-                    personaje = input('Que personaje desea elegir: ')
-                    eleccionPersonaje(personaje)
-                else:
-                    userInput, questGroup, answGroup = readQuest(entrada.lower().strip("¿?#$%&/()!¡"), True)
-                    respuesta = buscarRespuesta(userInput, questGroup, answGroup, newQuest, newAnsw)
-                    if respuesta == "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.":
-                        print("Yoda: ",respuesta)
-                        agregarPregunta(userInput)
-                        return inicioPrograma()    
-                print("Yoda:", respuesta)
-
-        case 'c-3po':
-            print("Hola, soy C-3PO, relaciones cibernéticas-humanas. Domino más de seis millones de formas de comunicación, hazme tu pregunta")
-            while True:
-                entrada = input("Tú: ")
-
-                if entrada.lower() == "salir" or entrada.lower() == "adios" :
-                    print("Conversación finalizada, que la fuerza te acompañe.")
-                    break
-                elif entrada.lower() == "cambiar de personaje" or entrada.lower() == "cambiar personaje" :
-                    personaje = input('Que personaje desea elegir: ')
-                    eleccionPersonaje(personaje)
-                else:
-                    userInput, questGroup, answGroup = readQuest(entrada.lower().strip("¿?#$%&/()!¡"), False)
-                    respuesta = buscarRespuesta(userInput, questGroup, answGroup, newQuest, newAnsw)
-                    if respuesta == "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.":
-                        print("C-3PO: ",respuesta)
-                        agregarPregunta(userInput)
-                        return inicioPrograma()        
-                print("C-3PO:", respuesta)
-        case ('salir') | ('adios'):
-            print("Conversación finalizada, que la fuerza te acompañe.")
-            return
-        case _:
-            while True:
-                entrada = input('No entendi, ingrese el personaje nuevamente: ')
-
-                if entrada.lower() == "salir" or entrada.lower() == "adios" :
-                    print("Conversación finalizada, que la fuerza te acompañe.")
-                    break
-                eleccionPersonaje(entrada)
-    """inicioPrograma()  """              
-
-# Responder
-def readQuest(userInput, yoda):
+    if mejorIndice != 0 and coincidenciaMax >= 2:
+        return answGroup[mejorIndice][0]
     
+    return  "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema."
+    
+
+def eleccionPersonaje(personaje):    
+    while True:
+        if personaje.lower() in ["salir", "adios"]:
+            print("Conversación finalizada, que la fuerza te acompañe.")
+            break
+
+        if personaje.lower() not in ['yoda', 'chewbacca', 'r2d2', 'c-3po']:
+            personaje = input('No entendí, ingrese el personaje nuevamente: ')
+            continue
+
+        entrada = input("Tú: ")
+
+        if entrada.lower() in ["salir", "adios"]:
+            print("Conversación finalizada, que la fuerza te acompañe.")
+            break
+
+        if entrada.lower() in ["cambiar de personaje", "cambiar personaje"]:
+            personaje = input('¿Qué personaje desea elegir? ')
+            continue
+
+        match personaje.lower():
+            case 'r2d2' | 'chewbacca':
+                frasesr2d2 = ['beep','Beep bep','Bep beep','Bpep','Beep beep beeep','bep']
+                fraseschewbacca = ['Grrrrowr','Hwaaurrgh','ghaawwu','huagg','Rrwaahhggg','Grrrruuughhh']
+                if personaje == 'r2d2':
+                    print(f"{personaje}:", random.choice(frasesr2d2))
+                else:
+                    print(f"{personaje}:", random.choice(fraseschewbacca))
+
+            case 'yoda' | 'c-3po':
+                if personaje == 'yoda':
+                    respuesta = lectorPregunta(limpiadorFrases(entrada.lower().strip("¿?#$%&/()!¡")), True)
+                else:
+                    respuesta = lectorPregunta(limpiadorFrases(entrada.lower().strip("¿?#$%&/()!¡")), False)
+                if respuesta == "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.":
+                    print(f"{personaje}:", respuesta)
+                    agregarPregunta(entrada)
+                    return inicioPrograma()
+                print(f"{personaje}:", respuesta)
+
+                    
+             
+def limpiadorFrases(input):
+    palabraSimplificada = []
+    palabra = ''
+    
+    for letras in input:
+
+        if letras in vocalesTildes:
+            indice = vocalesTildes.index(letras)
+            letras = vocalesSinTilde[indice]
+        if letras == " ":
+            if palabra:
+                if palabra in articulos:
+                    pass
+                else:
+                    palabraSimplificada.append(palabra)
+            palabra = ''
+        else:
+            palabra += letras
+
+    if palabra:
+        if palabra in articulos:
+            pass
+        else:
+            palabraSimplificada.append(palabra)
+
+    return palabraSimplificada
+# Responder
+def lectorPregunta(userInput, esYoda):
     questGroup = []
     answGroup = []
     quest = []
     answ = []
-    
     with open("ArchivosDeLectura/preguntas.txt", "r", encoding="utf-8") as file:
-    
         for lineas in file:
             lineas = lineas.strip()
             if lineas.startswith("Q:"):
                 quest.append(lineas[3:].lower().strip("¿?#$%&/()¡!"))
-            elif lineas.startswith("A:") and yoda == False:
+            elif lineas.startswith("A:")  and esYoda == False:
+                answ.append(lineas[3:] )
+            elif lineas.startswith("YA:") and esYoda == True:
                 answ.append(lineas[3:])
-            elif lineas.startswith("YA:") and yoda == True:
-                answ.append(lineas[3:])               
             elif lineas == "":
-                if quest:  
+                if quest:
                     questGroup.append(quest)
                     answGroup.append(answ)
                     quest = []
                     answ = []
-        if agregoPregunta == True:
+   
+    if agregoPregunta == True:
             questGroup.append(newQuest)
             answGroup.append(newAnsw)
-        return (userInput, questGroup, answGroup)
 
+    return buscarRespuesta(userInput, questGroup, answGroup)
 
 
 # --- PROGRAMA PRINCIPAL ---
@@ -165,7 +162,6 @@ print("--------------------------------------------------------------")
 print("          BIENVENIDO AL MEJOR ASISTENTE DE STAR WARS          ")
 print("--------------------------------------------------------------")
 print("Se inicio el chat, escriba su pregunta. Si desea finalizar el chat escriba salir o adios.")
-print("Porfavor no utilice tildes, Gracias.")
 inicioPrograma()
 
 

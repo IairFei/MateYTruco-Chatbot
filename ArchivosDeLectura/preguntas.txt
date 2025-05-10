@@ -182,7 +182,7 @@ YA: Por la Estrella de la Muerte, Alderaan destruido fue. En “A New Hope”, o
 
 Q: En que planeta se encuentra el Senado Galactico
 Q: Donde se encuentra el Templo Jedi
-Q: Cual es el planeta central de la Republica Galactica
+Q: Cual es el planeta central de la Republica Gal<actica
 A: El planeta Coruscant es la capital galáctica, sede del Senado y del Templo Jedi.
 YA: Coruscant, la capital galáctica es. Allí, el Senado y el Templo Jedi están.
 
@@ -212,8 +212,3 @@ Q: Donde viven los Ewoks
 Q: Donde ocurre la batalla final en El Retorno del Jedi
 A: Los Ewoks viven en la luna boscosa de Endor, donde ocurre la batalla contra el Imperio en Return of the Jedi. 
 YA: En la luna boscosa de Endor, los Ewoks viven. Contra el Imperio, batalla allí hubo, en “Return of the Jedi”.
-
-Q:
-A:
-YA:
-
