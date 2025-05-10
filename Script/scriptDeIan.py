@@ -1,16 +1,16 @@
 
-articulos = ["el","la","los","las","un","una","unos","unas","al","del"]
-vocalesTildes = ["á", "é", "í", "ó", "ú"];
+articulos = ["el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de","que","en",'quien','cuando']
+vocalesTildes = ["á", "é", "í", "ó", "ú"]
+vocalesSinTilde = ['a','e','i','o','u']
 
 def readQuest(userInputResumida):
-    
     questGroup = []
     answGroup = []
     quest = []
     answ = []
-    
+
+
     with open("ArchivosDeLectura/preguntas.txt", "r", encoding="utf-8") as file:
-    
         for lineas in file:
             lineas = lineas.strip()
             if lineas.startswith("Q:"):
@@ -18,65 +18,70 @@ def readQuest(userInputResumida):
             elif lineas.startswith("A:"):
                 answ.append(lineas[3:])
             elif lineas.startswith("YA:"):
-                answ.append(lineas[3:])               
+                answ.append(lineas[3:])
             elif lineas == "":
-                if quest:  
+                if quest:
                     questGroup.append(quest)
                     answGroup.append(answ)
                     quest = []
                     answ = []
-
-    
-        return buscarRespuesta(userInputResumida, questGroup, answGroup)
+   
+    return buscarRespuesta(userInputResumida, questGroup, answGroup)
 
 def buscarRespuesta(userInput, questGroup, answGroup):
-    #Busca la pregunta en el grupo de preguntas y devuelve la respuesta mas cercana.
     coincidenciaMax = 0
-    position = 0
+    mejorIndice = -1
 
-    for x in range(len(questGroup)):
-        coincidenciaNow = 0
-        for y in range(len(questGroup[x])):
-            listQuest = simplificador(questGroup[x][y])
+    for i in range(len(questGroup)):
+        coincidenciasActuales = 0
+        for pregunta in questGroup[i]:
+            palabrasPregunta = simplificador(pregunta)  # Simplificar la pregunta
             for palabra in userInput:
-                if palabra in listQuest:
-                    coincidenciaNow += 1
+                if palabra in palabrasPregunta:
+                    coincidenciasActuales += 1
+                    
+        if coincidenciasActuales > coincidenciaMax:  # Solo actualiza si se encuentran más coincidencias
+            coincidenciaMax = coincidenciasActuales
+            mejorIndice = i
 
-        if coincidenciaNow > coincidenciaMax: #compara para saber cual es la maxima coincidencia
-            coincidenciaMax = coincidenciaNow
-            position = x
+    if mejorIndice != -1 and coincidenciaMax > 2:
+        return answGroup[mejorIndice][0]
+    else:
+        return "no entendí"  
 
-    if coincidenciaMax >= 1:
-        return(print(answGroup[position][0]))
-    else: 
-        return(print("no entendí"))  # en caso de no entender la pregunta ejecuta la funcion de "agregar pregunta()"
+#La funcion de simplificador la utilizamos para pasar de un string a un array, convirtiendo todas las palabras de la oracion en posiciones dentro del mismo
 
-def simplificador(input): # se encarga de volver cada palabra del string una posicion del array y quitarle todos los articulos que contenga
+def simplificador(input):
     palabraSimplificada = []
     palabra = ''
+    
     for letras in input:
+
+        if letras in vocalesTildes:
+            indice = vocalesTildes.index(letras)
+            letras = vocalesSinTilde[indice]
         if letras == " ":
-            for art in articulos:
-                if palabra != art:
+            if palabra:
+                if palabra in articulos:
+                    pass
+                else:
                     palabraSimplificada.append(palabra)
-                    palabra=''
+            palabra = ''
         else:
             palabra += letras
 
-    for art in articulos:
-                if palabra == art or palabra == '':
-                   break
-                else: 
-                    palabraSimplificada.append(palabra)
-                    break
-
-    return(palabraSimplificada)
-
+    if palabra:
+        if palabra in articulos:
+            pass
+        else:
+            palabraSimplificada.append(palabra)
+    print(palabraSimplificada)
+    return 
 
 while True:
-
     userInput = input("Escriba tu respuesta: ")
     if userInput == "salir":
         break
     else:
-        readQuest(simplificador(userInput.lower()))
+        
+        print(simplificador(userInput.lower()))

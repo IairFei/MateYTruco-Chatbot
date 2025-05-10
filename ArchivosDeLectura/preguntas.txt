@@ -161,7 +161,7 @@ A: El sable de luz es un arma utilizada por los Jedi y los Sith, entre otros. Es
 YA: Arma del Jedi, el sable de luz es. Energía pura, con cristal Kyber alimentada está.
 
 
-Q: En que planeta creció Luke Skywalker
+Q: En que planeta creció crio nacio donde
 Q: De donde es Luke Skywalker
 A: Luke Skywalker creció en el planeta Tatooine, un mundo desértico del Borde Exterior.
 YA: En Tatooine, Luke Skywalker creció. Planeta desértico del Borde Exterior, es.
@@ -207,10 +207,13 @@ A: El planeta natal de Chewbacca y los demás Wookiees es Kashyyyk, un mundo sel
 YA: Kashyyyk, hogar de Chewbacca y los Wookiees es. Mundo de selvas, es.
 
 
-Q: Que planeta es el hogar de los Ewoks
+Q: Que planeta es el hogar de los Ewoks ewok ewook 
 Q: Donde viven los Ewoks
 Q: Donde ocurre la batalla final en El Retorno del Jedi
 A: Los Ewoks viven en la luna boscosa de Endor, donde ocurre la batalla contra el Imperio en Return of the Jedi. 
 YA: En la luna boscosa de Endor, los Ewoks viven. Contra el Imperio, batalla allí hubo, en “Return of the Jedi”.
 
+Q:
+A:
+YA:
 
