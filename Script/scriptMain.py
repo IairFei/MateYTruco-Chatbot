@@ -14,6 +14,7 @@ newAnsw =[]
 newQuest= [] 
 esYoda = False
 agregoPregunta = False
+primeraVez = True
 
 
 def inicioPrograma():
@@ -25,10 +26,14 @@ def inicioPrograma():
 def agregarPregunta(userInput):
     #Agrega una pregunta al archivo de preguntas.txt
     with open("ArchivosDeLectura/preguntas.txt", "a", encoding="utf-8") as file:
-        agrPregunta = input("Deseea agregar la pregunta '"+ userInput +"' al sistema? (si/no):").lower().strip("¿?#$%&/()!¡ ")
+        agrPregunta = input("Deseea agregar la pregunta '"+ userInput +"' al sistema? (si/no):").lower().strip("¿?#$%&/()!¡-_[]{}.,;:<> ")
         #Se le pregunta al usuario si desea agregar la pregunta al sistema.
         #Si la respuesta es afirmativa, se le solicita la respuesta y se agrega al archivo preguntas.txt.
         #Si la respuesta es negativa, se le informa al usuario que no se agregará la pregunta."""
+        
+        while agrPregunta != "si" and agrPregunta != "no":
+            agrPregunta = input("No entendí, ¿desea agregar la pregunta al sistema? (si/no):").lower().strip("¿?#$%&/()!¡ -_[]{}.,;:<>")
+        
         if agrPregunta == 'si':
             global agregoPregunta
             agregoPregunta = True
@@ -56,7 +61,7 @@ def buscarRespuesta(userInput, questGroup, answGroup):
 
     for i, preguntas in enumerate(questGroup):
         for pregunta in preguntas:
-            palabrasPregunta = set(limpiadorFrases(pregunta))  # También como set
+            palabrasPregunta = set(limpiadorFrases(pregunta))  
 
             coincidencias = userSet.intersection(palabrasPregunta)
             cantidadCoincidencias = len(coincidencias)
@@ -87,11 +92,14 @@ def eleccionPersonaje(personaje):
             print("Conversación finalizada, que la fuerza te acompañe.")
             break
 
-        if personaje.lower() not in ['yoda', 'chewbacca', 'r2d2', 'c-3po']:
+        if personaje.lower() not in ['yoda', 'chewbacca', 'r2d2', 'c-3po'] or personaje == '':
             #Si el personaje ingresado no es válido, se solicita nuevamente al usuario que ingrese un personaje
             personaje = input('No entendí, ingrese el personaje nuevamente: ')
             continue
-
+        global primeraVez
+        if primeraVez == True:
+            print(f"\nElegiste hablar con {personaje}. Puedes hacerle preguntas o cambiar de personaje escribiendo 'cambiar personaje'.")
+            print("Escribe 'salir' o 'adios' para finalizar la conversación.")
         entrada = input("Tú: ")
 
         if entrada.lower() in ["salir", "adios"]:
@@ -99,16 +107,24 @@ def eleccionPersonaje(personaje):
             print("Conversación finalizada, que la fuerza te acompañe.")
             break
 
-        if entrada.lower() in ["cambiar de personaje", "cambiar personaje"]:
+        if entrada.lower() in ["cambiar de personaje", "cambiar personaje"] :
             #Si el usuario desea cambiar de personaje, se solicita el nuevo personaje
             personaje = input('¿Qué personaje desea elegir? ')
+            primeraVez = True
             continue
         #Se utiliza un bloque match para determinar el personaje elegido y responder en consecuencia.
+
+        if entrada.lower() == '':
+            #Si el usuario no ingresa nada, se le solicita que ingrese una pregunta
+            primeraVez = False
+            print("No entendí, por favor escriba una pregunta.")
+            continue
+
         match personaje.lower():
             case 'r2d2' | 'chewbacca':
                 #Si el personaje es R2D2 o Chewbacca, se generan frases aleatorias para cada uno.
                 #Se utilizan listas de frases predefinidas para cada personaje y se elige una al azar
-
+                primeraVez = False
                 frasesr2d2 = ['beep','Beep bep','Bep beep','Bpep','Beep beep beeep','bep']
                 fraseschewbacca = ['Grrrrowr','Hwaaurrgh','ghaawwu','huagg','Rrwaahhggg','Grrrruuughhh']
                 if personaje == 'r2d2':
@@ -120,10 +136,11 @@ def eleccionPersonaje(personaje):
                 #Si el personaje es Yoda o C-3PO, se utiliza la función lectorPregunta para obtener una respuesta a la pregunta del usuario.
                 #Se le pasa la entrada del usuario y un boooleano para determinar la respuesta adecuada dependiendo de si el usuario.
                 #esta hablando con Yoda o C-3PO.
+                primeraVez = False
                 if personaje == 'yoda':
-                    respuesta = lectorPregunta(limpiadorFrases(entrada.lower().strip("¿?#$%&/()!¡")), True)
+                    respuesta = lectorPregunta(limpiadorFrases(entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")), True)
                 else:
-                    respuesta = lectorPregunta(limpiadorFrases(entrada.lower().strip("¿?#$%&/()!¡")), False)
+                    respuesta = lectorPregunta(limpiadorFrases(entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")), False)
                 #Se verifica si la respuesta es válida y se imprime en pantalla.
                 #Si la respuesta es "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.
                 #Significa que no se encontró una respuesta y se le enviará al usuario a la función agregarPregunta para que pueda agregarla al sistema.    
