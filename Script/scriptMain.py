@@ -141,6 +141,7 @@ def eleccionPersonaje(personaje):
                     respuesta = lectorPregunta(limpiadorFrases(entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")), True)
                 else:
                     respuesta = lectorPregunta(limpiadorFrases(entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")), False)
+
                 #Se verifica si la respuesta es válida y se imprime en pantalla.
                 #Si la respuesta es "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.
                 #Significa que no se encontró una respuesta y se le enviará al usuario a la función agregarPregunta para que pueda agregarla al sistema.    

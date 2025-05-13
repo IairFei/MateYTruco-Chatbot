@@ -1,6 +1,5 @@
 ﻿
 
-
 Q: Cual fue la primera pelicula
 A: La primera película por orden de estreno fue “Star Wars: Episode IV: A New Hope” (Una Nueva Esperanza), de 1977. Sin embargo, la primera película según el orden cronológico es “Star Wars: Episode I: The Phantom Menace” (La Amenaza Fantasma), de 1999.
 YA: “Star Wars: Episode IV: A New Hope” (Una Nueva Esperanza), por orden de estreno la primera fue, en 1977. Pero según el orden cronológico, “Episode I: The Phantom Menace” (La Amenaza Fantasma), en 1999 estrenada fue, sí.
@@ -220,5 +219,5 @@ YA: Muy sabios y con una profunda conexion con la fueza los Jedi con espadas las
 Q: Que significa el color violeta de una espada laser
 Q: Quien tiene una espada laser morada
 Q: Que diferencia tiene una espada laser morada
-A: La espada laser morada es muy rara y la empuña Mace Windu en las películas. El color violeta es un equilibrio entre el Lado Claro y el Lado Oscuro de la Fuerza.
-YA: Mace Windu es el único Jedi conocido que usa una espada laser morada, lo que simboliza su habilidad para usar tanto la Fuerza Ligera como las técnicas del Lado Oscuro en su combate.
+A: La espada laser violeta es muy rara y la empuña Mace Windu en las películas. El color violeta es un equilibrio entre el Lado Luminoso el Lado Oscuro de la Fuerza.
+YA: Mace Windu, el único Jedi conocido que usa una espada laser morada es. Su técnica "Vaapad" para usar tanto el Lado Luminoso como el Lado Oscuro en equilibrio simboliza.
