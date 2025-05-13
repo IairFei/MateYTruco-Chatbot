@@ -4,7 +4,7 @@ import random
 
 articulos = ["el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de","que","en","quien","por","para","con","a","y","o","si","no","como","mas","menos","muy","todo","toda","todos","todas"]
 
-vocalesTildes = ["á", "é", "í", "ó", "ú"]
+vocalesTildes = ["á","é","í","ó","ú"]
 vocalesSinTilde = ['a','e','i','o','u']
 
 #Globales

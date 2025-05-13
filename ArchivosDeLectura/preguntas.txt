@@ -1,6 +1,4 @@
 ﻿
-
-
 Q: Cual fue la primera pelicula
 A: La primera película por orden de estreno fue “Star Wars: Episode IV: A New Hope” (Una Nueva Esperanza), de 1977. Sin embargo, la primera película según el orden cronológico es “Star Wars: Episode I: The Phantom Menace” (La Amenaza Fantasma), de 1999.
 YA: “Star Wars: Episode IV: A New Hope” (Una Nueva Esperanza), por orden de estreno la primera fue, en 1977. Pero según el orden cronológico, “Episode I: The Phantom Menace” (La Amenaza Fantasma), en 1999 estrenada fue, sí.
@@ -115,6 +113,8 @@ A: Kylo Ren se llama Ben Solo. Es hijo de Han Solo y Leia Organa, y nieto de Dar
 YA: Kylo Ren, Ben Solo en realidad se llama. Hijo de Leia y Han, nieto de Vader es, mmm.
 OK: Kylo Ren se llama Ben Solo. Es hijo de Han Solo y Leia Organa, y nieto de Darth Vader. Hello there
 
+
+
 Q: Que dia del año se celebra el dia de Star Wars
 A: El Día de Star Wars, celebrado cada 4 de mayo, tiene su origen en un ingenioso juego de palabras en inglés. La emblemática frase de la saga, “May the Force be with you” (“Que la Fuerza te acompañe”), suena muy similar a “May the Fourth be with you” (“Que el 4 de mayo te acompañe”). Esta coincidencia fonética dio lugar a la elección de la fecha para conmemorar la franquicia.
 YA: Cada 4 de mayo, Star Wars celebrado es. “May the Fourth be with you”, un juego de palabras es, con “May the Force be with you”. Se parece, ¿mmm?
@@ -224,3 +224,18 @@ Q: Quien tiene una espada laser morada
 Q: Que diferencia tiene una espada laser morada
 A: La espada laser morada es muy rara y la empuña Mace Windu en las películas. El color violeta es un equilibrio entre el Lado Claro y el Lado Oscuro de la Fuerza.
 YA: Mace Windu es el único Jedi conocido que usa una espada laser morada, lo que simboliza su habilidad para usar tanto la Fuerza Ligera como las técnicas del Lado Oscuro en su combate.
+
+
+Q: como murio cinti
+A: no murio todavia
+YA: no murio todavia
+
+
+Q: hash tonot
+A:  no
+YA:  no
+
+
+Q: como se llama la nave de han
+A: Halcón Milenario
+YA: Halcón Milenario
