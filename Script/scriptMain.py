@@ -1,6 +1,7 @@
 import random
 import traceback
 import os
+import difflib
 
 # Librerías originales
 articulos = ["el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de", "que", "en", "quien", "por", "para", "con", "a", "y", "o", "si", "no", "como", "mas", "menos", "muy", "todo", "toda", "todos", "todas"]
@@ -16,7 +17,6 @@ agregoPregunta = False
 primeraVez = True
 existeArchivoPreguntas = True
 existeCarpetaPreguntas = True
-
 
 
 def crearArchivoPreguntas():
@@ -90,7 +90,6 @@ def crearArchivoPreguntas():
         file.write("YA: Anakin Skywalker, el padre de Luke es. Darth Vader, él también fue.\n")
         file.write("\n")
 
-
 def verificarArchivos():
     """Verifica la existencia de la carpeta y el archivo, y los crea si no existen."""
     try:
@@ -163,14 +162,45 @@ def agregarPregunta(userInput):
                 print("\nPregunta y respuesta agregadas correctamente al sistema.\n")
     except FileNotFoundError:
         verificarArchivos()
-        agregarPregunta(userInputModificado)
         if existeArchivoPreguntas == False:
             print("Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
         if existeCarpetaPreguntas == False:
             print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
         print("Por favor, vuelva a intentar.")
+        agregarPregunta(userInputModificado)
     except Exception as e:
         manejarError(e, "Error al agregar la pregunta")
+
+def LstPalabrasClaves():
+    palabrasClaves = []
+    temporal = []
+    with open("ArchivosDeLectura/preguntas.txt", "r", encoding="utf-8") as file:
+        for lineas in file:
+            lineas = lineas.strip()
+            if lineas.startswith("Q:"):
+
+                temporal = limpiadorFrases(lineas[3:].lower().strip("¿?#$%&/()¡!"))
+                temporal2 = list(set(temporal))
+
+                for palabra in temporal2:
+                    if palabra not in palabrasClaves:
+                        palabrasClaves.append(palabra)
+
+    
+    palabrasClaves = list(set(palabrasClaves))
+    
+    return palabrasClaves
+
+def ortografia(entrada, listado):
+    salida = []
+    for palabra in entrada:
+        coincidencias = difflib.get_close_matches(palabra, listado, n=1, cutoff=0.7)
+        if coincidencias:
+            salida.append(coincidencias[0])
+        else:
+            salida.append(palabra)  
+    return salida
+
 
 
 def buscarRespuesta(userInput, questGroup, answGroup):
@@ -244,7 +274,7 @@ def eleccionPersonaje(personaje):
                 case 'yoda' | 'c-3po':
                     primeraVez = False
                     try:
-                        limpia = limpiadorFrases(entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>"))
+                        limpia = ortografia(limpiadorFrases(entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")),LstPalabrasClaves())
                         respuesta = lectorPregunta(limpia, personaje == 'yoda')
                         if respuesta.startswith("No tengo respuesta"):
                             print(f"{personaje}:", respuesta)
