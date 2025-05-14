@@ -131,7 +131,8 @@ def verificarArchivos():
 def inicioPrograma():
     try:
         verificarArchivos()
-        print("Podés chatear con distintos personajes como R2D2, Chewbacca, Yoda o C-3PO. Cuando desees cambiar de personaje, escribí: cambiar personaje: seguido del nombre.\n")
+        print("Podés chatear con distintos personajes como R2D2, Chewbacca, Yoda o C-3PO. Cuando desees cambiar de personaje, escribí: cambiar personaje.\n")
+        print("En caso que desee salir del programa escriba: salir o adios.")
         personaje = input("Coloque el nombre del personaje con el que desea hablar: ")
         eleccionPersonaje(personaje)
     except KeyboardInterrupt:
@@ -158,7 +159,7 @@ def agregarPregunta(userInput):
 
                 newQuest.append(userInputModificado)
                 newAnsw.append(answer)
-
+                file.write("\n")
                 print("\nPregunta y respuesta agregadas correctamente al sistema.\n")
     except FileNotFoundError:
         verificarArchivos()
@@ -243,7 +244,7 @@ def eleccionPersonaje(personaje):
                 continue
 
             global primeraVez
-            if primeraVez:
+            if primeraVez == True:
                 print(f"\nElegiste hablar con {personaje}. Puedes hacerle preguntas o cambiar de personaje escribiendo 'cambiar personaje'.")
                 print("Escribe 'salir' o 'adios' para finalizar la conversación.")
 
@@ -258,7 +259,7 @@ def eleccionPersonaje(personaje):
                 primeraVez = True
                 continue
 
-            if entrada.strip() == "":
+            if entrada.lower() == '':
                 primeraVez = False
                 print("No entendí, por favor escriba una pregunta.")
                 continue
@@ -268,18 +269,23 @@ def eleccionPersonaje(personaje):
                     primeraVez = False
                     frasesr2d2 = ['beep', 'Beep bep', 'Bep beep', 'Bpep', 'Beep beep beeep', 'bep']
                     fraseschewbacca = ['Grrrrowr', 'Hwaaurrgh', 'ghaawwu', 'huagg', 'Rrwaahhggg', 'Grrrruuughhh']
-                    frase = random.choice(frasesr2d2 if personaje == 'r2d2' else fraseschewbacca)
-                    print(f"{personaje}:", frase)
+                    if personaje == 'r2d2':
+                        print(f"{personaje}:", random.choice(frasesr2d2))
+                    else:
+                        print(f"{personaje}:", random.choice(fraseschewbacca))
 
                 case 'yoda' | 'c-3po':
                     primeraVez = False
                     try:
-                        limpia = ortografia(limpiadorFrases(entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")),LstPalabrasClaves())
-                        respuesta = lectorPregunta(limpia, personaje == 'yoda')
-                        if respuesta.startswith("No tengo respuesta"):
+                        if personaje == 'yoda':
+                            respuesta = lectorPregunta(limpiadorFrases(entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")), True)
+                        else:
+                            respuesta = lectorPregunta(limpiadorFrases(entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")), False)
+                        if respuesta == "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.":
                             print(f"{personaje}:", respuesta)
                             agregarPregunta(entrada)
                             print(f"{personaje}: Hazme otra pregunta")
+                            """Una vez que se agrega la pregunta, se envia al usuario al inicio del programa para que pueda elegir con que personaje chatear."""
                             return eleccionPersonaje(personaje)
                         print(f"{personaje}:", respuesta)
                     except Exception as e:
@@ -299,14 +305,20 @@ def limpiadorFrases(input):
             indice = vocalesTildes.index(letras)
             letras = vocalesSinTilde[indice]
         if letras == " ":
-            if palabra and palabra not in articulos:
-                palabraLimpia.append(palabra)
+            if palabra:
+                if palabra in articulos:
+                    pass
+                else:
+                    palabraLimpia.append(palabra)
             palabra = ''
         else:
             palabra += letras
 
-    if palabra and palabra not in articulos:
-        palabraLimpia.append(palabra)
+    if palabra:
+        if palabra in articulos:
+            pass
+        else:
+            palabraLimpia.append(palabra)
 
     return palabraLimpia
 
@@ -318,17 +330,26 @@ def lectorPregunta(userInput, esYoda):
     answ = []
     try:
         with open("ArchivosDeLectura/preguntas.txt", "r", encoding="utf-8") as file:
-            for linea in file:
-                linea = linea.strip()
-                if linea.startswith("Q:"):
-                    quest.append(linea[3:].lower().strip("¿?#$%&/()¡!"))
-                elif linea.startswith("A:") and not esYoda:
-                    answ.append(linea[3:])
-                elif linea.startswith("YA:") and esYoda:
-                    answ.append(linea[3:])
-        for q, a in zip(quest, answ):
-            questGroup.append([q])
-            answGroup.append([a])
+            for lineas in file:
+                lineas = lineas.strip()
+                if lineas.startswith("Q:"):
+                    quest.append(lineas[3:].lower().strip("¿?#$%&/()¡!"))
+                elif lineas.startswith("A:")  and esYoda == False:
+                    answ.append(lineas[3:])
+                elif lineas.startswith("YA:") and esYoda == True:
+                    answ.append(lineas[3:])
+                elif lineas == "":# guarda las preguntas y respuestas que se ecuentra antes de un caracter ''
+                    if quest:
+                        questGroup.append(quest)
+                        answGroup.append(answ)
+                        quest = []
+                        answ = []
+        questGroup.append(quest)
+        answGroup.append(answ)
+
+        if agregoPregunta == True:
+            questGroup.append(newQuest)
+            answGroup.append(newAnsw)
         return buscarRespuesta(userInput, questGroup, answGroup)
     except FileNotFoundError:
         verificarArchivos()
