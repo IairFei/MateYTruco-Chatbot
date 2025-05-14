@@ -219,3 +219,16 @@ Q: Quien tiene una espada laser morada
 Q: Que diferencia tiene una espada laser morada
 A: La espada laser violeta es muy rara y la empuña Mace Windu en las películas. El color violeta es un equilibrio entre el Lado Luminoso el Lado Oscuro de la Fuerza.
 YA: Mace Windu, el único Jedi conocido que usa una espada laser morada es. Su técnica "Vaapad" para usar tanto el Lado Luminoso como el Lado Oscuro en equilibrio simboliza.
+
+Q: como se llama luke
+A: luke
+YA: luke
+
+
+Q: quien es luke
+A: no se
+YA: no se
+
+Q: como viviste tanto tiempo?
+A: El poder de la fuerza
+YA: El poder de la fuerza
