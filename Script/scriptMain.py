@@ -1,68 +1,187 @@
 import random
+import traceback
+import os
 
-#Librerias originales
+# Librerías originales
+articulos = ["el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de", "que", "en", "quien", "por", "para", "con", "a", "y", "o", "si", "no", "como", "mas", "menos", "muy", "todo", "toda", "todos", "todas"]
 
-articulos = ["el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de","que","en","quien","por","para","con","a","y","o","si","no","como","mas","menos","muy","todo","toda","todos","todas"]
+vocalesTildes = ["á", "é", "í", "ó", "ú"]
+vocalesSinTilde = ['a', 'e', 'i', 'o', 'u']
 
-vocalesTildes = ["á","é","í","ó","ú"]
-vocalesSinTilde = ['a','e','i','o','u']
-
-#Globales
-#Se declaran variables globales para almacenar las preguntas y respuestas nuevas que se agregan al sistema.
-
-newAnsw =[]
-newQuest= [] 
+# Globales
+newAnsw = []
+newQuest = []
 esYoda = False
 agregoPregunta = False
 primeraVez = True
+existeArchivoPreguntas = True
+existeCarpetaPreguntas = True
+
+
+
+def crearArchivoPreguntas():
+    """Crea el archivo preguntas.txt con preguntas iniciales."""
+    with open("ArchivosDeLectura/preguntas.txt", "w", encoding="utf-8") as file:
+        # Preguntas iniciales sobre Star Wars
+        file.write("Q: Cual fue la primera pelicula\n")
+        file.write("A: La primera película por orden de estreno fue “Star Wars: Episode IV: A New Hope” (Una Nueva Esperanza), de 1977. Sin embargo, la primera película según el orden cronológico es “Star Wars: Episode I: The Phantom Menace” (La Amenaza Fantasma), de 1999.\n")
+        file.write("YA: “Star Wars: Episode IV: A New Hope” (Una Nueva Esperanza), por orden de estreno la primera fue, en 1977. Pero según el orden cronológico, “Episode I: The Phantom Menace” (La Amenaza Fantasma), en 1999 estrenada fue, sí.\n")
+        file.write("\n")    
+        file.write("Q: En que año se estreno la primera pelicula\n")
+        file.write("Q: En que año se estreno A New Hope\n")
+        file.write("Q: En que año se estreno Una Nueva Esperanza\n")
+        file.write("A: La primera película, “A New Hope” (Una nueva esperanza), se estreno en 1977.\n")
+        file.write("YA: En 1977, la primera película, “A New Hope” (Una nueva esperanza) estrenada fue, mmm.\n")
+        file.write("\n")   
+        file.write("Q: En que año se estreno la segunda pelicula\n")
+        file.write("Q: En que año se estreno The Empire Strikes Back\n")
+        file.write("Q: En que año se estreno El Imperio Contraataca\n")
+        file.write("A: La segunda película, “The Empire Strikes Back” (El Imperio Contraataca), se estrenó en 1980.\n")
+        file.write("YA: En 1980, “The Empire Strikes Back” (El Imperio Contraataca), la segunda película estrenada fue, sí.\n")
+        file.write("\n")
+        file.write("Q: En que año se estreno la tercera pelicula\n")
+        file.write("Q: En que año se estreno Return of The Jedi\n")
+        file.write("Q: En que año se estreno El Regreso del Jedi\n")
+        file.write("A: La tercera película, “Return of The Jedi” (El Retorno del Jedi), se estrenó en 1983.\n")
+        file.write("YA: “Return of The Jedi” (El Retorno del Jedi), en 1983 lanzada fue, y la tercera película es.\n")
+        file.write("\n")
+        file.write("Q: En que año se estreno la cuarta pelicula?\n")
+        file.write("Q: En que año se estreno The Phantom Menace?\n")
+        file.write("Q: En que año se estreno La Amenaza Fantasma?\n")
+        file.write("A: La cuarta película, “The Phantom Menace”(La Amenaza Fantasma), se estrenó en 1999.\n")
+        file.write("YA: En 1999, “The Phantom Menace” (La Amenaza Fantasma); la cuarta película estrenada fue, hmmm.\n")
+        file.write("\n")
+        file.write("Q: En que año se estreno la quinta pelicula\n")
+        file.write("Q: En que año se estreno Attack of the Clones\n")
+        file.write("Q: En que año se estreno El Ataque de los Clones\n")
+        file.write("A: La quinta película, “Attack of the Clones” (El Ataque de los Clones), se estrenó en 2002.\n")
+        file.write("YA: “Attack of the Clones” (El Ataque de los Clones), la quinta, en 2002 estrenada fue.\n")
+        file.write("\n")
+        file.write("Q: En que año se estreno la sexta pelicula\n")
+        file.write("Q: En que año se estreno Revenge of the Sith\n")
+        file.write("Q: En que año se estreno La Venganza de los Sith\n")
+        file.write("A: La sexta película, “Revenge of the Sith”, (La Venganza de los Sith), se estrenó en 2005.\n")
+        file.write("YA: En 2005, “Revenge of the Sith” (La Venganza de los Sith), estrenada fue, sexta película, es.\n")
+        file.write("\n")
+        file.write("Q: En que año se estreno The Force Awakens\n")
+        file.write("Q: En que año se estreno El Despertar de la Fuerza\n")
+        file.write("Q: En que año se estreno la septima pelicula\n")
+        file.write("A: La séptima película, “The Force Awakens” (El Despertar de la Fuerza), se estrenó en 2015.\n")
+        file.write("YA: “The Force Awakens” (El Despertar de la Fuerza), séptima película, en 2015 apareció, mmm.\n")
+        file.write("\n")
+        file.write("Q: En que año se estreno The Last Jedi\n")
+        file.write("Q: En que año se estreno Los Ultimos Jedi\n")
+        file.write("Q: En que año se estreno la octava pelicula\n")
+        file.write("A: La octava pelicula, “The Last Jedi” (Los Últimos Jedi), se estrenó en 2017.\n")
+        file.write("YA: En 2017, “The Last Jedi” (Los Últimos Jedi), la octava película fue, sí.\n")
+        file.write("\n")
+        file.write("Q: En que año se estreno The Rise of Skywalker\n")
+        file.write("Q: En que año se estreno El Ascenso de Skywalker\n")
+        file.write("Q: En que año se estreno la novena pelicula\n")
+        file.write("A: La novena película, “The Rise of Skywalker” (El Ascenso de Skywalker), se estrenó en 2019.\n")
+        file.write("YA: La novena, “The Rise of Skywalker” (El Ascenso de Skywalker), en 2019 lanzada fue, hmmm.\n")
+        file.write("\n")
+        file.write("Q: Quien es el creador de Star Wars\n")
+        file.write("A: El creador de Star Wars es George Lucas. Es un director, guionista y productor estadounidense que escribió y dirigió la primera película de la saga.\n")
+        file.write("YA: George Lucas, el creador de Star Wars es. Director, guionista y productor, también, sí.\n")
+        file.write("\n")
+        file.write("Q: Quien es el padre de Luke Skywalker\n")
+        file.write("A: El padre de Luke Skywalker es Anakin Skywalker/Darth Vader.\n")
+        file.write("YA: Anakin Skywalker, el padre de Luke es. Darth Vader, él también fue.\n")
+        file.write("\n")
+
+
+def verificarArchivos():
+    """Verifica la existencia de la carpeta y el archivo, y los crea si no existen."""
+    try:
+        # Verificar si la carpeta existe, si no existe, la crea
+        if not os.path.exists("ArchivosDeLectura"):
+            global existeCarpetaPreguntas
+            existeCarpetaPreguntas = False
+            try:
+                print("Creando carpeta ArchivosDeLectura...")
+                os.makedirs("ArchivosDeLectura")
+            except Exception as e:
+                print(f"Error al crear la carpeta: {e}")
+                return
+            print("Carpeta 'ArchivosDeLectura' creada.")
+            
+            try:
+                print("Creando archivo preguntas.txt...")
+                crearArchivoPreguntas()
+            except Exception as e:
+                print(f"Error al crear el archivo: {e}")
+                return
+            print("Archivo 'preguntas.txt' creado con preguntas iniciales.")
+
+        # Verificar si el archivo preguntas.txt existe, si no existe, lo crea
+        if not os.path.exists("ArchivosDeLectura/preguntas.txt"):
+            global existeArchivoPreguntas
+            existeArchivoPreguntas = False
+            try:
+                print("Creando archivo preguntas.txt...")
+                crearArchivoPreguntas()
+            except Exception as e:
+                print(f"Error al crear el archivo: {e}")
+                return
+            print("Archivo 'preguntas.txt' creado con preguntas iniciales.")
+    except Exception as e:
+        manejarError(e, "Error al verificar o crear archivos")
 
 
 def inicioPrograma():
-    #Inicia el programa y solicita al usuario el personaje con el que desea interactuar.
-    print("Podés chatear con distintos personajes como R2D2, Chewbacca, Yoda o C-3PO. Cuando desees cambiar de personaje, escribí: cambiar personaje: seguido del nombre.\n")
-    personaje = input("Coloque el nombre del personaje con el que desea hablar: ")
-    eleccionPersonaje(personaje)
+    try:
+        verificarArchivos()
+        print("Podés chatear con distintos personajes como R2D2, Chewbacca, Yoda o C-3PO. Cuando desees cambiar de personaje, escribí: cambiar personaje: seguido del nombre.\n")
+        personaje = input("Coloque el nombre del personaje con el que desea hablar: ")
+        eleccionPersonaje(personaje)
+    except KeyboardInterrupt:
+        print("\nConversación finalizada, que la fuerza te acompañe.")
+    except Exception as e:
+        manejarError(e, "Error inesperado en el inicio del programa")
+
 
 def agregarPregunta(userInput):
-    #Agrega una pregunta al archivo de preguntas.txt
-    with open("ArchivosDeLectura/preguntas.txt", "a", encoding="utf-8") as file:
-        agrPregunta = input("Deseea agregar la pregunta '"+ userInput +"' al sistema? (si/no):").lower().strip("¿?#$%&/()!¡-_[]{}.,;:<> ")
-        #Se le pregunta al usuario si desea agregar la pregunta al sistema.
-        #Si la respuesta es afirmativa, se le solicita la respuesta y se agrega al archivo preguntas.txt.
-        #Si la respuesta es negativa, se le informa al usuario que no se agregará la pregunta."""
-        
-        while agrPregunta != "si" and agrPregunta != "no":
-            agrPregunta = input("No entendí, ¿desea agregar la pregunta al sistema? (si/no):").lower().strip("¿?#$%&/()!¡ -_[]{}.,;:<>")
-        
-        if agrPregunta == 'si':
-            global agregoPregunta
-            agregoPregunta = True
-            userInput = ''.join(userInput)
-            file.write("\n")
-            file.write(f"\nQ: {userInput}\n")
-            answer = input("Escriba la respuesta que desea agregar para la pregunta '" + userInput + "':")
-            file.write(f"A: {answer}\n")
-            file.write(f"YA: {answer}")
+    try:
+        with open("ArchivosDeLectura/preguntas.txt", "a", encoding="utf-8") as file:
+            agrPregunta = input(f"Desea agregar la pregunta '{userInput}' al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]{}.,;:<> ")
+            while agrPregunta not in ["si", "no"]:
+                agrPregunta = input("No entendí, ¿desea agregar la pregunta al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡ -_[]{}.,;:<>")
 
-            global newAnsw
-            global newQuest
-            
-            newQuest.append(userInput)
-            newAnsw.append(answer)
-            
-            file.write("\n")
-            print("\nPregunta y respuesta agregadas correctamente al sistema.\n")
+            if agrPregunta == 'si':
+                global agregoPregunta, newAnsw, newQuest
+                agregoPregunta = True
+                userInputModificado = ''.join(userInput)
+                file.write(f"\nQ: {userInputModificado}\n")
+                answer = input(f"Escriba la respuesta que desea agregar para la pregunta '{userInputModificado}': ")
+                file.write(f"A: {answer}\n")
+                file.write(f"YA: {answer}\n")
+
+                newQuest.append(userInputModificado)
+                newAnsw.append(answer)
+
+                print("\nPregunta y respuesta agregadas correctamente al sistema.\n")
+    except FileNotFoundError:
+        verificarArchivos()
+        agregarPregunta(userInputModificado)
+        if existeArchivoPreguntas == False:
+            print("Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
+        if existeCarpetaPreguntas == False:
+            print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
+        print("Por favor, vuelva a intentar.")
+    except Exception as e:
+        manejarError(e, "Error al agregar la pregunta")
+
 
 def buscarRespuesta(userInput, questGroup, answGroup):
     mejorIndice = -1
     mejorPuntaje = -1
     umbral = 0.8
-    userSet = set(userInput)  # Evita contar duplicados y mejora velocidad
+    userSet = set(userInput)
 
     for i, preguntas in enumerate(questGroup):
         for pregunta in preguntas:
-            palabrasPregunta = set(limpiadorFrases(pregunta))  
-
+            palabrasPregunta = set(limpiadorFrases(pregunta))
             coincidencias = userSet.intersection(palabrasPregunta)
             cantidadCoincidencias = len(coincidencias)
 
@@ -70,7 +189,6 @@ def buscarRespuesta(userInput, questGroup, answGroup):
                 continue
 
             densidad = cantidadCoincidencias / len(palabrasPregunta)
-
             puntaje = cantidadCoincidencias * densidad
 
             if puntaje > mejorPuntaje:
@@ -84,102 +202,81 @@ def buscarRespuesta(userInput, questGroup, answGroup):
 
 
 def eleccionPersonaje(personaje):
-    #Permite al usuario elegir un personaje y mantener una conversación con él.
     while True:
+        try:
+            if personaje.lower() in ["salir", "adios"]:
+                print("Conversación finalizada, que la fuerza te acompañe.")
+                break
 
-        if personaje.lower() in ["salir", "adios"]:
-            #Si el usuario ingresa 'salir' o 'adios', se finaliza la conversación.
-            print("Conversación finalizada, que la fuerza te acompañe.")
+            if personaje.lower() not in ['yoda', 'chewbacca', 'r2d2', 'c-3po'] or personaje == '':
+                personaje = input('No entendí, ingrese el personaje nuevamente: ')
+                continue
+
+            global primeraVez
+            if primeraVez:
+                print(f"\nElegiste hablar con {personaje}. Puedes hacerle preguntas o cambiar de personaje escribiendo 'cambiar personaje'.")
+                print("Escribe 'salir' o 'adios' para finalizar la conversación.")
+
+            entrada = input("Tú: ")
+
+            if entrada.lower() in ["salir", "adios"]:
+                print("Conversación finalizada, que la fuerza te acompañe.")
+                break
+
+            if entrada.lower() in ["cambiar de personaje", "cambiar personaje"]:
+                personaje = input('¿Qué personaje desea elegir? ')
+                primeraVez = True
+                continue
+
+            if entrada.strip() == "":
+                primeraVez = False
+                print("No entendí, por favor escriba una pregunta.")
+                continue
+
+            match personaje.lower():
+                case 'r2d2' | 'chewbacca':
+                    primeraVez = False
+                    frasesr2d2 = ['beep', 'Beep bep', 'Bep beep', 'Bpep', 'Beep beep beeep', 'bep']
+                    fraseschewbacca = ['Grrrrowr', 'Hwaaurrgh', 'ghaawwu', 'huagg', 'Rrwaahhggg', 'Grrrruuughhh']
+                    frase = random.choice(frasesr2d2 if personaje == 'r2d2' else fraseschewbacca)
+                    print(f"{personaje}:", frase)
+
+                case 'yoda' | 'c-3po':
+                    primeraVez = False
+                    try:
+                        limpia = limpiadorFrases(entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>"))
+                        respuesta = lectorPregunta(limpia, personaje == 'yoda')
+                        if respuesta.startswith("No tengo respuesta"):
+                            print(f"{personaje}:", respuesta)
+                            agregarPregunta(entrada)
+                            print(f"{personaje}: Hazme otra pregunta")
+                            return eleccionPersonaje(personaje)
+                        print(f"{personaje}:", respuesta)
+                    except Exception as e:
+                        manejarError(e, "Error procesando la pregunta")
+
+        except Exception as e:
+            manejarError(e, "Error en la conversación")
             break
 
-        if personaje.lower() not in ['yoda', 'chewbacca', 'r2d2', 'c-3po'] or personaje == '':
-            #Si el personaje ingresado no es válido, se solicita nuevamente al usuario que ingrese un personaje
-            personaje = input('No entendí, ingrese el personaje nuevamente: ')
-            continue
-        global primeraVez
-        if primeraVez == True:
-            print(f"\nElegiste hablar con {personaje}. Puedes hacerle preguntas o cambiar de personaje escribiendo 'cambiar personaje'.")
-            print("Escribe 'salir' o 'adios' para finalizar la conversación.")
-        entrada = input("Tú: ")
 
-        if entrada.lower() in ["salir", "adios"]:
-            #Si el usuario ingresa 'salir' o 'adios', se finaliza la conversación
-            print("Conversación finalizada, que la fuerza te acompañe.")
-            break
-
-        if entrada.lower() in ["cambiar de personaje", "cambiar personaje"] :
-            #Si el usuario desea cambiar de personaje, se solicita el nuevo personaje
-            personaje = input('¿Qué personaje desea elegir? ')
-            primeraVez = True
-            continue
-        #Se utiliza un bloque match para determinar el personaje elegido y responder en consecuencia.
-
-        if entrada.lower() == '':
-            #Si el usuario no ingresa nada, se le solicita que ingrese una pregunta
-            primeraVez = False
-            print("No entendí, por favor escriba una pregunta.")
-            continue
-
-        match personaje.lower():
-            case 'r2d2' | 'chewbacca':
-                #Si el personaje es R2D2 o Chewbacca, se generan frases aleatorias para cada uno.
-                #Se utilizan listas de frases predefinidas para cada personaje y se elige una al azar
-                primeraVez = False
-                frasesr2d2 = ['beep','Beep bep','Bep beep','Bpep','Beep beep beeep','bep']
-                fraseschewbacca = ['Grrrrowr','Hwaaurrgh','ghaawwu','huagg','Rrwaahhggg','Grrrruuughhh']
-                if personaje == 'r2d2':
-                    print(f"{personaje}:", random.choice(frasesr2d2))
-                else:
-                    print(f"{personaje}:", random.choice(fraseschewbacca))
-
-            case 'yoda' | 'c-3po':
-                #Si el personaje es Yoda o C-3PO, se utiliza la función lectorPregunta para obtener una respuesta a la pregunta del usuario.
-                #Se le pasa la entrada del usuario y un boooleano para determinar la respuesta adecuada dependiendo de si el usuario.
-                #esta hablando con Yoda o C-3PO.
-                primeraVez = False
-                if personaje == 'yoda':
-                    respuesta = lectorPregunta(limpiadorFrases(entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")), True)
-                else:
-                    respuesta = lectorPregunta(limpiadorFrases(entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")), False)
-
-                #Se verifica si la respuesta es válida y se imprime en pantalla.
-                #Si la respuesta es "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.
-                #Significa que no se encontró una respuesta y se le enviará al usuario a la función agregarPregunta para que pueda agregarla al sistema.    
-
-                if respuesta == "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.":
-                    print(f"{personaje}:", respuesta)
-                    agregarPregunta(entrada)
-                    print(f"{personaje}: Hazme otra pregunta" )
-                    """Una vez que se agrega la pregunta, se envia al usuario al inicio del programa para que pueda elegir con que personaje chatear."""
-                    return eleccionPersonaje(personaje)
-                print(f"{personaje}:", respuesta)
-
-                    
-             
 def limpiadorFrases(input):
     palabraLimpia = []
     palabra = ''
-    
-    for letras in input:
 
+    for letras in input:
         if letras in vocalesTildes:
             indice = vocalesTildes.index(letras)
             letras = vocalesSinTilde[indice]
         if letras == " ":
-            if palabra:
-                if palabra in articulos:
-                    pass
-                else:
-                    palabraLimpia.append(palabra)
+            if palabra and palabra not in articulos:
+                palabraLimpia.append(palabra)
             palabra = ''
         else:
             palabra += letras
 
-    if palabra:
-        if palabra in articulos:
-            pass
-        else:
-            palabraLimpia.append(palabra)
+    if palabra and palabra not in articulos:
+        palabraLimpia.append(palabra)
 
     return palabraLimpia
 
@@ -189,39 +286,40 @@ def lectorPregunta(userInput, esYoda):
     answGroup = []
     quest = []
     answ = []
-    with open("ArchivosDeLectura/preguntas.txt", "r", encoding="utf-8") as file:
-        for lineas in file:
-            lineas = lineas.strip()
-            if lineas.startswith("Q:"):
-                quest.append(lineas[3:].lower().strip("¿?#$%&/()¡!"))
-            elif lineas.startswith("A:")  and esYoda == False:
-                answ.append(lineas[3:] )
-            elif lineas.startswith("YA:") and esYoda == True:
-                answ.append(lineas[3:])
-            elif lineas == "":# guarda las preguntas y respuestas que se ecuentra antes de un caracter ''
-                if quest:
-                    questGroup.append(quest)
-                    answGroup.append(answ)
-                    quest = []
-                    answ = []
-    #Guarda las preguntas y respuestas que se encuentran al final del documento txt
-    questGroup.append(quest)
-    answGroup.append(answ)
-
-    if agregoPregunta == True:
-            questGroup.append(newQuest)
-            answGroup.append(newAnsw)
-
-    return buscarRespuesta(userInput, questGroup, answGroup)
-
-
-# --- PROGRAMA PRINCIPAL ---
-print("--------------------------------------------------------------")
-print("          BIENVENIDO AL MEJOR ASISTENTE DE STAR WARS          ")
-print("--------------------------------------------------------------")
-print("Se inicio el chat, escriba su pregunta. Si desea finalizar el chat escriba salir o adios.")
-inicioPrograma()
+    try:
+        with open("ArchivosDeLectura/preguntas.txt", "r", encoding="utf-8") as file:
+            for linea in file:
+                linea = linea.strip()
+                if linea.startswith("Q:"):
+                    quest.append(linea[3:].lower().strip("¿?#$%&/()¡!"))
+                elif linea.startswith("A:") and not esYoda:
+                    answ.append(linea[3:])
+                elif linea.startswith("YA:") and esYoda:
+                    answ.append(linea[3:])
+        for q, a in zip(quest, answ):
+            questGroup.append([q])
+            answGroup.append([a])
+        return buscarRespuesta(userInput, questGroup, answGroup)
+    except FileNotFoundError:
+        verificarArchivos()
+        if existeArchivoPreguntas == False and existeCarpetaPreguntas == True:
+            print("Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
+        if existeCarpetaPreguntas == False and existeArchivoPreguntas == True:
+            print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
+        print("Por favor, vuelva a intentar.")    
+    except Exception as e:
+        return manejarError(e, "Error leyendo las preguntas")
 
 
+def manejarError(e, mensaje):
+    line = traceback.format_exc().splitlines()[-1]
+    print(f"{mensaje}: {e} en {line}")
 
 
+# Ejecutar el programa principal
+if __name__ == "__main__":
+    print("--------------------------------------------------------------")
+    print("          BIENVENIDO AL MEJOR ASISTENTE DE STAR WARS          ")
+    print("--------------------------------------------------------------")
+    print("Se inicio el chat, escriba su pregunta. Si desea finalizar el chat escriba salir o adios.")
+    inicioPrograma()
