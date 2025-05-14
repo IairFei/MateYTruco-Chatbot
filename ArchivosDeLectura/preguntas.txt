@@ -73,6 +73,11 @@ Q: Luke Skywalker tiene una hermana
 A: La hermana de Luke Skywalker es Leia Organa. Ambos son hijos de Anakin Skywalker (Darth Vader) y Padmé Amidala.
 YA: Leia Organa, la hermana de Luke Skywalker es. Hijos de Anakin y Padmé ambos son, mmm.
 
+Q: Hola 
+A: Hola amo,¿en que lo puedo ayudar?
+YA: Mucho por aprender, tú tienes. Tus preguntas, responderé. Hmmm.
+
+
 Q: Quien es el maestro de Luke Skywalker
 Q: Quien entreno a Luke Skywalker
 A: Luke Skywalker fue entrenado por Obi-Wan Kenobi y, posteriormente, por el maestro Yoda.
@@ -219,3 +224,9 @@ Q: Quien tiene una espada laser morada
 Q: Que diferencia tiene una espada laser morada
 A: La espada laser violeta es muy rara y la empuña Mace Windu en las películas. El color violeta es un equilibrio entre el Lado Luminoso el Lado Oscuro de la Fuerza.
 YA: Mace Windu, el único Jedi conocido que usa una espada laser morada es. Su técnica "Vaapad" para usar tanto el Lado Luminoso como el Lado Oscuro en equilibrio simboliza.
+
+
+Q: asd
+A: no
+YA: no
+

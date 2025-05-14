@@ -4,7 +4,10 @@ import os
 import difflib
 
 # Librerías originales
-articulos = ["el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de", "que", "en", "quien", "por", "para", "con", "a", "y", "o", "si", "no", "como", "mas", "menos", "muy", "todo", "toda", "todos", "todas"]
+articulos = ["el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de", "que", "en",
+ "quien", "por", "para", "con", "a", "y", "o", "si", "no", "como", "mas", "menos", "muy", "todo", "toda", "todos", "todas"]
+
+palabrasClaves = ["cambiar", "personaje", "adios", "salir", 'r2d2', 'c-3po', 'yoda', 'chewbacca']
 
 vocalesTildes = ["á", "é", "í", "ó", "ú"]
 vocalesSinTilde = ['a', 'e', 'i', 'o', 'u']
@@ -134,6 +137,8 @@ def inicioPrograma():
         print("Podés chatear con distintos personajes como R2D2, Chewbacca, Yoda o C-3PO. Cuando desees cambiar de personaje, escribí: cambiar personaje.\n")
         print("En caso que desee salir del programa escriba: salir o adios.")
         personaje = input("Coloque el nombre del personaje con el que desea hablar: ")
+        personaje = ortografia(personaje,palabrasClaves)
+        personaje = ''.join(personaje)
         eleccionPersonaje(personaje)
     except KeyboardInterrupt:
         print("\nConversación finalizada, que la fuerza te acompañe.")
@@ -143,15 +148,15 @@ def inicioPrograma():
 
 def agregarPregunta(userInput):
     try:
+        userInputModificado = ''.join(userInput)
         with open("ArchivosDeLectura/preguntas.txt", "a", encoding="utf-8") as file:
-            agrPregunta = input(f"Desea agregar la pregunta '{userInput}' al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]{}.,;:<> ")
+            agrPregunta = input(f"Desea agregar la pregunta '{userInputModificado}' al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]{}.,;:<> ")
             while agrPregunta not in ["si", "no"]:
                 agrPregunta = input("No entendí, ¿desea agregar la pregunta al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡ -_[]{}.,;:<>")
 
             if agrPregunta == 'si':
                 global agregoPregunta, newAnsw, newQuest
                 agregoPregunta = True
-                userInputModificado = ''.join(userInput)
                 file.write(f"\nQ: {userInputModificado}\n")
                 answer = input(f"Escriba la respuesta que desea agregar para la pregunta '{userInputModificado}': ")
                 file.write(f"A: {answer}\n")
@@ -179,7 +184,6 @@ def LstPalabrasClaves():
         for lineas in file:
             lineas = lineas.strip()
             if lineas.startswith("Q:"):
-
                 temporal = limpiadorFrases(lineas[3:].lower().strip("¿?#$%&/()¡!"))
                 temporal2 = list(set(temporal))
 
@@ -187,21 +191,22 @@ def LstPalabrasClaves():
                     if palabra not in palabrasClaves:
                         palabrasClaves.append(palabra)
 
-    
     palabrasClaves = list(set(palabrasClaves))
-    
     return palabrasClaves
 
+
 def ortografia(entrada, listado):
+    entrada = limpiadorFrases(entrada)
     salida = []
     for palabra in entrada:
         coincidencias = difflib.get_close_matches(palabra, listado, n=1, cutoff=0.7)
         if coincidencias:
+            if palabra != coincidencias[0]:
+                print(f"\nSYSTEM: La palabra '{palabra}' fue corregida a '{coincidencias[0]}'")
             salida.append(coincidencias[0])
         else:
             salida.append(palabra)  
     return salida
-
 
 
 def buscarRespuesta(userInput, questGroup, answGroup):
@@ -235,6 +240,8 @@ def buscarRespuesta(userInput, questGroup, answGroup):
 def eleccionPersonaje(personaje):
     while True:
         try:
+            personaje = ortografia(personaje,palabrasClaves)
+            personaje = ''.join(personaje)
             if personaje.lower() in ["salir", "adios"]:
                 print("Conversación finalizada, que la fuerza te acompañe.")
                 break
@@ -246,7 +253,7 @@ def eleccionPersonaje(personaje):
             global primeraVez
             if primeraVez == True:
                 print(f"\nElegiste hablar con {personaje}. Puedes hacerle preguntas o cambiar de personaje escribiendo 'cambiar personaje'.")
-                print("Escribe 'salir' o 'adios' para finalizar la conversación.")
+                print("Escribe 'salir' o 'adios' para finalizar la conversación.\n")
 
             entrada = input("Tú: ")
 
@@ -277,10 +284,11 @@ def eleccionPersonaje(personaje):
                 case 'yoda' | 'c-3po':
                     primeraVez = False
                     try:
+                        entrada = ortografia(entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>"),LstPalabrasClaves())
                         if personaje == 'yoda':
-                            respuesta = lectorPregunta(limpiadorFrases(entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")), True)
+                            respuesta = lectorPregunta(entrada, True)
                         else:
-                            respuesta = lectorPregunta(limpiadorFrases(entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")), False)
+                            respuesta = lectorPregunta(entrada, False)
                         if respuesta == "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.":
                             print(f"{personaje}:", respuesta)
                             agregarPregunta(entrada)
