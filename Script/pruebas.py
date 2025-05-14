@@ -1,6 +1,6 @@
 articulos = ["el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de","que","en","quien","por","para","con","a","y","o","si","no","como","mas","menos","muy","todo","toda","todos","todas"]
 pClave = ["cambiar", "personaje", "adios", "salir"]
-
+import difflib
 vocalesTildes = ["á","é","í","ó","ú"]
 vocalesSinTilde = ['a','e','i','o','u']
 
@@ -32,45 +32,20 @@ def limpiadorFrases(input):
     return palabraLimpia
 
 
-def distancia_levenshtein(a, b):
-    if a == b:
-        return 0
-    if len(a) == 0:
-        return len(b)
-    if len(b) == 0:
-        return len(a)
-
-    fila_anterior = list(range(len(b) + 1))
-    for i, c1 in enumerate(a):
-        fila_actual = [i + 1]
-        for j, c2 in enumerate(b):
-            insert = fila_actual[j] + 1
-            delete = fila_anterior[j + 1] + 1
-            replace = fila_anterior[j] + (c1 != c2)
-            fila_actual.append(min(insert, delete, replace))
-        fila_anterior = fila_actual
-
-    return fila_anterior[-1]
 
 
 def ortografia(entrada, listado):
     salida = []
     for palabra in entrada:
-        mejorCoincidencia = palabra
-        menorDistancia = float('inf')
-
-        for clave in listado:
-            dist = distancia_levenshtein(palabra, clave)
-            if dist < menorDistancia:
-                menorDistancia = dist
-                mejorCoincidencia = clave
-
-        if menorDistancia <= max(1, len(palabra) * 0.3): 
-            salida.append(mejorCoincidencia)
+        coincidencias = difflib.get_close_matches(palabra, listado, n=1, cutoff=0.7)
+        if coincidencias:
+            salida.append(coincidencias[0])
         else:
-            salida.append(palabra)
-
+            salida.append(palabra)  
     return salida
+
+
+
 
 
 #Prender esYoda y agregarPregunta
@@ -98,10 +73,9 @@ def LstPalabrasClaves():
 
 
 
-def lectorPregunta(userInput): #,esYoda):
+def lectorPregunta(userInput,esYoda):
     questGroup = []
     answGroup = []
-
     quest = []
     answ = []
     with open("ArchivosDeLectura/preguntas.txt", "r", encoding="utf-8") as file:
@@ -109,9 +83,9 @@ def lectorPregunta(userInput): #,esYoda):
             lineas = lineas.strip()
             if lineas.startswith("Q:"):
                 quest.append(lineas[3:].lower().strip("¿?#$%&/()¡!"))
-            elif lineas.startswith("A:") : #and esYoda == False:
+            elif lineas.startswith("A:")  and esYoda == False:
                 answ.append(lineas[3:] )
-            elif lineas.startswith("YA:"): #and esYoda == True:
+            elif lineas.startswith("YA:") and esYoda == True:
                 answ.append(lineas[3:])
             elif lineas == "":# guarda las preguntas y respuestas que se ecuentra antes de un caracter ''
                 if quest:
@@ -155,6 +129,7 @@ def buscarRespuesta(userInput, questGroup, answGroup):
                 mejorIndice = i
 
     if mejorPuntaje >= umbral:
+        print (answGroup[mejorIndice][0])
         return answGroup[mejorIndice][0]
 
     return "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema."
@@ -166,6 +141,8 @@ while True:
     if inputUsuario != 'salir':
         inputUsuario = ortografia(limpiadorFrases(inputUsuario),LstPalabrasClaves())
         print(inputUsuario)
+        respuesta = lectorPregunta(inputUsuario,False)
+        print(respuesta)
         
     else:
         break
