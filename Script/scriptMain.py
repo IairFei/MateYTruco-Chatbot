@@ -248,6 +248,7 @@ def eleccionPersonaje(personaje):
 
             if personaje.lower() not in ['yoda', 'chewbacca', 'r2d2', 'c-3po'] or personaje == '':
                 personaje = input('No entendí, ingrese el personaje nuevamente: ')
+                personaje = ortografia(personaje,palabrasClaves)
                 continue
 
             global primeraVez
