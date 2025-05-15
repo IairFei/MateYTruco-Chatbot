@@ -3,9 +3,13 @@ import traceback
 import os
 import difflib
 
+# se debe de guardar el input en una varible global asi cuando te aparece lo de guardar la pregunta aparece con los articulos
+
+#logger con cambios de system
+
 # Librerías originales
 articulos = ["el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de", "que", "en",
- "quien", "por", "para", "con", "a", "y", "o", "si", "no", "como", "mas", "menos", "muy", "todo", "toda", "todos", "todas"]
+ "quien", "por", "para", "con", "a", "y", "o", "si", "no", "como", "mas", "menos", "muy", "todo", "toda", "todos", "todas",'cual','fue','quienes']
 
 palabrasClaves = ["cambiar", "personaje", "adios", "salir", 'r2d2', 'c-3po', 'yoda', 'chewbacca']
 
@@ -138,7 +142,7 @@ def inicioPrograma():
         print("En caso que desee salir del programa escriba: salir o adios.")
         personaje = input("Coloque el nombre del personaje con el que desea hablar: ")
         personaje = ortografia(personaje,palabrasClaves)
-        personaje = ''.join(personaje)
+        personaje = ' '.join(personaje)
         eleccionPersonaje(personaje)
     except KeyboardInterrupt:
         print("\nConversación finalizada, que la fuerza te acompañe.")
@@ -148,7 +152,7 @@ def inicioPrograma():
 
 def agregarPregunta(userInput):
     try:
-        userInputModificado = ''.join(userInput)
+        userInputModificado = ' '.join(userInput)
         with open("ArchivosDeLectura/preguntas.txt", "a", encoding="utf-8") as file:
             agrPregunta = input(f"Desea agregar la pregunta '{userInputModificado}' al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]{}.,;:<> ")
             while agrPregunta not in ["si", "no"]:
@@ -199,7 +203,7 @@ def ortografia(entrada, listado):
     entrada = limpiadorFrases(entrada)
     salida = []
     for palabra in entrada:
-        coincidencias = difflib.get_close_matches(palabra, listado, n=1, cutoff=0.7)
+        coincidencias = difflib.get_close_matches(palabra, listado, n=1, cutoff=0.75)
         if coincidencias:
             if palabra != coincidencias[0]:
                 print(f"\nSYSTEM: La palabra '{palabra}' fue corregida a '{coincidencias[0]}'")
@@ -241,7 +245,7 @@ def eleccionPersonaje(personaje):
     while True:
         try:
             personaje = ortografia(personaje,palabrasClaves)
-            personaje = ''.join(personaje)
+            personaje = ' '.join(personaje)
             if personaje.lower() in ["salir", "adios"]:
                 print("Conversación finalizada, que la fuerza te acompañe.")
                 break
