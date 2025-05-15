@@ -152,7 +152,7 @@ def inicioPrograma():
 
 def agregarPregunta(userInput):
     try:
-        userInputModificado = ' '.join(userInput)
+        userInputModificado = ''.join(userInput)
         with open("ArchivosDeLectura/preguntas.txt", "a", encoding="utf-8") as file:
             agrPregunta = input(f"Desea agregar la pregunta '{userInputModificado}' al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]{}.,;:<> ")
             while agrPregunta not in ["si", "no"]:
@@ -202,14 +202,28 @@ def LstPalabrasClaves():
 def ortografia(entrada, listado):
     entrada = limpiadorFrases(entrada)
     salida = []
+    
     for palabra in entrada:
-        coincidencias = difflib.get_close_matches(palabra, listado, n=1, cutoff=0.75)
-        if coincidencias:
-            if palabra != coincidencias[0]:
-                print(f"\nSYSTEM: La palabra '{palabra}' fue corregida a '{coincidencias[0]}'")
-            salida.append(coincidencias[0])
-        else:
-            salida.append(palabra)  
+        
+        palabra = palabra.lower()
+        if palabra in articulos:
+            continue
+        if palabra in listado:
+            salida.append(palabra)
+            continue
+        # Si la palabra no está en la lista, buscar coincidencias
+        # usando difflib
+        
+        coincidencias = difflib.get_close_matches(palabra, listado, n=1, cutoff=0.5)
+        if palabra != coincidencias[0]:
+            print("Palabras: ", palabra, "Coincidencias: ", coincidencias)
+            coincidenciasString = ' '.join(coincidencias)
+            print(f"¿Quisiste decir '{coincidenciasString}'?")
+            respuesta = input("Escriba 'si' para confirmar o 'no' para continuar: ").lower()
+            if respuesta == 'si':
+                salida.append(coincidencias[0])
+            else:
+                salida.append(palabra) 
     return salida
 
 
@@ -242,16 +256,18 @@ def buscarRespuesta(userInput, questGroup, answGroup):
 
 
 def eleccionPersonaje(personaje):
-    while True:
-        try:
-            personaje = ortografia(personaje,palabrasClaves)
-            personaje = ' '.join(personaje)
+    try:
+        palabrasClaves = LstPalabrasClaves()
+        personaje = ortografia(personaje,palabrasClaves)
+        personaje = ''.join(personaje)
+        while True:
             if personaje.lower() in ["salir", "adios"]:
                 print("Conversación finalizada, que la fuerza te acompañe.")
                 break
 
             if personaje.lower() not in ['yoda', 'chewbacca', 'r2d2', 'c-3po'] or personaje == '':
                 personaje = input('No entendí, ingrese el personaje nuevamente: ')
+
                 personaje = ortografia(personaje,palabrasClaves)
                 continue
 
@@ -289,7 +305,8 @@ def eleccionPersonaje(personaje):
                 case 'yoda' | 'c-3po':
                     primeraVez = False
                     try:
-                        entrada = ortografia(entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>"),LstPalabrasClaves())
+                        entrada = entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
+                        entrada = ortografia(entrada,palabrasClaves)
                         if personaje == 'yoda':
                             respuesta = lectorPregunta(entrada, True)
                         else:
@@ -303,10 +320,8 @@ def eleccionPersonaje(personaje):
                         print(f"{personaje}:", respuesta)
                     except Exception as e:
                         manejarError(e, "Error procesando la pregunta")
-
-        except Exception as e:
-            manejarError(e, "Error en la conversación")
-            break
+    except Exception as e:
+        manejarError(e, "Error en la conversación")
 
 
 def limpiadorFrases(input):
@@ -357,8 +372,6 @@ def lectorPregunta(userInput, esYoda):
                         answGroup.append(answ)
                         quest = []
                         answ = []
-        questGroup.append(quest)
-        answGroup.append(answ)
 
         if agregoPregunta == True:
             questGroup.append(newQuest)
