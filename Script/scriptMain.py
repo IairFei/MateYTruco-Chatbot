@@ -19,6 +19,7 @@ agregoPregunta = False
 primeraVez = True
 existeArchivoPreguntas = True
 existeCarpetaPreguntas = True
+existeCarpetaLogs = True
 entradaOriginal = ''
 
 
@@ -133,6 +134,31 @@ def verificarArchivos():
                 print(f"Error al crear el archivo: {e}")
                 return
             print("Archivo 'preguntas.txt' creado con preguntas iniciales.")
+        if not os.path.exists("Logs"):
+            global existeCarpetaLogs
+            existeCarpetaLogs=False
+            try:
+                print("Creando carpeta Logs...")
+                os.makedirs("Logs")
+            except Exception as e:
+                print(f"Error al crear la carpeta: {e} ")
+            print("Carpeta 'Logs' creada.")  
+            try:
+                # Crear el archivo errorLogs.txt dentro de la carpeta Logs
+                print("Creando archivo errorLogs.txt...")
+                with open("Logs/errorLogs.txt", "w", encoding="utf-8") as file:
+                    file.write("Registro de errores:\n")
+            except Exception as e:
+                # Manejar el error si no se puede crear el archivo
+                print(f"Error al crear el archivo: {e}")
+                return
+            print("Archivo 'errorLogs.txt' creado.")
+            if not os.path.exists("Logs/errorLogs.txt"):
+                # Crear el archivo errorLogs.txt dentro de la carpeta Logs
+                print("Creando archivo errorLogs.txt...")
+                with open("Logs/errorLogs.txt", "w", encoding="utf-8") as file:
+                    file.write("Registro de errores:\n")
+                print("Archivo 'errorLogs.txt' creado.")
     except Exception as e:
         manejarError(e, "Error al verificar o crear archivos")
 
@@ -456,9 +482,15 @@ def lectorPregunta(userInput, esYoda):
 def manejarError(e, mensaje):
     global entradaOriginal
     entradaOriginal = ''
-    print(f"Error: {mensaje}")
-    print(f"Detalles del error: {e}")
-    print("Por favor, vuelva a intentar.")
+    
+    # Guardar el error en un archivo de registro
+    try:
+        with open("Logs/errorLogs.txt", "a", encoding="utf-8") as file:
+            file.write(f"Error: {mensaje}\n")
+            file.write(f"Detalles del error: {e}\n")
+            file.write("-" * 50 + "\n")
+    except Exception as e:
+        print(f"Error al guardar el error en el archivo de registro: {e}")
 
 
 # Ejecutar el programa principal
