@@ -6,7 +6,7 @@ import difflib
 articulos = ["el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de", "que", "en",
  "quien", "por", "para", "con", "a", "y", "o", "si", "no", "como", "mas", "menos", "muy", "todo", "toda", "todos", "todas",'cual','fue','quienes']
 
-palabrasClaves = ["cambiar", "personaje", "adios", "salir", 'r2d2', 'c-3po', 'yoda', 'chewbacca','c3po']
+personajesYsalida = ["cambiar", "personaje", "adios", "salir", 'r2d2', 'c-3po', 'yoda', 'chewbacca','c3po']
 
 vocalesTildes = ["á", "é", "í", "ó", "ú"]
 vocalesSinTilde = ['a', 'e', 'i', 'o', 'u']
@@ -143,7 +143,7 @@ def inicioPrograma():
         print("Podés chatear con distintos personajes como R2D2, Chewbacca, Yoda o C-3PO. Cuando desees cambiar de personaje, escribí: cambiar personaje.\n")
         print("En caso que desee salir del programa escriba: salir o adios.")
         personaje = input("Coloque el nombre del personaje con el que desea hablar: ")
-        personaje = ortografia(personaje,palabrasClaves)
+        personaje = ortografia(personaje,personajesYsalida)
         personaje = ' '.join(personaje)
         eleccionPersonaje(personaje)
     except KeyboardInterrupt:
@@ -199,6 +199,7 @@ def LstPalabrasClaves():
                             palabrasClaves.append(palabra)
 
         palabrasClaves = list(set(palabrasClaves))
+        palabrasClaves.extend(personajesYsalida)
         return palabrasClaves
     except FileNotFoundError:
         verificarArchivos()
@@ -229,13 +230,13 @@ def ortografia(entrada, listado):
                     salida.append(palabra)
                     continue
                 try:
-                    coincidencias = difflib.get_close_matches(palabra, listado, n=3, cutoff=0.5)
+                    coincidencias = difflib.get_close_matches(palabra, listado, n=2, cutoff=0.5)
                 except Exception as e:
                     manejarError(e, "Error en la búsqueda de coincidencias")
                     continue
                 i = 0
                 corregida = False
-                while i < len(coincidencias) and  i < 3 :
+                while i < len(coincidencias) and  i < 2 :
                     if palabra == coincidencias[i]:
                         break
                     print(f"Palabra: {palabra} - ¿Quisiste decir '{coincidencias[i]}'?")
@@ -354,11 +355,17 @@ def eleccionPersonaje(personaje):
                     primeraVez = False
                     try:
                         entrada = entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
+                        print(entrada)
+
                         entrada = ortografia(entrada,palabrasClaves)
+                        if entrada[0] in ["salir", "adios"]:
+                                print("Conversación finalizada, que la fuerza te acompañe.")
+                                break
                         if personaje == 'yoda':
                             respuesta = lectorPregunta(entrada, True)
                         else:
                             respuesta = lectorPregunta(entrada, False)
+                        
                         if respuesta == "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.":
                             print(f"{personaje}:", respuesta)
                             agregarPregunta()
