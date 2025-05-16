@@ -24,6 +24,7 @@ agregoPregunta = False
 primeraVez = True
 existeArchivoPreguntas = True
 existeCarpetaPreguntas = True
+entradaOriginal = ''
 
 
 def crearArchivoPreguntas():
@@ -152,21 +153,21 @@ def inicioPrograma():
 
 def agregarPregunta(userInput):
     try:
-        userInputModificado = ''.join(userInput)
+        global entradaOriginal
         with open("ArchivosDeLectura/preguntas.txt", "a", encoding="utf-8") as file:
-            agrPregunta = input(f"Desea agregar la pregunta '{userInputModificado}' al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]{}.,;:<> ")
+            agrPregunta = input(f"Desea agregar la pregunta '{entradaOriginal}' al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]{}.,;:<> ")
             while agrPregunta not in ["si", "no"]:
                 agrPregunta = input("No entendí, ¿desea agregar la pregunta al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡ -_[]{}.,;:<>")
 
             if agrPregunta == 'si':
                 global agregoPregunta, newAnsw, newQuest
                 agregoPregunta = True
-                file.write(f"\nQ: {userInputModificado}\n")
-                answer = input(f"Escriba la respuesta que desea agregar para la pregunta '{userInputModificado}': ")
+                file.write(f"\nQ: {entradaOriginal}\n")
+                answer = input(f"Escriba la respuesta que desea agregar para la pregunta '{entradaOriginal}': ")
                 file.write(f"A: {answer}\n")
                 file.write(f"YA: {answer}\n")
 
-                newQuest.append(userInputModificado)
+                newQuest.append(entradaOriginal)
                 newAnsw.append(answer)
                 file.write("\n")
                 print("\nPregunta y respuesta agregadas correctamente al sistema.\n")
@@ -177,7 +178,7 @@ def agregarPregunta(userInput):
         if existeCarpetaPreguntas == False:
             print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
         print("Por favor, vuelva a intentar.")
-        agregarPregunta(userInputModificado)
+        agregarPregunta(entradaOriginal)
     except Exception as e:
         manejarError(e, "Error al agregar la pregunta")
 
@@ -199,32 +200,50 @@ def LstPalabrasClaves():
     return palabrasClaves
 
 
-def ortografia(entrada, listado):
+def ortografia(entrada, listado): #la entrada es quien fue luce, me gustaria que entre a entrada original y modifique unicamente la palabra que estaba mal 
+    global entradaOriginal
+    lista_palabras = entrada.split()
+    
+    
     entrada = limpiadorFrases(entrada)
     salida = []
     
     for palabra in entrada:
-        
         palabra = palabra.lower()
         if palabra in articulos:
             continue
         if palabra in listado:
             salida.append(palabra)
             continue
-        # Si la palabra no está en la lista, buscar coincidencias
-        # usando difflib
+
+        coincidencias = difflib.get_close_matches(palabra, listado, n=2, cutoff=0.5)
         
-        coincidencias = difflib.get_close_matches(palabra, listado, n=1, cutoff=0.5)
-        if palabra != coincidencias[0]:
-            print("Palabras: ", palabra, "Coincidencias: ", coincidencias)
-            coincidenciasString = ' '.join(coincidencias)
-            print(f"¿Quisiste decir '{coincidenciasString}'?")
+        i = 0
+        corregida = False
+        while i < len(coincidencias) and  i < 2 :
+            if palabra == coincidencias[i]:
+                break
+            print(f"Palabra: {palabra} - ¿Quisiste decir '{coincidencias[i]}'?")
             respuesta = input("Escriba 'si' para confirmar o 'no' para continuar: ").lower()
+            posicion = lista_palabras.index(palabra)
             if respuesta == 'si':
-                salida.append(coincidencias[0])
-            else:
-                salida.append(palabra) 
+                salida.append(coincidencias[i])
+                lista_palabras[posicion] = coincidencias[i]
+
+                corregida = True
+                break
+
+            i += 1
+
+        if not corregida:
+            entradaOriginal = []
+
+            salida.append(palabra)
+
+    
+    entradaOriginal = ' '.join(lista_palabras)
     return salida
+
 
 
 def buscarRespuesta(userInput, questGroup, answGroup):
@@ -258,8 +277,7 @@ def buscarRespuesta(userInput, questGroup, answGroup):
 def eleccionPersonaje(personaje):
     try:
         palabrasClaves = LstPalabrasClaves()
-        personaje = ortografia(personaje,palabrasClaves)
-        personaje = ''.join(personaje)
+        
         while True:
             if personaje.lower() in ["salir", "adios"]:
                 print("Conversación finalizada, que la fuerza te acompañe.")
@@ -267,8 +285,9 @@ def eleccionPersonaje(personaje):
 
             if personaje.lower() not in ['yoda', 'chewbacca', 'r2d2', 'c-3po'] or personaje == '':
                 personaje = input('No entendí, ingrese el personaje nuevamente: ')
-
                 personaje = ortografia(personaje,palabrasClaves)
+                personaje = ' '.join(personaje)
+
                 continue
 
             global primeraVez
@@ -395,8 +414,8 @@ def manejarError(e, mensaje):
 
 # Ejecutar el programa principal
 if __name__ == "__main__":
-    print("--------------------------------------------------------------")
+    ancho = 70
+    print("-" * ancho)
     print("          BIENVENIDO AL MEJOR ASISTENTE DE STAR WARS          ")
-    print("--------------------------------------------------------------")
-    print("Se inicio el chat, escriba su pregunta. Si desea finalizar el chat escriba salir o adios.")
+    print("-" * ancho)
     inicioPrograma()
