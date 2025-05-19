@@ -307,3 +307,9 @@ Q: Quien es el padre de Boba Fett
 Q: De donde vienen los clones
 A: Jango Fett fue un cazarrecompensas mandaloriano. Su ADN se usó para crear el ejército clon y Boba Fett fue criado como su hijo.
 YA: Clonador original, Jango Fett fue. A Boba crió como hijo, todos los clones su imagen tienen.
+
+
+Q: quien fue luke sywalker
+A: un tipazo
+YA: un tipazo
+

@@ -1,0 +1,27 @@
+Registro de log:
+Fecha y hora: 2025-05-19 17:27:56.781401
+Pregunta: quien fue kylo ren
+Respuesta:  Kylo Ren, Ben Solo en realidad se llama. Hijo de Leia y Han, nieto de Vader es, mmm.
+Personaje: yoda
+
+----------------------------------------
+Fecha y hora: 2025-05-19 17:28:09.316237
+Pregunta: quien fue kylo ren
+Pregunta original: quien fue kylo re
+Respuesta:  Kylo Ren, Ben Solo en realidad se llama. Hijo de Leia y Han, nieto de Vader es, mmm.
+Personaje: yoda
+
+----------------------------------------
+Fecha y hora: 2025-05-19 17:48:55.486671
+Pregunta con correccion ortografica: quien fue luke sywalker
+Respuesta:  fue e hjo de anakin
+Personaje: yoda
+Porcentaje de acierto: 100%
+----------------------------------------
+Fecha y hora: 2025-05-19 17:51:14.252795
+Pregunta con correccion ortografica: quien fue luke skywalker
+Pregunta sin correcion ortografica: quien fue luke sywalker
+Respuesta:  Anakin Skywalker, el padre de Luke es. Darth Vader, él también fue.
+Personaje: yoda
+Porcentaje de acierto: 100%
+----------------------------------------

@@ -1,4 +1,6 @@
-Registro de errores:
-Error: Error leyendo las preguntas
-Detalles del error: 'str' object has no attribute 'append'
+Registro de errores:Error: Error procesando la pregunta
+Detalles del error: name 'huboCorreccionOrtografica' is not defined
+--------------------------------------------------
+Error: Error procesando la pregunta
+Detalles del error: cannot access local variable 'entradaOriginal' where it is not associated with a value
 --------------------------------------------------
