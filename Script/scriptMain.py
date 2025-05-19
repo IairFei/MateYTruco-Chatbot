@@ -201,7 +201,7 @@ def verificarArchivos():
                 file.write("Registro de log:\n")
             print("Archivo 'log.txt' creado.")                
     except Exception as e:
-        manejarError(e, "Error al verificar o crear archivos")
+        manejarError(e, "Error al verificar o crear archivos.")
 
 def inicioPrograma():
     """
@@ -225,7 +225,7 @@ def inicioPrograma():
     except KeyboardInterrupt:
         print("\nConversación finalizada, que la fuerza te acompañe.")
     except Exception as e:
-        manejarError(e, "Error inesperado en el inicio del programa")
+        manejarError(e, "Error inesperado en el inicio del programa.")
 
 def agregarInteraccionLogs(entradaOriginal, entradaCorregida, respuesta, personaje):
     """
@@ -258,7 +258,7 @@ def agregarInteraccionLogs(entradaOriginal, entradaCorregida, respuesta, persona
                 file.write("Error: No se encontró el archivo de log. Se ha creado uno nuevo.\n")
                 agregarInteraccionLogs(entradaOriginal, entradaCorregida, respuesta, personaje)
     except Exception as e:
-        manejarError(e, "Error al agregar interacción al log")
+        manejarError(e, "Error al agregar interacción al log.")
     
 
 
@@ -310,7 +310,7 @@ def agregarPregunta():
         print("Por favor, vuelva a intentar.")
         agregarPregunta(entradaOriginal)
     except Exception as e:
-        manejarError(e, "Error al agregar la pregunta")
+        manejarError(e, "Error al agregar la pregunta.")
 
 def LstPalabrasClaves():
     palabrasClaves = []
@@ -337,7 +337,7 @@ def LstPalabrasClaves():
             print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
         print("Por favor, vuelva a intentar.")
     except Exception as e:
-        manejarError(e, "Error al leer el archivo de preguntas para obtener palabras clave")
+        manejarError(e, "Error al leer el archivo de preguntas para obtener palabras clave.")
         return palabrasClaves
 
 
@@ -377,7 +377,7 @@ def ortografia(entrada, listado):
                 try:
                     coincidencias = difflib.get_close_matches(palabra, listado, n=3, cutoff=0.5)
                 except Exception as e:
-                    manejarError(e, "Error en la búsqueda de coincidencias")
+                    manejarError(e, "Error en la búsqueda de coincidencias.")
                     continue
                 i = 0
                 corregida = False
@@ -408,7 +408,7 @@ def ortografia(entrada, listado):
             entradaModificada = ' '.join(lista_palabras) 
             return salida
         except Exception as e:
-            manejarError(e, "Error en la corrección ortográfica")
+            manejarError(e, "Error en la corrección ortográfica.")
             return entradaOriginal
 
 
@@ -478,20 +478,21 @@ def eleccionPersonaje(personaje):
             if personaje.lower() in ["salir", "adios"]:
                 print("Conversación finalizada, que la fuerza te acompañe.")
                 break
-
-            if personaje.lower() not in ['yoda', 'chewbacca', 'r2d2', 'c-3po', 'c3po'] or personaje == '':
+            print(personaje)
+            personaje = personaje.replace('-','')
+            if personaje not in ['yoda', 'chewbacca', 'r2d2', 'c3po'] or personaje == '':
                 personaje = input('No entendí, ingrese el personaje nuevamente: ')
                 try:
                     personaje = ortografia(personaje,palabrasClaves)
                     personaje = ' '.join(personaje)
                     continue
                 except Exception as e:
-                    manejarError(e, "Error en la elección del personaje")
+                    manejarError(e, "Error en la elección del personaje.")
                     continue
 
             global primeraVez
             if primeraVez == True:
-                print(f"\nElegiste hablar con {personaje}. Puedes hacerle preguntas o cambiar de personaje escribiendo 'cambiar personaje'.")
+                print(f"\nElegiste hablar con {personaje.upper()}. Puedes hacerle preguntas o cambiar de personaje escribiendo 'cambiar personaje'.")
                 print("Escribe 'salir' o 'adios' para finalizar la conversación.\n")
 
             entrada = input("Tú: ")
@@ -516,11 +517,11 @@ def eleccionPersonaje(personaje):
                     frasesr2d2 = ['beep', 'Beep bep', 'Bep beep', 'Bpep', 'Beep beep beeep', 'bep']
                     fraseschewbacca = ['Grrrrowr', 'Hwaaurrgh', 'ghaawwu', 'huagg', 'Rrwaahhggg', 'Grrrruuughhh']
                     if personaje == 'r2d2':
-                        print(f"{personaje}:", random.choice(frasesr2d2))
+                        print(f"{personaje.upper()}:", random.choice(frasesr2d2))
                     else:
-                        print(f"{personaje}:", random.choice(fraseschewbacca))
+                        print(f"{personaje.upper()}:", random.choice(fraseschewbacca))
 
-                case 'yoda' | 'c-3po' | 'c3po':
+                case 'yoda' | 'c3po':
                     primeraVez = False
                     try:
                         entrada = entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
@@ -530,32 +531,32 @@ def eleccionPersonaje(personaje):
                         else:
                             respuesta = lectorPregunta(entrada, False)
                         if respuesta == "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.":
-                            print(f"{personaje}:", respuesta)
+                            print(f"{personaje.upper()}:", respuesta)
                             agregarPregunta()
-                            print(f"{personaje}: Hazme otra pregunta")
+                            print(f"{personaje.upper()}: Hazme otra pregunta")
                             """Una vez que se agrega la pregunta, se envia al usuario al inicio del programa para que pueda elegir con que personaje chatear."""
                             return eleccionPersonaje(personaje)
                         if respuesta == None:
-                            print(f"{personaje}: No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.")
+                            print(f"{personaje.upper()}: No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.")
                             agregarPregunta()
-                            print(f"{personaje}: Hazme otra pregunta")
+                            print(f"{personaje.upper()}: Hazme otra pregunta")
                             return eleccionPersonaje(personaje)
-                        print(f"{personaje}:", respuesta)
+                        print(f"{personaje.upper()}:", respuesta)
                         if huboCorreccionOrtografica == True:
                             correccion = input("Era la respuesta correcta? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
                             while correccion not in ["si", "no"]:
                                 correccion = input("No entendí, ¿era la respuesta correcta? (si/no): ").lower()
                             if correccion == 'no':
                                 agregarPregunta()
-                                print(f"{personaje}: Hazme otra pregunta")
+                                print(f"{personaje.upper()}: Hazme otra pregunta")
                                 return eleccionPersonaje(personaje)
                             if correccion == 'si':
-                                print(f"{personaje}: Hazme otra pregunta")
+                                print(f"{personaje.upper()}: Hazme otra pregunta")
                         agregarInteraccionLogs(entradaOriginal, entradaModificada, respuesta, personaje)
                     except Exception as e:
-                        manejarError(e, "Error procesando la pregunta")
+                        manejarError(e, "Error procesando la pregunta.")
     except Exception as e:
-        manejarError(e, "Error en la conversación")
+        manejarError(e, "Error en la conversación.")
 
 
 def limpiadorFrases(input):
@@ -596,7 +597,7 @@ def limpiadorFrases(input):
 
         return palabraLimpia
     except Exception as e:
-        manejarError(e, "Error en el limpiador de frases")
+        manejarError(e, "Error en el limpiador de frases.")
         return
 
 
@@ -656,7 +657,7 @@ def lectorPregunta(userInput, esYoda):
         print("Por favor, vuelva a intentar.")    
     except Exception as e:
         # Si ocurre un error al leer el archivo, se maneja la excepción
-        return manejarError(e, "Error leyendo las preguntas")
+        return manejarError(e, "Error leyendo las preguntas.")
 
 
 # Manejo de errores
