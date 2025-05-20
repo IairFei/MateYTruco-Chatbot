@@ -2,6 +2,7 @@ import random
 import os
 import difflib
 import datetime
+import json
 
 # Librerías originales
 articulos = ["el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de", "que", "en",
@@ -38,74 +39,113 @@ def crearArchivoPreguntas():
     Excepciones: Si ocurre un error al crear o escribir en el archivo, la excepción es capturada y gestionada.
     """
     try:
-        with open("ArchivosDeLectura/preguntas.txt", "w", encoding="utf-8") as file:
-        # Preguntas iniciales sobre Star Wars
-            file.write("Q: Cual fue la primera pelicula\n")
-            file.write("A: La primera película por orden de estreno fue “Star Wars: Episode IV: A New Hope” (Una Nueva Esperanza), de 1977. Sin embargo, la primera película según el orden cronológico es “Star Wars: Episode I: The Phantom Menace” (La Amenaza Fantasma), de 1999.\n")
-            file.write("YA: “Star Wars: Episode IV: A New Hope” (Una Nueva Esperanza), por orden de estreno la primera fue, en 1977. Pero según el orden cronológico, “Episode I: The Phantom Menace” (La Amenaza Fantasma), en 1999 estrenada fue, sí.\n")
-            file.write("\n")    
-            file.write("Q: En que año se estreno la primera pelicula\n")
-            file.write("Q: En que año se estreno A New Hope\n")
-            file.write("Q: En que año se estreno Una Nueva Esperanza\n")
-            file.write("A: La primera película, “A New Hope” (Una nueva esperanza), se estreno en 1977.\n")
-            file.write("YA: En 1977, la primera película, “A New Hope” (Una nueva esperanza) estrenada fue, mmm.\n")
-            file.write("\n")   
-            file.write("Q: En que año se estreno la segunda pelicula\n")
-            file.write("Q: En que año se estreno The Empire Strikes Back\n")
-            file.write("Q: En que año se estreno El Imperio Contraataca\n")
-            file.write("A: La segunda película, “The Empire Strikes Back” (El Imperio Contraataca), se estrenó en 1980.\n")
-            file.write("YA: En 1980, “The Empire Strikes Back” (El Imperio Contraataca), la segunda película estrenada fue, sí.\n")
-            file.write("\n")
-            file.write("Q: En que año se estreno la tercera pelicula\n")
-            file.write("Q: En que año se estreno Return of The Jedi\n")
-            file.write("Q: En que año se estreno El Regreso del Jedi\n")
-            file.write("A: La tercera película, “Return of The Jedi” (El Retorno del Jedi), se estrenó en 1983.\n")
-            file.write("YA: “Return of The Jedi” (El Retorno del Jedi), en 1983 lanzada fue, y la tercera película es.\n")
-            file.write("\n")
-            file.write("Q: En que año se estreno la cuarta pelicula?\n")
-            file.write("Q: En que año se estreno The Phantom Menace?\n")
-            file.write("Q: En que año se estreno La Amenaza Fantasma?\n")
-            file.write("A: La cuarta película, “The Phantom Menace”(La Amenaza Fantasma), se estrenó en 1999.\n")
-            file.write("YA: En 1999, “The Phantom Menace” (La Amenaza Fantasma); la cuarta película estrenada fue, hmmm.\n")
-            file.write("\n")
-            file.write("Q: En que año se estreno la quinta pelicula\n")
-            file.write("Q: En que año se estreno Attack of the Clones\n")
-            file.write("Q: En que año se estreno El Ataque de los Clones\n")
-            file.write("A: La quinta película, “Attack of the Clones” (El Ataque de los Clones), se estrenó en 2002.\n")
-            file.write("YA: “Attack of the Clones” (El Ataque de los Clones), la quinta, en 2002 estrenada fue.\n")
-            file.write("\n")
-            file.write("Q: En que año se estreno la sexta pelicula\n")
-            file.write("Q: En que año se estreno Revenge of the Sith\n")
-            file.write("Q: En que año se estreno La Venganza de los Sith\n")
-            file.write("A: La sexta película, “Revenge of the Sith”, (La Venganza de los Sith), se estrenó en 2005.\n")
-            file.write("YA: En 2005, “Revenge of the Sith” (La Venganza de los Sith), estrenada fue, sexta película, es.\n")
-            file.write("\n")
-            file.write("Q: En que año se estreno The Force Awakens\n")
-            file.write("Q: En que año se estreno El Despertar de la Fuerza\n")
-            file.write("Q: En que año se estreno la septima pelicula\n")
-            file.write("A: La séptima película, “The Force Awakens” (El Despertar de la Fuerza), se estrenó en 2015.\n")
-            file.write("YA: “The Force Awakens” (El Despertar de la Fuerza), séptima película, en 2015 apareció, mmm.\n")
-            file.write("\n")
-            file.write("Q: En que año se estreno The Last Jedi\n")
-            file.write("Q: En que año se estreno Los Ultimos Jedi\n")
-            file.write("Q: En que año se estreno la octava pelicula\n")
-            file.write("A: La octava pelicula, “The Last Jedi” (Los Últimos Jedi), se estrenó en 2017.\n")
-            file.write("YA: En 2017, “The Last Jedi” (Los Últimos Jedi), la octava película fue, sí.\n")
-            file.write("\n")
-            file.write("Q: En que año se estreno The Rise of Skywalker\n")
-            file.write("Q: En que año se estreno El Ascenso de Skywalker\n")
-            file.write("Q: En que año se estreno la novena pelicula\n")
-            file.write("A: La novena película, “The Rise of Skywalker” (El Ascenso de Skywalker), se estrenó en 2019.\n")
-            file.write("YA: La novena, “The Rise of Skywalker” (El Ascenso de Skywalker), en 2019 lanzada fue, hmmm.\n")
-            file.write("\n")
-            file.write("Q: Quien es el creador de Star Wars\n")
-            file.write("A: El creador de Star Wars es George Lucas. Es un director, guionista y productor estadounidense que escribió y dirigió la primera película de la saga.\n")
-            file.write("YA: George Lucas, el creador de Star Wars es. Director, guionista y productor, también, sí.\n")
-            file.write("\n")
-            file.write("Q: Quien es el padre de Luke Skywalker\n")
-            file.write("A: El padre de Luke Skywalker es Anakin Skywalker/Darth Vader.\n")
-            file.write("YA: Anakin Skywalker, el padre de Luke es. Darth Vader, él también fue.\n")
-            file.write("\n")
+        preguntas = [
+            {
+            "preguntas": [
+                "Cual fue la primera pelicula"
+            ],
+            "respuesta": "La primera película por orden de estreno fue “Star Wars: Episode IV: A New Hope” (Una Nueva Esperanza), de 1977. Sin embargo, la primera película según el orden cronológico es “Star Wars: Episode I: The Phantom Menace” (La Amenaza Fantasma), de 1999.",
+            "respuesta_yoda": "“Star Wars: Episode IV: A New Hope” (Una Nueva Esperanza), por orden de estreno la primera fue, en 1977. Pero según el orden cronológico, “Episode I: The Phantom Menace” (La Amenaza Fantasma), en 1999 estrenada fue, sí."
+            },
+            {
+            "preguntas": [
+                "En que año se estreno la primera pelicula",
+                "En que año se estreno A New Hope",
+                "En que año se estreno Una Nueva Esperanza"
+            ],
+            "respuesta": "La primera película, “A New Hope” (Una nueva esperanza), se estreno en 1977.",
+            "respuesta_yoda": "En 1977, la primera película, “A New Hope” (Una nueva esperanza) estrenada fue, mmm."
+            },
+            {
+            "preguntas": [
+                "En que año se estreno la segunda pelicula",
+                "En que año se estreno The Empire Strikes Back",
+                "En que año se estreno El Imperio Contraataca"
+            ],
+            "respuesta": "La segunda película, “The Empire Strikes Back” (El Imperio Contraataca), se estrenó en 1980.",
+            "respuesta_yoda": "En 1980, “The Empire Strikes Back” (El Imperio Contraataca), la segunda película estrenada fue, sí."
+            },
+            {
+            "preguntas": [
+                "En que año se estreno la tercera pelicula",
+                "En que año se estreno Return of The Jedi",
+                "En que año se estreno El Regreso del Jedi"
+            ],
+            "respuesta": "La tercera película, “Return of The Jedi” (El Retorno del Jedi), se estrenó en 1983.",
+            "respuesta_yoda": "“Return of The Jedi” (El Retorno del Jedi), en 1983 lanzada fue, y la tercera película es."
+            },
+            {
+            "preguntas": [
+                "En que año se estreno la cuarta pelicula?",
+                "En que año se estreno The Phantom Menace?",
+                "En que año se estreno La Amenaza Fantasma?"
+            ],
+            "respuesta": "La cuarta película, “The Phantom Menace”(La Amenaza Fantasma), se estrenó en 1999.",
+            "respuesta_yoda": "En 1999, “The Phantom Menace” (La Amenaza Fantasma); la cuarta película estrenada fue, hmmm."
+            },
+            {
+            "preguntas": [
+                "En que año se estreno la quinta pelicula",
+                "En que año se estreno Attack of the Clones",
+                "En que año se estreno El Ataque de los Clones"
+            ],
+            "respuesta": "La quinta película, “Attack of the Clones” (El Ataque de los Clones), se estrenó en 2002.",
+            "respuesta_yoda": "“Attack of the Clones” (El Ataque de los Clones), la quinta, en 2002 estrenada fue."
+            },
+            {
+            "preguntas": [
+                "En que año se estreno la sexta pelicula",
+                "En que año se estreno Revenge of the Sith",
+                "En que año se estreno La Venganza de los Sith"
+            ],
+            "respuesta": "La sexta película, “Revenge of the Sith”, (La Venganza de los Sith), se estrenó en 2005.",
+            "respuesta_yoda": "En 2005, “Revenge of the Sith” (La Venganza de los Sith), estrenada fue, sexta película, es."
+            },
+            {
+            "preguntas": [
+                "En que año se estreno The Force Awakens",
+                "En que año se estreno El Despertar de la Fuerza",
+                "En que año se estreno la septima pelicula"
+            ],
+            "respuesta": "La séptima película, “The Force Awakens” (El Despertar de la Fuerza), se estrenó en 2015.",
+            "respuesta_yoda": "“The Force Awakens” (El Despertar de la Fuerza), séptima película, en 2015 apareció, mmm."
+            },
+            {
+            "preguntas": [
+                "En que año se estreno The Last Jedi",
+                "En que año se estreno Los Ultimos Jedi",
+                "En que año se estreno la octava pelicula"
+            ],
+            "respuesta": "La octava pelicula, “The Last Jedi” (Los Últimos Jedi), se estrenó en 2017.",
+            "respuesta_yoda": "En 2017, “The Last Jedi” (Los Últimos Jedi), la octava película fue, sí."
+            },
+            {
+            "preguntas": [
+                "En que año se estreno The Rise of Skywalker",
+                "En que año se estreno El Ascenso de Skywalker",
+                "En que año se estreno la novena pelicula"
+            ],
+            "respuesta": "La novena película, “The Rise of Skywalker” (El Ascenso de Skywalker), se estrenó en 2019.",
+            "respuesta_yoda": "La novena, “The Rise of Skywalker” (El Ascenso de Skywalker), en 2019 lanzada fue, hmmm."
+            },
+            {
+            "preguntas": [
+                "Quien es el creador de Star Wars"
+            ],
+            "respuesta": "El creador de Star Wars es George Lucas. Es un director, guionista y productor estadounidense que escribió y dirigió la primera película de la saga.",
+            "respuesta_yoda": "George Lucas, el creador de Star Wars es. Director, guionista y productor, también, sí."
+            },
+            {
+            "preguntas": [
+                "Quien es el padre de Luke Skywalker"
+            ],
+            "respuesta": "El padre de Luke Skywalker es Anakin Skywalker/Darth Vader.",
+            "respuesta_yoda": "Anakin Skywalker, el padre de Luke es. Darth Vader, él también fue."
+            }
+        ]
+
+        with open("ArchivosDeLectura/preguntas.json", "w", encoding="utf-8") as file:
+            json.dump(preguntas, file, ensure_ascii=False, indent=4)
     except Exception as e:
         manejarError(e, "Error al crear el archivo de preguntas")
         return
@@ -143,26 +183,26 @@ def verificarArchivos():
             
             try:
                 # Crear el archivo preguntas.txt dentro de la carpeta ArchivosDeLectura
-                print("Creando archivo preguntas.txt...")
+                print("Creando archivo preguntas.json...")
                 crearArchivoPreguntas()
             except Exception as e:
                 # Manejar el error si no se puede crear el archivo
                 print(f"Error al crear el archivo: {e}")
                 verificarArchivos()
                 return
-            print("Archivo 'preguntas.txt' creado con preguntas iniciales.")
+            print("Archivo 'preguntas.json' creado con preguntas iniciales.")
 
         # Verificar si el archivo preguntas.txt existe, si no existe, lo crea
-        if not os.path.exists("ArchivosDeLectura/preguntas.txt"):
+        if not os.path.exists("ArchivosDeLectura/preguntas.json"):
             global existeArchivoPreguntas
             existeArchivoPreguntas = False
             try:
-                print("Creando archivo preguntas.txt...")
+                print("Creando archivo preguntas.json...")
                 crearArchivoPreguntas()
             except Exception as e:
                 print(f"Error al crear el archivo: {e}")
                 return
-            print("Archivo 'preguntas.txt' creado con preguntas iniciales.")
+            print("Archivo 'preguntas.json' creado con preguntas iniciales.")
         if not os.path.exists("Logs"):
             global existeCarpetaLogs
             existeCarpetaLogs=False
@@ -244,12 +284,20 @@ def agregarInteraccionLogs(entradaOriginal, entradaCorregida, respuesta, persona
             file.write(f"Pregunta: {entradaCorregida}\n")
             if huboCorreccionOrtografica == True:
                 file.write(f"Pregunta sin correcion ortografica: {entradaOriginal}\n")
-            if agregoPregunta == True:
-                file.write(f"Respuesta agregada por el usuario: {respuestaAgregada}\n")
+            if agregoPregunta == True  and respuesta == "":
+                file.write(f"Respuesta agregada por el usuario: Ocurrio un error, no se agrego una respuesta\n")
                 file.write("Porcentaje de acierto con las preguntas: 0%\n")
-            else:
+            elif agregoPregunta == False and respuesta == "":
+                file.write(f"Respuesta: El usuario decidio no agregar la pregunta \n")
+                file.write("Porcentaje de acierto con las preguntas: 0%\n")
+            elif agregoPregunta == True and respuesta != "":
+                    file.write(f"Respuesta agregada por el usuario: {respuestaAgregada}\n")
+                    file.write("Porcentaje de acierto con las preguntas: 0%\n")
+            elif agregoPregunta == False and respuesta != "" and primeraVez == False:
                 file.write(f"Respuesta: {respuesta}\n") 
                 file.write("Porcentaje de acierto con las preguntas: 100%\n")
+            else:
+                file.write("Error")
             file.write(f"Personaje: {personaje}\n")        
             file.write("\n")
             file.write("----------------------------------------\n")
@@ -287,23 +335,32 @@ def agregarPregunta():
     try:
         global entradaOriginal
         global respuestaAgregada
-        with open("ArchivosDeLectura/preguntas.txt", "a", encoding="utf-8") as file:
-            agrPregunta = input(f"Desea agregar la pregunta '{entradaOriginal}' al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]{}.,;:<> ")
-            while agrPregunta not in ["si", "no"]:
-                agrPregunta = input("No entendí, ¿desea agregar la pregunta al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡ -_[]{}.,;:<>")
+        global agregoPregunta
+        with open("ArchivosDeLectura/preguntas.json", "r", encoding="utf-8") as file:
+            preguntas_data = json.load(file)
 
-            if agrPregunta == 'si':
-                global agregoPregunta, newAnsw, newQuest
-                agregoPregunta = True
-                file.write(f"\nQ: {entradaOriginal}\n")
-                answer = input(f"Escriba la respuesta que desea agregar para la pregunta '{entradaOriginal}': ")
-                file.write(f"A: {answer}\n")
-                file.write(f"YA: {answer}\n")
-                respuestaAgregada = answer
-                newQuest.append(entradaOriginal)
-                newAnsw.append(answer)
-                file.write("\n")
-                print("\nPregunta y respuesta agregadas correctamente al sistema.\n")
+        if huboCorreccionOrtografica == True:
+            entrada = entradaOriginal
+        else:
+            entrada = entradaModificada
+        agrPregunta = input(f"Desea agregar la pregunta '{entrada}' al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]{.},;:<> ")
+        while agrPregunta not in ["si", "no"]:
+            agrPregunta = input("No entendí, ¿desea agregar la pregunta al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡ -_[]{.]},;:<>")
+
+        if agrPregunta == 'si':
+            answer = input(f"Escriba la respuesta que desea agregar para la pregunta '{entrada}': ")
+            respuestaAgregada = answer
+            preguntas_data.append({
+            "preguntas": [entrada],
+            "respuesta": answer,
+            "respuesta_yoda": answer
+            })
+            with open("ArchivosDeLectura/preguntas.json", "w", encoding="utf-8") as file:
+                json.dump(preguntas_data, file, ensure_ascii=False, indent=4)
+            print("\nPregunta y respuesta agregadas correctamente al sistema.\n")
+            agregoPregunta = True
+        else:
+            agregoPregunta = False
     except FileNotFoundError:
         verificarArchivos()
         if existeArchivoPreguntas == False:
@@ -319,17 +376,15 @@ def LstPalabrasClaves():
     palabrasClaves = []
     temporal = []
     try:
-        with open("ArchivosDeLectura/preguntas.txt", "r", encoding="utf-8") as file:
-            for lineas in file:
-                lineas = lineas.strip()
-                if lineas.startswith("Q:"):
-                    temporal = limpiadorFrases(lineas[3:].lower().strip("¿?#$%&/()¡!"))
+        with open("ArchivosDeLectura/preguntas.json", "r", encoding="utf-8") as file:
+            preguntas_data = json.load(file)
+            for item in preguntas_data:
+                for pregunta in item.get("preguntas", []):
+                    temporal = limpiadorFrases(pregunta.lower().strip("¿?#$%&/()¡!"))
                     temporal2 = list(set(temporal))
-
                     for palabra in temporal2:
                         if palabra not in palabrasClaves:
                             palabrasClaves.append(palabra)
-
         palabrasClaves = list(set(palabrasClaves))
         return palabrasClaves
     except FileNotFoundError:
@@ -363,10 +418,10 @@ def ortografia(entrada, listado):
         global entradaModificada
         global huboCorreccionOrtografica
         huboCorreccionOrtografica = False
+        entradaOriginal = entrada
         try:
             lista_palabras = entrada.split()
         
-            entradaOriginal = entrada
             entrada = limpiadorFrases(entrada)
             salida = []
         
@@ -478,12 +533,11 @@ def eleccionPersonaje(personaje):
         global agregoPregunta
         palabrasClaves = LstPalabrasClaves()
         agregoPregunta = False
-        
+
         while True:
             if personaje.lower() in ["salir", "adios"]:
                 print("Conversación finalizada, que la fuerza te acompañe.")
                 break
-            print(personaje)
             personaje = personaje.replace('-','')
             if personaje not in ['yoda', 'chewbacca', 'r2d2', 'c3po'] or personaje == '':
                 personaje = input('No entendí, ingrese el personaje nuevamente: ')
@@ -537,13 +591,15 @@ def eleccionPersonaje(personaje):
                             respuesta = lectorPregunta(entrada, False)
                         if respuesta == "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.":
                             print(f"{personaje.upper()}:", respuesta)
+                            respuesta = ''
                             agregarPregunta()
-                            agregarInteraccionLogs(entradaOriginal, entradaModificada, respuestaAgregada, personaje)
+                            agregarInteraccionLogs(entradaOriginal, entradaModificada, respuestaAgregada, personaje.upper())
                             print(f"{personaje.upper()}: Hazme otra pregunta")
                             """Una vez que se agrega la pregunta, se envia al usuario al inicio del programa para que pueda elegir con que personaje chatear."""
                             return eleccionPersonaje(personaje)
                         if respuesta == None:
                             print(f"{personaje.upper()}: No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.")
+                            respuesta = ''
                             agregarPregunta()
                             print(f"{personaje.upper()}: Hazme otra pregunta")
                             return eleccionPersonaje(personaje)
@@ -558,7 +614,8 @@ def eleccionPersonaje(personaje):
                                 return eleccionPersonaje(personaje)
                             if correccion == 'si':
                                 print(f"{personaje.upper()}: Hazme otra pregunta")
-                        agregarInteraccionLogs(entradaOriginal, entradaModificada, respuesta, personaje)
+                        agregarInteraccionLogs(entradaOriginal, entradaModificada, respuesta, personaje.upper())
+                        respuesta=''
                     except Exception as e:
                         manejarError(e, "Error procesando la pregunta.")
     except Exception as e:
@@ -630,22 +687,17 @@ def lectorPregunta(userInput, esYoda):
     # Se inicializan las listas para almacenar preguntas y respuestas
     try:
         # Se verifica si el archivo de preguntas existe, si no existe, se crea
-        with open("ArchivosDeLectura/preguntas.txt", "r", encoding="utf-8") as file:
-            for lineas in file:
-                lineas = lineas.strip()
-                if lineas.startswith("Q:"):
-                    quest.append(lineas[3:].lower().strip("¿?#$%&/()¡!"))
-                elif lineas.startswith("A:")  and esYoda == False:
-                    answ.append(lineas[3:])
-                elif lineas.startswith("YA:") and esYoda == True:
-                    answ.append(lineas[3:])
-                elif lineas == "":# guarda las preguntas y respuestas que se ecuentra antes de un caracter ''
-                    if quest:
-                        # Se agrega la pregunta y respuesta a las listas
-                        questGroup.append(quest)
-                        answGroup.append(answ)
-                        quest = []
-                        answ = []
+        with open("ArchivosDeLectura/preguntas.json", "r", encoding="utf-8") as file:
+            preguntas_data = json.load(file)
+            for item in preguntas_data:
+                quest = [pregunta.lower().strip("¿?#$%&/()¡!") for pregunta in item.get("preguntas", [])]
+                if esYoda:
+                    answ = [item.get("respuesta_yoda", "")]
+                else:
+                    answ = [item.get("respuesta", "")]
+                if quest:
+                    questGroup.append(quest)
+                    answGroup.append(answ)
         if agregoPregunta == True:
             questGroup.append(newQuest)
             answGroup.append(newAnsw)
