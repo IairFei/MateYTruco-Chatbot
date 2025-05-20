@@ -1,4 +1,5 @@
-Registro de errores:Error: Error procesando la pregunta
+Registro de errores:
+Error: Error procesando la pregunta
 Detalles del error: name 'huboCorreccionOrtografica' is not defined
 --------------------------------------------------
 Error: Error procesando la pregunta

@@ -25,3 +25,112 @@ Respuesta:  Anakin Skywalker, el padre de Luke es. Darth Vader, él también fue
 Personaje: yoda
 Porcentaje de acierto: 100%
 ----------------------------------------
+Fecha y hora: 2025-05-19 18:30:39.492242
+Pregunta con correccion ortografica: primera pelicula
+Respuesta: un sipazo
+Porcentaje de acierto: 0%Personaje: yoda
+
+----------------------------------------
+Fecha y hora: 2025-05-19 18:33:17.021640
+Pregunta con correccion ortografica: quien fue luke skywalker
+Respuesta:  Anakin Skywalker, el padre de Luke es. Darth Vader, él también fue.
+Porcentaje de acierto: 100%
+Personaje: yoda
+
+----------------------------------------
+Fecha y hora: 2025-05-19 18:35:22.041615
+Pregunta con correccion ortografica: quien fue luke skywalker
+Respuesta:  Anakin Skywalker, el padre de Luke es. Darth Vader, él también fue.
+Porcentaje de acierto: 100%
+Personaje: yoda
+
+----------------------------------------
+Fecha y hora: 2025-05-19 18:37:30.145766
+Pregunta con correccion ortografica: quien fue luke skywalk
+Respuesta: un tipazo
+Porcentaje de acierto: 0%
+Personaje: yoda
+
+----------------------------------------
+Fecha y hora: 2025-05-19 18:37:38.061064
+Pregunta con correccion ortografica: quien fue luke skywalker
+Pregunta sin correcion ortografica: quien fue luke skywalke
+Respuesta: un tipazo
+Porcentaje de acierto: 0%
+Personaje: yoda
+
+----------------------------------------
+Fecha y hora: 2025-05-19 18:45:40.173049
+Pregunta: quien fue luke skywalk
+Respuesta:  un tipazo
+Porcentaje de acierto: 100%
+Personaje: yoda
+
+----------------------------------------
+Fecha y hora: 2025-05-19 18:46:12.025438
+Pregunta: quien fue luke skywalker
+Pregunta sin correcion ortografica: quien fue luke skywalkerse
+Respuesta:  Anakin Skywalker, el padre de Luke es. Darth Vader, él también fue.
+Porcentaje de acierto: 100%
+Personaje: yoda
+
+----------------------------------------
+Fecha y hora: 2025-05-19 18:53:38.146047
+Pregunta: quien es luke skywalker
+Pregunta sin correcion ortografica: quien es uke siwalker
+Respuesta:  Anakin Skywalker, el padre de Luke es. Darth Vader, él también fue.
+Porcentaje de acierto: 100%
+Personaje: yoda
+
+----------------------------------------
+Fecha y hora: 2025-05-19 18:53:56.891809
+Pregunta: quien es luke siwalker
+Pregunta sin correcion ortografica: quien es uke siwalker
+Respuesta: un tipazo
+Porcentaje de acierto: 0%
+Personaje: yoda
+
+----------------------------------------
+Fecha y hora: 2025-05-19 18:54:09.971106
+Pregunta: quien es luke siwalker
+Respuesta: No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.
+Porcentaje de acierto: 100%
+Personaje: yoda
+
+----------------------------------------
+Fecha y hora: 2025-05-19 18:54:31.475059
+Pregunta: quien es luke siwalker
+Respuesta: No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.
+Porcentaje de acierto: 100%
+Personaje: yoda
+
+----------------------------------------
+Fecha y hora: 2025-05-19 18:54:36.866148
+Pregunta: primera pelicula
+Respuesta:  “Star Wars: Episode IV: A New Hope” (Una Nueva Esperanza), por orden de estreno la primera fue, en 1977. Pero según el orden cronológico, “Episode I: The Phantom Menace” (La Amenaza Fantasma), en 1999 estrenada fue, sí.
+Porcentaje de acierto: 100%
+Personaje: yoda
+
+----------------------------------------
+Fecha y hora: 2025-05-19 18:56:36.451209
+Pregunta: quien es luke skywalker
+Pregunta sin correcion ortografica: quien es luke siwalker
+Respuesta:  Anakin Skywalker, el padre de Luke es. Darth Vader, él también fue.
+Porcentaje de acierto: 100%
+Personaje: yoda
+
+----------------------------------------
+Fecha y hora: 2025-05-19 18:56:47.287392
+Pregunta: quien es luke siwalker
+Respuesta: un tipazo
+Porcentaje de acierto: 0%
+Personaje: yoda
+
+----------------------------------------
+Fecha y hora: 2025-05-19 18:56:51.813148
+Pregunta: quien es luke siwalker
+Respuesta:  un tipazo
+Porcentaje de acierto: 100%
+Personaje: yoda
+
+----------------------------------------

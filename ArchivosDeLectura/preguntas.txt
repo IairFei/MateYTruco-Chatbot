@@ -78,7 +78,7 @@ Q: Quien mato a Han Solo
 Q: Como murio Han Solo
 Q: Como muere Han Solo
 Q: Quien fue el responsable de la muerte de Han Solo
-Q: Qien asesino a Han Solo
+Q: Quien asesino a Han Solo
 Q: Que le paso a Han Solo
 A: Han Solo fue asesinado por su hijo, Ben Solo/Kylo Ren, en la película “The Force Awakens” (El Despertar de la Fuerza), estrenada en 2015.
 YA: Por su hijo, asesinado Han Solo fue. Ben Solo, también Kylo Ren llamado es, en “The Force Awakens”, ocurrió, mmm.
@@ -309,7 +309,7 @@ A: Jango Fett fue un cazarrecompensas mandaloriano. Su ADN se usó para crear el
 YA: Clonador original, Jango Fett fue. A Boba crió como hijo, todos los clones su imagen tienen.
 
 
-Q: quien fue luke sywalker
+Q: quien es luke siwalker
 A: un tipazo
 YA: un tipazo
 

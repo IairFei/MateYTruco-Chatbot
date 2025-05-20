@@ -23,6 +23,7 @@ existeCarpetaPreguntas = True
 existeCarpetaLogs = True
 entradaOriginal = ''
 entradaModificada = ''
+respuestaAgregada = ''
 huboCorreccionOrtografica = False
 
 
@@ -239,16 +240,17 @@ def agregarInteraccionLogs(entradaOriginal, entradaCorregida, respuesta, persona
     """
     try:
         with open("Logs/log.txt", "a", encoding="utf-8") as file:
-            file.write("Fecha y hora: " + str(datetime.datetime.now()) + "\n")
-            file.write(f"Pregunta con correccion ortografica: {entradaCorregida}\n")
+            file.write("\nFecha y hora: " + str(datetime.datetime.now()) + "\n")
+            file.write(f"Pregunta: {entradaCorregida}\n")
             if huboCorreccionOrtografica == True:
                 file.write(f"Pregunta sin correcion ortografica: {entradaOriginal}\n")
-            file.write(f"Respuesta: {respuesta}\n")
-            file.write(f"Personaje: {personaje}\n")
             if agregoPregunta == True:
-                file.write("Porcentaje de acierto: 0%")
+                file.write(f"Respuesta agregada por el usuario: {respuestaAgregada}\n")
+                file.write("Porcentaje de acierto con las preguntas: 0%\n")
             else:
-                file.write("Porcentaje de acierto: 100%")         
+                file.write(f"Respuesta: {respuesta}\n") 
+                file.write("Porcentaje de acierto con las preguntas: 100%\n")
+            file.write(f"Personaje: {personaje}\n")        
             file.write("\n")
             file.write("----------------------------------------\n")
     except FileNotFoundError:
@@ -284,6 +286,7 @@ def agregarPregunta():
     """
     try:
         global entradaOriginal
+        global respuestaAgregada
         with open("ArchivosDeLectura/preguntas.txt", "a", encoding="utf-8") as file:
             agrPregunta = input(f"Desea agregar la pregunta '{entradaOriginal}' al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]{}.,;:<> ")
             while agrPregunta not in ["si", "no"]:
@@ -296,7 +299,7 @@ def agregarPregunta():
                 answer = input(f"Escriba la respuesta que desea agregar para la pregunta '{entradaOriginal}': ")
                 file.write(f"A: {answer}\n")
                 file.write(f"YA: {answer}\n")
-
+                respuestaAgregada = answer
                 newQuest.append(entradaOriginal)
                 newAnsw.append(answer)
                 file.write("\n")
@@ -472,7 +475,9 @@ def eleccionPersonaje(personaje):
     """
     # Se define la función eleccionPersonaje que permite al usuario elegir un personaje para interactuar
     try:
+        global agregoPregunta
         palabrasClaves = LstPalabrasClaves()
+        agregoPregunta = False
         
         while True:
             if personaje.lower() in ["salir", "adios"]:
@@ -532,12 +537,14 @@ def eleccionPersonaje(personaje):
                         if respuesta == "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.":
                             print(f"{personaje}:", respuesta)
                             agregarPregunta()
+                            agregarInteraccionLogs(entradaOriginal, entradaModificada, respuestaAgregada, personaje)
                             print(f"{personaje}: Hazme otra pregunta")
                             """Una vez que se agrega la pregunta, se envia al usuario al inicio del programa para que pueda elegir con que personaje chatear."""
                             return eleccionPersonaje(personaje)
                         if respuesta == None:
                             print(f"{personaje}: No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.")
                             agregarPregunta()
+                            agregarInteraccionLogs(entradaOriginal, entradaModificada, respuestaAgregada, personaje)
                             print(f"{personaje}: Hazme otra pregunta")
                             return eleccionPersonaje(personaje)
                         print(f"{personaje}:", respuesta)
