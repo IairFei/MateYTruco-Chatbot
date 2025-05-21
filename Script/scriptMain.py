@@ -8,7 +8,7 @@ import json
 articulos = ["el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de", "que", "en",
  "quien", "por", "para", "con", "a", "y", "o", "si", "no", "como", "mas", "menos", "muy", "todo", "toda", "todos", "todas",'cual','fue','quienes']
 
-palabrasClaves = ["cambiar", "personaje", "adios", "salir", 'r2d2', 'c-3po', 'yoda', 'chewbacca','c3po']
+pClaves = ["cambiar", "personaje", "adios", "salir", 'r2d2', 'c-3po', 'yoda', 'chewbacca','c3po']
 
 vocalesTildes = ["á", "é", "í", "ó", "ú"]
 vocalesSinTilde = ['a', 'e', 'i', 'o', 'u']
@@ -260,7 +260,7 @@ def inicioPrograma():
         print("Podés chatear con distintos personajes como R2D2, Chewbacca, Yoda o C-3PO. Cuando desees cambiar de personaje, escribí: cambiar personaje.\n")
         print("En caso que desee salir del programa escriba: salir o adios.")
         personaje = input("Coloque el nombre del personaje con el que desea hablar: ")
-        personaje = ortografia(personaje,palabrasClaves)
+        personaje = ortografia(personaje,pClaves)
         personaje = ' '.join(personaje)
         eleccionPersonaje(personaje)
     except KeyboardInterrupt:
@@ -542,7 +542,7 @@ def eleccionPersonaje(personaje):
             if personaje not in ['yoda', 'chewbacca', 'r2d2', 'c3po'] or personaje == '':
                 personaje = input('No entendí, ingrese el personaje nuevamente: ')
                 try:
-                    personaje = ortografia(personaje,palabrasClaves)
+                    personaje = ortografia(personaje,pClaves)
                     personaje = ' '.join(personaje)
                     continue
                 except Exception as e:
