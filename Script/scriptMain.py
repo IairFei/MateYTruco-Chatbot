@@ -28,6 +28,7 @@ respuestaAgregada = ''
 huboCorreccionOrtografica = False
 numMejorIndice = -1
 preguntaEnArchivo = ""
+cantCorreccionesOrtograficas = 0
 
 
 
@@ -341,8 +342,11 @@ def ortografia(entrada, listado):
         global entradaOriginal
         global entradaModificada
         global huboCorreccionOrtografica
+        global cantCorreccionesOrtograficas
         huboCorreccionOrtografica = False
         entradaOriginal = entrada
+        cantCorreccionesOrtograficas = 0
+        
         try:
             lista_palabras = entrada.split()
         
@@ -375,6 +379,7 @@ def ortografia(entrada, listado):
 
                     posicion = lista_palabras.index(palabra)
                     if respuesta == 'si':
+                        cantCorreccionesOrtograficas+=1
                         salida.append(coincidencias[i])
                         lista_palabras[posicion] = coincidencias[i]
                         huboCorreccionOrtografica = True
@@ -532,7 +537,7 @@ def inicioPrograma():
         print(" - Para ver preguntas frecuentes: escribir 'frecuentes' o 'preguntas frecuentes'")
         print(" - Para salir del programa: escribir 'salir' o 'adios'")
         print(" - Para volver al menú principal: escribir 'volver a menu' o 'menu' o 'volver'")
-        personaje = input("\nPor favor, escribí el nombre del personaje con el que querés hablar: ")
+        personaje = input("\nPor favor, escribí el nombre del personaje con el que querés hablar o algun comando: ")
         personaje = ortografia(personaje,pClaves)
         personaje = ' '.join(personaje)
         if personaje == '':
@@ -557,7 +562,13 @@ def agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaCorregida,
         FileNotFoundError: Si el archivo de log no existe, lo crea.
         Exception: Maneja cualquier otra excepción durante la escritura en el log.
     """
+    global cantCorreccionesOrtograficas
+    
     try:
+        porcentaje = 100
+        
+        if huboCorreccionOrtografica == True:
+            porcentaje -=(cantCorreccionesOrtograficas*10)
         with open("Logs/log.txt", "a", encoding="utf-8") as file:
             file.write("\nFecha y hora: " + str(datetime.datetime.now()) + "\n")
             file.write(f"Pregunta hecha por el usuario: {entradaCorregida}\n")
@@ -566,16 +577,16 @@ def agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaCorregida,
                 file.write(f"Pregunta sin correcion ortografica: {entradaOriginal}\n")
             if agregoPregunta == True  and respuesta == "":
                 file.write(f"Respuesta agregada por el usuario: Ocurrio un error, no se agrego una respuesta\n")
-                file.write("Porcentaje de acierto con las preguntas: 0%\n")
+                file.write(f"Porcentaje de acierto con las preguntas: {porcentaje}%\n")
             elif agregoPregunta == False and respuesta == "":
                 file.write(f"Respuesta: El usuario decidio no agregar la pregunta \n")
-                file.write("Porcentaje de acierto con las preguntas: 0%\n")
+                file.write(f"Porcentaje de acierto con las preguntas: {porcentaje}%\n")
             elif agregoPregunta == True and respuesta != "":
                     file.write(f"Respuesta agregada por el usuario: {respuestaAgregada}\n")
-                    file.write("Porcentaje de acierto con las preguntas: 0%\n")
+                    file.write(f"Porcentaje de acierto con las preguntas: {porcentaje}%\n")
             elif agregoPregunta == False and respuesta != "" and primeraVez == False:
                 file.write(f"Respuesta: {respuesta}\n") 
-                file.write("Porcentaje de acierto con las preguntas: 100%\n")
+                file.write(f"Porcentaje de acierto con las preguntas: {porcentaje}%\n")
             else:
                 file.write("Error")
             file.write(f"Personaje: {personaje}\n")        

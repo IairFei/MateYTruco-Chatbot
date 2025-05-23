@@ -357,3 +357,43 @@ Porcentaje de acierto con las preguntas: 0%
 Personaje: YODA
 
 ----------------------------------------
+
+Fecha y hora: 2025-05-23 16:30:46.213269
+Pregunta hecha por el usuario: nave de han solo
+Pregunta en el archivo: Cual es la nave mas famosa de star wars?
+Pregunta sin correcion ortografica: nave de an solo
+Respuesta: El Halcón Milenario es la nave mas icónica de Star Wars. Es pilotada por el contrabandista y rebelde Han Solo.
+Porcentaje de acierto con las preguntas: 100%
+Personaje: C3PO
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 16:33:11.045371
+Pregunta hecha por el usuario: nave han solo
+Pregunta en el archivo: Cual es la nave mas famosa de star wars?
+Pregunta sin correcion ortografica: nave an solo
+Respuesta: El Halcón Milenario es la nave mas icónica de Star Wars. Es pilotada por el contrabandista y rebelde Han Solo.
+Porcentaje de acierto con las preguntas: 100%
+Personaje: C3PO
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 16:40:42.814269
+Pregunta hecha por el usuario: nave han solo
+Pregunta en el archivo: Cual es la nave mas famosa de star wars?
+Pregunta sin correcion ortografica: nave han soo
+Respuesta: El Halcón Milenario es la nave mas icónica de Star Wars. Es pilotada por el contrabandista y rebelde Han Solo.
+Porcentaje de acierto con las preguntas: 90%
+Personaje: C3PO
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 16:41:54.506670
+Pregunta hecha por el usuario: en qe año se estreno la pelicula primera
+Pregunta en el archivo: Cuando se estreno la primera pelicula?
+Pregunta sin correcion ortografica: en qe aio se estren la peicula priera
+Respuesta: La primera película, “A New Hope” (Una nueva esperanza), se estreno en 1977.
+Porcentaje de acierto con las preguntas: 60%
+Personaje: C3PO
+
+----------------------------------------

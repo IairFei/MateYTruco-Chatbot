@@ -5,7 +5,7 @@
         ],
         "respuesta": "La primera película por orden de estreno fue “Star Wars: Episode IV: A New Hope” (Una Nueva Esperanza), de 1977. Sin embargo, la primera película según el orden cronológico es “Star Wars: Episode I: The Phantom Menace” (La Amenaza Fantasma), de 1999.",
         "respuesta_yoda": "“Star Wars: Episode IV: A New Hope” (Una Nueva Esperanza), por orden de estreno la primera fue, en 1977. Pero según el orden cronológico, “Episode I: The Phantom Menace” (La Amenaza Fantasma), en 1999 estrenada fue, sí.",
-        "veces_preguntado": 5
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -15,7 +15,7 @@
         ],
         "respuesta": "La primera película, “A New Hope” (Una nueva esperanza), se estreno en 1977.",
         "respuesta_yoda": "En 1977, la primera película, “A New Hope” (Una nueva esperanza) estrenada fue, mmm.",
-        "veces_preguntado": 1
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -25,7 +25,7 @@
         ],
         "respuesta": "La segunda película, “The Empire Strikes Back” (El Imperio Contraataca), se estrenó en 1980.",
         "respuesta_yoda": "En 1980, “The Empire Strikes Back” (El Imperio Contraataca), la segunda película estrenada fue, sí.",
-        "veces_preguntado": 10
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -514,6 +514,6 @@
         ],
         "respuesta": "Jango Fett fue un cazarrecompensas mandaloriano. Su ADN se usó para crear el ejército clon y Boba Fett fue criado como su hijo.",
         "respuesta_yoda": "Clonador original, Jango Fett fue. A Boba crió como hijo, todos los clones su imagen tienen.",
-        "veces_preguntado": 8
+        "veces_preguntado": 24
     }
 ]
