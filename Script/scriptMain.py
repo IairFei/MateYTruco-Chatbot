@@ -27,6 +27,7 @@ entradaModificada = ''
 respuestaAgregada = ''
 huboCorreccionOrtografica = False
 numMejorIndice = -1
+preguntaEnArchivo = ""
 
 
 
@@ -546,7 +547,7 @@ def inicioPrograma():
     except Exception as e:
         manejarError(e, "Error inesperado en el inicio del programa.")
 
-def agregarInteraccionLogs(entradaOriginal, entradaCorregida, respuesta, personaje):
+def agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaCorregida, respuesta, personaje):
     """
     Agrega la interacción del usuario y la respuesta del personaje al archivo de log.
     Si el archivo no existe, lo crea y agrega un encabezado.
@@ -559,7 +560,8 @@ def agregarInteraccionLogs(entradaOriginal, entradaCorregida, respuesta, persona
     try:
         with open("Logs/log.txt", "a", encoding="utf-8") as file:
             file.write("\nFecha y hora: " + str(datetime.datetime.now()) + "\n")
-            file.write(f"Pregunta: {entradaCorregida}\n")
+            file.write(f"Pregunta hecha por el usuario: {entradaCorregida}\n")
+            file.write(f"Pregunta en el archivo: {preguntaEnArchivo}\n")
             if huboCorreccionOrtografica == True:
                 file.write(f"Pregunta sin correcion ortografica: {entradaOriginal}\n")
             if agregoPregunta == True  and respuesta == "":
@@ -584,7 +586,7 @@ def agregarInteraccionLogs(entradaOriginal, entradaCorregida, respuesta, persona
             verificarArchivos()
             with open("Logs/errorLogs.txt", "a", encoding="utf-8") as file:
                 file.write("Error: No se encontró el archivo de log. Se ha creado uno nuevo.\n")
-                agregarInteraccionLogs(entradaOriginal, entradaCorregida, respuesta, personaje)
+                agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaCorregida, respuesta, personaje)
     except Exception as e:
         manejarError(e, "Error al agregar interacción al log.")
     
@@ -668,6 +670,8 @@ def buscarRespuesta(userInput, questGroup, answGroup):
     mejorIndice = -1
     mejorPuntaje = -1
     umbral = 0.8
+    global preguntaEnArchivo
+    preguntaEnArchivo = ""
     
     try:
         userSet = set(userInput)
@@ -688,6 +692,10 @@ def buscarRespuesta(userInput, questGroup, answGroup):
                     mejorIndice = i
                     numMejorIndice = i
         if mejorPuntaje >= umbral:
+            preguntaEnArchivo = questGroup[mejorIndice][0]
+            #Poner mayuscula la primera letra de la pregunta y signo de interrogacion al final
+            preguntaEnArchivo = preguntaEnArchivo.capitalize()
+            preguntaEnArchivo = preguntaEnArchivo+"?"
             return answGroup[mejorIndice][0]
 
         return "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema."
@@ -711,7 +719,8 @@ def eleccionPersonaje(personaje):
     # Se define la función eleccionPersonaje que permite al usuario elegir un personaje para interactuar
     try:
         global agregoPregunta
-
+        global preguntaEnArchivo
+        preguntaEnArchivo = ""
         palabrasClaves = LstPalabrasClaves()
         agregoPregunta = False
 
@@ -738,8 +747,7 @@ def eleccionPersonaje(personaje):
                 print("Escribe 'salir' o 'adios' para finalizar la conversación.\n")
 
             entrada = input("Tú: ")
-            entrada = ortografia(entrada,pClaves)
-            entrada = ' '.join(entrada)
+
             if entrada.lower() in ["salir", "adios"]:
                 print("Conversación finalizada, que la fuerza te acompañe.")
                 break
@@ -780,7 +788,7 @@ def eleccionPersonaje(personaje):
                             print(f"{personaje.upper()}:", respuesta)
                             respuesta = ''
                             agregarPregunta()
-                            agregarInteraccionLogs(entradaOriginal, entradaModificada, respuestaAgregada, personaje.upper())
+                            agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuestaAgregada, personaje.upper())
                             print(f"{personaje.upper()}: Hazme otra pregunta")
                             """Una vez que se agrega la pregunta, se envia al usuario al inicio del programa para que pueda elegir con que personaje chatear."""
                             return eleccionPersonaje(personaje)
@@ -804,8 +812,9 @@ def eleccionPersonaje(personaje):
                                 if huboCorreccionOrtografica == True:
                                     sumarVecesPreguntado(numMejorIndice)
                                 print(f"{personaje.upper()}: Hazme otra pregunta")
-                        agregarInteraccionLogs(entradaOriginal, entradaModificada, respuesta, personaje.upper())
+                        agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuesta, personaje.upper())
                         respuesta=''
+                        preguntaEnArchivo=''
                     except Exception as e:
                         manejarError(e, "Error procesando la pregunta.")
     except Exception as e:

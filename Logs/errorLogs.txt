@@ -50,3 +50,12 @@ Detalles del error: too many values to unpack (expected 2)
 Error: Error procesando la pregunta.
 Detalles del error: too many values to unpack (expected 2)
 --------------------------------------------------
+Error: Error procesando la pregunta.
+Detalles del error: cannot access local variable 'preguntaEnArchivo' where it is not associated with a value
+--------------------------------------------------
+Error: Error en la búsqueda de respuesta
+Detalles del error: str.upper() takes no arguments (1 given)
+--------------------------------------------------
+Error: Error en la búsqueda de respuesta
+Detalles del error: 'str' object has no attribute 'insert'
+--------------------------------------------------

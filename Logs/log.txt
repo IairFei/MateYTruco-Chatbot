@@ -312,3 +312,48 @@ Porcentaje de acierto con las preguntas: 100%
 Personaje: C3PO
 
 ----------------------------------------
+
+Fecha y hora: 2025-05-23 12:37:18.119480
+Pregunta hecha por el usuario: hermana luke
+Pregunta en el archivo: quien es la hermana de luke skywalker
+Respuesta: Leia Organa, la hermana de Luke Skywalker es. Hijos de Anakin y Padmé ambos son, mmm.
+Porcentaje de acierto con las preguntas: 100%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 12:39:53.922537
+Pregunta hecha por el usuario: hermana luke
+Pregunta en el archivo: Quien es la hermana de luke skywalker
+Respuesta: Leia Organa, la hermana de Luke Skywalker es. Hijos de Anakin y Padmé ambos son, mmm.
+Porcentaje de acierto con las preguntas: 100%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 12:40:32.493012
+Pregunta hecha por el usuario: hermana luke
+Pregunta en el archivo: Quien es la hermana de luke skywalker
+Respuesta: La hermana de Luke Skywalker es Leia Organa. Ambos son hijos de Anakin Skywalker (Darth Vader) y Padmé Amidala.
+Porcentaje de acierto con las preguntas: 100%
+Personaje: C3PO
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 12:45:12.068918
+Pregunta hecha por el usuario: hermana luke
+Pregunta en el archivo: Quien es la hermana de luke skywalker?
+Respuesta: Leia Organa, la hermana de Luke Skywalker es. Hijos de Anakin y Padmé ambos son, mmm.
+Porcentaje de acierto con las preguntas: 100%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 12:45:22.604537
+Pregunta hecha por el usuario: men
+Pregunta en el archivo: 
+Respuesta: El usuario decidio no agregar la pregunta 
+Porcentaje de acierto con las preguntas: 0%
+Personaje: YODA
+
+----------------------------------------
