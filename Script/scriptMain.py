@@ -164,7 +164,26 @@ def crearArchivoPreguntas():
     except Exception as e:
         manejarError(e, "Error al crear el archivo de preguntas")
         return
-
+def creditosFinales():
+    
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print(""" 
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⡰⠊⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⡰⠈⠀⠀⠠⠂⠂⠀⠀⢀⣀⠀⠀⠀⢀⣀⣴⢟⠛⠉     ╭─────────────────────────────-────────────────╮
+            ⠀⠀⠀⠀⠀⠀⠀⣾⣧⡠⣂⣤⣬⣲⣶⢷⣾⣛⠙⠳⠀⣤⣿⡿⠃⠂⠀⠀    │ CREDTOS:                                     |
+            ⣀⣀⣀⣀⣀⣀⡀⠛⢿⣷⠟⡋⣩⠻⣗⠀⠻⣝⢻⡌⠀⣍⡥⠊⠀⠀⠀⠀   │ Holm Ian                                     |
+            ⠈⠑⢝⡻⠿⣿⣿⣿⣾⡟⠘⢋⡉⠞⠒⠒⠋⠈⢲⣿⣿⡛⠁⠀⠀⠀⠀⠀   │ Feigelman Iair                               |
+            ⠀⠀⠀⠈⠑⠢⠍⠙⣿⣿⣄⡀⣠⣎⡀⠤⢤⣢⣿⣿⡟⠀⠀⠀⠀⠀⠀⠀    | Cinti Valentino                              |
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠙⠙⣿⣿⣿⣿⣿⣿⣛⣿⣿⣿⡅⠀⠀⠀⠀⠀⠀⠀     | Mora Diego                                   |
+            ⠀⠀⠀⠀⠀⠀⠀⢀⣀⣴⣿⣿⣿⣿⣿⣿⣿⣿⢿⣫⢤⢙⢦⠰⣄⡀⠀⠀    | Guzman Kevin                                 |
+            ⠀⠀⠀⠀⠀⢠⣼⣿⣿⣿⣳⢻⣿⣿⣿⣿⣷⠾⠿⠋⠖⠄⠀⠙⠎⢷⡀⠀    |/─────────────────────────────────────────────╯ 
+            ⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣯⡁⢿⣿⣿⣶⣶⣶⠶⠞⢉⣇⡀⠀⣀⣼⣷⠀
+            ⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣧⡾⢉⡛⠿⠢⢌⢀⣾⣿⣿⣿⣿⣿⣿⠀
+            ⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡦⡦⢮⠀⢰⡙⡛⠿⣿⣿⣿⠂
+            ⠀⠀⠀⠸⣿⠻⣿⣿⣿⣿⣿⣿⣿⣿⠯⢥⠾⠛⠢⣴⡿⡻⣞⢦⡀⠉⠉⠀
+            ⠀⠀⠀⠀⠀⠁⠈⠉⠉⠉⠉⠉⠁⠀⠀⠀⠉⠉⠉⠀⠀⠈⠈⠈⠉⠁⠀         
+            ⠀⠀""")
 def verificarArchivos():
     """
     Verifica la existencia de las carpetas y archivos necesarios para el funcionamiento del programa.
@@ -855,12 +874,23 @@ def manejarError(e, mensaje):
     # Guardar el error en un archivo de registro
     try:
         with open("Logs/errorLogs.txt", "a", encoding="utf-8") as file:
+            file.write("\nFecha y hora: " + str(datetime.datetime.now()) + "\n")
             file.write(f"Error: {mensaje}\n")
             file.write(f"Detalles del error: {e}\n")
             file.write("-" * 50 + "\n")
         print(f"Se ha producido un error: {mensaje}. Se ha registrado en el archivo de logs.")
+    except FileNotFoundError:
+        with open("Logs/errorLogs.txt", "w", encoding="utf-8") as file:
+            file.write("Registro de errores:\n")
+            file.write(f"Error: {mensaje}\n")
+            file.write(f"Detalles del error: {e}\n")
+            file.write("-" * 50 + "\n")
+        print("Archivo 'errorLogs.txt' creado y error registrado.")
     except Exception as e:
         print(f"Error al guardar el error en el archivo de registro: {e}")
+    finally:
+        # Asegurarse de que la entrada original se resetea
+        print("estoy en el finally")
         
 # Ejecutar el programa principal
 ancho = 70

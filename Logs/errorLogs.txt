@@ -59,3 +59,15 @@ Detalles del error: str.upper() takes no arguments (1 given)
 Error: Error en la búsqueda de respuesta
 Detalles del error: 'str' object has no attribute 'insert'
 --------------------------------------------------
+Error: Error en la conversación.
+Detalles del error: 'str' object has no attribute 'input'
+--------------------------------------------------
+Error: Error en la conversación.
+Detalles del error: 'str' object has no attribute 'input'
+--------------------------------------------------
+Error: Error en la conversación.
+Detalles del error: 'str' object has no attribute 'input'
+--------------------------------------------------
+Error: Error en la conversación.
+Detalles del error: 'str' object has no attribute 'input'
+--------------------------------------------------

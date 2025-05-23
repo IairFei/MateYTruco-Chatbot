@@ -397,3 +397,21 @@ Porcentaje de acierto con las preguntas: 60%
 Personaje: C3PO
 
 ----------------------------------------
+
+Fecha y hora: 2025-05-23 17:44:13.273313
+Pregunta hecha por el usuario: 12qwdasd
+Pregunta en el archivo: 
+Respuesta: El usuario decidio no agregar la pregunta 
+Porcentaje de acierto con las preguntas: 100%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 17:50:46.499198
+Pregunta hecha por el usuario: hola
+Pregunta en el archivo: 
+Respuesta: El usuario decidio no agregar la pregunta 
+Porcentaje de acierto con las preguntas: 100%
+Personaje: YODA
+
+----------------------------------------
