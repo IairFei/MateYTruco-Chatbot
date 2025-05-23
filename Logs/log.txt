@@ -247,3 +247,51 @@ Porcentaje de acierto con las preguntas: 0%
 Personaje: YODA
 
 ----------------------------------------
+
+Fecha y hora: 2025-05-23 11:57:38.162100
+Pregunta: men
+Respuesta: El usuario decidio no agregar la pregunta 
+Porcentaje de acierto con las preguntas: 0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 12:02:47.850916
+Pregunta: men
+Respuesta: El usuario decidio no agregar la pregunta 
+Porcentaje de acierto con las preguntas: 0%
+Personaje: C3PO
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 12:12:56.410974
+Pregunta: men
+Respuesta: El usuario decidio no agregar la pregunta 
+Porcentaje de acierto con las preguntas: 0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 12:13:04.615145
+Pregunta: c:/users/93179/appdata/local/programs/python/python313/python.exe c:/users/93179/desktop/mateytruco-chatbot/script/scriptmain.py
+Respuesta: El usuario decidio no agregar la pregunta 
+Porcentaje de acierto con las preguntas: 0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 12:13:12.848182
+Pregunta: men
+Respuesta: El usuario decidio no agregar la pregunta 
+Porcentaje de acierto con las preguntas: 0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 12:18:19.787895
+Pregunta: men
+Respuesta: El usuario decidio no agregar la pregunta 
+Porcentaje de acierto con las preguntas: 0%
+Personaje: YODA
+
+----------------------------------------

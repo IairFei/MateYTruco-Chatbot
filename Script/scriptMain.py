@@ -281,7 +281,46 @@ def LstPalabrasClaves():
     except Exception as e:
         manejarError(e, "Error al leer el archivo de preguntas para obtener palabras clave.")
         return palabrasClaves
+def limpiadorFrases(input):
+    """
+    Limpia y tokeniza una cadena de entrada eliminando artículos y reemplazando vocales acentuadas.
+    Parámetros:
+        input (str): Cadena de entrada a limpiar y tokenizar.
+    Retorna:
+        list: Lista de palabras limpias de la cadena de entrada, excluyendo artículos y con vocales acentuadas reemplazadas.
+    Excepciones:
+        Si ocurre un error durante el procesamiento, se maneja con manejarError y retorna None.
+    Nota:
+        Esta función depende de las variables externas 'vocalesTildes', 'vocalesSinTilde', 'articulos' y la función 'manejarError'.
+    """
+    palabraLimpia = []
+    palabra = ''
 
+    try:
+        for letras in input:
+            if letras in vocalesTildes:
+                indice = vocalesTildes.index(letras)
+                letras = vocalesSinTilde[indice]
+            if letras == " ":
+                if palabra:
+                    if palabra in articulos:
+                        pass
+                    else:
+                        palabraLimpia.append(palabra)
+                palabra = ''
+            else:
+                palabra += letras
+
+        if palabra:
+            if palabra in articulos:
+                pass
+            else:
+                palabraLimpia.append(palabra)
+
+        return palabraLimpia
+    except Exception as e:
+        manejarError(e, "Error en el limpiador de frases.")
+        return
 
 def ortografia(entrada, listado):
         """
@@ -352,7 +391,143 @@ def ortografia(entrada, listado):
         except Exception as e:
             manejarError(e, "Error en la corrección ortográfica.")
             return entradaOriginal
+def preguntasFrecuentes():
+    questGroup = []
+    quest = []
+    answerGroup = []
+    # Se inicializan las listas para almacenar preguntas y respuestas
+    try:
+        # Se verifica si el archivo de preguntas existe, si no existe, se crea
+        with open("ArchivosDeLectura/preguntas.json", "r", encoding="utf-8") as file:
+            preguntas_data = json.load(file)
+        # Ordenar las preguntas por 'veces_preguntado' de mayor a menor y tomar las top 3
+        # Se crea una lista de tuplas con las preguntas y su cantidad de veces preguntadas
+        # Se ordena la lista de preguntas por la cantidad de veces preguntadas
+        preguntas_ordenadas = [(item.get("preguntas", []), item.get("veces_preguntado", 0)) for item in preguntas_data]
+        def obtener_veces_preguntado(x):
+            # Devuelve el numero de veces que se ha preguntado
+            return x[1]
+        preguntas_ordenadas.sort(key=obtener_veces_preguntado, reverse=True)
+        top3 = preguntas_ordenadas[:3]
+        print("\nPreguntas frecuentes:")
+        for i, pregunta in enumerate(top3):
+            #mostrar como string la pregunta
+            print(f"{i+1}. {pregunta[0][0]}")       
+        eleccionPregunta = input("¿Desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
+        while eleccionPregunta not in ["si", "no"]:
+            eleccionPregunta = input("No entendí, ¿desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
+        if eleccionPregunta == 'si':
+            try:
+                preguntaElegida = int(input("Escriba el numero de la pregunta que desea hacer: "))
+                while preguntaElegida > 3 or preguntaElegida < 1:
+                    preguntaElegida = int(input("No entendí, escriba el numero de la pregunta que desea hacer: "))
+            except ValueError:
+                preguntaElegida = int(input("No entendí, escriba el numero de la pregunta que desea hacer: "))
+            preguntaElegida-=1
+            quest = top3[preguntaElegida][0][0]
+            print(f"\nPregunta elegida: {quest}")
+            questGroup.append(quest)
+            # Se crea una lista de respuestas para la pregunta elegida
+            for item in preguntas_data:
+                if quest in item.get("preguntas", []):
+                    if item.get("respuesta", "") != "":
+                        answ = (item.get("respuesta", ""))
+            print(f"\nRespuesta: {answ}")
+            # Se incrementa la cantidad de veces que se ha preguntado
+            for item in preguntas_data:
+                if quest in item.get("preguntas", []):
+                    item["veces_preguntado"] += 1
+        return
+    except KeyboardInterrupt:
+        # Si el usuario interrumpe la ejecución, se maneja la excepción
+        print("\nConversación finalizada, que la fuerza te acompañe.")
+    # Si el archivo no existe, se verifica y crea
+    except FileNotFoundError:
+        verificarArchivos()
+        if existeArchivoPreguntas == False and existeCarpetaPreguntas == True:
+            print("Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
+        if existeCarpetaPreguntas == False and existeArchivoPreguntas == True:
+            print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
+        print("Por favor, vuelva a intentar.")    
+    except Exception as e:
+        # Si ocurre un error al leer el archivo, se maneja la excepción
+        return manejarError(e, "Error leyendo las preguntas.")    
 
+def lectorPregunta(userInput, esYoda):
+    """
+    Lee preguntas y respuestas desde un archivo, procesa la entrada del usuario y retorna una respuesta apropiada.
+
+    Parámetros:
+        userInput (str): Entrada del usuario a comparar con las preguntas almacenadas.
+        esYoda (bool): Determina si se usan respuestas estilo Yoda ("YA:") o estándar ("A:").
+
+    Retorna:
+        str: La respuesta encontrada al comparar la entrada del usuario con las preguntas y respuestas almacenadas.
+
+    Excepciones:
+        KeyboardInterrupt: Si el usuario interrumpe la ejecución.
+        FileNotFoundError: Si el archivo o carpeta de preguntas no existe.
+        Exception: Para cualquier otro error durante la lectura del archivo.
+    """
+    questGroup = []
+    answGroup = []
+    quest = []
+    answ = []
+    # Se inicializan las listas para almacenar preguntas y respuestas
+    try:
+        # Se verifica si el archivo de preguntas existe, si no existe, se crea
+        with open("ArchivosDeLectura/preguntas.json", "r", encoding="utf-8") as file:
+            preguntas_data = json.load(file)
+            for item in preguntas_data:
+                quest = [pregunta.lower().strip("¿?#$%&/()¡!") for pregunta in item.get("preguntas", [])]
+                if esYoda:
+                    answ = [item.get("respuesta_yoda", "")]
+                else:
+                    answ = [item.get("respuesta", "")]
+                if quest:
+                    questGroup.append(quest)
+                    answGroup.append(answ)
+        if agregoPregunta == True:
+            questGroup.append(newQuest)
+            answGroup.append(newAnsw)
+        return buscarRespuesta(userInput, questGroup, answGroup)
+    except KeyboardInterrupt:
+        # Si el usuario interrumpe la ejecución, se maneja la excepción
+        print("\nConversación finalizada, que la fuerza te acompañe.")
+    # Si el archivo no existe, se verifica y crea
+    except FileNotFoundError:
+        verificarArchivos()
+        if existeArchivoPreguntas == False and existeCarpetaPreguntas == True:
+            print("Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
+        if existeCarpetaPreguntas == False and existeArchivoPreguntas == True:
+            print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
+        print("Por favor, vuelva a intentar.")    
+    except Exception as e:
+        # Si ocurre un error al leer el archivo, se maneja la excepción
+        return manejarError(e, "Error leyendo las preguntas.")
+
+
+# Manejo de errores
+def manejarError(e, mensaje):
+    """
+    Maneja errores capturados durante la ejecución del programa, reseteando la entrada original y registrando los detalles del error en un archivo de logs.
+    Args:
+        e (Exception): La excepción que fue capturada.
+        mensaje (str): Un mensaje descriptivo sobre el contexto o la causa del error.
+    """
+    global entradaOriginal
+    entradaOriginal = ''
+    
+    # Guardar el error en un archivo de registro
+    try:
+        with open("Logs/errorLogs.txt", "a", encoding="utf-8") as file:
+            file.write(f"Error: {mensaje}\n")
+            file.write(f"Detalles del error: {e}\n")
+            file.write("-" * 50 + "\n")
+        print(f"Se ha producido un error: {mensaje}. Se ha registrado en el archivo de logs.")
+    except Exception as e:
+        print(f"Error al guardar el error en el archivo de registro: {e}")
+        
 
 def inicioPrograma():
     """
@@ -558,14 +733,17 @@ def eleccionPersonaje(personaje):
     # Se define la función eleccionPersonaje que permite al usuario elegir un personaje para interactuar
     try:
         global agregoPregunta
+
         palabrasClaves = LstPalabrasClaves()
         agregoPregunta = False
-        mejorIndice = 0
 
         while True:
             if personaje.lower() in ["salir", "adios"]:
                 print("Conversación finalizada, que la fuerza te acompañe.")
                 break
+            if personaje.lower() in ["volver a menu", "menu", "volver"]:
+                print("Volviendo al menú principal...")
+                return inicioPrograma()
             personaje = personaje.replace('-','')
             if personaje not in ['yoda', 'chewbacca', 'r2d2', 'c3po'] or personaje == '':
                 personaje = input('No entendí, ingrese el personaje nuevamente: ')
@@ -576,14 +754,14 @@ def eleccionPersonaje(personaje):
                 except Exception as e:
                     manejarError(e, "Error en la elección del personaje.")
                     continue
-
             global primeraVez
             if primeraVez == True:
                 print(f"\nElegiste hablar con {personaje.upper()}. Puedes hacerle preguntas o cambiar de personaje escribiendo 'cambiar personaje'.")
                 print("Escribe 'salir' o 'adios' para finalizar la conversación.\n")
 
             entrada = input("Tú: ")
-
+            entrada = ortografia(entrada,pClaves)
+            entrada = ' '.join(entrada)
             if entrada.lower() in ["salir", "adios"]:
                 print("Conversación finalizada, que la fuerza te acompañe.")
                 break
@@ -663,185 +841,6 @@ def sumarVecesPreguntado(mejorIndice):
             json.dump(preguntas_data, file, ensure_ascii=False, indent=4)
     global numMejorIndice
     numMejorIndice = -1
-def limpiadorFrases(input):
-    """
-    Limpia y tokeniza una cadena de entrada eliminando artículos y reemplazando vocales acentuadas.
-    Parámetros:
-        input (str): Cadena de entrada a limpiar y tokenizar.
-    Retorna:
-        list: Lista de palabras limpias de la cadena de entrada, excluyendo artículos y con vocales acentuadas reemplazadas.
-    Excepciones:
-        Si ocurre un error durante el procesamiento, se maneja con manejarError y retorna None.
-    Nota:
-        Esta función depende de las variables externas 'vocalesTildes', 'vocalesSinTilde', 'articulos' y la función 'manejarError'.
-    """
-    palabraLimpia = []
-    palabra = ''
-
-    try:
-        for letras in input:
-            if letras in vocalesTildes:
-                indice = vocalesTildes.index(letras)
-                letras = vocalesSinTilde[indice]
-            if letras == " ":
-                if palabra:
-                    if palabra in articulos:
-                        pass
-                    else:
-                        palabraLimpia.append(palabra)
-                palabra = ''
-            else:
-                palabra += letras
-
-        if palabra:
-            if palabra in articulos:
-                pass
-            else:
-                palabraLimpia.append(palabra)
-
-        return palabraLimpia
-    except Exception as e:
-        manejarError(e, "Error en el limpiador de frases.")
-        return
-
-def preguntasFrecuentes():
-    questGroup = []
-    quest = []
-    answerGroup = []
-    # Se inicializan las listas para almacenar preguntas y respuestas
-    try:
-        # Se verifica si el archivo de preguntas existe, si no existe, se crea
-        with open("ArchivosDeLectura/preguntas.json", "r", encoding="utf-8") as file:
-            preguntas_data = json.load(file)
-        # Ordenar las preguntas por 'veces_preguntado' de mayor a menor y tomar las top 3
-        # Se crea una lista de tuplas con las preguntas y su cantidad de veces preguntadas
-        # Se ordena la lista de preguntas por la cantidad de veces preguntadas
-        preguntas_ordenadas = [(item.get("preguntas", []), item.get("veces_preguntado", 0)) for item in preguntas_data]
-        def obtener_veces_preguntado(x):
-            # Devuelve el numero de veces que se ha preguntado
-            return x[1]
-        preguntas_ordenadas.sort(key=obtener_veces_preguntado, reverse=True)
-        top3 = preguntas_ordenadas[:3]
-        print("\nPreguntas frecuentes:")
-        for i, pregunta in enumerate(top3):
-            #mostrar como string la pregunta
-            print(f"{i+1}. {pregunta[0][0]}")       
-        eleccionPregunta = input("¿Desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
-        while eleccionPregunta not in ["si", "no"]:
-            eleccionPregunta = input("No entendí, ¿desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
-        if eleccionPregunta == 'si':
-            try:
-                preguntaElegida = int(input("Escriba el numero de la pregunta que desea hacer: "))
-                while preguntaElegida > 3 or preguntaElegida < 1:
-                    preguntaElegida = int(input("No entendí, escriba el numero de la pregunta que desea hacer: "))
-            except ValueError:
-                preguntaElegida = int(input("No entendí, escriba el numero de la pregunta que desea hacer: "))
-            preguntaElegida-=1
-            quest = top3[preguntaElegida][0][0]
-            print(f"\nPregunta elegida: {quest}")
-            questGroup.append(quest)
-            # Se crea una lista de respuestas para la pregunta elegida
-            for item in preguntas_data:
-                if quest in item.get("preguntas", []):
-                    if item.get("respuesta", "") != "":
-                        answ = (item.get("respuesta", ""))
-            print(f"\nRespuesta: {answ}")
-            # Se incrementa la cantidad de veces que se ha preguntado
-            for item in preguntas_data:
-                if quest in item.get("preguntas", []):
-                    item["veces_preguntado"] += 1
-        return
-    except KeyboardInterrupt:
-        # Si el usuario interrumpe la ejecución, se maneja la excepción
-        print("\nConversación finalizada, que la fuerza te acompañe.")
-    # Si el archivo no existe, se verifica y crea
-    except FileNotFoundError:
-        verificarArchivos()
-        if existeArchivoPreguntas == False and existeCarpetaPreguntas == True:
-            print("Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
-        if existeCarpetaPreguntas == False and existeArchivoPreguntas == True:
-            print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
-        print("Por favor, vuelva a intentar.")    
-    except Exception as e:
-        # Si ocurre un error al leer el archivo, se maneja la excepción
-        return manejarError(e, "Error leyendo las preguntas.")    
-
-def lectorPregunta(userInput, esYoda):
-    """
-    Lee preguntas y respuestas desde un archivo, procesa la entrada del usuario y retorna una respuesta apropiada.
-
-    Parámetros:
-        userInput (str): Entrada del usuario a comparar con las preguntas almacenadas.
-        esYoda (bool): Determina si se usan respuestas estilo Yoda ("YA:") o estándar ("A:").
-
-    Retorna:
-        str: La respuesta encontrada al comparar la entrada del usuario con las preguntas y respuestas almacenadas.
-
-    Excepciones:
-        KeyboardInterrupt: Si el usuario interrumpe la ejecución.
-        FileNotFoundError: Si el archivo o carpeta de preguntas no existe.
-        Exception: Para cualquier otro error durante la lectura del archivo.
-    """
-    questGroup = []
-    answGroup = []
-    quest = []
-    answ = []
-    # Se inicializan las listas para almacenar preguntas y respuestas
-    try:
-        # Se verifica si el archivo de preguntas existe, si no existe, se crea
-        with open("ArchivosDeLectura/preguntas.json", "r", encoding="utf-8") as file:
-            preguntas_data = json.load(file)
-            for item in preguntas_data:
-                quest = [pregunta.lower().strip("¿?#$%&/()¡!") for pregunta in item.get("preguntas", [])]
-                if esYoda:
-                    answ = [item.get("respuesta_yoda", "")]
-                else:
-                    answ = [item.get("respuesta", "")]
-                if quest:
-                    questGroup.append(quest)
-                    answGroup.append(answ)
-        if agregoPregunta == True:
-            questGroup.append(newQuest)
-            answGroup.append(newAnsw)
-        return buscarRespuesta(userInput, questGroup, answGroup)
-    except KeyboardInterrupt:
-        # Si el usuario interrumpe la ejecución, se maneja la excepción
-        print("\nConversación finalizada, que la fuerza te acompañe.")
-    # Si el archivo no existe, se verifica y crea
-    except FileNotFoundError:
-        verificarArchivos()
-        if existeArchivoPreguntas == False and existeCarpetaPreguntas == True:
-            print("Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
-        if existeCarpetaPreguntas == False and existeArchivoPreguntas == True:
-            print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
-        print("Por favor, vuelva a intentar.")    
-    except Exception as e:
-        # Si ocurre un error al leer el archivo, se maneja la excepción
-        return manejarError(e, "Error leyendo las preguntas.")
-
-
-# Manejo de errores
-def manejarError(e, mensaje):
-    """
-    Maneja errores capturados durante la ejecución del programa, reseteando la entrada original y registrando los detalles del error en un archivo de logs.
-    Args:
-        e (Exception): La excepción que fue capturada.
-        mensaje (str): Un mensaje descriptivo sobre el contexto o la causa del error.
-    """
-    global entradaOriginal
-    entradaOriginal = ''
-    
-    # Guardar el error en un archivo de registro
-    try:
-        with open("Logs/errorLogs.txt", "a", encoding="utf-8") as file:
-            file.write(f"Error: {mensaje}\n")
-            file.write(f"Detalles del error: {e}\n")
-            file.write("-" * 50 + "\n")
-        print(f"Se ha producido un error: {mensaje}. Se ha registrado en el archivo de logs.")
-    except Exception as e:
-        print(f"Error al guardar el error en el archivo de registro: {e}")
-        
-
 
 # Ejecutar el programa principal
 ancho = 70
