@@ -8,7 +8,7 @@ import json
 articulos = ["el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de", "que", "en",
  "quien", "por", "para", "con", "a", "y", "o", "si", "no", "como", "mas", "menos", "muy", "todo", "toda", "todos", "todas",'cual','fue','quienes']
 
-pClaves = ["cambiar", "personaje", "adios", "salir", 'r2d2', 'c-3po', 'yoda', 'chewbacca','c3po']
+pClaves = ["cambiar", "personaje", "adios", "salir", 'r2d2', 'c-3po', 'yoda', 'chewbacca','c3po','preguntas','frecuentes','menu', 'volver']
 
 vocalesTildes = ["á", "é", "í", "ó", "ú"]
 vocalesSinTilde = ['a', 'e', 'i', 'o', 'u']
@@ -26,6 +26,7 @@ entradaOriginal = ''
 entradaModificada = ''
 respuestaAgregada = ''
 huboCorreccionOrtografica = False
+numMejorIndice = -1
 
 
 
@@ -45,7 +46,8 @@ def crearArchivoPreguntas():
                 "Cual fue la primera pelicula"
             ],
             "respuesta": "La primera película por orden de estreno fue “Star Wars: Episode IV: A New Hope” (Una Nueva Esperanza), de 1977. Sin embargo, la primera película según el orden cronológico es “Star Wars: Episode I: The Phantom Menace” (La Amenaza Fantasma), de 1999.",
-            "respuesta_yoda": "“Star Wars: Episode IV: A New Hope” (Una Nueva Esperanza), por orden de estreno la primera fue, en 1977. Pero según el orden cronológico, “Episode I: The Phantom Menace” (La Amenaza Fantasma), en 1999 estrenada fue, sí."
+            "respuesta_yoda": "“Star Wars: Episode IV: A New Hope” (Una Nueva Esperanza), por orden de estreno la primera fue, en 1977. Pero según el orden cronológico, “Episode I: The Phantom Menace” (La Amenaza Fantasma), en 1999 estrenada fue, sí.",
+            "veces_preguntado": 0
             },
             {
             "preguntas": [
@@ -54,7 +56,8 @@ def crearArchivoPreguntas():
                 "En que año se estreno Una Nueva Esperanza"
             ],
             "respuesta": "La primera película, “A New Hope” (Una nueva esperanza), se estreno en 1977.",
-            "respuesta_yoda": "En 1977, la primera película, “A New Hope” (Una nueva esperanza) estrenada fue, mmm."
+            "respuesta_yoda": "En 1977, la primera película, “A New Hope” (Una nueva esperanza) estrenada fue, mmm.",
+            "veces_preguntado": 0
             },
             {
             "preguntas": [
@@ -63,7 +66,8 @@ def crearArchivoPreguntas():
                 "En que año se estreno El Imperio Contraataca"
             ],
             "respuesta": "La segunda película, “The Empire Strikes Back” (El Imperio Contraataca), se estrenó en 1980.",
-            "respuesta_yoda": "En 1980, “The Empire Strikes Back” (El Imperio Contraataca), la segunda película estrenada fue, sí."
+            "respuesta_yoda": "En 1980, “The Empire Strikes Back” (El Imperio Contraataca), la segunda película estrenada fue, sí.",
+            "veces_preguntado": 0
             },
             {
             "preguntas": [
@@ -72,7 +76,8 @@ def crearArchivoPreguntas():
                 "En que año se estreno El Regreso del Jedi"
             ],
             "respuesta": "La tercera película, “Return of The Jedi” (El Retorno del Jedi), se estrenó en 1983.",
-            "respuesta_yoda": "“Return of The Jedi” (El Retorno del Jedi), en 1983 lanzada fue, y la tercera película es."
+            "respuesta_yoda": "“Return of The Jedi” (El Retorno del Jedi), en 1983 lanzada fue, y la tercera película es.",
+            "veces_preguntado": 0
             },
             {
             "preguntas": [
@@ -81,7 +86,8 @@ def crearArchivoPreguntas():
                 "En que año se estreno La Amenaza Fantasma?"
             ],
             "respuesta": "La cuarta película, “The Phantom Menace”(La Amenaza Fantasma), se estrenó en 1999.",
-            "respuesta_yoda": "En 1999, “The Phantom Menace” (La Amenaza Fantasma); la cuarta película estrenada fue, hmmm."
+            "respuesta_yoda": "En 1999, “The Phantom Menace” (La Amenaza Fantasma); la cuarta película estrenada fue, hmmm.",
+            "veces_preguntado": 0
             },
             {
             "preguntas": [
@@ -90,7 +96,8 @@ def crearArchivoPreguntas():
                 "En que año se estreno El Ataque de los Clones"
             ],
             "respuesta": "La quinta película, “Attack of the Clones” (El Ataque de los Clones), se estrenó en 2002.",
-            "respuesta_yoda": "“Attack of the Clones” (El Ataque de los Clones), la quinta, en 2002 estrenada fue."
+            "respuesta_yoda": "“Attack of the Clones” (El Ataque de los Clones), la quinta, en 2002 estrenada fue.",
+            "veces_preguntado": 0
             },
             {
             "preguntas": [
@@ -99,7 +106,8 @@ def crearArchivoPreguntas():
                 "En que año se estreno La Venganza de los Sith"
             ],
             "respuesta": "La sexta película, “Revenge of the Sith”, (La Venganza de los Sith), se estrenó en 2005.",
-            "respuesta_yoda": "En 2005, “Revenge of the Sith” (La Venganza de los Sith), estrenada fue, sexta película, es."
+            "respuesta_yoda": "En 2005, “Revenge of the Sith” (La Venganza de los Sith), estrenada fue, sexta película, es.",
+            "veces_preguntado": 0
             },
             {
             "preguntas": [
@@ -108,7 +116,8 @@ def crearArchivoPreguntas():
                 "En que año se estreno la septima pelicula"
             ],
             "respuesta": "La séptima película, “The Force Awakens” (El Despertar de la Fuerza), se estrenó en 2015.",
-            "respuesta_yoda": "“The Force Awakens” (El Despertar de la Fuerza), séptima película, en 2015 apareció, mmm."
+            "respuesta_yoda": "“The Force Awakens” (El Despertar de la Fuerza), séptima película, en 2015 apareció, mmm.",
+            "veces_preguntado": 0
             },
             {
             "preguntas": [
@@ -117,7 +126,8 @@ def crearArchivoPreguntas():
                 "En que año se estreno la octava pelicula"
             ],
             "respuesta": "La octava pelicula, “The Last Jedi” (Los Últimos Jedi), se estrenó en 2017.",
-            "respuesta_yoda": "En 2017, “The Last Jedi” (Los Últimos Jedi), la octava película fue, sí."
+            "respuesta_yoda": "En 2017, “The Last Jedi” (Los Últimos Jedi), la octava película fue, sí.",
+            "veces_preguntado": 0
             },
             {
             "preguntas": [
@@ -126,21 +136,24 @@ def crearArchivoPreguntas():
                 "En que año se estreno la novena pelicula"
             ],
             "respuesta": "La novena película, “The Rise of Skywalker” (El Ascenso de Skywalker), se estrenó en 2019.",
-            "respuesta_yoda": "La novena, “The Rise of Skywalker” (El Ascenso de Skywalker), en 2019 lanzada fue, hmmm."
+            "respuesta_yoda": "La novena, “The Rise of Skywalker” (El Ascenso de Skywalker), en 2019 lanzada fue, hmmm.",
+            "veces_preguntado": 0
             },
             {
             "preguntas": [
                 "Quien es el creador de Star Wars"
             ],
             "respuesta": "El creador de Star Wars es George Lucas. Es un director, guionista y productor estadounidense que escribió y dirigió la primera película de la saga.",
-            "respuesta_yoda": "George Lucas, el creador de Star Wars es. Director, guionista y productor, también, sí."
+            "respuesta_yoda": "George Lucas, el creador de Star Wars es. Director, guionista y productor, también, sí.",
+            "veces_preguntado": 0
             },
             {
             "preguntas": [
                 "Quien es el padre de Luke Skywalker"
             ],
             "respuesta": "El padre de Luke Skywalker es Anakin Skywalker/Darth Vader.",
-            "respuesta_yoda": "Anakin Skywalker, el padre de Luke es. Darth Vader, él también fue."
+            "respuesta_yoda": "Anakin Skywalker, el padre de Luke es. Darth Vader, él también fue.",
+            "veces_preguntado": 0
             }
         ]
 
@@ -243,6 +256,103 @@ def verificarArchivos():
             print("Archivo 'log.txt' creado.")                
     except Exception as e:
         manejarError(e, "Error al verificar o crear archivos.")
+def LstPalabrasClaves():
+    palabrasClaves = []
+    temporal = []
+    try:
+        with open("ArchivosDeLectura/preguntas.json", "r", encoding="utf-8") as file:
+            preguntas_data = json.load(file)
+            for item in preguntas_data:
+                for pregunta in item.get("preguntas", []):
+                    temporal = limpiadorFrases(pregunta.lower().strip("¿?#$%&/()¡!"))
+                    temporal2 = list(set(temporal))
+                    for palabra in temporal2:
+                        if palabra not in palabrasClaves:
+                            palabrasClaves.append(palabra)
+        palabrasClaves = list(set(palabrasClaves))
+        return palabrasClaves
+    except FileNotFoundError:
+        verificarArchivos()
+        if existeArchivoPreguntas == False:
+            print("Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
+        if existeCarpetaPreguntas == False:
+            print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
+        print("Por favor, vuelva a intentar.")
+    except Exception as e:
+        manejarError(e, "Error al leer el archivo de preguntas para obtener palabras clave.")
+        return palabrasClaves
+
+
+def ortografia(entrada, listado):
+        """
+        Corrige errores ortográficos en una entrada de texto comparando cada palabra con un listado de palabras válidas.
+        Parámetros:
+            entrada (str): La cadena de texto a corregir.
+            listado (list): Lista de palabras válidas para comparar y corregir.
+        Retorna:
+            list: Lista de palabras corregidas según el listado proporcionado. Si ocurre un error, retorna la entrada original.
+        Notas:
+            - Utiliza coincidencias aproximadas para sugerir correcciones ortográficas.
+            - Solicita confirmación al usuario antes de realizar una corrección.
+            - Omite artículos definidos en la variable global 'articulos'.
+        Exceociones:
+            En caso de error, maneja la excepción y retorna la entrada original.
+        """
+        global entradaOriginal
+        global entradaModificada
+        global huboCorreccionOrtografica
+        huboCorreccionOrtografica = False
+        entradaOriginal = entrada
+        try:
+            lista_palabras = entrada.split()
+        
+            entrada = limpiadorFrases(entrada)
+            salida = []
+        
+            for palabra in entrada:
+                palabra = palabra.lower()
+                if palabra in articulos:
+                    continue
+                if palabra in listado:
+                    salida.append(palabra)
+                    continue
+                try:
+                    coincidencias = difflib.get_close_matches(palabra, listado, n=3, cutoff=0.5)
+                except Exception as e:
+                    manejarError(e, "Error en la búsqueda de coincidencias.")
+                    continue
+                i = 0
+                corregida = False
+                while i < len(coincidencias) and  i < 3 :
+                    if palabra == coincidencias[i]:
+                        break
+                    print(f"\nPalabra no encontrada: '{palabra}'")
+                    print(f"¿Quisiste decir '{coincidencias[i]}'?")
+                    respuesta = input("Escriba 'si' para confirmar o 'no' para continuar: ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<> ")
+                    while respuesta not in ["si", "no"]:
+                        respuesta = input(f"No entendí, ¿desea modificar la palabra {palabra} por {coincidencias[i]}? (si/no): ")
+                        respuesta = respuesta.lower().strip("¿?#$%&/()!¡ -_[]{.],;:<>")
+
+                    posicion = lista_palabras.index(palabra)
+                    if respuesta == 'si':
+                        salida.append(coincidencias[i])
+                        lista_palabras[posicion] = coincidencias[i]
+                        huboCorreccionOrtografica = True
+                        corregida = True
+                        break
+
+                    i += 1
+
+                if not corregida:
+                    entradaModificada = []
+                    salida.append(palabra)
+                    
+            entradaModificada = ' '.join(lista_palabras) 
+            return salida
+        except Exception as e:
+            manejarError(e, "Error en la corrección ortográfica.")
+            return entradaOriginal
+
 
 def inicioPrograma():
     """
@@ -257,11 +367,26 @@ def inicioPrograma():
     """
     try:
         verificarArchivos()
-        print("Podés chatear con distintos personajes como R2D2, Chewbacca, Yoda o C-3PO. Cuando desees cambiar de personaje, escribí: cambiar personaje.\n")
-        print("En caso que desee salir del programa escriba: salir o adios.")
-        personaje = input("Coloque el nombre del personaje con el que desea hablar: ")
+        print(" Podés chatear con los siguientes personajes:")
+        print(" - R2D2")
+        print(" - Chewbacca")
+        print(" - Yoda")
+        print(" - C-3PO")
+
+        print("\n Comandos útiles:")
+        print(" - Para cambiar de personaje: escribir 'cambiar personaje'")
+        print(" - Para ver preguntas frecuentes: escribir 'frecuentes' o 'preguntas frecuentes'")
+        print(" - Para salir del programa: escribir 'salir' o 'adios'")
+        print(" - Para volver al menú principal: escribir 'volver a menu' o 'menu' o 'volver'")
+        personaje = input("\nPor favor, escribí el nombre del personaje con el que querés hablar: ")
         personaje = ortografia(personaje,pClaves)
         personaje = ' '.join(personaje)
+        if personaje == '':
+            print("No entendí, por favor escriba el nombre del personaje.")
+            return inicioPrograma()
+        if personaje.lower() in ["preguntas frecuentes", "frecuentes"]:
+            preguntasFrecuentes()
+            return inicioPrograma()
         eleccionPersonaje(personaje)
     except KeyboardInterrupt:
         print("\nConversación finalizada, que la fuerza te acompañe.")
@@ -353,7 +478,8 @@ def agregarPregunta():
             preguntas_data.append({
             "preguntas": [entrada],
             "respuesta": answer,
-            "respuesta_yoda": answer
+            "respuesta_yoda": answer,
+            "veces_preguntado": 1
             })
             with open("ArchivosDeLectura/preguntas.json", "w", encoding="utf-8") as file:
                 json.dump(preguntas_data, file, ensure_ascii=False, indent=4)
@@ -371,105 +497,6 @@ def agregarPregunta():
         agregarPregunta(entradaOriginal)
     except Exception as e:
         manejarError(e, "Error al agregar la pregunta.")
-
-def LstPalabrasClaves():
-    palabrasClaves = []
-    temporal = []
-    try:
-        with open("ArchivosDeLectura/preguntas.json", "r", encoding="utf-8") as file:
-            preguntas_data = json.load(file)
-            for item in preguntas_data:
-                for pregunta in item.get("preguntas", []):
-                    temporal = limpiadorFrases(pregunta.lower().strip("¿?#$%&/()¡!"))
-                    temporal2 = list(set(temporal))
-                    for palabra in temporal2:
-                        if palabra not in palabrasClaves:
-                            palabrasClaves.append(palabra)
-        palabrasClaves = list(set(palabrasClaves))
-        return palabrasClaves
-    except FileNotFoundError:
-        verificarArchivos()
-        if existeArchivoPreguntas == False:
-            print("Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
-        if existeCarpetaPreguntas == False:
-            print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
-        print("Por favor, vuelva a intentar.")
-    except Exception as e:
-        manejarError(e, "Error al leer el archivo de preguntas para obtener palabras clave.")
-        return palabrasClaves
-
-
-def ortografia(entrada, listado):
-        """
-        Corrige errores ortográficos en una entrada de texto comparando cada palabra con un listado de palabras válidas.
-        Parámetros:
-            entrada (str): La cadena de texto a corregir.
-            listado (list): Lista de palabras válidas para comparar y corregir.
-        Retorna:
-            list: Lista de palabras corregidas según el listado proporcionado. Si ocurre un error, retorna la entrada original.
-        Notas:
-            - Utiliza coincidencias aproximadas para sugerir correcciones ortográficas.
-            - Solicita confirmación al usuario antes de realizar una corrección.
-            - Omite artículos definidos en la variable global 'articulos'.
-        Exceociones:
-            En caso de error, maneja la excepción y retorna la entrada original.
-        """
-        global entradaOriginal
-        global entradaModificada
-        global huboCorreccionOrtografica
-        huboCorreccionOrtografica = False
-        entradaOriginal = entrada
-        try:
-            lista_palabras = entrada.split()
-        
-            entrada = limpiadorFrases(entrada)
-            salida = []
-        
-            for palabra in entrada:
-                palabra = palabra.lower()
-                if palabra in articulos:
-                    continue
-                if palabra in listado:
-                    salida.append(palabra)
-                    continue
-                try:
-                    coincidencias = difflib.get_close_matches(palabra, listado, n=3, cutoff=0.5)
-                except Exception as e:
-                    manejarError(e, "Error en la búsqueda de coincidencias.")
-                    continue
-                i = 0
-                corregida = False
-                while i < len(coincidencias) and  i < 3 :
-                    if palabra == coincidencias[i]:
-                        break
-                    print(f"Palabra: {palabra} - ¿Quisiste decir '{coincidencias[i]}'?")
-                    respuesta = input("Escriba 'si' para confirmar o 'no' para continuar: ").lower()
-                    while respuesta not in ["si", "no"]:
-                        respuesta = input(f"No entendí, ¿desea modificar la palabra {palabra} por {coincidencias[i]}? (si/no): ")
-                        respuesta = respuesta.lower().strip("¿?#$%&/()!¡ -_[]{}.,;:<>")
-
-                    posicion = lista_palabras.index(palabra)
-                    if respuesta == 'si':
-                        salida.append(coincidencias[i])
-                        lista_palabras[posicion] = coincidencias[i]
-                        huboCorreccionOrtografica = True
-                        corregida = True
-                        break
-
-                    i += 1
-
-                if not corregida:
-                    entradaModificada = []
-
-                    salida.append(palabra)
-                    
-            entradaModificada = ' '.join(lista_palabras) 
-            return salida
-        except Exception as e:
-            manejarError(e, "Error en la corrección ortográfica.")
-            return entradaOriginal
-
-
 
 def buscarRespuesta(userInput, questGroup, answGroup):
     """
@@ -506,7 +533,7 @@ def buscarRespuesta(userInput, questGroup, answGroup):
                 if puntaje > mejorPuntaje:
                     mejorPuntaje = puntaje
                     mejorIndice = i
-
+                    numMejorIndice = i
         if mejorPuntaje >= umbral:
             return answGroup[mejorIndice][0]
 
@@ -533,6 +560,7 @@ def eleccionPersonaje(personaje):
         global agregoPregunta
         palabrasClaves = LstPalabrasClaves()
         agregoPregunta = False
+        mejorIndice = 0
 
         while True:
             if personaje.lower() in ["salir", "adios"]:
@@ -559,7 +587,9 @@ def eleccionPersonaje(personaje):
             if entrada.lower() in ["salir", "adios"]:
                 print("Conversación finalizada, que la fuerza te acompañe.")
                 break
-
+            if entrada.lower() in ["volver a menu", "menu", "volver"]:
+                print("Volviendo al menú principal...")
+                return inicioPrograma()
             if entrada.lower() in ["cambiar de personaje", "cambiar personaje"]:
                 personaje = input('¿Qué personaje desea elegir? ')
                 primeraVez = True
@@ -583,6 +613,7 @@ def eleccionPersonaje(personaje):
                 case 'yoda' | 'c3po':
                     primeraVez = False
                     try:
+                        
                         entrada = entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
                         entrada = ortografia(entrada,palabrasClaves)
                         if personaje == 'yoda':
@@ -603,16 +634,19 @@ def eleccionPersonaje(personaje):
                             agregarPregunta()
                             print(f"{personaje.upper()}: Hazme otra pregunta")
                             return eleccionPersonaje(personaje)
+                        sumarVecesPreguntado(numMejorIndice)
                         print(f"{personaje.upper()}:", respuesta)
                         if huboCorreccionOrtografica == True:
-                            correccion = input("Era la respuesta correcta? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
-                            while correccion not in ["si", "no"]:
-                                correccion = input("No entendí, ¿era la respuesta correcta? (si/no): ").lower()
-                            if correccion == 'no':
+                            correcta = input("Era la respuesta correcta? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
+                            while correcta not in ["si", "no"]:
+                                correcta = input("No entendí, ¿era la respuesta correcta? (si/no): ").lower()
+                            if correcta == 'no':
                                 agregarPregunta()
                                 print(f"{personaje.upper()}: Hazme otra pregunta")
                                 return eleccionPersonaje(personaje)
-                            if correccion == 'si':
+                            if correcta == 'si':
+                                if huboCorreccionOrtografica == True:
+                                    sumarVecesPreguntado(numMejorIndice)
                                 print(f"{personaje.upper()}: Hazme otra pregunta")
                         agregarInteraccionLogs(entradaOriginal, entradaModificada, respuesta, personaje.upper())
                         respuesta=''
@@ -621,7 +655,14 @@ def eleccionPersonaje(personaje):
     except Exception as e:
         manejarError(e, "Error en la conversación.")
 
-
+def sumarVecesPreguntado(mejorIndice):
+    with open("ArchivosDeLectura/preguntas.json", "r", encoding="utf-8") as file:
+        preguntas_data = json.load(file)
+        preguntas_data[mejorIndice]["veces_preguntado"] += 1
+        with open("ArchivosDeLectura/preguntas.json", "w", encoding="utf-8") as file:
+            json.dump(preguntas_data, file, ensure_ascii=False, indent=4)
+    global numMejorIndice
+    numMejorIndice = -1
 def limpiadorFrases(input):
     """
     Limpia y tokeniza una cadena de entrada eliminando artículos y reemplazando vocales acentuadas.
@@ -663,6 +704,67 @@ def limpiadorFrases(input):
         manejarError(e, "Error en el limpiador de frases.")
         return
 
+def preguntasFrecuentes():
+    questGroup = []
+    quest = []
+    answerGroup = []
+    # Se inicializan las listas para almacenar preguntas y respuestas
+    try:
+        # Se verifica si el archivo de preguntas existe, si no existe, se crea
+        with open("ArchivosDeLectura/preguntas.json", "r", encoding="utf-8") as file:
+            preguntas_data = json.load(file)
+        # Ordenar las preguntas por 'veces_preguntado' de mayor a menor y tomar las top 3
+        # Se crea una lista de tuplas con las preguntas y su cantidad de veces preguntadas
+        # Se ordena la lista de preguntas por la cantidad de veces preguntadas
+        preguntas_ordenadas = [(item.get("preguntas", []), item.get("veces_preguntado", 0)) for item in preguntas_data]
+        def obtener_veces_preguntado(x):
+            # Devuelve el numero de veces que se ha preguntado
+            return x[1]
+        preguntas_ordenadas.sort(key=obtener_veces_preguntado, reverse=True)
+        top3 = preguntas_ordenadas[:3]
+        print("\nPreguntas frecuentes:")
+        for i, pregunta in enumerate(top3):
+            #mostrar como string la pregunta
+            print(f"{i+1}. {pregunta[0][0]}")       
+        eleccionPregunta = input("¿Desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
+        while eleccionPregunta not in ["si", "no"]:
+            eleccionPregunta = input("No entendí, ¿desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
+        if eleccionPregunta == 'si':
+            try:
+                preguntaElegida = int(input("Escriba el numero de la pregunta que desea hacer: "))
+                while preguntaElegida > 3 or preguntaElegida < 1:
+                    preguntaElegida = int(input("No entendí, escriba el numero de la pregunta que desea hacer: "))
+            except ValueError:
+                preguntaElegida = int(input("No entendí, escriba el numero de la pregunta que desea hacer: "))
+            preguntaElegida-=1
+            quest = top3[preguntaElegida][0][0]
+            print(f"\nPregunta elegida: {quest}")
+            questGroup.append(quest)
+            # Se crea una lista de respuestas para la pregunta elegida
+            for item in preguntas_data:
+                if quest in item.get("preguntas", []):
+                    if item.get("respuesta", "") != "":
+                        answ = (item.get("respuesta", ""))
+            print(f"\nRespuesta: {answ}")
+            # Se incrementa la cantidad de veces que se ha preguntado
+            for item in preguntas_data:
+                if quest in item.get("preguntas", []):
+                    item["veces_preguntado"] += 1
+        return
+    except KeyboardInterrupt:
+        # Si el usuario interrumpe la ejecución, se maneja la excepción
+        print("\nConversación finalizada, que la fuerza te acompañe.")
+    # Si el archivo no existe, se verifica y crea
+    except FileNotFoundError:
+        verificarArchivos()
+        if existeArchivoPreguntas == False and existeCarpetaPreguntas == True:
+            print("Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
+        if existeCarpetaPreguntas == False and existeArchivoPreguntas == True:
+            print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
+        print("Por favor, vuelva a intentar.")    
+    except Exception as e:
+        # Si ocurre un error al leer el archivo, se maneja la excepción
+        return manejarError(e, "Error leyendo las preguntas.")    
 
 def lectorPregunta(userInput, esYoda):
     """

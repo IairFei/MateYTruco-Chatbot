@@ -4,7 +4,8 @@
             "Cual fue la primera pelicula"
         ],
         "respuesta": "La primera película por orden de estreno fue “Star Wars: Episode IV: A New Hope” (Una Nueva Esperanza), de 1977. Sin embargo, la primera película según el orden cronológico es “Star Wars: Episode I: The Phantom Menace” (La Amenaza Fantasma), de 1999.",
-        "respuesta_yoda": "“Star Wars: Episode IV: A New Hope” (Una Nueva Esperanza), por orden de estreno la primera fue, en 1977. Pero según el orden cronológico, “Episode I: The Phantom Menace” (La Amenaza Fantasma), en 1999 estrenada fue, sí."
+        "respuesta_yoda": "“Star Wars: Episode IV: A New Hope” (Una Nueva Esperanza), por orden de estreno la primera fue, en 1977. Pero según el orden cronológico, “Episode I: The Phantom Menace” (La Amenaza Fantasma), en 1999 estrenada fue, sí.",
+        "veces_preguntado": 5
     },
     {
         "preguntas": [
@@ -13,7 +14,8 @@
             "En que año se estreno Una Nueva Esperanza"
         ],
         "respuesta": "La primera película, “A New Hope” (Una nueva esperanza), se estreno en 1977.",
-        "respuesta_yoda": "En 1977, la primera película, “A New Hope” (Una nueva esperanza) estrenada fue, mmm."
+        "respuesta_yoda": "En 1977, la primera película, “A New Hope” (Una nueva esperanza) estrenada fue, mmm.",
+        "veces_preguntado": 1
     },
     {
         "preguntas": [
@@ -22,7 +24,8 @@
             "En que año se estreno El Imperio Contraataca"
         ],
         "respuesta": "La segunda película, “The Empire Strikes Back” (El Imperio Contraataca), se estrenó en 1980.",
-        "respuesta_yoda": "En 1980, “The Empire Strikes Back” (El Imperio Contraataca), la segunda película estrenada fue, sí."
+        "respuesta_yoda": "En 1980, “The Empire Strikes Back” (El Imperio Contraataca), la segunda película estrenada fue, sí.",
+        "veces_preguntado": 10
     },
     {
         "preguntas": [
@@ -31,7 +34,8 @@
             "En que año se estreno El Regreso del Jedi"
         ],
         "respuesta": "La tercera película, “Return of The Jedi” (El Retorno del Jedi), se estrenó en 1983.",
-        "respuesta_yoda": "“Return of The Jedi” (El Retorno del Jedi), en 1983 lanzada fue, y la tercera película es."
+        "respuesta_yoda": "“Return of The Jedi” (El Retorno del Jedi), en 1983 lanzada fue, y la tercera película es.",
+        "veces_preguntado": 3
     },
     {
         "preguntas": [
@@ -40,7 +44,8 @@
             "En que año se estreno La Amenaza Fantasma?"
         ],
         "respuesta": "La cuarta película, “The Phantom Menace”(La Amenaza Fantasma), se estrenó en 1999.",
-        "respuesta_yoda": "En 1999, “The Phantom Menace” (La Amenaza Fantasma); la cuarta película estrenada fue, hmmm."
+        "respuesta_yoda": "En 1999, “The Phantom Menace” (La Amenaza Fantasma); la cuarta película estrenada fue, hmmm.",
+        "veces_preguntado": 4
     },
     {
         "preguntas": [
@@ -49,7 +54,8 @@
             "En que año se estreno El Ataque de los Clones"
         ],
         "respuesta": "La quinta película, “Attack of the Clones” (El Ataque de los Clones), se estrenó en 2002.",
-        "respuesta_yoda": "“Attack of the Clones” (El Ataque de los Clones), la quinta, en 2002 estrenada fue."
+        "respuesta_yoda": "“Attack of the Clones” (El Ataque de los Clones), la quinta, en 2002 estrenada fue.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -58,7 +64,8 @@
             "En que año se estreno La Venganza de los Sith"
         ],
         "respuesta": "La sexta película, “Revenge of the Sith”, (La Venganza de los Sith), se estrenó en 2005.",
-        "respuesta_yoda": "En 2005, “Revenge of the Sith” (La Venganza de los Sith), estrenada fue, sexta película, es."
+        "respuesta_yoda": "En 2005, “Revenge of the Sith” (La Venganza de los Sith), estrenada fue, sexta película, es.",
+        "veces_preguntado": 20
     },
     {
         "preguntas": [
@@ -67,7 +74,8 @@
             "En que año se estreno la septima pelicula"
         ],
         "respuesta": "La séptima película, “The Force Awakens” (El Despertar de la Fuerza), se estrenó en 2015.",
-        "respuesta_yoda": "“The Force Awakens” (El Despertar de la Fuerza), séptima película, en 2015 apareció, mmm."
+        "respuesta_yoda": "“The Force Awakens” (El Despertar de la Fuerza), séptima película, en 2015 apareció, mmm.",
+        "veces_preguntado": 4
     },
     {
         "preguntas": [
@@ -76,7 +84,8 @@
             "En que año se estreno la octava pelicula"
         ],
         "respuesta": "La octava pelicula, “The Last Jedi” (Los Últimos Jedi), se estrenó en 2017.",
-        "respuesta_yoda": "En 2017, “The Last Jedi” (Los Últimos Jedi), la octava película fue, sí."
+        "respuesta_yoda": "En 2017, “The Last Jedi” (Los Últimos Jedi), la octava película fue, sí.",
+        "veces_preguntado": 2
     },
     {
         "preguntas": [
@@ -85,21 +94,24 @@
             "En que año se estreno la novena pelicula"
         ],
         "respuesta": "La novena película, “The Rise of Skywalker” (El Ascenso de Skywalker), se estrenó en 2019.",
-        "respuesta_yoda": "La novena, “The Rise of Skywalker” (El Ascenso de Skywalker), en 2019 lanzada fue, hmmm."
+        "respuesta_yoda": "La novena, “The Rise of Skywalker” (El Ascenso de Skywalker), en 2019 lanzada fue, hmmm.",
+        "veces_preguntado": 49
     },
     {
         "preguntas": [
             "Quien es el creador de Star Wars"
         ],
         "respuesta": "El creador de Star Wars es George Lucas. Es un director, guionista y productor estadounidense que escribió y dirigió la primera película de la saga.",
-        "respuesta_yoda": "George Lucas, el creador de Star Wars es. Director, guionista y productor, también, sí."
+        "respuesta_yoda": "George Lucas, el creador de Star Wars es. Director, guionista y productor, también, sí.",
+        "veces_preguntado": 1
     },
     {
         "preguntas": [
             "Quien es el padre de Luke Skywalker"
         ],
         "respuesta": "El padre de Luke Skywalker es Anakin Skywalker/Darth Vader.",
-        "respuesta_yoda": "Anakin Skywalker, el padre de Luke es. Darth Vader, él también fue."
+        "respuesta_yoda": "Anakin Skywalker, el padre de Luke es. Darth Vader, él también fue.",
+        "veces_preguntado": 1
     },
     {
         "preguntas": [
@@ -107,7 +119,8 @@
             "Luke Skywalker tiene una hermana"
         ],
         "respuesta": "La hermana de Luke Skywalker es Leia Organa. Ambos son hijos de Anakin Skywalker (Darth Vader) y Padmé Amidala.",
-        "respuesta_yoda": "Leia Organa, la hermana de Luke Skywalker es. Hijos de Anakin y Padmé ambos son, mmm."
+        "respuesta_yoda": "Leia Organa, la hermana de Luke Skywalker es. Hijos de Anakin y Padmé ambos son, mmm.",
+        "veces_preguntado": 1
     },
     {
         "preguntas": [
@@ -115,7 +128,8 @@
             "Quien entreno a Luke Skywalker"
         ],
         "respuesta": "Luke Skywalker fue entrenado por Obi-Wan Kenobi y, posteriormente, por el maestro Yoda.",
-        "respuesta_yoda": "Por Obi-Wan entrenado fue Luke. Luego, yo su maestro también fui, sí."
+        "respuesta_yoda": "Por Obi-Wan entrenado fue Luke. Luego, yo su maestro también fui, sí.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -127,7 +141,8 @@
             "Que le paso a Han Solo"
         ],
         "respuesta": "Han Solo fue asesinado por su hijo, Ben Solo/Kylo Ren, en la película “The Force Awakens” (El Despertar de la Fuerza), estrenada en 2015.",
-        "respuesta_yoda": "Por su hijo, asesinado Han Solo fue. Ben Solo, también Kylo Ren llamado es, en “The Force Awakens”, ocurrió, mmm."
+        "respuesta_yoda": "Por su hijo, asesinado Han Solo fue. Ben Solo, también Kylo Ren llamado es, en “The Force Awakens”, ocurrió, mmm.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -136,7 +151,8 @@
             "Cual era el nombre original de Darth Vader"
         ],
         "respuesta": "El nombre real de Darth Vader es Anakin Skywalker.",
-        "respuesta_yoda": "Anakin Skywalker, el nombre real de Darth Vader es."
+        "respuesta_yoda": "Anakin Skywalker, el nombre real de Darth Vader es.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -144,7 +160,8 @@
             "Quien es el droide dorado de Star Wars"
         ],
         "respuesta": "Yo, el droide que acompaña a R2-D2 soy C-3PO. Soy un droide de protocolo diseñado para traducción.",
-        "respuesta_yoda": "C-3PO, el droide de protocolo que con R2-D2 va, es. Para traducción, programado fue."
+        "respuesta_yoda": "C-3PO, el droide de protocolo que con R2-D2 va, es. Para traducción, programado fue.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -153,7 +170,8 @@
             "Quien fue el mentor de Darth Vader cuando era Jedi"
         ],
         "respuesta": "El maestro de Anakin Skywalker fue Obi-Wan Kenobi.",
-        "respuesta_yoda": "Obi-Wan Kenobi, maestro de Anakin Skywalker fue, mmm."
+        "respuesta_yoda": "Obi-Wan Kenobi, maestro de Anakin Skywalker fue, mmm.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -162,7 +180,8 @@
             "Cual es la verdadera identidad del Emperador"
         ],
         "respuesta": "Palpatine, también conocido como Darth Sidious, es un Sith que se convierte en Emperador del Imperio Galáctico.",
-        "respuesta_yoda": "Palpatine, también Darth Sidious es. Emperador del Imperio Galáctico fue, sí. Haberlo descubierto antes, debimos."
+        "respuesta_yoda": "Palpatine, también Darth Sidious es. Emperador del Imperio Galáctico fue, sí. Haberlo descubierto antes, debimos.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -171,14 +190,16 @@
             "Quienes son los padres de Kylo Ren"
         ],
         "respuesta": "Kylo Ren se llama Ben Solo. Es hijo de Han Solo y Leia Organa, y nieto de Darth Vader.",
-        "respuesta_yoda": "Kylo Ren, Ben Solo en realidad se llama. Hijo de Leia y Han, nieto de Vader es, mmm."
+        "respuesta_yoda": "Kylo Ren, Ben Solo en realidad se llama. Hijo de Leia y Han, nieto de Vader es, mmm.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
             "Que dia del año se celebra el dia de Star Wars"
         ],
         "respuesta": "El Día de Star Wars, celebrado cada 4 de mayo, tiene su origen en un ingenioso juego de palabras en inglés. La emblemática frase de la saga, “May the Force be with you” (“Que la Fuerza te acompañe”), suena muy similar a “May the Fourth be with you” (“Que el 4 de mayo te acompañe”). Esta coincidencia fonética dio lugar a la elección de la fecha para conmemorar la franquicia.",
-        "respuesta_yoda": "Cada 4 de mayo, Star Wars celebrado es. “May the Fourth be with you”, un juego de palabras es, con “May the Force be with you”. Se parece, ¿mmm?"
+        "respuesta_yoda": "Cada 4 de mayo, Star Wars celebrado es. “May the Fourth be with you”, un juego de palabras es, con “May the Force be with you”. Se parece, ¿mmm?",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -187,7 +208,8 @@
             "Que hacen los Jedi"
         ],
         "respuesta": "Los Jedi son guardianes de la paz y la justicia en la galaxia. Usan la Fuerza para el bien y empuñan sables de luz.",
-        "respuesta_yoda": "Guardianes de la paz y justicia, los Jedi somos. Con la Fuerza y sables de luz, luchamos por el bien, mmm."
+        "respuesta_yoda": "Guardianes de la paz y justicia, los Jedi somos. Con la Fuerza y sables de luz, luchamos por el bien, mmm.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -197,7 +219,8 @@
             "Cual es el poder místico de Star Wars"
         ],
         "respuesta": "La Fuerza es un campo de energía mística que une a todos los seres vivos. Da poder a los Jedi, Sith y demás usuarios de la Fuerza.",
-        "respuesta_yoda": "La Fuerza es mi aliada, y una poderosa aliada es. Vida crea, la hace crecer. Su energía nos rodea y nos une. Somos seres luminosos."
+        "respuesta_yoda": "La Fuerza es mi aliada, y una poderosa aliada es. Vida crea, la hace crecer. Su energía nos rodea y nos une. Somos seres luminosos.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -206,7 +229,8 @@
             "Como se llama la espada laser de Star Wars"
         ],
         "respuesta": "El sable de luz es un arma utilizada por los Jedi y los Sith, entre otros. Es una hoja de energía pura alimentada por un cristal Kyber.",
-        "respuesta_yoda": "Arma del Jedi, el sable de luz es. Energía pura, con cristal Kyber alimentada está."
+        "respuesta_yoda": "Arma del Jedi, el sable de luz es. Energía pura, con cristal Kyber alimentada está.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -214,7 +238,8 @@
             "De donde es Luke Skywalker"
         ],
         "respuesta": "Luke Skywalker creció en el planeta Tatooine, un mundo desértico del Borde Exterior.",
-        "respuesta_yoda": "En Tatooine, Luke Skywalker creció. Planeta desértico del Borde Exterior, es."
+        "respuesta_yoda": "En Tatooine, Luke Skywalker creció. Planeta desértico del Borde Exterior, es.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -222,7 +247,8 @@
             "De donde es la princesa Leia"
         ],
         "respuesta": "Leia Organa fue adoptada por Bail Organa y criada en el planeta Alderaan.",
-        "respuesta_yoda": "Leia Organa, adoptada por Bail Organa fue. En Alderaan criada fue, sí."
+        "respuesta_yoda": "Leia Organa, adoptada por Bail Organa fue. En Alderaan criada fue, sí.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -231,7 +257,8 @@
             "Que planeta destruyo la primera Estrella de la Muerte"
         ],
         "respuesta": "El planeta Alderaan fue destruido por la primera Estrella de la Muerte en “A New Hope”.",
-        "respuesta_yoda": "Por la Estrella de la Muerte, Alderaan destruido fue. En “A New Hope”, ocurrió, mmm."
+        "respuesta_yoda": "Por la Estrella de la Muerte, Alderaan destruido fue. En “A New Hope”, ocurrió, mmm.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -240,7 +267,8 @@
             "Cual es el planeta central de la Republica Galactica"
         ],
         "respuesta": "El planeta Coruscant es la capital galáctica, sede del Senado y del Templo Jedi.",
-        "respuesta_yoda": "Coruscant, la capital galáctica es. Allí, el Senado y el Templo Jedi están."
+        "respuesta_yoda": "Coruscant, la capital galáctica es. Allí, el Senado y el Templo Jedi están.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -249,7 +277,8 @@
             "Cual es el planeta pantanoso donde entrena Luke"
         ],
         "respuesta": "Yoda vivía en el planeta Dagobah, un mundo pantanoso y aislado en el que conoce a Luke Skywalker y lo entrena.",
-        "respuesta_yoda": "En Dagobah, me exilié. A Luke allí entrené, pantanoso el lugar era, sí."
+        "respuesta_yoda": "En Dagobah, me exilié. A Luke allí entrené, pantanoso el lugar era, sí.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -257,7 +286,8 @@
             "Donde ocurre la pelea entre Anakin y Obi Wan"
         ],
         "respuesta": "La pelea entre Anakin y Obi-Wan ocurre en Mustafar, un planeta volcánico.",
-        "respuesta_yoda": "En Mustafar, volcánico planeta, el duelo entre Anakin y Obi-Wan fue, mmm."
+        "respuesta_yoda": "En Mustafar, volcánico planeta, el duelo entre Anakin y Obi-Wan fue, mmm.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -266,7 +296,8 @@
             "Cual es el planeta de los Wookiees"
         ],
         "respuesta": "El planeta natal de Chewbacca y los demás Wookiees es Kashyyyk, un mundo selvático.",
-        "respuesta_yoda": "Kashyyyk, hogar de Chewbacca y los Wookiees es. Mundo de selvas, es."
+        "respuesta_yoda": "Kashyyyk, hogar de Chewbacca y los Wookiees es. Mundo de selvas, es.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -275,7 +306,8 @@
             "Donde ocurre la batalla final en El Retorno del Jedi"
         ],
         "respuesta": "Los Ewoks viven en la luna boscosa de Endor, donde ocurre la batalla contra el Imperio en Return of the Jedi.",
-        "respuesta_yoda": "En la luna boscosa de Endor, los Ewoks viven. Contra el Imperio, batalla allí hubo, en “Return of the Jedi”."
+        "respuesta_yoda": "En la luna boscosa de Endor, los Ewoks viven. Contra el Imperio, batalla allí hubo, en “Return of the Jedi”.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -284,7 +316,8 @@
             "Qué le pasó a Darth Vader"
         ],
         "respuesta": "Darth Vader muere salvando a su hijo, Luke skywalker, al enfrentarse al emperador palpatine",
-        "respuesta_yoda": "Redención halló, a su hijo salvó y al emperador, Vader para luego morir destruyó."
+        "respuesta_yoda": "Redención halló, a su hijo salvó y al emperador, Vader para luego morir destruyó.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -295,7 +328,8 @@
             "A quien pertenece el Halcon Milenario"
         ],
         "respuesta": "El Halcón Milenario es la nave mas icónica de Star Wars. Es pilotada por el contrabandista y rebelde Han Solo.",
-        "respuesta_yoda": "Rápido y audaz, el Halcón Milenario, la nave del contrabandista Han Solo es."
+        "respuesta_yoda": "Rápido y audaz, el Halcón Milenario, la nave del contrabandista Han Solo es.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -305,7 +339,8 @@
             "Que naves usaba la alianza rebelde"
         ],
         "respuesta": "Los pilotos rebeldes usaban los X-Wing, naves pequeñas y ágiles especializadas en combate.",
-        "respuesta_yoda": "Alas en forma de cruz los X-Wing tienen y su especialidad el combate es. Esperanza a la rebelión daban."
+        "respuesta_yoda": "Alas en forma de cruz los X-Wing tienen y su especialidad el combate es. Esperanza a la rebelión daban.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -313,7 +348,8 @@
             "Como luchaban los Ewoks"
         ],
         "respuesta": "Los ewoks usaban armas como lanza, hondas y trampas hechas con recursos naturales.",
-        "respuesta_yoda": "Tecnología no tienen, pero sabiduría en batalla si, lanzas y trampas usaban."
+        "respuesta_yoda": "Tecnología no tienen, pero sabiduría en batalla si, lanzas y trampas usaban.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -324,7 +360,8 @@
             "Quien es Chubaca"
         ],
         "respuesta": "Chewbacca es el wookie mas famoso de Star Wars, también es el amigo de Han solo y copiloto del Halcón Milenario.",
-        "respuesta_yoda": "El wookie mas famoso, mi amigo Chewbacca es. Compañero de Solo y copiloto del Halcón Milenario su rol es, hmm."
+        "respuesta_yoda": "El wookie mas famoso, mi amigo Chewbacca es. Compañero de Solo y copiloto del Halcón Milenario su rol es, hmm.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -335,7 +372,8 @@
             "Quien era Han Solo"
         ],
         "respuesta": "Han solo era un contrabandista al servicio de Jabba el hutt que luego se unio a los rebeldes.",
-        "respuesta_yoda": "Heroe de la Alianza Rebelde Han Solo fue, hmm. Contrabandista antes era."
+        "respuesta_yoda": "Heroe de la Alianza Rebelde Han Solo fue, hmm. Contrabandista antes era.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -343,7 +381,8 @@
             "Como se conocen La Princesa Leia y Han Solo"
         ],
         "respuesta": "Han solo y Leia se conocen cuando él acepta ayudar a rescatarla de la estrella de la muerte junto a Luke Skywalker y Obi-wan.",
-        "respuesta_yoda": "En la estrella de la muerte, Solo y Leia se conocieron."
+        "respuesta_yoda": "En la estrella de la muerte, Solo y Leia se conocieron.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -351,7 +390,8 @@
             "Que querian los separatistas"
         ],
         "respuesta": "Los Separatistas era un grupo de sistemas estelares y corporaciones que se separaron de la República Galáctica. Creían que esta era corrupta e ineficiente. Eran liderados por el Conde Dooku.",
-        "respuesta_yoda": "Corrupción veían, justicia buscaban, pero por el Lado Oscuro, usados fueron.\nSepararse quisieron de la República, si. Engañados por Dooku, fueron."
+        "respuesta_yoda": "Corrupción veían, justicia buscaban, pero por el Lado Oscuro, usados fueron.\nSepararse quisieron de la República, si. Engañados por Dooku, fueron.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -360,7 +400,8 @@
             "Como termino la guerra de los clones"
         ],
         "respuesta": "La Guerra de los Clones termino cuando los Separatistas fueron traicionados por Darth Sidious y eliminados por Darth Vader.",
-        "respuesta_yoda": "Final oscuro la Guerra de los Clones tuvo. Los Separatistas eliminados por Vader fueron."
+        "respuesta_yoda": "Final oscuro la Guerra de los Clones tuvo. Los Separatistas eliminados por Vader fueron.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -369,7 +410,8 @@
             "Quien vencio al Emperador"
         ],
         "respuesta": "El Emperador Palpatine fue derrotado por Darth Vader, quien lo arrojó al reactor de la Estrella de la Muerte para salvar a su hijo, Luke.",
-        "respuesta_yoda": "Por Vader, el Emperador destruido fue. A su hijo salvó, y redención encontró, sí."
+        "respuesta_yoda": "Por Vader, el Emperador destruido fue. A su hijo salvó, y redención encontró, sí.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -379,7 +421,8 @@
             "Como murieron los Jedi"
         ],
         "respuesta": "La Orden 66 fue una directiva secreta dada por Palpatine para eliminar a todos los Jedi, ejecutada por los clones al final de la Guerra de los Clones.",
-        "respuesta_yoda": "La Orden 66, el fin de los Jedi marcó. Por los clones ejecutada fue."
+        "respuesta_yoda": "La Orden 66, el fin de los Jedi marcó. Por los clones ejecutada fue.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -389,7 +432,8 @@
             "Quien es Ben Solo"
         ],
         "respuesta": "El hijo de Han Solo y Leia Organa es Ben Solo, quien más tarde se convierte en Kylo Ren.",
-        "respuesta_yoda": "Ben Solo, hijo de Leia y Han es. Kylo Ren se volvió, hacia el Lado Oscuro cayó, mmm."
+        "respuesta_yoda": "Ben Solo, hijo de Leia y Han es. Kylo Ren se volvió, hacia el Lado Oscuro cayó, mmm.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -398,7 +442,8 @@
             "Quien le enseño a Rey a usar la Fuerza"
         ],
         "respuesta": "Rey fue entrenada por Luke Skywalker y Leia Organa.",
-        "respuesta_yoda": "Por Luke entrenada fue Rey, guía de Leia también tuvo. Poderosa se volvió, sí."
+        "respuesta_yoda": "Por Luke entrenada fue Rey, guía de Leia también tuvo. Poderosa se volvió, sí.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -407,7 +452,8 @@
             "Quien es Rey Skywalker"
         ],
         "respuesta": "Rey es la nieta del Emperador Palpatine, se convierte en la última Jedi y elige tomar el apellido Skywalker.",
-        "respuesta_yoda": "De Palpatine, descendiente es Rey. Pero Skywalker su nombre eligió, su destino forjó, mmm."
+        "respuesta_yoda": "De Palpatine, descendiente es Rey. Pero Skywalker su nombre eligió, su destino forjó, mmm.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -416,7 +462,8 @@
             "Quien es Ben Kenobi"
         ],
         "respuesta": "Obi-Wan Kenobi fue un Maestro Jedi que entrenó a Anakin Skywalker y luego a Luke. También fue conocido como “Ben Kenobi” durante su exilio en Tatooine.",
-        "respuesta_yoda": "Jedi sabio, Obi-Wan fue. A Anakin y Luke entrenó. “Ben” lo llamaron en Tatooine, sí."
+        "respuesta_yoda": "Jedi sabio, Obi-Wan fue. A Anakin y Luke entrenó. “Ben” lo llamaron en Tatooine, sí.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -425,7 +472,8 @@
             "Quien es la madre de Luke y Leia"
         ],
         "respuesta": "Padmé Amidala fue senadora y reina de Naboo. Es la esposa de Anakin Skywalker y madre de Luke y Leia.",
-        "respuesta_yoda": "Senadora de Naboo, Padmé fue. A Anakin amó y madre de los gemelos Luke y Leia es, mmm."
+        "respuesta_yoda": "Senadora de Naboo, Padmé fue. A Anakin amó y madre de los gemelos Luke y Leia es, mmm.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -434,7 +482,8 @@
             "Quien es el Jedi del sable morado"
         ],
         "respuesta": "Mace Windu fue un poderoso Maestro Jedi, miembro del Alto Consejo, conocido por su sable de luz morado.",
-        "respuesta_yoda": "Fuerte en la Fuerza, Mace Windu fue. Sable morado tuvo, sí. Contra Sidious luchó, mmm."
+        "respuesta_yoda": "Fuerte en la Fuerza, Mace Windu fue. Sable morado tuvo, sí. Contra Sidious luchó, mmm.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -443,7 +492,8 @@
             "Quien fue el maestro de Obi-Wan"
         ],
         "respuesta": "Qui-Gon Jinn fue un Jedi no convencional, maestro de Obi-Wan Kenobi y quien descubrió a Anakin Skywalker en Tatooine.",
-        "respuesta_yoda": "El destino vio en Anakin, Qui-Gon Jinn. A Obi-Wan enseñó, un Jedi sabio era, hmmm."
+        "respuesta_yoda": "El destino vio en Anakin, Qui-Gon Jinn. A Obi-Wan enseñó, un Jedi sabio era, hmmm.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -453,7 +503,8 @@
             "Quien trabaja para Jabba el Hutt"
         ],
         "respuesta": "Boba Fett es un temido cazarrecompensas que viste armadura mandaloriana. Es hijo clon de Jango Fett.",
-        "respuesta_yoda": "Clon de Jango, Boba Fett es. Cazarrecompensas letal, armadura verde lleva, sí."
+        "respuesta_yoda": "Clon de Jango, Boba Fett es. Cazarrecompensas letal, armadura verde lleva, sí.",
+        "veces_preguntado": 0
     },
     {
         "preguntas": [
@@ -462,6 +513,15 @@
             "De donde vienen los clones"
         ],
         "respuesta": "Jango Fett fue un cazarrecompensas mandaloriano. Su ADN se usó para crear el ejército clon y Boba Fett fue criado como su hijo.",
-        "respuesta_yoda": "Clonador original, Jango Fett fue. A Boba crió como hijo, todos los clones su imagen tienen."
+        "respuesta_yoda": "Clonador original, Jango Fett fue. A Boba crió como hijo, todos los clones su imagen tienen.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "hermana de luce"
+        ],
+        "respuesta": "lucia",
+        "respuesta_yoda": "lucia",
+        "veces_preguntado": 10
     }
 ]

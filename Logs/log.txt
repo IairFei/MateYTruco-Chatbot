@@ -74,3 +74,176 @@ Porcentaje de acierto con las preguntas: 100%
 Personaje: c3po
 
 ----------------------------------------
+
+Fecha y hora: 2025-05-23 10:50:25.639819
+Pregunta: frec
+Respuesta: El usuario decidio no agregar la pregunta 
+Porcentaje de acierto con las preguntas: 0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 11:02:27.277334
+Pregunta: primera pelicula
+Pregunta sin correcion ortografica: prier ppeicula
+Respuesta: “Star Wars: Episode IV: A New Hope” (Una Nueva Esperanza), por orden de estreno la primera fue, en 1977. Pero según el orden cronológico, “Episode I: The Phantom Menace” (La Amenaza Fantasma), en 1999 estrenada fue, sí.
+Porcentaje de acierto con las preguntas: 100%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 11:07:13.816324
+Pregunta: quien es el padre de luke
+Pregunta sin correcion ortografica: quien es el padre de luce
+Respuesta: Anakin Skywalker, el padre de Luke es. Darth Vader, él también fue.
+Porcentaje de acierto con las preguntas: 100%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 11:09:28.602644
+Pregunta: quien es el padre de luke
+Pregunta sin correcion ortografica: quien es el padre de luce
+Respuesta: Anakin Skywalker, el padre de Luke es. Darth Vader, él también fue.
+Porcentaje de acierto con las preguntas: 100%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 11:10:09.363349
+Pregunta: quien es el padre de luke
+Pregunta sin correcion ortografica: quien es el padre de luce
+Respuesta: Anakin Skywalker, el padre de Luke es. Darth Vader, él también fue.
+Porcentaje de acierto con las preguntas: 100%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 11:12:04.843746
+Pregunta: quien es el padre de luke
+Respuesta: Anakin Skywalker, el padre de Luke es. Darth Vader, él también fue.
+Porcentaje de acierto con las preguntas: 100%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 11:12:19.702035
+Pregunta: quien es el padre de luke
+Pregunta sin correcion ortografica: quien es el padre de luce
+Respuesta: Anakin Skywalker, el padre de Luke es. Darth Vader, él también fue.
+Porcentaje de acierto con las preguntas: 100%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 11:26:33.441159
+Pregunta: hermana de luke
+Respuesta: Leia Organa, la hermana de Luke Skywalker es. Hijos de Anakin y Padmé ambos son, mmm.
+Porcentaje de acierto con las preguntas: 100%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 11:48:32.256449
+Pregunta: hermana de luce
+Respuesta agregada por el usuario: lucia
+Porcentaje de acierto con las preguntas: 0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 11:48:44.839882
+Pregunta: hermana de luce
+Respuesta: lucia
+Porcentaje de acierto con las preguntas: 100%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 11:48:47.427188
+Pregunta: hermana de luce
+Respuesta: lucia
+Porcentaje de acierto con las preguntas: 100%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 11:48:48.621423
+Pregunta: hermana de luce
+Respuesta: lucia
+Porcentaje de acierto con las preguntas: 100%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 11:48:49.879831
+Pregunta: hermana de luce
+Respuesta: lucia
+Porcentaje de acierto con las preguntas: 100%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 11:48:50.398567
+Pregunta: hermana de luce
+Respuesta: lucia
+Porcentaje de acierto con las preguntas: 100%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 11:48:50.855212
+Pregunta: hermana de luce
+Respuesta: lucia
+Porcentaje de acierto con las preguntas: 100%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 11:48:51.264944
+Pregunta: hermana de luce
+Respuesta: lucia
+Porcentaje de acierto con las preguntas: 100%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 11:48:51.732619
+Pregunta: hermana de luce
+Respuesta: lucia
+Porcentaje de acierto con las preguntas: 100%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 11:48:52.131834
+Pregunta: hermana de luce
+Respuesta: lucia
+Porcentaje de acierto con las preguntas: 100%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 11:51:33.306844
+Pregunta: menu
+Respuesta: El usuario decidio no agregar la pregunta 
+Porcentaje de acierto con las preguntas: 0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 11:53:57.178922
+Pregunta: volver a menu
+Respuesta: El usuario decidio no agregar la pregunta 
+Porcentaje de acierto con las preguntas: 0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 11:54:09.954158
+Pregunta: volver a menu
+Respuesta: El usuario decidio no agregar la pregunta 
+Porcentaje de acierto con las preguntas: 0%
+Personaje: YODA
+
+----------------------------------------
