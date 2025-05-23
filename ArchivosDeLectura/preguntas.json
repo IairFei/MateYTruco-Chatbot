@@ -515,13 +515,5 @@
         "respuesta": "Jango Fett fue un cazarrecompensas mandaloriano. Su ADN se usó para crear el ejército clon y Boba Fett fue criado como su hijo.",
         "respuesta_yoda": "Clonador original, Jango Fett fue. A Boba crió como hijo, todos los clones su imagen tienen.",
         "veces_preguntado": 0
-    },
-    {
-        "preguntas": [
-            "hermana de luce"
-        ],
-        "respuesta": "lucia",
-        "respuesta_yoda": "lucia",
-        "veces_preguntado": 10
     }
 ]
