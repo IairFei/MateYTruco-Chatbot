@@ -295,3 +295,20 @@ Porcentaje de acierto con las preguntas: 0%
 Personaje: YODA
 
 ----------------------------------------
+
+Fecha y hora: 2025-05-23 12:25:23.069192
+Pregunta: padre luke
+Pregunta sin correcion ortografica: padre luce
+Respuesta: Anakin Skywalker, el padre de Luke es. Darth Vader, él también fue.
+Porcentaje de acierto con las preguntas: 100%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-23 12:25:58.587606
+Pregunta: menu padre luke
+Respuesta: El padre de Luke Skywalker es Anakin Skywalker/Darth Vader.
+Porcentaje de acierto con las preguntas: 100%
+Personaje: C3PO
+
+----------------------------------------

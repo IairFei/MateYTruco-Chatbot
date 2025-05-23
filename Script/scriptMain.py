@@ -507,28 +507,6 @@ def lectorPregunta(userInput, esYoda):
         return manejarError(e, "Error leyendo las preguntas.")
 
 
-# Manejo de errores
-def manejarError(e, mensaje):
-    """
-    Maneja errores capturados durante la ejecución del programa, reseteando la entrada original y registrando los detalles del error en un archivo de logs.
-    Args:
-        e (Exception): La excepción que fue capturada.
-        mensaje (str): Un mensaje descriptivo sobre el contexto o la causa del error.
-    """
-    global entradaOriginal
-    entradaOriginal = ''
-    
-    # Guardar el error en un archivo de registro
-    try:
-        with open("Logs/errorLogs.txt", "a", encoding="utf-8") as file:
-            file.write(f"Error: {mensaje}\n")
-            file.write(f"Detalles del error: {e}\n")
-            file.write("-" * 50 + "\n")
-        print(f"Se ha producido un error: {mensaje}. Se ha registrado en el archivo de logs.")
-    except Exception as e:
-        print(f"Error al guardar el error en el archivo de registro: {e}")
-        
-
 def inicioPrograma():
     """
     Inicia el programa principal del chatbot, permitiendo al usuario seleccionar un personaje para conversar.
@@ -842,6 +820,28 @@ def sumarVecesPreguntado(mejorIndice):
     global numMejorIndice
     numMejorIndice = -1
 
+
+# Manejo de errores
+def manejarError(e, mensaje):
+    """
+    Maneja errores capturados durante la ejecución del programa, reseteando la entrada original y registrando los detalles del error en un archivo de logs.
+    Args:
+        e (Exception): La excepción que fue capturada.
+        mensaje (str): Un mensaje descriptivo sobre el contexto o la causa del error.
+    """
+    global entradaOriginal
+    entradaOriginal = ''
+    
+    # Guardar el error en un archivo de registro
+    try:
+        with open("Logs/errorLogs.txt", "a", encoding="utf-8") as file:
+            file.write(f"Error: {mensaje}\n")
+            file.write(f"Detalles del error: {e}\n")
+            file.write("-" * 50 + "\n")
+        print(f"Se ha producido un error: {mensaje}. Se ha registrado en el archivo de logs.")
+    except Exception as e:
+        print(f"Error al guardar el error en el archivo de registro: {e}")
+        
 # Ejecutar el programa principal
 ancho = 70
 print("-" * ancho)
