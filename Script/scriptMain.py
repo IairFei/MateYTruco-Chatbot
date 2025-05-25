@@ -13,22 +13,35 @@ pClaves = ["cambiar", "personaje", "adios", "salir", 'r2d2', 'c-3po', 'yoda', 'c
 vocalesTildes = ["á", "é", "í", "ó", "ú"]
 vocalesSinTilde = ['a', 'e', 'i', 'o', 'u']
 
-# Globales
-newAnsw = []
-newQuest = []
+# Control de flujo
+primeraVez = True
 esYoda = False
 agregoPregunta = False
-primeraVez = True
+
+# Archivos y carpetas
 existeArchivoPreguntas = True
 existeCarpetaPreguntas = True
 existeCarpetaLogs = True
+
+# Entrada y salida
 entradaOriginal = ''
 entradaModificada = ''
 respuestaAgregada = ''
-huboCorreccionOrtografica = False
-numMejorIndice = -1
 preguntaEnArchivo = ""
+
+# Datos nuevos
+newQuest = []
+newAnsw = []
+
+# Corrección ortográfica
+huboCorreccionOrtografica = False
 cantCorreccionesOrtograficas = 0
+
+# Índice de mejor coincidencia
+numMejorIndice = -1
+top3MasParecidas = []
+
+
 
 def textoPersonalizado(personaje, mensaje):
     palabras = mensaje.split()
@@ -338,6 +351,7 @@ def LstPalabrasClaves():
     except Exception as e:
         manejarError(e, "Error al leer el archivo de preguntas para obtener palabras clave.")
         return palabrasClaves
+    
 def limpiadorFrases(input):
     """
     Limpia y tokeniza una cadena de entrada eliminando artículos y reemplazando vocales acentuadas.
@@ -741,9 +755,13 @@ def buscarRespuesta(userInput, questGroup, answGroup):
     mejorPuntaje = -1
     umbral = 0.8
     global preguntaEnArchivo
+    global numMejorIndice
+    global top3MasParecidas  
     preguntaEnArchivo = ""
     
+   
     try:
+        top3MasParecidas = []
         userSet = set(userInput)
         for i, preguntas in enumerate(questGroup):
             for pregunta in preguntas:
@@ -761,18 +779,63 @@ def buscarRespuesta(userInput, questGroup, answGroup):
                     mejorPuntaje = puntaje
                     mejorIndice = i
                     numMejorIndice = i
+                    for preguntas in questGroup[i]:
+                        top3MasParecidas.append(preguntas)
+                    
+                        
+                    
         if mejorPuntaje >= umbral:
             preguntaEnArchivo = questGroup[mejorIndice][0]
-            #Poner mayuscula la primera letra de la pregunta y signo de interrogacion al final
-            preguntaEnArchivo = preguntaEnArchivo.capitalize()
-            preguntaEnArchivo = preguntaEnArchivo+"?"
+            preguntaEnArchivo = preguntaEnArchivo.capitalize() + "?"
+            top3MasParecidas[0]= ''
             return answGroup[mejorIndice][0]
 
         return "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema."
     except Exception as e:
         manejarError(e, "Error en la búsqueda de respuesta")
         return "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema."
+    
+def busquedaTop3():
+    with open("ArchivosDeLectura/preguntas.json", "r", encoding="utf-8") as file:
+        preguntas_data = json.load(file)
+    for i,preguntas in enumerate(top3MasParecidas[:4]):
+        if preguntas != '':
+            print(f'{i}.¿{preguntas.capitalize()}?')
+    questGroup = []
+    quest = []
+    answerGroup = []
 
+    try:
+        preguntaElegida-=1
+        quest = top3[preguntaElegida][0][0]
+        print(f"\nPregunta elegida: {quest}")
+        questGroup.append(quest)
+        # Se crea una lista de respuestas para la pregunta elegida
+        for item in preguntas_data:
+            if quest in item.get("preguntas", []):
+                if item.get("respuesta", "") != "":
+                    answ = (item.get("respuesta", ""))
+        print(f"\nRespuesta: {answ}")
+        # Se incrementa la cantidad de veces que se ha preguntado
+        for item in preguntas_data:
+            if quest in item.get("preguntas", []):
+                item["veces_preguntado"] += 1
+        return
+    except KeyboardInterrupt:
+        # Si el usuario interrumpe la ejecución, se maneja la excepción
+        print("\nConversación finalizada, que la fuerza te acompañe.")
+        
+    # Si el archivo no existe, se verifica y crea
+    except FileNotFoundError:
+        verificarArchivos()
+        if existeArchivoPreguntas == False and existeCarpetaPreguntas == True:
+            print("Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
+        if existeCarpetaPreguntas == False and existeArchivoPreguntas == True:
+            print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
+        print("Por favor, vuelva a intentar.")    
+    except Exception as e:
+        # Si ocurre un error al leer el archivo, se maneja la excepción
+        return manejarError(e, "Error leyendo las preguntas.")    
 
 def eleccionPersonaje(personaje):
     """
@@ -878,7 +941,8 @@ def eleccionPersonaje(personaje):
                             while correcta not in ["si", "no"]:
                                 correcta = input("No entendí, ¿era la respuesta correcta? (si/no): ").lower()
                             if correcta == 'no':
-                                agregarPregunta()
+                                if busquedaTop3() != '':
+                                    agregarPregunta()
                                 textoPersonalizado(personaje.upper(), 'Hazme otra pregunta')
                                 return eleccionPersonaje(personaje)
                             if correcta == 'si':
