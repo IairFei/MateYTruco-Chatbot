@@ -415,3 +415,13 @@ Porcentaje de acierto con las preguntas: 100%
 Personaje: YODA
 
 ----------------------------------------
+
+Fecha y hora: 2025-05-24 13:28:47.173717
+Pregunta hecha por el usuario: quien mato al solo
+Pregunta en el archivo: Quien mato a han solo?
+Pregunta sin correcion ortografica: quien mato al colo
+Respuesta: Por su hijo, asesinado Han Solo fue. Ben Solo, también Kylo Ren llamado es, en “The Force Awakens”, ocurrió, mmm.
+Porcentaje de acierto con las preguntas: 90%
+Personaje: YODA
+
+----------------------------------------
