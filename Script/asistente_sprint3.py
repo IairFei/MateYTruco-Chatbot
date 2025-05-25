@@ -5,9 +5,9 @@ import datetime
 import json
 
 # Librerías originales
-articulos = ["el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de", "que", "en", "por", "para", "con", "a", "y", "o", "si", "no", "como", "mas", "menos", "muy", "todo", "toda", "todos", "todas","quien", "quienes", "cual", "cuales", "donde", "cuando", "porque"]
+articulos = ["fue","el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de", "que", "en", "por", "para", "con", "a", "y", "o", "si", "no", "como", "mas", "menos", "muy", "todo", "toda", "todos", "todas","quien", "quienes", "cual", "cuales", "donde", "cuando", "porque"]
 
-pClaves = ["cambiar", "personaje", "adios", "salir", 'r2d2','arturito', 'c-3po', 'yoda', 'chewbacca','c3po','preguntas','frecuentes','menu', 'volver']
+pClaves = ["cambiar", "personaje", "adios", "salir", 'r2d2','arturito', 'c-3po', 'yoda', 'chewbacca','c3po','preguntas','frecuentes','menu', 'volver','creditos','equipo','ayuda']
 
 vocalesTildes = ["á", "é", "í", "ó", "ú"]
 vocalesSinTilde = ['a', 'e', 'i', 'o', 'u']
@@ -29,6 +29,7 @@ entradaOriginal = ''
 entradaModificada = ''
 respuestaAgregada = ''
 preguntaEnArchivo = ""
+preguntaAgregada = ""
 
 # Datos nuevos
 newQuest = []
@@ -54,25 +55,27 @@ def textoPersonalizado(personaje, mensaje):
     lineas = []
     linea_actual = ""
     
-
-    for palabra in palabras:
-        if len(linea_actual) + len(palabra) + 1 <= 50:
-            if linea_actual != '':
-                linea_actual += " "
-            linea_actual += palabra
-        else:   
+    try:
+        for palabra in palabras:
+            if len(linea_actual) + len(palabra) + 1 <= 50:
+                if linea_actual != '':
+                    linea_actual += " "
+                linea_actual += palabra
+            else:   
+                lineas.append(linea_actual)
+                linea_actual = palabra
+        if linea_actual:
             lineas.append(linea_actual)
-            linea_actual = palabra
-    if linea_actual:
-        lineas.append(linea_actual)
 
-    ancho = 0
-    for linea in lineas:
-        if len(linea) > ancho:
-            ancho = len(linea)
+        ancho = 0
+        for linea in lineas:
+            if len(linea) > ancho:
+                ancho = len(linea)
 
-    espaciadoParaUsuario = 80
-
+        espaciadoParaUsuario = 80
+    except Exception as e:
+        manejarError(e, "Error en el texto personalizado.")
+        return
     if personaje == "Tú":
         print(" " * (espaciadoParaUsuario - ancho - 4 ) + "╭" + "─" * (ancho + 2) + "╮")
         for linea in lineas:
@@ -219,26 +222,28 @@ def crearArchivoPreguntas():
     except Exception as e:
         manejarError(e, "Error al crear el archivo de preguntas")
         return
-def creditosFinales():
-    
-    os.system('cls' if os.name == 'nt' else 'clear')
-    print(""" 
-            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⡰⠊⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀
-            ⠀⠀⠀⠀⠀⠀⠀⠀⡰⠈⠀⠀⠠⠂⠂⠀⠀⢀⣀⠀⠀⠀⢀⣀⣴⢟⠛⠉     ╭─────────────────────────────-────────────────╮
-            ⠀⠀⠀⠀⠀⠀⠀⣾⣧⡠⣂⣤⣬⣲⣶⢷⣾⣛⠙⠳⠀⣤⣿⡿⠃⠂⠀⠀    │ CREDTOS:                                     |
-            ⣀⣀⣀⣀⣀⣀⡀⠛⢿⣷⠟⡋⣩⠻⣗⠀⠻⣝⢻⡌⠀⣍⡥⠊⠀⠀⠀⠀   │ Holm Ian                                     |
-            ⠈⠑⢝⡻⠿⣿⣿⣿⣾⡟⠘⢋⡉⠞⠒⠒⠋⠈⢲⣿⣿⡛⠁⠀⠀⠀⠀⠀   │ Feigelman Iair                               |
-            ⠀⠀⠀⠈⠑⠢⠍⠙⣿⣿⣄⡀⣠⣎⡀⠤⢤⣢⣿⣿⡟⠀⠀⠀⠀⠀⠀⠀    | Cinti Valentino                              |
-            ⠀⠀⠀⠀⠀⠀⠀⠀⠙⠙⣿⣿⣿⣿⣿⣿⣛⣿⣿⣿⡅⠀⠀⠀⠀⠀⠀⠀     | Mora Diego                                   |
-            ⠀⠀⠀⠀⠀⠀⠀⢀⣀⣴⣿⣿⣿⣿⣿⣿⣿⣿⢿⣫⢤⢙⢦⠰⣄⡀⠀⠀    | Guzman Kevin                                 |
-            ⠀⠀⠀⠀⠀⢠⣼⣿⣿⣿⣳⢻⣿⣿⣿⣿⣷⠾⠿⠋⠖⠄⠀⠙⠎⢷⡀⠀    |/─────────────────────────────────────────────╯ 
-            ⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣯⡁⢿⣿⣿⣶⣶⣶⠶⠞⢉⣇⡀⠀⣀⣼⣷⠀
-            ⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣧⡾⢉⡛⠿⠢⢌⢀⣾⣿⣿⣿⣿⣿⣿⠀
-            ⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡦⡦⢮⠀⢰⡙⡛⠿⣿⣿⣿⠂
-            ⠀⠀⠀⠸⣿⠻⣿⣿⣿⣿⣿⣿⣿⣿⠯⢥⠾⠛⠢⣴⡿⡻⣞⢦⡀⠉⠉⠀
-            ⠀⠀⠀⠀⠀⠁⠈⠉⠉⠉⠉⠉⠁⠀⠀⠀⠉⠉⠉⠀⠀⠈⠈⠈⠉⠁⠀         
-            ⠀⠀""")
+def creditos():
+    try:
+        print(r""" 
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⡰⠊⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀
+                ⠀⠀⠀⠀⠀⠀⠀⠀⡰⠈⠀⠀⠠⠂⠂⠀⠀⢀⣀⠀⠀⠀⢀⣀⣴⢟⠛⠉    ╭─────────────────────────────-────────────────╮
+                ⠀⠀⠀⠀⠀⠀⠀⣾⣧⡠⣂⣤⣬⣲⣶⢷⣾⣛⠙⠳⠀⣤⣿⡿⠃⠂⠀⠀    │ CREDTOS:                                     |
+                ⣀⣀⣀⣀⣀⣀⡀⠛⢿⣷⠟⡋⣩⠻⣗⠀⠻⣝⢻⡌⠀⣍⡥⠊⠀⠀⠀⠀    │ Holm Ian                                     |
+                ⠈⠑⢝⡻⠿⣿⣿⣿⣾⡟⠘⢋⡉⠞⠒⠒⠋⠈⢲⣿⣿⡛⠁⠀⠀⠀⠀⠀    │ Feigelman Iair                               |
+                ⠀⠀⠀⠈⠑⠢⠍⠙⣿⣿⣄⡀⣠⣎⡀⠤⢤⣢⣿⣿⡟⠀⠀⠀⠀⠀⠀⠀    | Cinti Valentino                              |
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠙⠙⣿⣿⣿⣿⣿⣿⣛⣿⣿⣿⡅⠀⠀⠀⠀⠀⠀⠀    | Mora Diego                                   |
+                ⠀⠀⠀⠀⠀⠀⠀⢀⣀⣴⣿⣿⣿⣿⣿⣿⣿⣿⢿⣫⢤⢙⢦⠰⣄⡀⠀⠀    | Guzman Kevin                                 |
+                ⠀⠀⠀⠀⠀⢠⣼⣿⣿⣿⣳⢻⣿⣿⣿⣿⣷⠾⠿⠋⠖⠄⠀⠙⠎⢷⡀⠀    |/─────────────────────────────────────────────╯ 
+                ⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣯⡁⢿⣿⣿⣶⣶⣶⠶⠞⢉⣇⡀⠀⣀⣼⣷⠀
+                ⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣧⡾⢉⡛⠿⠢⢌⢀⣾⣿⣿⣿⣿⣿⣿⠀
+                ⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡦⡦⢮⠀⢰⡙⡛⠿⣿⣿⣿⠂
+                ⠀⠀⠀⠸⣿⠻⣿⣿⣿⣿⣿⣿⣿⣿⠯⢥⠾⠛⠢⣴⡿⡻⣞⢦⡀⠉⠉⠀
+                ⠀⠀⠀⠀⠀⠁⠈⠉⠉⠉⠉⠉⠁⠀⠀⠀⠉⠉⠉⠀⠀⠈⠈⠈⠉⠁⠀         
+                """)
+    except Exception as e:
+        manejarError(e, "Error en los creditos ")
+        return
 def verificarArchivos():
     """
     Verifica la existencia de las carpetas y archivos necesarios para el funcionamiento del programa.
@@ -400,11 +405,14 @@ def limpiadorFrases(input):
         return
         
 def stem_basico(palabra):
-    for sufijo in ['ando', 'iendo', 'cion', 'sion', 'mente', 'ado', 'ido', 'ar', 'er', 'ir', 'os', 'as', 'es']:
-        if palabra.endswith(sufijo):
-            return palabra[:-len(sufijo)]
-    return palabra
-
+    try:
+        for sufijo in ['ando', 'iendo', 'cion', 'sion', 'mente', 'ado', 'ido', 'ar', 'er', 'ir', 'os', 'as', 'es','nes', 'les', 'is', 'os']:
+            if palabra.endswith(sufijo):
+                return palabra[:-len(sufijo)]
+        return palabra
+    except Exception as e:
+        manejarError(e, "Error en el stem básico.")
+        return
 def ortografia(entrada, listado):
     """
     Corrige errores ortográficos en una entrada de texto comparando cada palabra con un listado de palabras válidas.
@@ -505,6 +513,7 @@ def ortografia(entrada, listado):
 
 def preguntasFrecuentes():
     global esPregFrecuente
+    esPregFrecuente = True
     # Se inicializan las listas para almacenar preguntas y respuestas
     try:
         # Se verifica si el archivo de preguntas existe, si no existe, se crea
@@ -532,14 +541,21 @@ def preguntasFrecuentes():
                 while preguntaElegida > 3 or preguntaElegida < 1:
                     preguntaElegida = int(input("No entendí, escriba el numero de la pregunta que desea hacer: "))
             except ValueError:
-                preguntaElegida = int(input("No entendí, escriba el numero de la pregunta que desea hacer: "))
-            esPregFrecuente = True
-            busquedaTop3(top3, preguntaElegida, esPregFrecuente)
-            
-            input("Presione Enter para continuar...")
+                # Solicitar nuevamente el número de la pregunta hasta que sea válido
+                while True:
+                    try:
+                        preguntaElegida = int(input("No entendí, escriba el número de la pregunta que desea hacer: "))
+                        if 1 <= preguntaElegida <= 3:
+                            break
+                        else:
+                            print("Por favor, ingrese un número válido entre 1 y 3.")
+                    except ValueError:
+                        print("Por favor, ingrese un número válido entre 1 y 3.")
+            busquedaTop3(top3, preguntaElegida, esPregFrecuente,esYoda)
         return
     except KeyboardInterrupt:
         # Si el usuario interrumpe la ejecución, se maneja la excepción
+        creditos()
         print("\nConversación finalizada, que la fuerza te acompañe.")
         
     # Si el archivo no existe, se verifica y crea
@@ -594,6 +610,7 @@ def lectorPregunta(userInput, esYoda):
         return buscarRespuesta(userInput, questGroup, answGroup)
     except KeyboardInterrupt:
         # Si el usuario interrumpe la ejecución, se maneja la excepción
+        creditos()
         print("\nConversación finalizada, que la fuerza te acompañe.")
     # Si el archivo no existe, se verifica y crea
     except FileNotFoundError:
@@ -607,6 +624,16 @@ def lectorPregunta(userInput, esYoda):
         # Si ocurre un error al leer el archivo, se maneja la excepción
         return manejarError(e, "Error leyendo las preguntas. -- Lector de preguntas.")
 
+def ayuda():
+    """
+    Muestra un mensaje de ayuda al usuario con información sobre los comandos disponibles.
+    """
+    print("Comandos útiles:")
+    print(" - Para cambiar de personaje: escribir 'cambiar personaje'")
+    print(" - Para ver preguntas frecuentes: escribir 'frecuentes' o 'preguntas frecuentes'")
+    print(" - Para salir del programa: escribir 'salir' o 'adios'")
+    print(" - Para volver al menú principal: escribir 'volver a menu' o 'menu' o 'volver'")
+    print(" - Para ver los créditos : escribir 'creditos' o 'equipo'")
 
 def inicioPrograma():
     global boo
@@ -629,11 +656,7 @@ def inicioPrograma():
         print(" - Yoda")
         print(" - C-3PO o C3PO")
 
-        print("\n Comandos útiles:")
-        print(" - Para cambiar de personaje: escribir 'cambiar personaje'")
-        print(" - Para ver preguntas frecuentes: escribir 'frecuentes' o 'preguntas frecuentes'")
-        print(" - Para salir del programa: escribir 'salir' o 'adios'")
-        print(" - Para volver al menú principal: escribir 'volver a menu' o 'menu' o 'volver'")
+        ayuda()
         personaje = input("\nPor favor, escribí el nombre del personaje con el que querés hablar o algun comando: ")
         personaje = ortografia(personaje,pClaves)
         personaje = ' '.join(personaje)
@@ -645,6 +668,7 @@ def inicioPrograma():
             return inicioPrograma()
         eleccionPersonaje(personaje)
     except KeyboardInterrupt:
+        creditos()
         print("\nConversación finalizada, que la fuerza te acompañe.")
     except Exception as e:
         manejarError(e, "Error inesperado en el inicio del programa.")
@@ -666,19 +690,22 @@ def agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaCorregida,
         with open("Logs/log.txt", "a", encoding="utf-8") as file:
             file.write("\nFecha y hora: " + str(datetime.datetime.now()) + "\n")
             file.write(f"Pregunta hecha por el usuario: {entradaCorregida}\n")
-            file.write(f"Pregunta en el archivo: {preguntaEnArchivo}\n")
             if huboCorreccionOrtografica == True:
                 file.write(f"Pregunta sin correcion ortografica: {entradaOriginal}\n")
+                file.write(f"Pregunta en el archivo: {preguntaEnArchivo}\n")
             if agregoPregunta == True  and respuesta == "":
+                file.write(f"Pregunta en el archivo: {preguntaEnArchivo}\n")
                 file.write(f"Respuesta agregada por el usuario: Ocurrio un error, no se agrego una respuesta\n")
                 file.write(f"Porcentaje de acierto con las preguntas: {porcentajeAcierto}%\n")
             elif agregoPregunta == False and respuesta == "":
                 file.write(f"Respuesta: El usuario decidio no agregar la pregunta \n")
-                file.write(f"Porcentaje de acierto con las preguntas: {porcentajeAcierto}%\n")
+                file.write(f"Porcentaje de acierto con las preguntas: 0%\n")
             elif agregoPregunta == True and respuesta != "":
-                    file.write(f"Respuesta agregada por el usuario: {respuestaAgregada}\n")
-                    file.write(f"Porcentaje de acierto con las preguntas: {porcentajeAcierto}%\n")
+                file.write(f"Pregunta agregada por el usuario al archivo: {preguntaAgregada}\n")
+                file.write(f"Respuesta agregada por el usuario: {respuestaAgregada}\n")
+                file.write(f"Porcentaje de acierto con las preguntas: No se tendra en cuenta el porcentaje ya que es una pregunta nueva agregada por el usuario\n")
             elif agregoPregunta == False and respuesta != "" and primeraVez == False:
+                file.write(f"Pregunta en el archivo: {preguntaEnArchivo}\n")
                 file.write(f"Respuesta: {respuesta}\n") 
                 file.write(f"Porcentaje de acierto con las preguntas: {porcentajeAcierto}%\n")
             else:
@@ -717,10 +744,12 @@ def agregarPregunta():
         FileNotFoundError: Si el archivo o carpeta de preguntas no existe, intenta crearlos y reintenta.
         Exception: Maneja cualquier otra excepción usando `manejarError`.
     """
+    cont = 0
     try:
         global entradaOriginal
         global respuestaAgregada
         global agregoPregunta
+        global preguntaAgregada
         with open("ArchivosDeLectura/preguntas.json", "r", encoding="utf-8") as file:
             preguntas_data = json.load(file)
 
@@ -733,20 +762,59 @@ def agregarPregunta():
             agrPregunta = input("No entendí, ¿desea agregar la pregunta al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡ -_[]{.]},;:<>")
 
         if agrPregunta == 'si':
-            answer = input(f"Escriba la respuesta que desea agregar para la pregunta '{entrada}': ")
-            respuestaAgregada = answer
-            preguntas_data.append({
-            "preguntas": [entrada],
-            "respuesta": answer,
-            "respuesta_yoda": answer,
-            "veces_preguntado": 1
-            })
-            with open("ArchivosDeLectura/preguntas.json", "w", encoding="utf-8") as file:
-                json.dump(preguntas_data, file, ensure_ascii=False, indent=4)
-            print("\nPregunta y respuesta agregadas correctamente al sistema.\n")
-            agregoPregunta = True
+            preguntaEnArchivo = True
+            while preguntaEnArchivo == True:
+                ya_existe = False
+                cont = 0
+                for item in preguntas_data:
+                    preguntas = item.get("preguntas", [])
+                    while cont < len(preguntas) and ya_existe == False: 
+                        if entrada in preguntas[cont].lower().strip("¿?#$%&/()¡!"):
+                            ya_existe = True
+                            break
+                        cont += 1
+                    cont = 0
+                if ya_existe:
+                    print(f"La pregunta '{entrada}' ya existe en el sistema. Debe reformular la pregunta.")
+                    entrada = input(f"Escriba la pregunta que desea agregar: ")
+                    entrada = entrada.lower().strip("¿?#$%&/()¡! ")
+                    while entrada == "":
+                        entrada = input("No entendí, escriba la pregunta que desea agregar: ")
+                        entrada = entrada.lower().strip("¿?#$%&/()¡! ")
+                else:
+                    print(f"La pregunta '{entrada}' no existe en el sistema. Puede agregarla.")
+                    preguntaEnArchivo = False
+            if preguntaEnArchivo == False:
+                answer = input(f"Escriba la respuesta que desea agregar para la pregunta '{entrada}': ")
+                if answer == "":
+                    while answer == "":
+                        answer = input(f"No entendí, escriba la respuesta que desea agregar para la pregunta '{entrada}': ")
+                        answer = answer.lower().strip("¿?#$%&/()¡! ")
+                respuestaAgregada = answer
+                preguntas_data.append({
+                "preguntas": [entrada],
+                "respuesta": answer,
+                "respuesta_yoda": answer,
+                "veces_preguntado": 1
+                })
+                try:
+                    with open("ArchivosDeLectura/preguntas.json", "w", encoding="utf-8") as file:
+                        json.dump(preguntas_data, file, ensure_ascii=False, indent=4)
+                    print("\nPregunta y respuesta agregadas correctamente al sistema.\n")
+                    agregoPregunta = True
+                    preguntaAgregada = entrada
+                except FileNotFoundError:
+                    verificarArchivos()
+                    if existeArchivoPreguntas == False:
+                        print("Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
+                    if existeCarpetaPreguntas == False:
+                        print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
+                    print("Por favor, vuelva a intentar.")
+                    agregarPregunta(preguntaAgregada)
         else:
+            respuestaAgregada=""
             agregoPregunta = False
+        return
     except FileNotFoundError:
         verificarArchivos()
         if existeArchivoPreguntas == False:
@@ -755,6 +823,9 @@ def agregarPregunta():
             print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
         print("Por favor, vuelva a intentar.")
         agregarPregunta(entradaOriginal)
+    except KeyboardInterrupt:
+        creditos()
+        print("\nConversación finalizada, que la fuerza te acompañe.")
     except Exception as e:
         manejarError(e, "Error al agregar la pregunta.")
 
@@ -835,17 +906,12 @@ def busquedaTop3(listaTop3, preguntaElegida, esPregFrecuente, esYoda):
         with open("ArchivosDeLectura/preguntas.json", "r", encoding="utf-8") as file:
             preguntas_data = json.load(file)
 
-        # Validar índice
-        if preguntaElegida < 1 or preguntaElegida > len(listaTop3):
-            print("\nNúmero de pregunta fuera de rango.")
-            return
-
         if esPregFrecuente:
             preguntaElegida -= 1
             quest = listaTop3[preguntaElegida][0][0]
         else:
-            quest = listaTop3[preguntaElegida - 1]  # Ajuste de índice para evitar out of range
-
+            quest = listaTop3[preguntaElegida-1]  # Ajuste de índice para evitar out of range
+        print(f"\nPregunta elegida: ", quest)
         print(f"\nPregunta elegida: {quest.capitalize()}?")
         questGroup.append(quest.lower())
 
@@ -865,6 +931,7 @@ def busquedaTop3(listaTop3, preguntaElegida, esPregFrecuente, esYoda):
                         answ = item.get("respuesta", "")
 
         print(f"\nRespuesta: {answ}")
+        
 
         # Incrementar contador de uso
         for item in preguntas_data:
@@ -874,10 +941,13 @@ def busquedaTop3(listaTop3, preguntaElegida, esPregFrecuente, esYoda):
         # Guardar JSON actualizado
         with open("ArchivosDeLectura/preguntas.json", "w", encoding="utf-8") as file:
             json.dump(preguntas_data, file, ensure_ascii=False, indent=4)
+        
+        input("Presione Enter para continuar...")
 
         return
 
     except KeyboardInterrupt:
+        creditos()
         print("\nConversación finalizada, que la fuerza te acompañe.")
 
     except FileNotFoundError:
@@ -909,12 +979,26 @@ def eleccionPersonaje(personaje):
         agregoPregunta = False
 
         while True:
+            if personaje.lower() in ["creditos", "equipo"]:
+                creditos()
+                input("Presione Enter para continuar...")
+                inicioPrograma()
+                break
             if personaje.lower() in ["salir", "adios"]:
+                creditos()
                 print("Conversación finalizada, que la fuerza te acompañe.")
+                break
+            if personaje.lower() in ["ayuda"]:
+                ayuda()
+                eleccionPersonaje(personaje)
                 break
             if personaje.lower() in ["volver a menu", "menu", "volver"]:
                 print("Volviendo al menú principal...")
                 return inicioPrograma()
+            if personaje.lower() in ["frecuentes", "preguntas frecuentes"]:
+                preguntasFrecuentes()
+                eleccionPersonaje(personaje)
+                break
             personaje = personaje.replace('-','')
             if personaje not in ['yoda', 'chewbacca', 'r2d2', 'c3po', 'arturito'] or personaje == '':
                 personaje = input('No entendí, ingrese el personaje nuevamente: ')
@@ -938,9 +1022,22 @@ def eleccionPersonaje(personaje):
             palabrasClaves.extend(pClaves)
             entrada = ortografia(entrada,palabrasClaves)
 
-            
+            if entradaModificada in ["ayuda"]:
+                ayuda()
+                eleccionPersonaje(personaje)
+                break
+            if entradaModificada in ["creditos", "equipo"]:
+                creditos()
+                input("Presione Enter para continuar...")
+                eleccionPersonaje(personaje)
+                break
             if entradaModificada in ["salir", "adios"]:
+                creditos()
                 print("Conversación finalizada, que la fuerza te acompañe.")
+                break
+            if entradaModificada in ["frecuentes", "preguntas frecuentes"]:
+                preguntasFrecuentes()
+                eleccionPersonaje(personaje)
                 break
             if entradaModificada in ["volver a menu", "menu", "volver"]:
                 print("Volviendo al menú principal...")
@@ -987,6 +1084,7 @@ def eleccionPersonaje(personaje):
                             textoPersonalizado(personaje.upper(), ' No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.')
                             respuesta = ''
                             agregarPregunta()
+                            agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuestaAgregada, personaje.upper())
                             textoPersonalizado(personaje.upper(), 'Hazme otra pregunta')
                             return eleccionPersonaje(personaje)
                         textoPersonalizado(personaje.upper(), respuesta)
@@ -1024,7 +1122,7 @@ def eleccionPersonaje(personaje):
                                 else:
                                     busquedaTop3(top3MasParecidas[:4], preguntaElegida, esPregFrecuente, False)
                             else:
-                                agregarPregunta()
+                                respuesta = agregarPregunta()
                                 agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuesta, personaje.upper())
                             textoPersonalizado(personaje.upper(), 'Hazme otra pregunta')
                             return eleccionPersonaje(personaje)
@@ -1034,19 +1132,34 @@ def eleccionPersonaje(personaje):
                         agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuesta, personaje.upper())
                         respuesta=''
                         preguntaEnArchivo=''
+                    except KeyboardInterrupt:
+                        creditos()
+                        print("\nConversación finalizada, que la fuerza te acompañe.")
                     except Exception as e:
                         manejarError(e, "Error procesando la pregunta.")
+    except KeyboardInterrupt:
+        creditos()
+        print("\nConversación finalizada, que la fuerza te acompañe.")
     except Exception as e:
         manejarError(e, "Error en la conversación.")
 
 def sumarVecesPreguntado(mejorIndice):
-    with open("ArchivosDeLectura/preguntas.json", "r", encoding="utf-8") as file:
-        preguntas_data = json.load(file)
-        preguntas_data[mejorIndice]["veces_preguntado"] += 1
-        with open("ArchivosDeLectura/preguntas.json", "w", encoding="utf-8") as file:
-            json.dump(preguntas_data, file, ensure_ascii=False, indent=4)
-    global numMejorIndice
-    numMejorIndice = -1
+    try:
+        with open("ArchivosDeLectura/preguntas.json", "r", encoding="utf-8") as file:
+            preguntas_data = json.load(file)
+            preguntas_data[mejorIndice]["veces_preguntado"] += 1
+            with open("ArchivosDeLectura/preguntas.json", "w", encoding="utf-8") as file:
+                json.dump(preguntas_data, file, ensure_ascii=False, indent=4)
+        global numMejorIndice
+        numMejorIndice = -1
+    except FileNotFoundError:
+        verificarArchivos()
+        if existeArchivoPreguntas == False:
+            print("Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
+        if existeCarpetaPreguntas == False:
+            print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
+        print("Por favor, vuelva a intentar.")
+        inicioPrograma()
 
 
 # Manejo de errores
