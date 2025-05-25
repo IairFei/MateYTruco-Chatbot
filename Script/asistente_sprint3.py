@@ -40,6 +40,7 @@ cantCorreccionesOrtograficas = 0
 # Índice de mejor coincidencia
 numMejorIndice = -1
 top3MasParecidas = []
+porcentajeAcierto = 0
 
 
 
@@ -71,13 +72,13 @@ def textoPersonalizado(personaje, mensaje):
         print(" " * (espaciadoParaUsuario - ancho - 4 ) + "╭" + "─" * (ancho + 2) + "╮")
         for linea in lineas:
             print(" " * (espaciadoParaUsuario - ancho - 4 ) + "│ " + linea.ljust(ancho) + " │")
-        print(" " * (espaciadoParaUsuario - ancho - 4) + "╰" + "─" * (ancho + 1) + "\|")
+        print(" " * (espaciadoParaUsuario - ancho - 4) + "╰" + "─" * (ancho + 1) + "⋁ ")
         print(" " * espaciadoParaUsuario + personaje)
     else:
         print("  ╭" + "─" * (ancho + 2) + "╮")
         for linea in lineas:
             print("  │ " + linea.ljust(ancho) + " │")
-        print("  |/" + "─" * (ancho + 1) + "╯")
+        print("  ⋁ " + "─" * (ancho + 1) + "╯")
         print('', personaje)
 
 
@@ -392,71 +393,80 @@ def limpiadorFrases(input):
     except Exception as e:
         manejarError(e, "Error en el limpiador de frases.")
         return
+def stem_basico(palabra):
+    for sufijo in ['ando', 'iendo', 'cion', 'sion', 'mente', 'ado', 'ido', 'ar', 'er', 'ir', 'os', 'as', 'es']:
+        if palabra.endswith(sufijo):
+            return palabra[:-len(sufijo)]
+    return palabra
 
 def ortografia(entrada, listado):
-        """
-        Corrige errores ortográficos en una entrada de texto comparando cada palabra con un listado de palabras válidas.
-        Parámetros:
-            entrada (str): La cadena de texto a corregir.
-            listado (list): Lista de palabras válidas para comparar y corregir.
-        Retorna:
-            list: Lista de palabras corregidas según el listado proporcionado. Si ocurre un error, retorna la entrada original.
-        Notas:
-            - Utiliza coincidencias aproximadas para sugerir correcciones ortográficas.
-            - Solicita confirmación al usuario antes de realizar una corrección.
-            - Omite artículos definidos en la variable global 'articulos'.
-        Exceociones:
-            En caso de error, maneja la excepción y retorna la entrada original.
-        """
-        global entradaOriginal
-        global entradaModificada
-        global huboCorreccionOrtografica
-        global cantCorreccionesOrtograficas
-        global articulos
-        huboCorreccionOrtografica = False
-        entradaOriginal = entrada
-        cantCorreccionesOrtograficas = 0
-        
-        try:
-            lista_palabras = entrada.split()
-        
-            entrada = limpiadorFrases(entrada)
-            salida = []
-        
-            for palabra in entrada:
-                palabra = palabra.lower()
-                if palabra in articulos:
-                    continue
-                if palabra in listado:
-                    salida.append(palabra)
-                    continue
+    """
+    Corrige errores ortográficos en una entrada de texto comparando cada palabra con un listado de palabras válidas.
+    Parámetros:
+        entrada (str): La cadena de texto a corregir.
+        listado (list): Lista de palabras válidas para comparar y corregir.
+    Retorna:
+        list: Lista de palabras corregidas según el listado proporcionado. Si ocurre un error, retorna la entrada original.
+    Notas:
+        - Utiliza coincidencias aproximadas para sugerir correcciones ortográficas.
+        - Solicita confirmación al usuario antes de realizar una corrección.
+        - Corrige artículos definidos en la variable global 'articulos'.
+    Excepciones:
+        En caso de error, maneja la excepción y retorna la entrada original.
+    """
+    global entradaOriginal
+    global entradaModificada
+    global huboCorreccionOrtografica
+    global cantCorreccionesOrtograficas
+    global articulos
+
+    huboCorreccionOrtografica = False
+    entradaOriginal = entrada
+    cantCorreccionesOrtograficas = 0
+
+    try:
+        lista_palabras = entrada.split()
+        entrada_limpia = limpiadorFrases(entrada)
+        salida = []
+
+        listado_stem = [stem_basico(pal.lower()) for pal in listado]
+
+        for palabra in entrada_limpia:
+            palabra = palabra.lower()
+            palabra_stem = stem_basico(palabra)
+
+            if palabra_stem not in listado_stem:
                 try:
-                    coincidencias = difflib.get_close_matches(palabra, listado, n=3, cutoff=0.5)
+                    coincidencias = difflib.get_close_matches(palabra, listado, n=3, cutoff=0.4)
                 except Exception as e:
                     manejarError(e, "Error en la búsqueda de coincidencias.")
+                    salida.append(palabra)
                     continue
+
                 i = 0
                 corregida = False
                 mostroLosiento = False
-                while i < len(coincidencias) and  i < 3 :
+                while i < len(coincidencias) and i < 3:
                     if palabra == coincidencias[i]:
                         break
                     print(f"SYSTEM: ⚠︎ Palabra no encontrada: '{palabra}'")
-                    print(f"SYSTEM: ¿Quisiste decir '{coincidencias[i]}? Escriba 'si' para confirmar o 'no' para continuar:  ", end="")
-                    respuesta =  input("").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>=")
+                    print(f"SYSTEM: ¿Quisiste decir '{coincidencias[i]}'? Escriba 'si' para confirmar o 'no' para continuar:  ", end="")
+                    respuesta = input("").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<=")
                     while respuesta not in ["si", "no"]:
                         respuesta = input(f"SYSTEM: No entendí, ¿desea modificar la palabra {palabra} por {coincidencias[i]}? (si/no): ")
-                        respuesta = respuesta.lower().strip("¿?#$%&/()!¡ -_[]{.],;:<>=")
+                        respuesta = respuesta.lower().strip("¿?#$%&/()!¡-_[]{.],;:<=")
                         print('\033[F\033[K', end='')
-                    posicion = lista_palabras.index(palabra)
+
                     if respuesta == 'si':
                         print('\033[F\033[K', end='')
                         print('\033[F\033[K', end='')
                         print('\033[F\033[K', end='')
                         print(f"SYSTEM: Se modifico '{palabra}' por '{coincidencias[i]}'")
-                        cantCorreccionesOrtograficas+=1
-                        salida.append(coincidencias[i])
-                        lista_palabras[posicion] = coincidencias[i]
+                        cantCorreccionesOrtograficas += 1
+                        palabra_corregida = coincidencias[i]
+                        posicion = lista_palabras.index(palabra)
+                        lista_palabras[posicion] = palabra_corregida
+                        salida.append(palabra_corregida)
                         huboCorreccionOrtografica = True
                         corregida = True
                         break
@@ -464,20 +474,24 @@ def ortografia(entrada, listado):
                         print('\033[F\033[K', end='')
                         print('\033[F\033[K', end='')
                         if not mostroLosiento:
-                            print(f"SYSTEM: Lo siento. Probemos con otra palabra:")
+                            print("SYSTEM: Lo siento. Probemos con otra palabra:")
                             mostroLosiento = True
                     i += 1
                 if not corregida:
                     print('\033[F\033[K', end='')
                     print('SYSTEM: No se modifico ninguna palabra')
-                    entradaModificada = []
                     salida.append(palabra)
-                    
-            entradaModificada = ' '.join(lista_palabras) 
-            return salida
-        except Exception as e:
-            manejarError(e, "Error en la corrección ortográfica.")
-            return entradaOriginal
+            else:
+                salida.append(palabra)
+
+        entradaModificada = ' '.join(lista_palabras)
+        return salida
+
+    except Exception as e:
+        manejarError(e, "Error en la corrección ortográfica.")
+        return entradaOriginal
+
+
 def preguntasFrecuentes():
     global esPregFrecuente
     # Se inicializan las listas para almacenar preguntas y respuestas
@@ -527,7 +541,7 @@ def preguntasFrecuentes():
         print("Por favor, vuelva a intentar.")    
     except Exception as e:
         # Si ocurre un error al leer el archivo, se maneja la excepción
-        return manejarError(e, "Error leyendo las preguntas.")    
+        return manejarError(e, "Error leyendo las preguntas. -- Preguntas frecuentes.")    
 
 def lectorPregunta(userInput, esYoda):
     """
@@ -580,7 +594,7 @@ def lectorPregunta(userInput, esYoda):
         print("Por favor, vuelva a intentar.")    
     except Exception as e:
         # Si ocurre un error al leer el archivo, se maneja la excepción
-        return manejarError(e, "Error leyendo las preguntas.")
+        return manejarError(e, "Error leyendo las preguntas. -- Lector de preguntas.")
 
 
 def inicioPrograma():
@@ -635,10 +649,7 @@ def agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaCorregida,
     global cantCorreccionesOrtograficas
     
     try:
-        porcentaje = 100
-        
-        if huboCorreccionOrtografica == True:
-            porcentaje -=(cantCorreccionesOrtograficas*10)
+        global porcentajeAcierto
         with open("Logs/log.txt", "a", encoding="utf-8") as file:
             file.write("\nFecha y hora: " + str(datetime.datetime.now()) + "\n")
             file.write(f"Pregunta hecha por el usuario: {entradaCorregida}\n")
@@ -647,16 +658,16 @@ def agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaCorregida,
                 file.write(f"Pregunta sin correcion ortografica: {entradaOriginal}\n")
             if agregoPregunta == True  and respuesta == "":
                 file.write(f"Respuesta agregada por el usuario: Ocurrio un error, no se agrego una respuesta\n")
-                file.write(f"Porcentaje de acierto con las preguntas: {porcentaje}%\n")
+                file.write(f"Porcentaje de acierto con las preguntas: {porcentajeAcierto}%\n")
             elif agregoPregunta == False and respuesta == "":
                 file.write(f"Respuesta: El usuario decidio no agregar la pregunta \n")
-                file.write(f"Porcentaje de acierto con las preguntas: {porcentaje}%\n")
+                file.write(f"Porcentaje de acierto con las preguntas: {porcentajeAcierto}%\n")
             elif agregoPregunta == True and respuesta != "":
                     file.write(f"Respuesta agregada por el usuario: {respuestaAgregada}\n")
-                    file.write(f"Porcentaje de acierto con las preguntas: {porcentaje}%\n")
+                    file.write(f"Porcentaje de acierto con las preguntas: {porcentajeAcierto}%\n")
             elif agregoPregunta == False and respuesta != "" and primeraVez == False:
                 file.write(f"Respuesta: {respuesta}\n") 
-                file.write(f"Porcentaje de acierto con las preguntas: {porcentaje}%\n")
+                file.write(f"Porcentaje de acierto con las preguntas: {porcentajeAcierto}%\n")
             else:
                 file.write("Error")
             file.write(f"Personaje: {personaje}\n")        
@@ -737,29 +748,29 @@ def agregarPregunta():
 def buscarRespuesta(userInput, questGroup, answGroup):
     """
     Busca la mejor respuesta para una entrada de usuario comparando con grupos de preguntas y respuestas.
-    Prarametros:
+
+    Parametros:
         userInput (str): Entrada del usuario a analizar.
         questGroup (list[list[str]]): Lista de grupos de preguntas, donde cada grupo es una lista de frases relacionadas.
         answGroup (list[list[str]]): Lista de grupos de respuestas, donde cada grupo es una lista de respuestas correspondientes a questGroup.
+
     Returns:
         str: La mejor respuesta encontrada según la similitud con la entrada del usuario, o un mensaje predeterminado si no se encuentra coincidencia suficiente.
-    Notas:
-        - Utiliza coincidencia de palabras y densidad de coincidencias para determinar la mejor respuesta.
-    Excepciones:
-        Si ocurre una excepción, maneja el error y retorna un mensaje predeterminado.
     """
     mejorIndice = -1
     mejorPuntaje = -1
     umbral = 0.8
     global preguntaEnArchivo
     global numMejorIndice
-    global top3MasParecidas  
+    global top3MasParecidas
+    global porcentajeAcierto
     preguntaEnArchivo = ""
-    
-   
+
     try:
         top3MasParecidas = []
         userSet = set(userInput)
+        coincidencias_lista = []
+
         for i, preguntas in enumerate(questGroup):
             for pregunta in preguntas:
                 palabrasPregunta = set(limpiadorFrases(pregunta))
@@ -772,74 +783,97 @@ def buscarRespuesta(userInput, questGroup, answGroup):
                 densidad = cantidadCoincidencias / len(palabrasPregunta)
                 puntaje = cantidadCoincidencias * densidad
 
+                coincidencias_lista.append((puntaje, i, pregunta))
+
                 if puntaje > mejorPuntaje:
                     mejorPuntaje = puntaje
                     mejorIndice = i
                     numMejorIndice = i
-                    for preguntas in questGroup[i]:
-                        top3MasParecidas.append(preguntas)
-                    
-                        
-                    
+                    porcentajeAcierto = densidad * 100
+
+        usados = set()
+        for puntaje, i, pregunta in coincidencias_lista:
+            if i not in usados:
+                usados.add(i)
+                if questGroup[i]:
+                    top3MasParecidas.append(questGroup[i][0])
+            if len(top3MasParecidas) == 3:
+                break
+
         if mejorPuntaje >= umbral:
             preguntaEnArchivo = questGroup[mejorIndice][0]
             preguntaEnArchivo = preguntaEnArchivo.capitalize() + "?"
-            top3MasParecidas[0]= ''
             return answGroup[mejorIndice][0]
 
         return "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema."
+
     except Exception as e:
         manejarError(e, "Error en la búsqueda de respuesta")
         return "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema."
-    
+
+
 def busquedaTop3(listaTop3, preguntaElegida, esPregFrecuente, esYoda):
     questGroup = []
     quest = []
     answ = ""
-    with open("ArchivosDeLectura/preguntas.json", "r", encoding="utf-8") as file:
-        preguntas_data = json.load(file)
+    global entradaModificada
+
     try:
-        if esPregFrecuente == True:
-            preguntaElegida-=1
+        with open("ArchivosDeLectura/preguntas.json", "r", encoding="utf-8") as file:
+            preguntas_data = json.load(file)
+
+        # Validar índice
+        if preguntaElegida < 1 or preguntaElegida > len(listaTop3):
+            print("\nNúmero de pregunta fuera de rango.")
+            return
+
+        if esPregFrecuente:
+            preguntaElegida -= 1
             quest = listaTop3[preguntaElegida][0][0]
         else:
-            quest = listaTop3[preguntaElegida]
+            quest = listaTop3[preguntaElegida - 1]  # Ajuste de índice para evitar out of range
+
         print(f"\nPregunta elegida: {quest.capitalize()}?")
         questGroup.append(quest.lower())
-        # Se crea una lista de respuestas para la pregunta elegida
+
         for item in preguntas_data:
-            preguntas= item.get("preguntas", [])
-            for i in range (len(preguntas)):
+            preguntas = item.get("preguntas", [])
+            for i in range(len(preguntas)):
                 if preguntas[i].lower() == questGroup[0]:
-                    if esYoda == False:
-                        if item.get("respuesta", "") != "":
-                            answ = (item.get("respuesta", ""))
+                    # Agregar entradaModificada si no está ya presente
+                    ya_existe = any(entradaModificada.lower() == p.lower() for p in item["preguntas"])
+                    if not ya_existe:
+                        item["preguntas"].append(entradaModificada)
+
+                    # Obtener respuesta
+                    if esYoda:
+                        answ = item.get("respuesta_yoda", "")
                     else:
-                        if item.get("respuesta_yoda", "") != "":
-                            answ = (item.get("respuesta_yoda", ""))
+                        answ = item.get("respuesta", "")
+
         print(f"\nRespuesta: {answ}")
-        # Se incrementa la cantidad de veces que se ha preguntado
+
+        # Incrementar contador de uso
         for item in preguntas_data:
             if quest in item.get("preguntas", []):
                 item["veces_preguntado"] += 1
-        esPregFrecuente = False
-        esYoda = False
+
+        # Guardar JSON actualizado
+        with open("ArchivosDeLectura/preguntas.json", "w", encoding="utf-8") as file:
+            json.dump(preguntas_data, file, ensure_ascii=False, indent=4)
+
         return
+
     except KeyboardInterrupt:
-        # Si el usuario interrumpe la ejecución, se maneja la excepción
         print("\nConversación finalizada, que la fuerza te acompañe.")
-        
-    # Si el archivo no existe, se verifica y crea
+
     except FileNotFoundError:
         verificarArchivos()
-        if existeArchivoPreguntas == False and existeCarpetaPreguntas == True:
-            print("Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
-        if existeCarpetaPreguntas == False and existeArchivoPreguntas == True:
-            print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
-        print("Por favor, vuelva a intentar.")    
+        print("Se han regenerado los archivos necesarios. Vuelva a intentar.")
+
     except Exception as e:
-        # Si ocurre un error al leer el archivo, se maneja la excepción
-        return manejarError(e, "Error leyendo las preguntas.")  
+        return manejarError(e, "Error leyendo las preguntas. -- busquedaTop3")
+
 
 def eleccionPersonaje(personaje):
     """
@@ -949,9 +983,9 @@ def eleccionPersonaje(personaje):
                             correcta = input("No entendí, ¿era la respuesta correcta? (si/no): ").lower()
                         if correcta == 'no':
                             print("\nLas siguientes preguntas son las que más se parecen a la pregunta que hiciste:\n")
-                            for i,preguntas in enumerate(top3MasParecidas[:4]):
-                                if preguntas != '':
-                                    print(f'{i}.¿{preguntas.capitalize()}?')
+                            for i, pregunta in enumerate(top3MasParecidas):
+                                if pregunta:
+                                    print(f"{i + 1}. ¿{pregunta.capitalize()}?")
                             eleccionPregunta = input("¿Desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
                             while eleccionPregunta not in ["si", "no"]:
                                 eleccionPregunta = input("No entendí, ¿desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
