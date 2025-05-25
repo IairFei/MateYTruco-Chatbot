@@ -241,9 +241,14 @@ def creditos():
                 ⠀⠀⠀⠸⣿⠻⣿⣿⣿⣿⣿⣿⣿⣿⠯⢥⠾⠛⠢⣴⡿⡻⣞⢦⡀⠉⠉⠀
                 ⠀⠀⠀⠀⠀⠁⠈⠉⠉⠉⠉⠉⠁⠀⠀⠀⠉⠉⠉⠀⠀⠈⠈⠈⠉⠁⠀         
                 """)
+    except KeyboardInterrupt:
+        # Si el usuario interrumpe la ejecución, se maneja la excepción
+        print("\nSYSTEM: Conversación finalizada, que la fuerza te acompañe.")
+        return
     except Exception as e:
         manejarError(e, "Error en los creditos ")
         return
+    
 def verificarArchivos():
     """
     Verifica la existencia de las carpetas y archivos necesarios para el funcionamiento del programa.
@@ -413,102 +418,88 @@ def stem_basico(palabra):
     except Exception as e:
         manejarError(e, "Error en el stem básico.")
         return
-def ortografia(entrada, listado):
+
+
+def ortografia(entrada: str, listado: list) -> list:
     """
     Corrige errores ortográficos en una entrada de texto comparando cada palabra con un listado de palabras válidas.
-    Parámetros:
-        entrada (str): La cadena de texto a corregir.
-        listado (list): Lista de palabras válidas para comparar y corregir.
-    Retorna:
-        list: Lista de palabras corregidas según el listado proporcionado. Si ocurre un error, retorna la entrada original.
-    Notas:
-        - Utiliza coincidencias aproximadas para sugerir correcciones ortográficas.
-        - Solicita confirmación al usuario antes de realizar una corrección.
-        - Corrige artículos definidos en la variable global 'articulos'.
-    Excepciones:
-        En caso de error, maneja la excepción y retorna la entrada original.
+    Utiliza coincidencias aproximadas y solicita confirmación.
     """
-    global entradaOriginal
-    global entradaModificada
-    global huboCorreccionOrtografica
-    global cantCorreccionesOrtograficas
-    global articulos
+    global entradaOriginal, entradaModificada
+    global huboCorreccionOrtografica, cantCorreccionesOrtograficas, articulos
 
     huboCorreccionOrtografica = False
     entradaOriginal = entrada
     cantCorreccionesOrtograficas = 0
 
     try:
+        # Lista de palabras original y limpia
         lista_palabras = entrada.split()
         entrada_limpia = limpiadorFrases(entrada)
+
+        # Precalcular stems del listado
+        listado_stem = [stem_basico(pal.lower()) for pal in listado]
+
         salida = []
-        corregida = False
-        for pal in listado:
-            listado_stem = stem_basico(pal.lower()) 
-                        
 
-        for palabra in entrada_limpia:
-            palabra = palabra.lower()
-            palabra_stem = stem_basico(palabra)
+        # Procesar cada palabra limpia
+        for idx, palabra in enumerate(entrada_limpia):
+            palabra_lower = palabra.lower()
+            # Saltar artículos directamente
+            if palabra_lower in articulos:
+                salida.append(palabra_lower)
+                continue
 
+            palabra_stem = stem_basico(palabra_lower)
+
+            # Si no se encuentra su raíz en el listado, buscar sugerencias
             if palabra_stem not in listado_stem:
                 try:
-                    coincidencias = difflib.get_close_matches(palabra, listado, n=3, cutoff=0.5)
+                    sugerencias = difflib.get_close_matches(palabra_lower, listado, n=3, cutoff=0.5)
                 except Exception as e:
                     manejarError(e, "Error en la búsqueda de coincidencias.")
-                    salida.append(palabra)
+                    salida.append(palabra_lower)
                     continue
 
-                i = 0
+                corregida = palabra_lower
+                # Iterar sugerencias y pedir confirmación
+                for sugerencia in sugerencias:
+                    print(f"SYSTEM: ⚠︎ Palabra no encontrada: '{palabra_lower}'")
+                    print(f"SYSTEM: ¿Quisiste decir '{sugerencia}'? (si/no): ", end="")
+                    respuesta = input().strip().lower()
 
-                mostroLosiento = False
-                huboSUegrencia = len(coincidencias) > 0
-                while i < len(coincidencias) and i < 3:
-                    if palabra == coincidencias[i]:
-                        break
-                    print(f"SYSTEM: ⚠︎ Palabra no encontrada: '{palabra}'")
-                    print(f"SYSTEM: ¿Quisiste decir '{coincidencias[i]}'? Escriba 'si' para confirmar o 'no' para continuar:  ", end="")
-                    respuesta = input("").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<=")
-                    while respuesta not in ["si", "no"]:
-                        respuesta = input(f"SYSTEM: No entendí, ¿desea modificar la palabra {palabra} por {coincidencias[i]}? (si/no): ")
-                        respuesta = respuesta.lower().strip("¿?#$%&/()!¡-_[]{.],;:<=")
-                        borrarLineas(1,boo)
+                    # Validar respuesta
+                    while respuesta not in ['si', 'no']:
+                        respuesta = input(f"SYSTEM: Por favor, 'si' o 'no': ").strip().lower()
 
                     if respuesta == 'si':
-                        borrarLineas(3,boo)
-                        print(f"SYSTEM: Se modifico '{palabra}' por '{coincidencias[i]}'")
+                        borrarLineas(3, boo)
+                        print(f"SYSTEM: Se modificó '{palabra_lower}' por '{sugerencia}'")
+                        corregida = sugerencia
                         cantCorreccionesOrtograficas += 1
-                        palabra_corregida = coincidencias[i]
-                        posicion = lista_palabras.index(palabra)
-                        lista_palabras[posicion] = palabra_corregida
-                        salida.append(palabra_corregida)
                         huboCorreccionOrtografica = True
-                        corregida = True
                         break
                     else:
-                        borrarLineas(2,boo)
-                        if not mostroLosiento:
-                            print("SYSTEM: Lo siento. Probemos con otra palabra:")
-                            mostroLosiento = True
-                    i += 1
+                        borrarLineas(2, boo)
+                        print("SYSTEM: Vale, probemos con otra sugerencia...")
 
-                if  corregida == False and huboSUegrencia: 
-                    borrarLineas(1,boo)
-                    print('SYSTEM: No se modifico ninguna palabra')   
-                     
-                if mostroLosiento == True and corregida == False:
-                    borrarLineas(1,boo)
-                salida.append(palabra)
+                # Si no se corrigió con ninguna sugerencia, informar
+                if corregida == palabra_lower and sugerencias:
+                    borrarLineas(1, boo)
+                    print("SYSTEM: No se modificó ninguna palabra.")
+
+                salida.append(corregida)
             else:
-                
-                salida.append(palabra)
+                # Palabra correcta según stem
+                salida.append(palabra_lower)
 
-        entradaModificada = ' '.join(lista_palabras)
+        entradaModificada = ' '.join(salida)
         return salida
 
     except Exception as e:
         manejarError(e, "Error en la corrección ortográfica.")
-        return entradaOriginal
+        return lista_palabras  # Retornar lista original en caso de fallo
+
 
 
 def preguntasFrecuentes():
@@ -537,26 +528,26 @@ def preguntasFrecuentes():
             eleccionPregunta = input("No entendí, ¿desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
         if eleccionPregunta == 'si':
             try:
-                preguntaElegida = int(input("Escriba el numero de la pregunta que desea hacer: "))
+                preguntaElegida = int(input("SYSTEM: Escriba el numero de la pregunta que desea hacer: "))
                 while preguntaElegida > 3 or preguntaElegida < 1:
                     preguntaElegida = int(input("No entendí, escriba el numero de la pregunta que desea hacer: "))
             except ValueError:
                 # Solicitar nuevamente el número de la pregunta hasta que sea válido
                 while True:
                     try:
-                        preguntaElegida = int(input("No entendí, escriba el número de la pregunta que desea hacer: "))
+                        preguntaElegida = int(input("SYSTEM: No entendí, escriba el número de la pregunta que desea hacer: "))
                         if 1 <= preguntaElegida <= 3:
                             break
                         else:
-                            print("Por favor, ingrese un número válido entre 1 y 3.")
+                            print("SYSTEM: Por favor, ingrese un número válido entre 1 y 3.")
                     except ValueError:
-                        print("Por favor, ingrese un número válido entre 1 y 3.")
+                        print("SYSTEM: Por favor, ingrese un número válido entre 1 y 3.")
             busquedaTop3(top3, preguntaElegida, esPregFrecuente,esYoda)
         return
     except KeyboardInterrupt:
         # Si el usuario interrumpe la ejecución, se maneja la excepción
         creditos()
-        print("\nConversación finalizada, que la fuerza te acompañe.")
+        print("\nSYSTEM: Conversación finalizada, que la fuerza te acompañe.")
         
     # Si el archivo no existe, se verifica y crea
     except FileNotFoundError:
@@ -611,7 +602,7 @@ def lectorPregunta(userInput, esYoda):
     except KeyboardInterrupt:
         # Si el usuario interrumpe la ejecución, se maneja la excepción
         creditos()
-        print("\nConversación finalizada, que la fuerza te acompañe.")
+        print("\nSYSTEM: Conversación finalizada, que la fuerza te acompañe.")
     # Si el archivo no existe, se verifica y crea
     except FileNotFoundError:
         verificarArchivos()
@@ -634,9 +625,9 @@ def ayuda():
     print(" - Para salir del programa: escribir 'salir' o 'adios'")
     print(" - Para volver al menú principal: escribir 'volver a menu' o 'menu' o 'volver'")
     print(" - Para ver los créditos : escribir 'creditos' o 'equipo'")
-
+    
 def inicioPrograma():
-    global boo
+    
     """
     Inicia el programa principal del chatbot, permitiendo al usuario seleccionar un personaje para conversar.
     Verifica la existencia de archivos necesarios, muestra instrucciones, solicita el nombre del personaje,
@@ -659,9 +650,10 @@ def inicioPrograma():
         ayuda()
         personaje = input("\nPor favor, escribí el nombre del personaje con el que querés hablar o algun comando: ")
         personaje = ortografia(personaje,pClaves)
+
         personaje = ' '.join(personaje)
         if personaje == '':
-            print("No entendí, por favor escriba el nombre del personaje.")
+            print("SYSTEM: No entendí, por favor escriba el nombre del personaje.")
             return inicioPrograma()
         if personaje.lower() in ["preguntas frecuentes", "frecuentes"]:
             preguntasFrecuentes()
@@ -669,7 +661,7 @@ def inicioPrograma():
         eleccionPersonaje(personaje)
     except KeyboardInterrupt:
         creditos()
-        print("\nConversación finalizada, que la fuerza te acompañe.")
+        print("\nSYSTEM: Conversación finalizada, que la fuerza te acompañe.")
     except Exception as e:
         manejarError(e, "Error inesperado en el inicio del programa.")
 
@@ -759,7 +751,7 @@ def agregarPregunta():
             entrada = entradaOriginal
         agrPregunta = input(f"Desea agregar la pregunta '{entrada}' al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]{.},;:<> ")
         while agrPregunta not in ["si", "no"]:
-            agrPregunta = input("No entendí, ¿desea agregar la pregunta al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡ -_[]{.]},;:<>")
+            agrPregunta = input("SYSTEM: No entendí, ¿desea agregar la pregunta al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡ -_[]{.]},;:<>")
 
         if agrPregunta == 'si':
             preguntaEnArchivo = True
@@ -776,19 +768,19 @@ def agregarPregunta():
                     cont = 0
                 if ya_existe:
                     print(f"La pregunta '{entrada}' ya existe en el sistema. Debe reformular la pregunta.")
-                    entrada = input(f"Escriba la pregunta que desea agregar: ")
+                    entrada = input(f"SYSTEM: Escriba la pregunta que desea agregar: ")
                     entrada = entrada.lower().strip("¿?#$%&/()¡! ")
                     while entrada == "":
-                        entrada = input("No entendí, escriba la pregunta que desea agregar: ")
+                        entrada = input("SYSTEM: No entendí, escriba la pregunta que desea agregar: ")
                         entrada = entrada.lower().strip("¿?#$%&/()¡! ")
                 else:
                     print(f"La pregunta '{entrada}' no existe en el sistema. Puede agregarla.")
                     preguntaEnArchivo = False
             if preguntaEnArchivo == False:
-                answer = input(f"Escriba la respuesta que desea agregar para la pregunta '{entrada}': ")
+                answer = input(f"SYSTEM: Escriba la respuesta que desea agregar para la pregunta '{entrada}': ")
                 if answer == "":
                     while answer == "":
-                        answer = input(f"No entendí, escriba la respuesta que desea agregar para la pregunta '{entrada}': ")
+                        answer = input(f"SYSTEM: No entendí, escriba la respuesta que desea agregar para la pregunta '{entrada}': ")
                         answer = answer.lower().strip("¿?#$%&/()¡! ")
                 respuestaAgregada = answer
                 preguntas_data.append({
@@ -825,7 +817,7 @@ def agregarPregunta():
         agregarPregunta(entradaOriginal)
     except KeyboardInterrupt:
         creditos()
-        print("\nConversación finalizada, que la fuerza te acompañe.")
+        print("\nSYSTEM: Conversación finalizada, que la fuerza te acompañe.")
     except Exception as e:
         manejarError(e, "Error al agregar la pregunta.")
 
@@ -948,7 +940,7 @@ def busquedaTop3(listaTop3, preguntaElegida, esPregFrecuente, esYoda):
 
     except KeyboardInterrupt:
         creditos()
-        print("\nConversación finalizada, que la fuerza te acompañe.")
+        print("\nSYSTEM: Conversación finalizada, que la fuerza te acompañe.")
 
     except FileNotFoundError:
         verificarArchivos()
@@ -977,7 +969,6 @@ def eleccionPersonaje(personaje):
         preguntaEnArchivo = ""
         palabrasClaves = LstPalabrasClaves()
         agregoPregunta = False
-
         while True:
             if personaje.lower() in ["creditos", "equipo"]:
                 creditos()
@@ -988,10 +979,6 @@ def eleccionPersonaje(personaje):
                 creditos()
                 print("Conversación finalizada, que la fuerza te acompañe.")
                 break
-            if personaje.lower() in ["ayuda"]:
-                ayuda()
-                eleccionPersonaje(personaje)
-                break
             if personaje.lower() in ["volver a menu", "menu", "volver"]:
                 print("Volviendo al menú principal...")
                 return inicioPrograma()
@@ -1001,7 +988,7 @@ def eleccionPersonaje(personaje):
                 break
             personaje = personaje.replace('-','')
             if personaje not in ['yoda', 'chewbacca', 'r2d2', 'c3po', 'arturito'] or personaje == '':
-                personaje = input('No entendí, ingrese el personaje nuevamente: ')
+                personaje = input('SYSTEM: No entendí, ingrese el personaje nuevamente: ')
                 try:
                     personaje = ortografia(personaje,pClaves)
                     personaje = ' '.join(personaje)
@@ -1049,7 +1036,7 @@ def eleccionPersonaje(personaje):
 
             if entradaModificada == '':
                 primeraVez = False
-                print("No entendí, por favor escriba una pregunta.")
+                print("SYSTEM: No entendí, por favor escriba una pregunta.")
                 continue
 
             match personaje.lower():
@@ -1077,7 +1064,7 @@ def eleccionPersonaje(personaje):
                             respuesta = ''
                             agregarPregunta()
                             agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuestaAgregada, personaje.upper())
-                            textoPersonalizado(personaje.upper(), 'Hazme otra pregunta')
+                            textoPersonalizado(personaje.upper(), 'Hazme otra pregunta' )
                             """Una vez que se agrega la pregunta, se envia al usuario al inicio del programa para que pueda elegir con que personaje chatear."""
                             return eleccionPersonaje(personaje)
                         if respuesta == None:
@@ -1087,11 +1074,13 @@ def eleccionPersonaje(personaje):
                             agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuestaAgregada, personaje.upper())
                             textoPersonalizado(personaje.upper(), 'Hazme otra pregunta')
                             return eleccionPersonaje(personaje)
+                        global porcentajeAcierto
                         textoPersonalizado(personaje.upper(), respuesta)
-                        correcta = input("Era la respuesta correcta? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>=")
+                        print(f'SYSTEM: Porcentaje de acierto con las preguntas: {porcentajeAcierto}% \n')
+                        correcta = input("SYSTEM: Era la respuesta correcta? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>=")
                         borrarLineas(1,boo)
                         while correcta not in ["si", "no"]:
-                            correcta = input("No entendí, ¿era la respuesta correcta? (si/no): ").lower()
+                            correcta = input("SYSTEM: No entendí, ¿era la respuesta correcta? (si/no): ").lower()
                         if correcta == 'no':
                             print("\nLas siguientes preguntas son las que más se parecen a la pregunta que hiciste:\n")
                             for i, pregunta in enumerate(top3MasParecidas):
@@ -1099,23 +1088,23 @@ def eleccionPersonaje(personaje):
                                     print(f"{i + 1}. ¿{pregunta.capitalize()}?")
                             eleccionPregunta = input("¿Desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
                             while eleccionPregunta not in ["si", "no"]:
-                                eleccionPregunta = input("No entendí, ¿desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
+                                eleccionPregunta = input("SYSTEM: No entendí, ¿desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
                             if eleccionPregunta == 'si':
                                 try:
-                                    preguntaElegida = int(input("Escriba el numero de la pregunta que desea hacer: "))
+                                    preguntaElegida = int(input("SYSTEM: Escriba el numero de la pregunta que desea hacer: "))
                                     while preguntaElegida > 3 or preguntaElegida < 1:
-                                        preguntaElegida = int(input("No entendí, escriba el numero de la pregunta que desea hacer: "))
+                                        preguntaElegida = int(input("SYSTEM: No entendí, escriba el numero de la pregunta que desea hacer: "))
                                 except ValueError:
                                     # Solicitar nuevamente el número de la pregunta hasta que sea válido
                                     while True:
                                         try:
-                                            preguntaElegida = int(input("No entendí, escriba el número de la pregunta que desea hacer: "))
+                                            preguntaElegida = int(input("SYSTEM: No entendí, escriba el número de la pregunta que desea hacer: "))
                                             if 1 <= preguntaElegida <= 3:
                                                 break
                                             else:
-                                                print("Por favor, ingrese un número válido entre 1 y 3.")
+                                                print("SYSTEM: Por favor, ingrese un número válido entre 1 y 3.")
                                         except ValueError:
-                                            print("Por favor, ingrese un número válido entre 1 y 3.")
+                                            print("SYSTEM: Por favor, ingrese un número válido entre 1 y 3.")
 
                                 if esYoda:
                                     busquedaTop3(top3MasParecidas[:4], preguntaElegida, esPregFrecuente, True)
@@ -1134,12 +1123,12 @@ def eleccionPersonaje(personaje):
                         preguntaEnArchivo=''
                     except KeyboardInterrupt:
                         creditos()
-                        print("\nConversación finalizada, que la fuerza te acompañe.")
+                        print("\nSYSTEM: Conversación finalizada, que la fuerza te acompañe.")
                     except Exception as e:
                         manejarError(e, "Error procesando la pregunta.")
     except KeyboardInterrupt:
         creditos()
-        print("\nConversación finalizada, que la fuerza te acompañe.")
+        print("\nSYSTEM: Conversación finalizada, que la fuerza te acompañe.")
     except Exception as e:
         manejarError(e, "Error en la conversación.")
 
@@ -1194,14 +1183,15 @@ def manejarError(e, mensaje):
 # Ejecutar el programa principal
 def unicaVez():
     try:
+        global boo
         ancho = 70
         print("-" * ancho)
         print("          BIENVENIDO AL MEJOR ASISTENTE DE STAR WARS          ")
         print("-" * ancho)
         while True:
             print("¿Dónde estás ejecutando el programa?")
-            print("1. Terminal")
-            print("2. IDLE")
+            print("1. VsCode")
+            print("2. Otro")
             opcion = input("Elegí 1 o 2: ").strip()
 
             if opcion == '1':
@@ -1211,12 +1201,12 @@ def unicaVez():
                 boo = False
                 break
             else:
-                print("Opción no válida. Por favor, escribí 1 o 2.\n")
+                print("SYSTEM: Opción no válida. Por favor, escribí 1 o 2.\n")
 
-        input('Presiona Enter para ver las instrucciones.')
         inicioPrograma()
     except KeyboardInterrupt:
-        print("\nConversación finalizada, que la fuerza te acompañe.")
+        creditos()
+        print("\nSYSTEM: Conversación finalizada, que la fuerza te acompañe.")
     except Exception as e:
         manejarError(e, "Error en la ejecución inicial del programa.")
         return
