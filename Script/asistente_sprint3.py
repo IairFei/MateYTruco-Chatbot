@@ -28,6 +28,7 @@ entradaOriginal = ''
 entradaModificada = ''
 respuestaAgregada = ''
 preguntaEnArchivo = ""
+preguntaAgregada = ""
 
 # Datos nuevos
 newQuest = []
@@ -666,9 +667,9 @@ def agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaCorregida,
                 file.write(f"Respuesta: El usuario decidio no agregar la pregunta \n")
                 file.write(f"Porcentaje de acierto con las preguntas: 0%\n")
             elif agregoPregunta == True and respuesta != "":
-                file.write(f"Pregunta en el archivo: {preguntaEnArchivo}\n")
+                file.write(f"Pregunta agregada por el usuario al archivo: {preguntaAgregada}\n")
                 file.write(f"Respuesta agregada por el usuario: {respuestaAgregada}\n")
-                file.write(f"Porcentaje de acierto con las preguntas: {porcentajeAcierto}%\n")
+                file.write(f"Porcentaje de acierto con las preguntas: No se tendra en cuenta el porcentaje ya que es una pregunta nueva agregada por el usuario\n")
             elif agregoPregunta == False and respuesta != "" and primeraVez == False:
                 file.write(f"Pregunta en el archivo: {preguntaEnArchivo}\n")
                 file.write(f"Respuesta: {respuesta}\n") 
@@ -714,6 +715,7 @@ def agregarPregunta():
         global entradaOriginal
         global respuestaAgregada
         global agregoPregunta
+        global preguntaAgregada
         with open("ArchivosDeLectura/preguntas.json", "r", encoding="utf-8") as file:
             preguntas_data = json.load(file)
 
@@ -765,11 +767,11 @@ def agregarPregunta():
                     json.dump(preguntas_data, file, ensure_ascii=False, indent=4)
                 print("\nPregunta y respuesta agregadas correctamente al sistema.\n")
                 agregoPregunta = True
-                respuesta = answer
+                preguntaAgregada = entrada
         else:
-            respuesta=""
+            respuestaAgregada=""
             agregoPregunta = False
-        return respuesta
+        return
     except FileNotFoundError:
         verificarArchivos()
         if existeArchivoPreguntas == False:
@@ -1005,6 +1007,7 @@ def eleccionPersonaje(personaje):
                             textoPersonalizado(personaje.upper(), ' No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.')
                             respuesta = ''
                             agregarPregunta()
+                            agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuestaAgregada, personaje.upper())
                             textoPersonalizado(personaje.upper(), 'Hazme otra pregunta')
                             return eleccionPersonaje(personaje)
                         textoPersonalizado(personaje.upper(), respuesta)
