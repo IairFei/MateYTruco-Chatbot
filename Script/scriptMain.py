@@ -65,7 +65,7 @@ def textoPersonalizado(personaje, mensaje):
         if len(linea) > ancho:
             ancho = len(linea)
 
-    espaciadoParaUsuario = 60
+    espaciadoParaUsuario = 80
 
     if personaje == "Tú":
         print(" " * (espaciadoParaUsuario - ancho - 4 ) + "╭" + "─" * (ancho + 2) + "╮")
@@ -437,30 +437,39 @@ def ortografia(entrada, listado):
                     continue
                 i = 0
                 corregida = False
+                mostroLosiento = False
                 while i < len(coincidencias) and  i < 3 :
                     if palabra == coincidencias[i]:
                         break
-                    print(f"⚠︎ Palabra no encontrada: '{palabra}'")
-                    print(f"¿Quisiste decir '{coincidencias[i]}'? \n")
-                    print("Escriba 'si' para confirmar o 'no' para continuar:  ", end="")
+                    print(f"SYSTEM: ⚠︎ Palabra no encontrada: '{palabra}'")
+                    print(f"SYSTEM: ¿Quisiste decir '{coincidencias[i]}? Escriba 'si' para confirmar o 'no' para continuar:  ", end="")
                     respuesta =  input("").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>=")
-                    print('\033[F\033[K', end='')
                     while respuesta not in ["si", "no"]:
-                        respuesta = input(f"No entendí, ¿desea modificar la palabra {palabra} por {coincidencias[i]}? (si/no): ")
+                        respuesta = input(f"SYSTEM: No entendí, ¿desea modificar la palabra {palabra} por {coincidencias[i]}? (si/no): ")
                         respuesta = respuesta.lower().strip("¿?#$%&/()!¡ -_[]{.],;:<>=")
-
+                        print('\033[F\033[K', end='')
                     posicion = lista_palabras.index(palabra)
                     if respuesta == 'si':
+                        print('\033[F\033[K', end='')
+                        print('\033[F\033[K', end='')
+                        print('\033[F\033[K', end='')
+                        print(f"SYSTEM: Se modifico '{palabra}' por '{coincidencias[i]}'")
                         cantCorreccionesOrtograficas+=1
                         salida.append(coincidencias[i])
                         lista_palabras[posicion] = coincidencias[i]
                         huboCorreccionOrtografica = True
                         corregida = True
                         break
-
+                    else:
+                        print('\033[F\033[K', end='')
+                        print('\033[F\033[K', end='')
+                        if not mostroLosiento:
+                            print(f"SYSTEM: Lo siento. Probemos con otra palabra:")
+                            mostroLosiento = True
                     i += 1
-
                 if not corregida:
+                    print('\033[F\033[K', end='')
+                    print('SYSTEM: No se modifico ninguna palabra')
                     entradaModificada = []
                     salida.append(palabra)
                     
@@ -883,7 +892,11 @@ def eleccionPersonaje(personaje):
             entrada = input()
             print('\033[F\033[K', end='')  #sube una línea y la borra
             textoPersonalizado("Tú", entrada)
-
+            entrada = entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>=")
+            palabrasClaves.extend(pClaves)
+            entrada = ortografia(entrada,palabrasClaves)
+            entrada = ' '.join(entrada)
+            
             if entrada.lower() in ["salir", "adios"]:
                 print("Conversación finalizada, que la fuerza te acompañe.")
                 break
@@ -913,13 +926,11 @@ def eleccionPersonaje(personaje):
                 case 'yoda' | 'c3po':
                     primeraVez = False
                     try:
-                        
-                        entrada = entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>=")
-                        entrada = ortografia(entrada,palabrasClaves)
-                        if personaje == 'yoda':
-                            respuesta = lectorPregunta(entrada, True)
+                        if personaje == 'yoda':        
+                                respuesta = lectorPregunta(entrada, True)
                         else:
-                            respuesta = lectorPregunta(entrada, False)
+                                respuesta = lectorPregunta(entrada, False)
+
                         if respuesta == "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.":
                             textoPersonalizado(personaje.upper(), respuesta)
                             respuesta = ''
