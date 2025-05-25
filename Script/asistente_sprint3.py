@@ -5,7 +5,7 @@ import datetime
 import json
 
 # Librerías originales
-articulos = ["el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de", "que", "en", "por", "para", "con", "a", "y", "o", "si", "no", "como", "mas", "menos", "muy", "todo", "toda", "todos", "todas","quien", "quienes", "cual", "cuales", "donde", "cuando", "porque"]
+articulos = ["fue","el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de", "que", "en", "por", "para", "con", "a", "y", "o", "si", "no", "como", "mas", "menos", "muy", "todo", "toda", "todos", "todas","quien", "quienes", "cual", "cuales", "donde", "cuando", "porque"]
 
 pClaves = ["cambiar", "personaje", "adios", "salir", 'r2d2','arturito', 'c-3po', 'yoda', 'chewbacca','c3po','preguntas','frecuentes','menu', 'volver']
 
@@ -394,7 +394,7 @@ def limpiadorFrases(input):
         manejarError(e, "Error en el limpiador de frases.")
         return
 def stem_basico(palabra):
-    for sufijo in ['ando', 'iendo', 'cion', 'sion', 'mente', 'ado', 'ido', 'ar', 'er', 'ir', 'os', 'as', 'es']:
+    for sufijo in ['ando', 'iendo', 'cion', 'sion', 'mente', 'ado', 'ido', 'ar', 'er', 'ir', 'os', 'as', 'es','nes', 'les', 'is', 'os']:
         if palabra.endswith(sufijo):
             return palabra[:-len(sufijo)]
     return palabra
@@ -525,7 +525,7 @@ def preguntasFrecuentes():
             except ValueError:
                 preguntaElegida = int(input("No entendí, escriba el numero de la pregunta que desea hacer: "))
             esPregFrecuente = True
-            busquedaTop3(top3, preguntaElegida, esPregFrecuente)
+            busquedaTop3(top3, preguntaElegida, esPregFrecuente,esYoda)
             
             input("Presione Enter para continuar...")
         return
@@ -655,19 +655,22 @@ def agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaCorregida,
         with open("Logs/log.txt", "a", encoding="utf-8") as file:
             file.write("\nFecha y hora: " + str(datetime.datetime.now()) + "\n")
             file.write(f"Pregunta hecha por el usuario: {entradaCorregida}\n")
-            file.write(f"Pregunta en el archivo: {preguntaEnArchivo}\n")
             if huboCorreccionOrtografica == True:
                 file.write(f"Pregunta sin correcion ortografica: {entradaOriginal}\n")
+                file.write(f"Pregunta en el archivo: {preguntaEnArchivo}\n")
             if agregoPregunta == True  and respuesta == "":
+                file.write(f"Pregunta en el archivo: {preguntaEnArchivo}\n")
                 file.write(f"Respuesta agregada por el usuario: Ocurrio un error, no se agrego una respuesta\n")
                 file.write(f"Porcentaje de acierto con las preguntas: {porcentajeAcierto}%\n")
             elif agregoPregunta == False and respuesta == "":
                 file.write(f"Respuesta: El usuario decidio no agregar la pregunta \n")
-                file.write(f"Porcentaje de acierto con las preguntas: {porcentajeAcierto}%\n")
+                file.write(f"Porcentaje de acierto con las preguntas: 0%\n")
             elif agregoPregunta == True and respuesta != "":
-                    file.write(f"Respuesta agregada por el usuario: {respuestaAgregada}\n")
-                    file.write(f"Porcentaje de acierto con las preguntas: {porcentajeAcierto}%\n")
+                file.write(f"Pregunta en el archivo: {preguntaEnArchivo}\n")
+                file.write(f"Respuesta agregada por el usuario: {respuestaAgregada}\n")
+                file.write(f"Porcentaje de acierto con las preguntas: {porcentajeAcierto}%\n")
             elif agregoPregunta == False and respuesta != "" and primeraVez == False:
+                file.write(f"Pregunta en el archivo: {preguntaEnArchivo}\n")
                 file.write(f"Respuesta: {respuesta}\n") 
                 file.write(f"Porcentaje de acierto con las preguntas: {porcentajeAcierto}%\n")
             else:
@@ -706,6 +709,7 @@ def agregarPregunta():
         FileNotFoundError: Si el archivo o carpeta de preguntas no existe, intenta crearlos y reintenta.
         Exception: Maneja cualquier otra excepción usando `manejarError`.
     """
+    cont = 0
     try:
         global entradaOriginal
         global respuestaAgregada
@@ -722,20 +726,50 @@ def agregarPregunta():
             agrPregunta = input("No entendí, ¿desea agregar la pregunta al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡ -_[]{.]},;:<>")
 
         if agrPregunta == 'si':
-            answer = input(f"Escriba la respuesta que desea agregar para la pregunta '{entrada}': ")
-            respuestaAgregada = answer
-            preguntas_data.append({
-            "preguntas": [entrada],
-            "respuesta": answer,
-            "respuesta_yoda": answer,
-            "veces_preguntado": 1
-            })
-            with open("ArchivosDeLectura/preguntas.json", "w", encoding="utf-8") as file:
-                json.dump(preguntas_data, file, ensure_ascii=False, indent=4)
-            print("\nPregunta y respuesta agregadas correctamente al sistema.\n")
-            agregoPregunta = True
+            preguntaEnArchivo = True
+            while preguntaEnArchivo == True:
+                ya_existe = False
+                cont = 0
+                for item in preguntas_data:
+                    preguntas = item.get("preguntas", [])
+                    while cont < len(preguntas) and ya_existe == False: 
+                        if entrada in preguntas[cont].lower().strip("¿?#$%&/()¡!"):
+                            ya_existe = True
+                            break
+                        cont += 1
+                    cont = 0
+                if ya_existe:
+                    print(f"La pregunta '{entrada}' ya existe en el sistema. Debe reformular la pregunta.")
+                    entrada = input(f"Escriba la pregunta que desea agregar: ")
+                    entrada = entrada.lower().strip("¿?#$%&/()¡! ")
+                    while entrada == "":
+                        entrada = input("No entendí, escriba la pregunta que desea agregar: ")
+                        entrada = entrada.lower().strip("¿?#$%&/()¡! ")
+                else:
+                    print(f"La pregunta '{entrada}' no existe en el sistema. Puede agregarla.")
+                    preguntaEnArchivo = False
+            if preguntaEnArchivo == False:
+                answer = input(f"Escriba la respuesta que desea agregar para la pregunta '{entrada}': ")
+                if answer == "":
+                    while answer == "":
+                        answer = input(f"No entendí, escriba la respuesta que desea agregar para la pregunta '{entrada}': ")
+                        answer = answer.lower().strip("¿?#$%&/()¡! ")
+                respuestaAgregada = answer
+                preguntas_data.append({
+                "preguntas": [entrada],
+                "respuesta": answer,
+                "respuesta_yoda": answer,
+                "veces_preguntado": 1
+                })
+                with open("ArchivosDeLectura/preguntas.json", "w", encoding="utf-8") as file:
+                    json.dump(preguntas_data, file, ensure_ascii=False, indent=4)
+                print("\nPregunta y respuesta agregadas correctamente al sistema.\n")
+                agregoPregunta = True
+                respuesta = answer
         else:
+            respuesta=""
             agregoPregunta = False
+        return respuesta
     except FileNotFoundError:
         verificarArchivos()
         if existeArchivoPreguntas == False:
@@ -824,16 +858,11 @@ def busquedaTop3(listaTop3, preguntaElegida, esPregFrecuente, esYoda):
         with open("ArchivosDeLectura/preguntas.json", "r", encoding="utf-8") as file:
             preguntas_data = json.load(file)
 
-        # Validar índice
-        if preguntaElegida < 1 or preguntaElegida > len(listaTop3):
-            print("\nNúmero de pregunta fuera de rango.")
-            return
-
         if esPregFrecuente:
             preguntaElegida -= 1
             quest = listaTop3[preguntaElegida][0][0]
         else:
-            quest = listaTop3[preguntaElegida - 1]  # Ajuste de índice para evitar out of range
+            quest = listaTop3[preguntaElegida-1]  # Ajuste de índice para evitar out of range
 
         print(f"\nPregunta elegida: {quest.capitalize()}?")
         questGroup.append(quest.lower())
@@ -1013,7 +1042,7 @@ def eleccionPersonaje(personaje):
                                 else:
                                     busquedaTop3(top3MasParecidas[:4], preguntaElegida, esPregFrecuente, False)
                             else:
-                                agregarPregunta()
+                                respuesta = agregarPregunta()
                                 agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuesta, personaje.upper())
                             textoPersonalizado(personaje.upper(), 'Hazme otra pregunta')
                             return eleccionPersonaje(personaje)
