@@ -50,25 +50,27 @@ def textoPersonalizado(personaje, mensaje):
     lineas = []
     linea_actual = ""
     
-
-    for palabra in palabras:
-        if len(linea_actual) + len(palabra) + 1 <= 50:
-            if linea_actual != '':
-                linea_actual += " "
-            linea_actual += palabra
-        else:   
+    try:
+        for palabra in palabras:
+            if len(linea_actual) + len(palabra) + 1 <= 50:
+                if linea_actual != '':
+                    linea_actual += " "
+                linea_actual += palabra
+            else:   
+                lineas.append(linea_actual)
+                linea_actual = palabra
+        if linea_actual:
             lineas.append(linea_actual)
-            linea_actual = palabra
-    if linea_actual:
-        lineas.append(linea_actual)
 
-    ancho = 0
-    for linea in lineas:
-        if len(linea) > ancho:
-            ancho = len(linea)
+        ancho = 0
+        for linea in lineas:
+            if len(linea) > ancho:
+                ancho = len(linea)
 
-    espaciadoParaUsuario = 80
-
+        espaciadoParaUsuario = 80
+    except Exception as e:
+        manejarError(e, "Error en el texto personalizado.")
+        return
     if personaje == "Tú":
         print(" " * (espaciadoParaUsuario - ancho - 4 ) + "╭" + "─" * (ancho + 2) + "╮")
         for linea in lineas:
@@ -216,25 +218,28 @@ def crearArchivoPreguntas():
         manejarError(e, "Error al crear el archivo de preguntas")
         return
 def creditosFinales():
-    
-    os.system('cls' if os.name == 'nt' else 'clear')
-    print(""" 
-            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⡰⠊⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀
-            ⠀⠀⠀⠀⠀⠀⠀⠀⡰⠈⠀⠀⠠⠂⠂⠀⠀⢀⣀⠀⠀⠀⢀⣀⣴⢟⠛⠉     ╭─────────────────────────────-────────────────╮
-            ⠀⠀⠀⠀⠀⠀⠀⣾⣧⡠⣂⣤⣬⣲⣶⢷⣾⣛⠙⠳⠀⣤⣿⡿⠃⠂⠀⠀    │ CREDTOS:                                     |
-            ⣀⣀⣀⣀⣀⣀⡀⠛⢿⣷⠟⡋⣩⠻⣗⠀⠻⣝⢻⡌⠀⣍⡥⠊⠀⠀⠀⠀   │ Holm Ian                                     |
-            ⠈⠑⢝⡻⠿⣿⣿⣿⣾⡟⠘⢋⡉⠞⠒⠒⠋⠈⢲⣿⣿⡛⠁⠀⠀⠀⠀⠀   │ Feigelman Iair                               |
-            ⠀⠀⠀⠈⠑⠢⠍⠙⣿⣿⣄⡀⣠⣎⡀⠤⢤⣢⣿⣿⡟⠀⠀⠀⠀⠀⠀⠀    | Cinti Valentino                              |
-            ⠀⠀⠀⠀⠀⠀⠀⠀⠙⠙⣿⣿⣿⣿⣿⣿⣛⣿⣿⣿⡅⠀⠀⠀⠀⠀⠀⠀     | Mora Diego                                   |
-            ⠀⠀⠀⠀⠀⠀⠀⢀⣀⣴⣿⣿⣿⣿⣿⣿⣿⣿⢿⣫⢤⢙⢦⠰⣄⡀⠀⠀    | Guzman Kevin                                 |
-            ⠀⠀⠀⠀⠀⢠⣼⣿⣿⣿⣳⢻⣿⣿⣿⣿⣷⠾⠿⠋⠖⠄⠀⠙⠎⢷⡀⠀    |/─────────────────────────────────────────────╯ 
-            ⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣯⡁⢿⣿⣿⣶⣶⣶⠶⠞⢉⣇⡀⠀⣀⣼⣷⠀
-            ⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣧⡾⢉⡛⠿⠢⢌⢀⣾⣿⣿⣿⣿⣿⣿⠀
-            ⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡦⡦⢮⠀⢰⡙⡛⠿⣿⣿⣿⠂
-            ⠀⠀⠀⠸⣿⠻⣿⣿⣿⣿⣿⣿⣿⣿⠯⢥⠾⠛⠢⣴⡿⡻⣞⢦⡀⠉⠉⠀
-            ⠀⠀⠀⠀⠀⠁⠈⠉⠉⠉⠉⠉⠁⠀⠀⠀⠉⠉⠉⠀⠀⠈⠈⠈⠉⠁⠀         
-            ⠀⠀""")
+    try:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print(""" 
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⡰⠊⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀
+                ⠀⠀⠀⠀⠀⠀⠀⠀⡰⠈⠀⠀⠠⠂⠂⠀⠀⢀⣀⠀⠀⠀⢀⣀⣴⢟⠛⠉     ╭─────────────────────────────-────────────────╮
+                ⠀⠀⠀⠀⠀⠀⠀⣾⣧⡠⣂⣤⣬⣲⣶⢷⣾⣛⠙⠳⠀⣤⣿⡿⠃⠂⠀⠀    │ CREDTOS:                                     |
+                ⣀⣀⣀⣀⣀⣀⡀⠛⢿⣷⠟⡋⣩⠻⣗⠀⠻⣝⢻⡌⠀⣍⡥⠊⠀⠀⠀⠀   │ Holm Ian                                     |
+                ⠈⠑⢝⡻⠿⣿⣿⣿⣾⡟⠘⢋⡉⠞⠒⠒⠋⠈⢲⣿⣿⡛⠁⠀⠀⠀⠀⠀   │ Feigelman Iair                               |
+                ⠀⠀⠀⠈⠑⠢⠍⠙⣿⣿⣄⡀⣠⣎⡀⠤⢤⣢⣿⣿⡟⠀⠀⠀⠀⠀⠀⠀    | Cinti Valentino                              |
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠙⠙⣿⣿⣿⣿⣿⣿⣛⣿⣿⣿⡅⠀⠀⠀⠀⠀⠀⠀     | Mora Diego                                   |
+                ⠀⠀⠀⠀⠀⠀⠀⢀⣀⣴⣿⣿⣿⣿⣿⣿⣿⣿⢿⣫⢤⢙⢦⠰⣄⡀⠀⠀    | Guzman Kevin                                 |
+                ⠀⠀⠀⠀⠀⢠⣼⣿⣿⣿⣳⢻⣿⣿⣿⣿⣷⠾⠿⠋⠖⠄⠀⠙⠎⢷⡀⠀    |/─────────────────────────────────────────────╯ 
+                ⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣯⡁⢿⣿⣿⣶⣶⣶⠶⠞⢉⣇⡀⠀⣀⣼⣷⠀
+                ⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣧⡾⢉⡛⠿⠢⢌⢀⣾⣿⣿⣿⣿⣿⣿⠀
+                ⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡦⡦⢮⠀⢰⡙⡛⠿⣿⣿⣿⠂
+                ⠀⠀⠀⠸⣿⠻⣿⣿⣿⣿⣿⣿⣿⣿⠯⢥⠾⠛⠢⣴⡿⡻⣞⢦⡀⠉⠉⠀
+                ⠀⠀⠀⠀⠀⠁⠈⠉⠉⠉⠉⠉⠁⠀⠀⠀⠉⠉⠉⠀⠀⠈⠈⠈⠉⠁⠀         
+                ⠀⠀""")
+    except Exception as e:
+        manejarError(e, "Error en los creditos finales")
+        return
 def verificarArchivos():
     """
     Verifica la existencia de las carpetas y archivos necesarios para el funcionamiento del programa.
@@ -395,11 +400,14 @@ def limpiadorFrases(input):
         manejarError(e, "Error en el limpiador de frases.")
         return
 def stem_basico(palabra):
-    for sufijo in ['ando', 'iendo', 'cion', 'sion', 'mente', 'ado', 'ido', 'ar', 'er', 'ir', 'os', 'as', 'es','nes', 'les', 'is', 'os']:
-        if palabra.endswith(sufijo):
-            return palabra[:-len(sufijo)]
-    return palabra
-
+    try:
+        for sufijo in ['ando', 'iendo', 'cion', 'sion', 'mente', 'ado', 'ido', 'ar', 'er', 'ir', 'os', 'as', 'es','nes', 'les', 'is', 'os']:
+            if palabra.endswith(sufijo):
+                return palabra[:-len(sufijo)]
+        return palabra
+    except Exception as e:
+        manejarError(e, "Error en el stem básico.")
+        return
 def ortografia(entrada, listado):
     """
     Corrige errores ortográficos en una entrada de texto comparando cada palabra con un listado de palabras válidas.
@@ -763,11 +771,20 @@ def agregarPregunta():
                 "respuesta_yoda": answer,
                 "veces_preguntado": 1
                 })
-                with open("ArchivosDeLectura/preguntas.json", "w", encoding="utf-8") as file:
-                    json.dump(preguntas_data, file, ensure_ascii=False, indent=4)
-                print("\nPregunta y respuesta agregadas correctamente al sistema.\n")
-                agregoPregunta = True
-                preguntaAgregada = entrada
+                try:
+                    with open("ArchivosDeLectura/preguntas.json", "w", encoding="utf-8") as file:
+                        json.dump(preguntas_data, file, ensure_ascii=False, indent=4)
+                    print("\nPregunta y respuesta agregadas correctamente al sistema.\n")
+                    agregoPregunta = True
+                    preguntaAgregada = entrada
+                except FileNotFoundError:
+                    verificarArchivos()
+                    if existeArchivoPreguntas == False:
+                        print("Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
+                    if existeCarpetaPreguntas == False:
+                        print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
+                    print("Por favor, vuelva a intentar.")
+                    agregarPregunta(preguntaAgregada)
         else:
             respuestaAgregada=""
             agregoPregunta = False
@@ -780,6 +797,8 @@ def agregarPregunta():
             print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
         print("Por favor, vuelva a intentar.")
         agregarPregunta(entradaOriginal)
+    except KeyboardInterrupt:
+        print("\nConversación finalizada, que la fuerza te acompañe.")
     except Exception as e:
         manejarError(e, "Error al agregar la pregunta.")
 
@@ -1055,19 +1074,32 @@ def eleccionPersonaje(personaje):
                         agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuesta, personaje.upper())
                         respuesta=''
                         preguntaEnArchivo=''
+                    except KeyboardInterrupt:
+                        print("\nConversación finalizada, que la fuerza te acompañe.")
                     except Exception as e:
                         manejarError(e, "Error procesando la pregunta.")
+    except KeyboardInterrupt:
+        print("\nConversación finalizada, que la fuerza te acompañe.")
     except Exception as e:
         manejarError(e, "Error en la conversación.")
 
 def sumarVecesPreguntado(mejorIndice):
-    with open("ArchivosDeLectura/preguntas.json", "r", encoding="utf-8") as file:
-        preguntas_data = json.load(file)
-        preguntas_data[mejorIndice]["veces_preguntado"] += 1
-        with open("ArchivosDeLectura/preguntas.json", "w", encoding="utf-8") as file:
-            json.dump(preguntas_data, file, ensure_ascii=False, indent=4)
-    global numMejorIndice
-    numMejorIndice = -1
+    try:
+        with open("ArchivosDeLectura/preguntas.json", "r", encoding="utf-8") as file:
+            preguntas_data = json.load(file)
+            preguntas_data[mejorIndice]["veces_preguntado"] += 1
+            with open("ArchivosDeLectura/preguntas.json", "w", encoding="utf-8") as file:
+                json.dump(preguntas_data, file, ensure_ascii=False, indent=4)
+        global numMejorIndice
+        numMejorIndice = -1
+    except FileNotFoundError:
+        verificarArchivos()
+        if existeArchivoPreguntas == False:
+            print("Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
+        if existeCarpetaPreguntas == False:
+            print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
+        print("Por favor, vuelva a intentar.")
+        inicioPrograma()
 
 
 # Manejo de errores
