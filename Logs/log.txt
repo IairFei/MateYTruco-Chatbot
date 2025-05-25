@@ -425,3 +425,21 @@ Porcentaje de acierto con las preguntas: 90%
 Personaje: YODA
 
 ----------------------------------------
+
+Fecha y hora: 2025-05-25 01:49:29.917811
+Pregunta hecha por el usuario: quien es poe
+Pregunta en el archivo: 
+Respuesta: El usuario decidio no agregar la pregunta 
+Porcentaje de acierto con las preguntas: 100%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 01:49:36.157062
+Pregunta hecha por el usuario: quien es dameron
+Pregunta en el archivo: 
+Respuesta: El usuario decidio no agregar la pregunta 
+Porcentaje de acierto con las preguntas: 100%
+Personaje: YODA
+
+----------------------------------------

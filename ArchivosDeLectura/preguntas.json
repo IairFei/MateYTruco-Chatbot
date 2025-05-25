@@ -515,5 +515,635 @@
         "respuesta": "Jango Fett fue un cazarrecompensas mandaloriano. Su ADN se usó para crear el ejército clon y Boba Fett fue criado como su hijo.",
         "respuesta_yoda": "Clonador original, Jango Fett fue. A Boba crió como hijo, todos los clones su imagen tienen.",
         "veces_preguntado": 26
+    },
+    {
+        "preguntas": [
+            "Que color tiene el sable de luz de Rey al final de la saga",
+            "De que color es el nuevo sable de Rey",
+            "Como es el sable que Rey construye al final"
+        ],
+        "respuesta": "Al final de la saga, Rey construye un sable de luz amarillo.",
+        "respuesta_yoda": "Amarillo, el sable de Rey es al final. Construido por ella misma, sí.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Cual es el nombre del planeta minero controlado por el Imperio",
+            "En que planeta se ubica la Ciudad de las Nubes",
+            "Que es Ciudad Nube"
+        ],
+        "respuesta": "La Ciudad de las Nubes está ubicada en Bespin, un planeta minero gaseoso.",
+        "respuesta_yoda": "En Bespin, la Ciudad de las Nubes está. Minero, planeta gaseoso es, mmm.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Cual es la raza del Gran Almirante Thrawn",
+            "Quien es el Almirante Thrawn",
+            "De que especie es el estratega imperial Thrawn"
+        ],
+        "respuesta": "El Gran Almirante Thrawn pertenece a la especie Chiss.",
+        "respuesta_yoda": "Chiss, su especie es. Gran mente táctica, Thrawn tiene, sí.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien fue la madre adoptiva de Leia Organa",
+            "Como se llama la esposa de Bail Organa",
+            "Quien cuida a Leia en Alderaan"
+        ],
+        "respuesta": "La madre adoptiva de Leia Organa es la reina Breha Organa.",
+        "respuesta_yoda": "Reina de Alderaan, Breha Organa es. Madre adoptiva de Leia, fue.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Que nombre recibe la nave de Boba Fett",
+            "Como se llama la nave que pilota Boba Fett",
+            "Cual es la nave de Boba Fett"
+        ],
+        "respuesta": "La nave de Boba Fett se llama Slave I.",
+        "respuesta_yoda": "Slave I, la nave de Boba Fett es. Mandaloriana y temida, hmm.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Cual es la especialidad del droide IG-11",
+            "Que tipo de droide es IG11",
+            "Quien es IG11"
+        ],
+        "respuesta": "IG-11 es un droide asesino reprogramado como cuidador y protector.",
+        "respuesta_yoda": "Asesino fue, protector se volvió. El droide IG-11, cambio encontró, mmm.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Como se llama el planeta del clan mandaloriano de Din Djarin",
+            "Cual es el escondite de los mandalorianos en The Mandalorian"
+        ],
+        "respuesta": "Los mandalorianos se ocultan en Nevarro, un planeta del Borde Exterior.",
+        "respuesta_yoda": "En Nevarro, escondidos los mandalorianos están. Lejos, en el Borde Exterior, hmm.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Que tipo de criatura es el rancor",
+            "Cual es el monstruo que Jabba el Hutt tiene en su palacio",
+            "Como se llama la bestia que aparece en el pozo bajo el trono de Jabba"
+        ],
+        "respuesta": "El rancor es una enorme criatura carnívora que vive bajo el palacio de Jabba el Hutt.",
+        "respuesta_yoda": "Rancor, temible criatura es. Bajo el trono de Jabba, su guarida está.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Cual es el código de los mandalorianos",
+            "Que frase dicen los mandalorianos como juramento",
+            "Cual es la expresión típica entre mandalorianos"
+        ],
+        "respuesta": "Los mandalorianos repiten ‘El Camino Así Es’ o  'This is the way' como parte de su credo.",
+        "respuesta_yoda": "'This is the way', el credo mandaloriano es. Camino antiguo, siguen ellos.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Que tipo de criatura es Jabba el Hutt",
+            "A qué especie pertenece Jabba",
+            "Como se llama la especie babosa de Jabba",
+	        "Quien es Jabba"
+        ],
+        "respuesta": "Jabba el Hutt pertenece a la especie Hutt, originaria del planeta Nal Hutta.",
+        "respuesta_yoda": "Hutt es su especie, Nal Hutta su mundo. Jabba, poderoso es.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Como se llama la nave de Poe Dameron",
+            "Que nombre recibe el X-Wing negro de Poe",
+            "Quien es Poe Dameron"
+        ],
+        "respuesta": "Poe Dameron es un piloto de la Resistencia. Pilota un X-Wing negro llamado Black One.",
+        "respuesta_yoda": "Black One, su nave es. Poe Dameron, piloto de la resistencia es, mmm.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien es la líder del Escuadrón Rogue",
+            "Quien comanda Rogue Squadron",
+            "Cual es el escuadrón rebelde famoso liderado por Luke"
+        ],
+        "respuesta": "El Escuadrón Pícaro, también conocido como Rogue Squadron, fue liderado por Luke Skywalker.",
+        "respuesta_yoda": "Luke Skywalker, líder del Escuadrón Pícaro fue. Rebeldes valientes, eran, sí.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien fundó la Primera Orden",
+            "Que es la Primera Orden",
+            "Quien está detrás de la creación de la Primera Orden"
+        ],
+        "respuesta": "La Primera Orden, enemiga de la Nueva República, fue creada por antiguos líderes del Imperio Galáctico con el apoyo secreto de Palpatine.",
+        "respuesta_yoda": "De las cenizas del Imperio, la Primera Orden surgió. Enemiga de la Nueva República es.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Como se llama el planeta helado en El Imperio Contraataca",
+            "Donde se encuentra la base rebelde en la quinta película",
+            "Que planeta congelado aparece en de El Imperio Contraataca"
+        ],
+        "respuesta": "El planeta helado en el que se encuentra la base rebelde que aparece al principio de 'El Imperio Contraataca' se llama Hoth.",
+        "respuesta_yoda": "Frío y blanco, el planeta Hoth es. Allí, los rebeldes se escondían.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Cual es la especie de Yoda",
+            "Que especie tiene larga esperanza de vida y usa la Fuerza",
+            "Cual es la especie de Grogu"
+        ],
+        "respuesta": "La especie de Yoda, Yaddle y Grogu es desconocida. Son longevos y sensibles a la Fuerza.",
+        "respuesta_yoda": "Nombre no tiene nuestra especie. Pero larga vida y poder en la Fuerza, sí.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Que droide fue construido por Anakin Skywalker",
+            "Quien construyo a C-3PO",
+            "Que droide dorado fue creado por Anakin"
+        ],
+        "respuesta": "Fui construido por Anakin Skywalker en su niñez.",
+        "respuesta_yoda": "De un niño, obra es. C-3PO, por Anakin creado fue.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Que criatura aparece en el compactador de basura de la Estrella de la Muerte",
+            "Como se llama el monstruo del compactador en Una Nueva Esperanza",
+            "Que animal ataca a Luke en el agua de la Estrella de la Muerte"
+        ],
+        "respuesta": "La criatura que vive en el compactador de basura es un dianoga.",
+        "respuesta_yoda": "Dianoga, el monstruo del compactador es. Ojo grande, peligroso, sí.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Como se llama la capital de la Nueva República",
+            "Cual es el planeta destruido por la Base Starkiller",
+            "Donde estaba el gobierno de la Nueva República"
+        ],
+        "respuesta": "La capital de la Nueva República era Hosnian Prime, destruida por la Base Starkiller.",
+        "respuesta_yoda": "Hosnian Prime, la capital de la Nueva República fue. Starkiller la destruyó, gran pérdida fue, mmm.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien derrota a Darth Maul definitivamente",
+            "Como muere Darth Maul",
+            "Quien mata a Darth Maul"
+        ],
+        "respuesta": "Darth Maul es finalmente derrotado por Obi-Wan Kenobi en Tatooine.",
+        "respuesta_yoda": "Por Obi-Wan, Maul derrotado fue. En Tatooine, su destino encontró.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Como se llama la nave del General Grievous",
+            "Qué nombre recibe la nave de Grievous en La Venganza de los Sith",
+            "Cual es la nave principal de Grievous"
+        ],
+        "respuesta": "La nave de Grievous se llama El Malevolencia.",
+        "respuesta_yoda": "Malevolencia, su nave es. Poderosa y temida, mmm.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Que planeta es hogar de los Twi'leks",
+            "Cual es el planeta natal de Hera Syndulla",
+            "Donde viven los twileks"
+        ],
+        "respuesta": "El planeta natal de los twi'leks es Ryloth.",
+        "respuesta_yoda": "Ryloth, el hogar de los twi'leks es. Hera allí nació, sí.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Que nave lidera la flota rebelde en El Regreso del Jedi",
+            "Como se llama la nave capital rebelde en la batalla de Endor",
+            "Cual es el crucero insignia de la Alianza Rebelde"
+        ],
+        "respuesta": "La nave capital rebelde en Endor es el Home One.",
+        "respuesta_yoda": "Home One, su nombre es. A la victoria llevó, hmm.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Que personaje usa una lanza de beskar",
+            "Quien posee una lanza metálica en The Mandalorian",
+            "Como se llama la lanza que puede resistir sables de luz"
+        ],
+        "respuesta": "La lanza de beskar fue usada por Din Djarin el mandaloriano, para combatir a Moff Gideon.",
+        "respuesta_yoda": "La lanza de beskar, poderosa contra sables es. Din Djarin la blandió.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Como se llama la nave en la que viajan los Jedi en las precuelas",
+            "Que tipo de nave usan los Jedi como transporte diplomático",
+            "Cual es la nave de transporte Jedi"
+        ],
+        "respuesta": "Los Jedi usan cruceros clase Consular, como el Radiant VII.",
+        "respuesta_yoda": "Clase Consular es. Radiant VII, uno fue, sí.",
+        "veces_preguntado": 0
+    },
+{
+    "preguntas": [
+        "Que nave pilotaba Anakin durante las Guerras Clon",
+        "Que modelo de caza usaba Anakin",
+        "Que nave amarilla usaba Anakin Skywalker"
+    ],
+    "respuesta": "Durante las Guerras Clon, Anakin pilotaba un caza estelar ETA-2 Actis.",
+    "respuesta_yoda": "Actis ETA-2, veloz nave de Anakin era. Combate dominaba, sí.",
+    "veces_preguntado": 0
+    },
+{
+    "preguntas": [
+        "Quien es alien naranja que aparece en Return of the jedi ",
+        "Como se llama el almirante que dice es una trampa",
+        "Quien lidera la flota rebelde en Endor"
+    ],
+    "respuesta": "El almirante Mon Calamari que lidera la flota rebelde es Ackbar.",
+    "respuesta_yoda": "Ackbar, almirante de aguas profundas es. ¡Una trampa!, advirtió, hmm.",
+    "veces_preguntado": 0
+   },
+   {
+        "preguntas": [
+            "Quien es el Jedi que domina el estilo de lucha con sable único de forma agresiva",
+            "Que maestro Jedi usa un estilo ofensivo llamado Vaapad",
+            "Quien inventó la forma de combate Vaapad"
+        ],
+        "respuesta": "El maestro Mace Windu desarrolló y dominó la forma de combate Vaapad.",
+        "respuesta_yoda": "Vaapad, estilo agresivo es. Mace Windu, su creador fue, hmm.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Cual es el planeta natal de la especie Jawa",
+            "Donde viven los Jawas",
+            "Que criaturas encapuchadas recogen chatarra en el desierto"
+        ],
+        "respuesta": "Los Jawas viven en Tatooine, un planeta desértico.",
+        "respuesta_yoda": "Tatooine, hogar de los Jawas es. Chatarreros pequeños, sí.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien fue el maestro del Conde Dooku",
+            "Que Jedi entrenó a Dooku",
+            "Quien era el maestro Jedi de Dooku"
+        ],
+        "respuesta": "El maestro Jedi de Count Dooku fue Yoda.",
+        "respuesta_yoda": "Dooku, mi aprendiz fue. Oscuridad eligió, lamentable fue.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Que nombre tenía el emperador antes de ser Sith",
+            "Como se llamaba Palpatine cuando era senador",
+            "Que nombre usaba Darth Sidious públicamente"
+        ],
+        "respuesta": "El nombre del emperador antes de ser Sith era Sheev Palpatine.",
+        "respuesta_yoda": "Sheev Palpatine, nombre público es. Darth Sidious, su sombra fue.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Que planeta es de origen de los Mon Calamari",
+            "Donde nació el almirante Ackbar",
+            "Cual es el mundo acuático de la especie Mon Calamari"
+        ],
+        "respuesta": "El planeta natal de los Mon Calamari es Mon Cala.",
+        "respuesta_yoda": "Mon Cala, hogar bajo el agua es. Mon Calamari allí nadan, sí.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien es el Jedi que sobrevive oculto en un taller de chatarra",
+            "Que joven Jedi aparece en Obi-Wan Kenobi",
+            "Quien es Nari"
+        ],
+        "respuesta": "Nari es un joven Jedi que aparece en la serie Obi-Wan Kenobi, buscando ayuda.",
+        "respuesta_yoda": "Nari, esperanza en el exilio es. Buscó a Obi-Wan, mmm.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien es el líder de los Nightsisters en Dathomir",
+            "Que bruja dirige a las Hermanas de la Noche",
+            "Como se llama la madre bruja de Dathomir"
+        ],
+        "respuesta": "La líder de las Hermanas de la Noche es Madre Talzin.",
+        "respuesta_yoda": "Talzin, magia poderosa tiene. Bruja de Dathomir es, hmm.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Que nave imperial tiene forma de daga",
+            "Que nave destruye planetas y aparece en el Episodio IX",
+            "Como se llama la flota Sith secreta"
+        ],
+        "respuesta": "La nave con forma de daga es el Destructor Estelar clase Xyston de la flota Sith.",
+        "respuesta_yoda": "Xyston, destructor temido es. De la flota Sith, viene, mmm.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien entrenó a Leia en el uso de la Fuerza",
+            "Que maestro Jedi guía a Leia",
+            "Quien ayuda a Leia a entrenar como Jedi"
+        ],
+        "respuesta": "Leia fue entrenada por Luke Skywalker en los caminos de la Fuerza.",
+        "respuesta_yoda": "A Leia enseñé. Hermana mía, su camino encontró.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Que planeta fue usado como base rebelde",
+            "Donde estaba la base rebelde en Rogue One",
+            "Cual fue el escondite rebelde en Scarif"
+        ],
+        "respuesta": "La base rebelde estaba en Yavin IV durante los eventos de Rogue One.",
+        "respuesta_yoda": "Yavin IV, refugio rebelde fue. Desde allí atacaron, sí.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Que personaje fue Jedi y luego bibliotecaria",
+            "Quien era la guardiana del archivo Jedi",
+            "Como se llama la maestra que dice 'Si no está en los archivos, no existe'"
+        ],
+        "respuesta": "La bibliotecaria Jedi se llama Jocasta Nu.",
+        "respuesta_yoda": "Jocasta Nu, saber cuidaba. Archivos protegía, mmm.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien es el mentor de Han Solo",
+            "Quien enseñó a Han Solo a ser contrabandista",
+            "Como se llama el ladrón que recluta a Han en Solo"
+        ],
+        "respuesta": "Tobias Beckett fue el mentor de Han Solo en la película Solo.",
+        "respuesta_yoda": "Beckett, guía de Han fue. Vida dura enseñó, sí.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Que criatura vive en las cavernas de Crait",
+            "Como se llama el zorro de cristal de Los Últimos Jedi",
+            "Que animal brilla en el suelo de sal"
+        ],
+        "respuesta": "Los vulptices son zorros de cristal que viven en Crait.",
+        "respuesta_yoda": "Vulptices, brillan en la sal. Rápidos y hermosos, mmm.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Que ser inmenso aparece en el episodio final de Rebels",
+            "Que criatura viaja por el hiperespacio de forma natural",
+            "Como se llaman los animales que transportan a Ezra y Thrawn"
+        ],
+        "respuesta": "Los purrgil son criaturas que pueden viajar por el hiperespacio.",
+        "respuesta_yoda": "Purrgil, grandes y sabios son. A través del hiperespacio vuelan.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien fue el primer Sith en usar el título Darth",
+            "Que Sith dio origen a la tradición de los Darth",
+            "Cual fue el primer señor oscuro en usar el nombre Darth"
+        ],
+        "respuesta": "Darth Bane fue el primer Sith en instituir la Regla de Dos y usar el título Darth.",
+        "respuesta_yoda": "Darth Bane, legado oscuro dejó. Solo dos deben ser, dijo.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Cual es el punto débil de la Estrella de la Muerte",
+            "Por donde fue destruida la Estrella de la Muerte",
+            "Que fallo de diseño tenía la Estrella de la Muerte"
+        ],
+        "respuesta": "El punto débil de la Estrella de la Muerte era una pequeña abertura que llevaba al reactor principal.",
+        "respuesta_yoda": "Pequeña abertura, gran debilidad fue. Al reactor conducía, sí.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Cual fue la segunda versión de la Estrella de la Muerte",
+            "Que arma inacabada aparece en El Retorno del Jedi",
+            "Como se llama la nueva estación espacial que aparece en Endor"
+        ],
+        "respuesta": "La segunda Estrella de la Muerte fue una versión más grande y poderosa, aún en construcción.",
+        "respuesta_yoda": "Segunda versión, más grande era. Incompleta pero letal, mmm.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Donde estaba ubicada la segunda Estrella de la Muerte",
+            "En que lugar se construyó la segunda Estrella de la Muerte",
+            "Cerca de que luna estaba la Estrella de la Muerte II"
+        ],
+        "respuesta": "La segunda Estrella de la Muerte fue construida cerca de la luna de Endor.",
+        "respuesta_yoda": "En Endor flotaba, la segunda Estrella de la Muerte. Trampa era, sí.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien dio la orden de destruir Alderaan",
+            "Quien autorizó el disparo de la Estrella de la Muerte",
+            "Quien toma la decisión de usar la Estrella contra Alderaan"
+        ],
+        "respuesta": "El Gran Moff Tarkin ordenó destruir Alderaan con la Estrella de la Muerte.",
+        "respuesta_yoda": "Tarkin lo ordenó. Cruel ejemplo dio, Alderaan no quedó.",
+        "veces_preguntado": 0
+    },
+   {
+        "preguntas": [
+            "Que planeta se usó para construir la Estrella de la Muerte",
+            "Donde se ensamblaron partes de la Estrella de la Muerte",
+            "Que mundo fue ocupado para construir la superarma imperial"
+        ],
+        "respuesta": "El planeta Geonosis fue uno de los lugares usados para construir la Estrella de la Muerte.",
+        "respuesta_yoda": "Geonosis, cuna de guerra fue. Allí, la Estrella empezó a nacer, hmm.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Como obtiene la Alianza Rebelde los planos de la Estrella de la Muerte",
+            "Que misión consigue los planos de la Estrella de la Muerte",
+            "En que película se roban los planos de la Estrella de la Muerte"
+        ],
+        "respuesta": "Los planos de la Estrella de la Muerte fueron obtenidos en la misión de Rogue One.",
+        "respuesta_yoda": "Rogue One, esperanza trajo. Planos robados, sacrificio fue.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Que parte destruyó Luke para volar la Estrella de la Muerte",
+            "Donde impactó el torpedo para destruir la estación espacial imperial",
+            "Que blanco alcanzó Luke para destruir la Estrella de la Muerte"
+        ],
+        "respuesta": "Luke Skywalker destruyó la Estrella de la Muerte al impactar el reactor principal.",
+        "respuesta_yoda": "Reactor, punto clave fue. Luke allí disparó, victoria logró.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien estaba al mando de la Estrella de la Muerte durante su primera aparición",
+            "Que oficial imperial comandaba la estación espacial",
+            "Quien dirigía la Estrella de la Muerte bajo las órdenes del emperador"
+        ],
+        "respuesta": "El Gran Moff Tarkin estaba al mando de la Estrella de la Muerte.",
+        "respuesta_yoda": "Tarkin, con poder gobernaba. Orgullo del Imperio, comandó.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien es Obi Wan Kenobi",
+            "Quien fue Obi Wan",
+            "Quien es el maestro Jedi Obi Wan"
+        ],
+        "respuesta": "Obi-Wan Kenobi fue un maestro Jedi que entrenó a Anakin Skywalker y luego a su hijo, Luke Skywalker. Luchó en las Guerras Clon y fue clave en la caída y redención de Darth Vader.",
+        "respuesta_yoda": "Maestro Jedi, Obi-Wan fue. A Anakin y a Luke entrenó, sí. En las Guerras Clon luchó, y el destino de Vader marcó.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien es Anakin Skywalker",
+            "Quien fue Anakin Skywalker",
+            "Antes de ser Darth Vader quien era"
+        ],
+        "respuesta": "Anakin Skywalker fue un Jedi muy poderoso, considerado el Elegido destinado a traer equilibrio a la Fuerza. Fue entrenado por Obi-Wan Kenobi y cayó al Lado Oscuro, convirtiéndose en Darth Vader.",
+        "respuesta_yoda": "El Elegido, Anakin era. Jedi poderoso fue, pero al Lado Oscuro cayó. Darth Vader, se convirtió, sí.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien es Padme Amidala",
+            "Quien fue la esposa de Anakin Skywalker",
+            "Quien es la madre de Luke y Leia"
+        ],
+        "respuesta": "Padmé Amidala fue la senadora de Naboo y esposa de Anakin Skywalker. Madre de Luke y Leia, murió poco después de dar a luz.",
+        "respuesta_yoda": "Padmé Amidala, senadora de Naboo fue. Esposa de Anakin, madre de Luke y Leia, sí. Después de nacer ellos, murió.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien es Luke Skywalker",
+            "Quien fue el Jedi principal de la trilogia original",
+            "Quien derroto al Emperador"
+        ],
+        "respuesta": "Luke Skywalker es un Jedi legendario, hijo de Anakin Skywalker y Padmé Amidala. Jugó un papel clave en la caída del Imperio y la redención de Darth Vader.",
+        "respuesta_yoda": "Hijo de Anakin, Luke Skywalker es. El Imperio ayudó a derribar, y a su padre redimir, mmm.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien es Leia Organa",
+            "Quien es la princesa Leia",
+            "Leia es hija de quien"
+        ],
+        "respuesta": "Leia Organa fue una líder de la Alianza Rebelde, hermana de Luke Skywalker e hija de Anakin y Padmé. También fue entrenada en la Fuerza.",
+        "respuesta_yoda": "Hermana de Luke, Leia es. Hija de Anakin y Padmé también. Líder de la Rebelión, y sensible a la Fuerza, mmm.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien es Finn",
+            "Quien era FN-2187",
+            "Como se llama el stormtrooper que se volvió bueno"
+        ],
+        "respuesta": "Finn, anteriormente conocido como FN-2187, fue un stormtrooper de la Primera Orden que desertó para unirse a la Resistencia.",
+        "respuesta_yoda": "Stormtrooper fue, Finn. A la Resistencia huyó, sí. Nombre FN-2187 antes tenía.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien es Poe Dameron",
+            "Quien es el piloto de la Resistencia",
+            "Quien pilota un X-Wing en la nueva trilogía"
+        ],
+        "respuesta": "Poe Dameron es un piloto experto de la Resistencia, conocido por su valentía y habilidad en combate. Pilota un X-Wing llamado Black One.",
+        "respuesta_yoda": "Poe Dameron, piloto valiente es. En la Resistencia lucha, y su X-Wing Black One pilota, mmm.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien es Ahsoka Tano",
+            "Quien fue la aprendiz de Anakin Skywalker",
+            "Quien es la Jedi Togruta"
+        ],
+        "respuesta": "Ahsoka Tano es una Togruta que fue padawan de Anakin Skywalker. Dejó la Orden Jedi y luchó por la justicia durante y después de las Guerras Clon.",
+        "respuesta_yoda": "Padawan de Anakin, Ahsoka fue. A la Orden dejó, pero por la justicia luchó, sí.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien es Darth Maul",
+            "Quien es el sith de doble sable rojo",
+            "Como se llama el aprendiz de Darth Sidious con cuernos"
+        ],
+        "respuesta": "Darth Maul fue un Sith aprendiz de Darth Sidious. Conocido por su sable láser doble y su aspecto amenazante, sobrevivió a ser partido en dos y regresó como líder criminal.",
+        "respuesta_yoda": "Darth Maul, aprendiz de Sidious fue. Doble sable tenía, y sobrevivir logró. Oscuro camino siguió, sí.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien es Lando Calrissian",
+            "Quien es el amigo de Han Solo que dirige Ciudad Nube",
+            "Quien ayudó a destruir la segunda Estrella de la Muerte"
+        ],
+        "respuesta": "Lando Calrissian es un antiguo contrabandista y administrador de Ciudad Nube. Más tarde se unió a la Rebelión y ayudó a destruir la segunda Estrella de la Muerte.",
+        "respuesta_yoda": "Lando, amigo de Han es. Ciudad Nube gobernó, y la Estrella de la Muerte ayudó a destruir, mmm.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien es Jar Jar Binks",
+            "Como se llama el gungan de Naboo",
+            "Quien es el amigo torpe de la Padme"
+        ],
+        "respuesta": "Jar Jar Binks es un gungan del planeta Naboo. Aunque torpe, desempeñó un papel importante durante la República Galáctica.",
+        "respuesta_yoda": "Jar Jar, gungan torpe es. Pero importante fue, en su camino, sí.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien es Qui-Gon Jinn",
+            "Quien fue el maestro de Obi-Wan",
+            "Quien descubrió a Anakin Skywalker"
+        ],
+        "respuesta": "Qui-Gon Jinn fue un Maestro Jedi que entrenó a Obi-Wan Kenobi y descubrió a Anakin Skywalker. Era conocido por seguir la voluntad de la Fuerza más allá del Consejo.",
+        "respuesta_yoda": "Qui-Gon, sabio Jedi fue. A Anakin encontró, y la Fuerza siguió por su cuenta, mmm.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien es Jyn Erso",
+            "Quien robó los planos de la Estrella de la Muerte",
+            "Quien es la hija de Galen Erso"
+        ],
+        "respuesta": "Jyn Erso fue una luchadora de la Alianza Rebelde que lideró la misión para robar los planos de la Estrella de la Muerte.",
+        "respuesta_yoda": "Jyn Erso, valiente fue. Los planos robó y esperanza trajo, sí.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Quien es Cassian Andor",
+            "Quien ayudó a Jyn Erso en Rogue One",
+            "Quien era el espía de la Rebelión"
+        ],
+        "respuesta": "Cassian Andor fue un espía de la Alianza Rebelde que participó en la misión de Rogue One para obtener los planos de la Estrella de la Muerte.",
+        "respuesta_yoda": "Cassian, espía rebelde era. A Jyn ayudó, y por la causa dio todo, mmm.",
+        "veces_preguntado": 0
     }
 ]
