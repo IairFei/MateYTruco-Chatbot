@@ -16,7 +16,6 @@ vocalesSinTilde = ['a', 'e', 'i', 'o', 'u']
 primeraVez = True
 esYoda = False
 agregoPregunta = False
-esPregFrecuente = False
 boo = True
 
 # Archivos y carpetas
@@ -271,37 +270,38 @@ def verificarArchivos():
             existeCarpetaPreguntas = False
             try:
                 # Crear la carpeta ArchivosDeLectura
-                print("Creando carpeta ArchivosDeLectura...")
+                print("SYSTEM: Creando carpeta ArchivosDeLectura...")
                 os.makedirs("ArchivosDeLectura")
             except Exception as e:
                 # Manejar el error si no se puede crear la carpeta
-                print(f"Error al crear la carpeta: {e}")
+                manejarError(e, "Error al crear la carpeta ArchivosDeLectura")
                 verificarArchivos()
                 return
-            print("Carpeta 'ArchivosDeLectura' creada.")
+            print("SYSTEM: Carpeta 'ArchivosDeLectura' creada.")
             
             try:
                 # Crear el archivo preguntas.txt dentro de la carpeta ArchivosDeLectura
-                print("Creando archivo preguntas.json...")
+                print("SYSTEM: Creando archivo preguntas.json...")
                 crearArchivoPreguntas()
             except Exception as e:
                 # Manejar el error si no se puede crear el archivo
-                print(f"Error al crear el archivo: {e}")
+                manejarError(e, "Error al crear el archivo preguntas.json")
                 verificarArchivos()
                 return
-            print("Archivo 'preguntas.json' creado con preguntas iniciales.")
+            print("SYSTEM: Archivo 'preguntas.json' creado con preguntas iniciales.")
 
         # Verificar si el archivo preguntas.txt existe, si no existe, lo crea
         if not os.path.exists("ArchivosDeLectura/preguntas.json"):
             global existeArchivoPreguntas
             existeArchivoPreguntas = False
             try:
-                print("Creando archivo preguntas.json...")
+                print("SYSTEM: Creando archivo preguntas.json...")
                 crearArchivoPreguntas()
             except Exception as e:
-                print(f"Error al crear el archivo: {e}")
+                manejarError(e, "Error al crear el archivo preguntas.json")
+                verificarArchivos()
                 return
-            print("Archivo 'preguntas.json' creado con preguntas iniciales.")
+            print("SYSTEM: Archivo 'preguntas.json' creado con preguntas iniciales.")
         if not os.path.exists("Logs"):
             global existeCarpetaLogs
             existeCarpetaLogs=False
@@ -309,37 +309,39 @@ def verificarArchivos():
                 print("Creando carpeta Logs...")
                 os.makedirs("Logs")
             except Exception as e:
-                print(f"Error al crear la carpeta: {e} ")
-            print("Carpeta 'Logs' creada.")  
+                manejarError(e, "Error al crear la carpeta Logs")
+                verificarArchivos()
+                return
+            print("SYSTEM: Carpeta 'Logs' creada.")  
             try:
                 # Crear el archivo errorLogs.txt dentro de la carpeta Logs
-                print("Creando archivo errorLogs.txt...")
+                print("SYSTEM: Creando archivo errorLogs.txt...")
                 with open("Logs/errorLogs.txt", "w", encoding="utf-8") as file:
                     file.write("Registro de errores:\n")
             except Exception as e:
                 # Manejar el error si no se puede crear el archivo
-                print(f"Error al crear el archivo: {e}")
+                manejarError(e, "Error al crear el archivo errorLogs.txt")
                 verificarArchivos()
                 return
-            print("Archivo 'errorLogs.txt' creado.")
+            print("SYSTEM: Archivo 'errorLogs.txt' creado.")
         try:
             if not os.path.exists("Logs/errorLogs.txt"):
                 # Crear el archivo errorLogs.txt dentro de la carpeta Logs
-                print("Creando archivo errorLogs.txt...")
+                print("SYSTEM: Creando archivo errorLogs.txt...")
                 with open("Logs/errorLogs.txt", "w", encoding="utf-8") as file:
                     file.write("Registro de errores:\n")
-                print("Archivo 'errorLogs.txt' creado.")
+                print("SYSTEM: Archivo 'errorLogs.txt' creado.")
         except Exception as e:
             # Manejar el error si no se puede crear el archivo
-            print(f"Error al crear el archivo: {e}")
+            manejarError(e, "Error al crear el archivo errorLogs.txt")
             verificarArchivos()
             return
         if not os.path.exists("Logs/log.txt"):
             # Crear el archivo log.txt par guardar las interacciones
-            print("Creando archivo log.txt...")
+            print("SYSTEM: Creando archivo log.txt...")
             with open("Logs/log.txt", "w", encoding="utf-8") as file:
                 file.write("Registro de log:\n")
-            print("Archivo 'log.txt' creado.")                
+            print("SYSTEM: Archivo 'log.txt' creado.")                
     except Exception as e:
         manejarError(e, "Error al verificar o crear archivos.")
 def LstPalabrasClaves():
@@ -360,10 +362,10 @@ def LstPalabrasClaves():
     except FileNotFoundError:
         verificarArchivos()
         if existeArchivoPreguntas == False:
-            print("Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
+            print("SYSTEM: Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
         if existeCarpetaPreguntas == False:
-            print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
-        print("Por favor, vuelva a intentar.")
+            print("SYSTEM: Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
+        print("SYSTEM: Por favor, vuelva a intentar.")
     except Exception as e:
         manejarError(e, "Error al leer el archivo de preguntas para obtener palabras clave.")
         return palabrasClaves
@@ -503,8 +505,6 @@ def ortografia(entrada: str, listado: list) -> list:
 
 
 def preguntasFrecuentes():
-    global esPregFrecuente
-    esPregFrecuente = True
     # Se inicializan las listas para almacenar preguntas y respuestas
     try:
         # Se verifica si el archivo de preguntas existe, si no existe, se crea
@@ -523,40 +523,41 @@ def preguntasFrecuentes():
         for i, pregunta in enumerate(top3):
             #mostrar como string la pregunta
             print(f"{i+1}. {pregunta[0][0]}?")       
-        eleccionPregunta = input("¿Desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
+        eleccionPregunta = input("\nSYSTEM: ¿Desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
         while eleccionPregunta not in ["si", "no"]:
-            eleccionPregunta = input("No entendí, ¿desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
+            eleccionPregunta = input("\nSYSTEM: No entendí, ¿desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
         if eleccionPregunta == 'si':
             try:
-                preguntaElegida = int(input("SYSTEM: Escriba el numero de la pregunta que desea hacer: "))
+                preguntaElegida = int(input("\nSYSTEM: Escriba el numero de la pregunta que desea hacer: "))
                 while preguntaElegida > 3 or preguntaElegida < 1:
-                    preguntaElegida = int(input("No entendí, escriba el numero de la pregunta que desea hacer: "))
+                    preguntaElegida = int(input("\nSYSTEM: No entendí, escriba el numero de la pregunta que desea hacer: "))
             except ValueError:
                 # Solicitar nuevamente el número de la pregunta hasta que sea válido
                 while True:
                     try:
-                        preguntaElegida = int(input("SYSTEM: No entendí, escriba el número de la pregunta que desea hacer: "))
+                        preguntaElegida = int(input("\nSYSTEM: No entendí, escriba el número de la pregunta que desea hacer: "))
                         if 1 <= preguntaElegida <= 3:
                             break
                         else:
-                            print("SYSTEM: Por favor, ingrese un número válido entre 1 y 3.")
+                            print("\nSYSTEM: Por favor, ingrese un número válido entre 1 y 3.")
                     except ValueError:
-                        print("SYSTEM: Por favor, ingrese un número válido entre 1 y 3.")
-            busquedaTop3(top3, preguntaElegida, esPregFrecuente,esYoda)
+                        print("\nSYSTEM: Por favor, ingrese un número válido entre 1 y 3.")
+            busquedaTop3(top3, preguntaElegida, True,esYoda)
         return
     except KeyboardInterrupt:
         # Si el usuario interrumpe la ejecución, se maneja la excepción
         creditos()
         print("\nSYSTEM: Conversación finalizada, que la fuerza te acompañe.")
+        return
         
     # Si el archivo no existe, se verifica y crea
     except FileNotFoundError:
         verificarArchivos()
         if existeArchivoPreguntas == False and existeCarpetaPreguntas == True:
-            print("Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
+            print("SYSTEM: Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.\n")
         if existeCarpetaPreguntas == False and existeArchivoPreguntas == True:
-            print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
-        print("Por favor, vuelva a intentar.")    
+            print("SYSTEM: Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.\n")
+        print("SYSTEM: Por favor, vuelva a intentar.")    
     except Exception as e:
         # Si ocurre un error al leer el archivo, se maneja la excepción
         return manejarError(e, "Error leyendo las preguntas. -- Preguntas frecuentes.")    
@@ -603,14 +604,15 @@ def lectorPregunta(userInput, esYoda):
         # Si el usuario interrumpe la ejecución, se maneja la excepción
         creditos()
         print("\nSYSTEM: Conversación finalizada, que la fuerza te acompañe.")
+        return
     # Si el archivo no existe, se verifica y crea
     except FileNotFoundError:
         verificarArchivos()
         if existeArchivoPreguntas == False and existeCarpetaPreguntas == True:
-            print("Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
+            print("SYSTEM: Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.\n")
         if existeCarpetaPreguntas == False and existeArchivoPreguntas == True:
-            print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
-        print("Por favor, vuelva a intentar.")    
+            print("SYSTEM: Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.\n")
+        print("SYSTEM: Por favor, vuelva a intentar.")    
     except Exception as e:
         # Si ocurre un error al leer el archivo, se maneja la excepción
         return manejarError(e, "Error leyendo las preguntas. -- Lector de preguntas.")
@@ -625,6 +627,7 @@ def ayuda():
     print(" - Para salir del programa: escribir 'salir' o 'adios'")
     print(" - Para volver al menú principal: escribir 'volver a menu' o 'menu' o 'volver'")
     print(" - Para ver los créditos : escribir 'creditos' o 'equipo'")
+    print(" - Para ver la los comandos: escribir 'ayuda'")
     
 def inicioPrograma():
     
@@ -648,7 +651,7 @@ def inicioPrograma():
         print(" - C-3PO o C3PO")
 
         ayuda()
-        personaje = input("\nPor favor, escribí el nombre del personaje con el que querés hablar o algun comando: ")
+        personaje = input("\nSYSTEM: Por favor, escribí el nombre del personaje con el que querés hablar o algun comando: ")
         personaje = ortografia(personaje,pClaves)
 
         personaje = ' '.join(personaje)
@@ -662,6 +665,7 @@ def inicioPrograma():
     except KeyboardInterrupt:
         creditos()
         print("\nSYSTEM: Conversación finalizada, que la fuerza te acompañe.")
+        return
     except Exception as e:
         manejarError(e, "Error inesperado en el inicio del programa.")
 
@@ -709,7 +713,7 @@ def agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaCorregida,
         with open("Logs/log.txt", "w", encoding="utf-8") as file:
             verificarArchivos()
             with open("Logs/errorLogs.txt", "a", encoding="utf-8") as file:
-                file.write("Error: No se encontró el archivo de log. Se ha creado uno nuevo.\n")
+                file.write("SYSTEM: Error: No se encontró el archivo de log. Se ha creado uno nuevo.\n")
                 agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaCorregida, respuesta, personaje)
     except Exception as e:
         manejarError(e, "Error al agregar interacción al log.")
@@ -749,9 +753,9 @@ def agregarPregunta():
             entrada = entradaModificada
         else:
             entrada = entradaOriginal
-        agrPregunta = input(f"Desea agregar la pregunta '{entrada}' al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]{.},;:<> ")
+        agrPregunta = input(f"\nSYSTEM: Desea agregar la pregunta '{entrada}' al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]{.},;:<> ")
         while agrPregunta not in ["si", "no"]:
-            agrPregunta = input("SYSTEM: No entendí, ¿desea agregar la pregunta al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡ -_[]{.]},;:<>")
+            agrPregunta = input("\nSYSTEM: No entendí, ¿desea agregar la pregunta al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡ -_[]{.]},;:<>")
 
         if agrPregunta == 'si':
             preguntaEnArchivo = True
@@ -767,20 +771,20 @@ def agregarPregunta():
                         cont += 1
                     cont = 0
                 if ya_existe:
-                    print(f"La pregunta '{entrada}' ya existe en el sistema. Debe reformular la pregunta.")
-                    entrada = input(f"SYSTEM: Escriba la pregunta que desea agregar: ")
+                    print(f"\nSYSTEM: La pregunta '{entrada}' ya existe en el sistema. Debe reformular la pregunta.\n")
+                    entrada = input(f"\nSYSTEM: Escriba la pregunta que desea agregar: ")
                     entrada = entrada.lower().strip("¿?#$%&/()¡! ")
                     while entrada == "":
-                        entrada = input("SYSTEM: No entendí, escriba la pregunta que desea agregar: ")
+                        entrada = input("\nSYSTEM: No entendí, escriba la pregunta que desea agregar: ")
                         entrada = entrada.lower().strip("¿?#$%&/()¡! ")
                 else:
-                    print(f"La pregunta '{entrada}' no existe en el sistema. Puede agregarla.")
+                    print(f"\nSYSTEM: La pregunta '{entrada}' no existe en el sistema. Puede agregarla.")
                     preguntaEnArchivo = False
             if preguntaEnArchivo == False:
-                answer = input(f"SYSTEM: Escriba la respuesta que desea agregar para la pregunta '{entrada}': ")
+                answer = input(f"\nSYSTEM: Escriba la respuesta que desea agregar para la pregunta '{entrada}': ")
                 if answer == "":
                     while answer == "":
-                        answer = input(f"SYSTEM: No entendí, escriba la respuesta que desea agregar para la pregunta '{entrada}': ")
+                        answer = input(f"\nSYSTEM: No entendí, escriba la respuesta que desea agregar para la pregunta '{entrada}': ")
                         answer = answer.lower().strip("¿?#$%&/()¡! ")
                 respuestaAgregada = answer
                 preguntas_data.append({
@@ -792,16 +796,16 @@ def agregarPregunta():
                 try:
                     with open("ArchivosDeLectura/preguntas.json", "w", encoding="utf-8") as file:
                         json.dump(preguntas_data, file, ensure_ascii=False, indent=4)
-                    print("\nPregunta y respuesta agregadas correctamente al sistema.\n")
+                    print("\nSYSTEM: Pregunta y respuesta agregadas correctamente al sistema.\n")
                     agregoPregunta = True
                     preguntaAgregada = entrada
                 except FileNotFoundError:
                     verificarArchivos()
                     if existeArchivoPreguntas == False:
-                        print("Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
+                        print("SYSTEM: Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.\n")
                     if existeCarpetaPreguntas == False:
-                        print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
-                    print("Por favor, vuelva a intentar.")
+                        print("SYSTEM: Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.\n")
+                    print("SYSTEM: Por favor, vuelva a intentar.\n")
                     agregarPregunta(preguntaAgregada)
         else:
             respuestaAgregada=""
@@ -810,14 +814,15 @@ def agregarPregunta():
     except FileNotFoundError:
         verificarArchivos()
         if existeArchivoPreguntas == False:
-            print("Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
+            print("\nSYSTEM: Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
         if existeCarpetaPreguntas == False:
-            print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
-        print("Por favor, vuelva a intentar.")
+            print("\nSYSTEM: Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
+        print("\nSYSTEM: Por favor, vuelva a intentar.")
         agregarPregunta(entradaOriginal)
     except KeyboardInterrupt:
         creditos()
         print("\nSYSTEM: Conversación finalizada, que la fuerza te acompañe.")
+        return
     except Exception as e:
         manejarError(e, "Error al agregar la pregunta.")
 
@@ -903,8 +908,6 @@ def busquedaTop3(listaTop3, preguntaElegida, esPregFrecuente, esYoda):
             quest = listaTop3[preguntaElegida][0][0]
         else:
             quest = listaTop3[preguntaElegida-1]  # Ajuste de índice para evitar out of range
-        print(f"\nPregunta elegida: ", quest)
-        print(f"\nPregunta elegida: {quest.capitalize()}?")
         questGroup.append(quest.lower())
 
         for item in preguntas_data:
@@ -921,10 +924,20 @@ def busquedaTop3(listaTop3, preguntaElegida, esPregFrecuente, esYoda):
                         answ = item.get("respuesta_yoda", "")
                     else:
                         answ = item.get("respuesta", "")
-
-        print(f"\nRespuesta: {answ}")
+        quest = "Pregunta: " + quest.capitalize() + "?"
+        answ = "Respuesta: " + answ.capitalize()
+        if esPregFrecuente:
+            textoPersonalizado("Tú", quest)
+            textoPersonalizado("SYSTEM", answ)
+        else: 
+            if esYoda:
+                textoPersonalizado("Tú", quest)
+                textoPersonalizado("YODA", answ)
+            else:
+                textoPersonalizado("Tú", quest)
+                textoPersonalizado("C-3PO", answ)
         
-
+        esPregFrecuente = False
         # Incrementar contador de uso
         for item in preguntas_data:
             if quest in item.get("preguntas", []):
@@ -934,17 +947,18 @@ def busquedaTop3(listaTop3, preguntaElegida, esPregFrecuente, esYoda):
         with open("ArchivosDeLectura/preguntas.json", "w", encoding="utf-8") as file:
             json.dump(preguntas_data, file, ensure_ascii=False, indent=4)
         
-        input("Presione Enter para continuar...")
+        input("SYSTEM: Presione Enter para continuar...")
 
         return
 
     except KeyboardInterrupt:
         creditos()
         print("\nSYSTEM: Conversación finalizada, que la fuerza te acompañe.")
+        return
 
     except FileNotFoundError:
         verificarArchivos()
-        print("Se han regenerado los archivos necesarios. Vuelva a intentar.")
+        print("\nSYSTEM: Se han regenerado los archivos necesarios. Vuelva a intentar.")
 
     except Exception as e:
         return manejarError(e, "Error leyendo las preguntas. -- busquedaTop3")
@@ -972,15 +986,15 @@ def eleccionPersonaje(personaje):
         while True:
             if personaje.lower() in ["creditos", "equipo"]:
                 creditos()
-                input("Presione Enter para continuar...")
+                input("SYSTEM: Presione Enter para continuar...")
                 inicioPrograma()
                 break
             if personaje.lower() in ["salir", "adios"]:
                 creditos()
-                print("Conversación finalizada, que la fuerza te acompañe.")
+                print("SYSTEM: Conversación finalizada, que la fuerza te acompañe.")
                 break
             if personaje.lower() in ["volver a menu", "menu", "volver"]:
-                print("Volviendo al menú principal...")
+                print("SYSTEM: Volviendo al menú principal...")
                 return inicioPrograma()
             if personaje.lower() in ["frecuentes", "preguntas frecuentes"]:
                 preguntasFrecuentes()
@@ -1015,22 +1029,22 @@ def eleccionPersonaje(personaje):
                 break
             if entradaModificada in ["creditos", "equipo"]:
                 creditos()
-                input("Presione Enter para continuar...")
+                input("SYSTEM: Presione Enter para continuar...")
                 eleccionPersonaje(personaje)
                 break
             if entradaModificada in ["salir", "adios"]:
                 creditos()
-                print("Conversación finalizada, que la fuerza te acompañe.")
+                print("SYSTEM: Conversación finalizada, que la fuerza te acompañe.")
                 break
             if entradaModificada in ["frecuentes", "preguntas frecuentes"]:
                 preguntasFrecuentes()
                 eleccionPersonaje(personaje)
                 break
             if entradaModificada in ["volver a menu", "menu", "volver"]:
-                print("Volviendo al menú principal...")
+                print("SYSTEM: Volviendo al menú principal...")
                 return inicioPrograma()
             if entradaModificada in ["cambiar de personaje", "cambiar personaje"]:
-                personaje = input('¿Qué personaje desea elegir? ')
+                personaje = input('SYSTEM: ¿Qué personaje desea elegir? ')
                 primeraVez = True
                 continue
 
@@ -1086,7 +1100,7 @@ def eleccionPersonaje(personaje):
                             for i, pregunta in enumerate(top3MasParecidas):
                                 if pregunta:
                                     print(f"{i + 1}. ¿{pregunta.capitalize()}?")
-                            eleccionPregunta = input("¿Desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
+                            eleccionPregunta = input("SYSTEM: ¿Desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
                             while eleccionPregunta not in ["si", "no"]:
                                 eleccionPregunta = input("SYSTEM: No entendí, ¿desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
                             if eleccionPregunta == 'si':
@@ -1107,9 +1121,9 @@ def eleccionPersonaje(personaje):
                                             print("SYSTEM: Por favor, ingrese un número válido entre 1 y 3.")
 
                                 if esYoda:
-                                    busquedaTop3(top3MasParecidas[:4], preguntaElegida, esPregFrecuente, True)
+                                    busquedaTop3(top3MasParecidas[:4], preguntaElegida, False, True)
                                 else:
-                                    busquedaTop3(top3MasParecidas[:4], preguntaElegida, esPregFrecuente, False)
+                                    busquedaTop3(top3MasParecidas[:4], preguntaElegida, False, False)
                             else:
                                 respuesta = agregarPregunta()
                                 agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuesta, personaje.upper())
@@ -1124,11 +1138,13 @@ def eleccionPersonaje(personaje):
                     except KeyboardInterrupt:
                         creditos()
                         print("\nSYSTEM: Conversación finalizada, que la fuerza te acompañe.")
+                        return
                     except Exception as e:
                         manejarError(e, "Error procesando la pregunta.")
     except KeyboardInterrupt:
         creditos()
         print("\nSYSTEM: Conversación finalizada, que la fuerza te acompañe.")
+        return
     except Exception as e:
         manejarError(e, "Error en la conversación.")
 
@@ -1144,10 +1160,10 @@ def sumarVecesPreguntado(mejorIndice):
     except FileNotFoundError:
         verificarArchivos()
         if existeArchivoPreguntas == False:
-            print("Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
+            print("SYSTEM: Error: No se encontró el archivo de preguntas para agregar. Se ha creado uno nuevo con preguntas iniciales.")
         if existeCarpetaPreguntas == False:
-            print("Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
-        print("Por favor, vuelva a intentar.")
+            print("SYSTEM: Error: No se encontró la carpeta de preguntas para agregar. Se ha creado una nueva junto a un archivo con preguntas iniciales.")
+        print("SYSTEM: Por favor, vuelva a intentar.")
         inicioPrograma()
 
 
@@ -1169,16 +1185,16 @@ def manejarError(e, mensaje):
             file.write(f"Error: {mensaje}\n")
             file.write(f"Detalles del error: {e}\n")
             file.write("-" * 50 + "\n")
-        print(f"Se ha producido un error: {mensaje}. Se ha registrado en el archivo de logs.")
+        print(f"SYSTEM: Se ha producido un error: {mensaje}. Se ha registrado en el archivo errorLogs.txt.")
     except FileNotFoundError:
         with open("Logs/errorLogs.txt", "w", encoding="utf-8") as file:
             file.write("Registro de errores:\n")
             file.write(f"Error: {mensaje}\n")
             file.write(f"Detalles del error: {e}\n")
             file.write("-" * 50 + "\n")
-        print("Archivo 'errorLogs.txt' creado y error registrado.")
+        print("SYSTEM: Archivo 'errorLogs.txt' creado y error registrado.")
     except Exception as e:
-        print(f"Error al guardar el error en el archivo de registro: {e}")
+        print(f"SYSTEM: Error al guardar el error en el archivo de registro: {e}")
         
 # Ejecutar el programa principal
 def unicaVez():
@@ -1207,6 +1223,7 @@ def unicaVez():
     except KeyboardInterrupt:
         creditos()
         print("\nSYSTEM: Conversación finalizada, que la fuerza te acompañe.")
+        return
     except Exception as e:
         manejarError(e, "Error en la ejecución inicial del programa.")
         return

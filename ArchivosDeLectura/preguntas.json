@@ -61,7 +61,8 @@
         "preguntas": [
             "Cuando se estreno la sexta pelicula",
             "En que año se estreno Revenge of the Sith",
-            "En que año se estreno La Venganza de los Sith"
+            "En que año se estreno La Venganza de los Sith",
+            "frecuentes"
         ],
         "respuesta": "La sexta película, “Revenge of the Sith”, (La Venganza de los Sith), se estrenó en 2005.",
         "respuesta_yoda": "En 2005, “Revenge of the Sith” (La Venganza de los Sith), estrenada fue, sexta película, es.",
@@ -144,7 +145,7 @@
         ],
         "respuesta": "Han Solo fue asesinado por su hijo, Ben Solo/Kylo Ren, en la película “The Force Awakens” (El Despertar de la Fuerza), estrenada en 2015.",
         "respuesta_yoda": "Por su hijo, asesinado Han Solo fue. Ben Solo, también Kylo Ren llamado es, en “The Force Awakens”, ocurrió, mmm.",
-        "veces_preguntado": 1
+        "veces_preguntado": 100
     },
     {
         "preguntas": [
@@ -336,7 +337,8 @@
             "Que es el Halcon Milenario",
             "De quien es el Halcon Milenario",
             "A quien pertenece el Halcon Milenario",
-            "Halcon"
+            "Halcon",
+            "mato han solo"
         ],
         "respuesta": "El Halcón Milenario es la nave mas icónica de Star Wars. Es pilotada por el contrabandista y rebelde Han Solo.",
         "respuesta_yoda": "Rápido y audaz, el Halcón Milenario, la nave del contrabandista Han Solo es.",
@@ -368,7 +370,8 @@
             "Quien es el compañero de han solo",
             "Quien es Chewbacca",
             "Quien es Chewie",
-            "Quien es Chubaca"
+            "Quien es Chubaca",
+            "mato han solo"
         ],
         "respuesta": "Chewbacca es el wookie mas famoso de Star Wars, también es el amigo de Han solo y copiloto del Halcón Milenario.",
         "respuesta_yoda": "El wookie mas famoso, mi amigo Chewbacca es. Compañero de Solo y copiloto del Halcón Milenario su rol es, hmm.",
@@ -532,7 +535,8 @@
             "Quien es Jango Fett",
             "Quien es el padre de Boba Fett",
             "De donde vienen los clones",
-            "Jango"
+            "Jango",
+            "frecuentes"
         ],
         "respuesta": "Jango Fett fue un cazarrecompensas mandaloriano. Su ADN se usó para crear el ejército clon y Boba Fett fue criado como su hijo.",
         "respuesta_yoda": "Clonador original, Jango Fett fue. A Boba crió como hijo, todos los clones su imagen tienen.",
