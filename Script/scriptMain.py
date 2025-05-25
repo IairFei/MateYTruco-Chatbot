@@ -895,20 +895,20 @@ def eleccionPersonaje(personaje):
             entrada = entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>=")
             palabrasClaves.extend(pClaves)
             entrada = ortografia(entrada,palabrasClaves)
-            entrada = ' '.join(entrada)
+
             
-            if entrada.lower() in ["salir", "adios"]:
+            if entradaModificada.lower() in ["salir", "adios"]:
                 print("Conversación finalizada, que la fuerza te acompañe.")
                 break
-            if entrada.lower() in ["volver a menu", "menu", "volver"]:
+            if entradaModificada.lower() in ["volver a menu", "menu", "volver"]:
                 print("Volviendo al menú principal...")
                 return inicioPrograma()
-            if entrada.lower() in ["cambiar de personaje", "cambiar personaje"]:
+            if entradaModificada.lower() in ["cambiar de personaje", "cambiar personaje"]:
                 personaje = input('¿Qué personaje desea elegir? ')
                 primeraVez = True
                 continue
 
-            if entrada.lower() == '':
+            if entradaModificada.lower() == '':
                 primeraVez = False
                 print("No entendí, por favor escriba una pregunta.")
                 continue
