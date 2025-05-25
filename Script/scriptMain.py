@@ -17,7 +17,6 @@ vocalesSinTilde = ['a', 'e', 'i', 'o', 'u']
 primeraVez = True
 esYoda = False
 agregoPregunta = False
-esPregFrecuente= False
 
 # Archivos y carpetas
 existeArchivoPreguntas = True
@@ -482,6 +481,7 @@ def ortografia(entrada, listado):
 def preguntasFrecuentes():
     questGroup = []
     quest = []
+    answerGroup = []
     # Se inicializan las listas para almacenar preguntas y respuestas
     try:
         # Se verifica si el archivo de preguntas existe, si no existe, se crea
@@ -499,7 +499,7 @@ def preguntasFrecuentes():
         print("\nPreguntas frecuentes:")
         for i, pregunta in enumerate(top3):
             #mostrar como string la pregunta
-            print(f"{i+1}. {pregunta[0][0]}?")       
+            print(f"{i+1}. {pregunta[0][0]}")       
         eleccionPregunta = input("¿Desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
         while eleccionPregunta not in ["si", "no"]:
             eleccionPregunta = input("No entendí, ¿desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
@@ -510,8 +510,20 @@ def preguntasFrecuentes():
                     preguntaElegida = int(input("No entendí, escriba el numero de la pregunta que desea hacer: "))
             except ValueError:
                 preguntaElegida = int(input("No entendí, escriba el numero de la pregunta que desea hacer: "))
-            esPregFrecuente = True
-            busquedaTop3(top3, preguntaElegida, esPregFrecuente)
+            preguntaElegida-=1
+            quest = top3[preguntaElegida][0][0]
+            print(f"\nPregunta elegida: {quest}")
+            questGroup.append(quest)
+            # Se crea una lista de respuestas para la pregunta elegida
+            for item in preguntas_data:
+                if quest in item.get("preguntas", []):
+                    if item.get("respuesta", "") != "":
+                        answ = (item.get("respuesta", ""))
+            print(f"\nRespuesta: {answ}")
+            # Se incrementa la cantidad de veces que se ha preguntado
+            for item in preguntas_data:
+                if quest in item.get("preguntas", []):
+                    item["veces_preguntado"] += 1
         return
     except KeyboardInterrupt:
         # Si el usuario interrumpe la ejecución, se maneja la excepción
@@ -527,7 +539,7 @@ def preguntasFrecuentes():
         print("Por favor, vuelva a intentar.")    
     except Exception as e:
         # Si ocurre un error al leer el archivo, se maneja la excepción
-        return manejarError(e, "Error mostrando las preguntas frecuentes.")    
+        return manejarError(e, "Error leyendo las preguntas.")    
 
 def lectorPregunta(userInput, esYoda):
     """
@@ -792,38 +804,31 @@ def buscarRespuesta(userInput, questGroup, answGroup):
         manejarError(e, "Error en la búsqueda de respuesta")
         return "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema."
     
-def busquedaTop3(listaTop3, preguntaElegida, esPregFrecuente, esYoda):
-    questGroup = []
-    quest = []
-    answ = ""
+def busquedaTop3():
     with open("ArchivosDeLectura/preguntas.json", "r", encoding="utf-8") as file:
         preguntas_data = json.load(file)
+    for i,preguntas in enumerate(top3MasParecidas[:4]):
+        if preguntas != '':
+            print(f'{i}.¿{preguntas.capitalize()}?')
+    questGroup = []
+    quest = []
+    answerGroup = []
+
     try:
-        if esPregFrecuente == True:
-            preguntaElegida-=1
-            quest = listaTop3[preguntaElegida][0][0]
-        else:
-            quest = listaTop3[preguntaElegida]
-        print(f"\nPregunta elegida: {quest.capitalize()}?")
-        questGroup.append(quest.lower())
+        preguntaElegida-=1
+        quest = top3[preguntaElegida][0][0]
+        print(f"\nPregunta elegida: {quest}")
+        questGroup.append(quest)
         # Se crea una lista de respuestas para la pregunta elegida
         for item in preguntas_data:
-            preguntas= item.get("preguntas", [])
-            for i in range (len(preguntas)):
-                if preguntas[i].lower() == questGroup[0]:
-                    if esYoda == False:
-                        if item.get("respuesta", "") != "":
-                            answ = (item.get("respuesta", ""))
-                    else:
-                        if item.get("respuesta_yoda", "") != "":
-                            answ = (item.get("respuesta_yoda", ""))
+            if quest in item.get("preguntas", []):
+                if item.get("respuesta", "") != "":
+                    answ = (item.get("respuesta", ""))
         print(f"\nRespuesta: {answ}")
         # Se incrementa la cantidad de veces que se ha preguntado
         for item in preguntas_data:
             if quest in item.get("preguntas", []):
                 item["veces_preguntado"] += 1
-        esPregFrecuente = False
-        esYoda = False
         return
     except KeyboardInterrupt:
         # Si el usuario interrumpe la ejecución, se maneja la excepción
@@ -892,18 +897,18 @@ def eleccionPersonaje(personaje):
             entrada = ortografia(entrada,palabrasClaves)
 
             
-            if entradaModificada.lower() in ["salir", "adios"]:
+            if entradaModificada in ["salir", "adios"]:
                 print("Conversación finalizada, que la fuerza te acompañe.")
                 break
-            if entradaModificada.lower() in ["volver a menu", "menu", "volver"]:
+            if entradaModificada in ["volver a menu", "menu", "volver"]:
                 print("Volviendo al menú principal...")
                 return inicioPrograma()
-            if entradaModificada.lower() in ["cambiar de personaje", "cambiar personaje"]:
+            if entradaModificada in ["cambiar de personaje", "cambiar personaje"]:
                 personaje = input('¿Qué personaje desea elegir? ')
                 primeraVez = True
                 continue
 
-            if entradaModificada.lower() == '':
+            if entradaModificada == '':
                 primeraVez = False
                 print("No entendí, por favor escriba una pregunta.")
                 continue
@@ -921,15 +926,11 @@ def eleccionPersonaje(personaje):
                 case 'yoda' | 'c3po':
                     primeraVez = False
                     try:
-                        
-                        entrada = entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>=")
-                        entrada = ortografia(entrada,palabrasClaves)
-                        if personaje == 'yoda':
-                            esYoda=True
-                            respuesta = lectorPregunta(entrada, True)
+                        if personaje == 'yoda':        
+                                respuesta = lectorPregunta(entrada, True)
                         else:
-                            esYoda=False
-                            respuesta = lectorPregunta(entrada, False)
+                                respuesta = lectorPregunta(entrada, False)
+
                         if respuesta == "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.":
                             textoPersonalizado(personaje.upper(), respuesta)
                             respuesta = ''
@@ -944,38 +945,21 @@ def eleccionPersonaje(personaje):
                             agregarPregunta()
                             textoPersonalizado(personaje.upper(), 'Hazme otra pregunta')
                             return eleccionPersonaje(personaje)
+                        sumarVecesPreguntado(numMejorIndice)
+                        textoPersonalizado(personaje.upper(), respuesta)
                         if huboCorreccionOrtografica == True:
                             correcta = input("Era la respuesta correcta? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>=")
                             while correcta not in ["si", "no"]:
                                 correcta = input("No entendí, ¿era la respuesta correcta? (si/no): ").lower()
                             if correcta == 'no':
-                                for i,preguntas in enumerate(top3MasParecidas[:4]):
-                                    if preguntas != '':
-                                        print(f'{i}.¿{preguntas.capitalize()}?')
-                                eleccionPregunta = input("¿Desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
-                                while eleccionPregunta not in ["si", "no"]:
-                                    eleccionPregunta = input("No entendí, ¿desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
-                                if eleccionPregunta == 'si':
-                                    try:
-                                        preguntaElegida = int(input("Escriba el numero de la pregunta que desea hacer: "))
-                                        while preguntaElegida > 3 or preguntaElegida < 1:
-                                            preguntaElegida = int(input("No entendí, escriba el numero de la pregunta que desea hacer: "))
-                                    except ValueError:
-                                        preguntaElegida = int(input("No entendí, escriba el numero de la pregunta que desea hacer: "))
-                                    if esYoda:
-                                        busquedaTop3(top3MasParecidas[:4], preguntaElegida, esPregFrecuente, True)
-                                    else:
-                                        busquedaTop3(top3MasParecidas[:4], preguntaElegida, esPregFrecuente, False)
-                                else:
+                                if busquedaTop3() != '':
                                     agregarPregunta()
                                 textoPersonalizado(personaje.upper(), 'Hazme otra pregunta')
                                 return eleccionPersonaje(personaje)
                             if correcta == 'si':
-                                sumarVecesPreguntado(numMejorIndice)
+                                if huboCorreccionOrtografica == True:
+                                    sumarVecesPreguntado(numMejorIndice)
                                 textoPersonalizado(personaje.upper(), 'Hazme otra pregunta')
-                        else:
-                            sumarVecesPreguntado(numMejorIndice)
-                            textoPersonalizado(personaje.upper(), respuesta)
                         agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuesta, personaje.upper())
                         respuesta=''
                         preguntaEnArchivo=''
@@ -1022,6 +1006,9 @@ def manejarError(e, mensaje):
         print("Archivo 'errorLogs.txt' creado y error registrado.")
     except Exception as e:
         print(f"Error al guardar el error en el archivo de registro: {e}")
+    finally:
+        # Asegurarse de que la entrada original se resetea
+        print("estoy en el finally")
         
 # Ejecutar el programa principal
 ancho = 70
