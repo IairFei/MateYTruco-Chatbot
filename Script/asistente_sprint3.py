@@ -526,17 +526,23 @@ def preguntasFrecuentes():
         eleccionPregunta = input("¿Desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
         while eleccionPregunta not in ["si", "no"]:
             eleccionPregunta = input("No entendí, ¿desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
-        if eleccionPregunta == 'si':
-            try:
-                preguntaElegida = int(input("Escriba el numero de la pregunta que desea hacer: "))
-                while preguntaElegida > 3 or preguntaElegida < 1:
-                    preguntaElegida = int(input("No entendí, escriba el numero de la pregunta que desea hacer: "))
-            except ValueError:
-                preguntaElegida = int(input("No entendí, escriba el numero de la pregunta que desea hacer: "))
-            esPregFrecuente = True
-            busquedaTop3(top3, preguntaElegida, esPregFrecuente,esYoda)
-            
-            input("Presione Enter para continuar...")
+            if eleccionPregunta == 'si':
+                try:
+                    preguntaElegida = int(input("Escriba el numero de la pregunta que desea hacer: "))
+                    while preguntaElegida > 3 or preguntaElegida < 1:
+                        preguntaElegida = int(input("No entendí, escriba el numero de la pregunta que desea hacer: "))
+                except ValueError:
+                    # Solicitar nuevamente el número de la pregunta hasta que sea válido
+                    while True:
+                        try:
+                            preguntaElegida = int(input("No entendí, escriba el número de la pregunta que desea hacer: "))
+                            if 1 <= preguntaElegida <= 3:
+                                break
+                            else:
+                                print("Por favor, ingrese un número válido entre 1 y 3.")
+                        except ValueError:
+                            print("Por favor, ingrese un número válido entre 1 y 3.")
+                busquedaTop3(top3, preguntaElegida, esPregFrecuente,esYoda)
         return
     except KeyboardInterrupt:
         # Si el usuario interrumpe la ejecución, se maneja la excepción
@@ -904,6 +910,7 @@ def busquedaTop3(listaTop3, preguntaElegida, esPregFrecuente, esYoda):
                         answ = item.get("respuesta", "")
 
         print(f"\nRespuesta: {answ}")
+        
 
         # Incrementar contador de uso
         for item in preguntas_data:
@@ -913,6 +920,8 @@ def busquedaTop3(listaTop3, preguntaElegida, esPregFrecuente, esYoda):
         # Guardar JSON actualizado
         with open("ArchivosDeLectura/preguntas.json", "w", encoding="utf-8") as file:
             json.dump(preguntas_data, file, ensure_ascii=False, indent=4)
+        
+        input("Presione Enter para continuar...")
 
         return
 
