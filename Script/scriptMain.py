@@ -30,6 +30,42 @@ numMejorIndice = -1
 preguntaEnArchivo = ""
 cantCorreccionesOrtograficas = 0
 
+def textoPersonalizado(personaje, mensaje):
+    palabras = mensaje.split()
+    lineas = []
+    linea_actual = ""
+    
+
+    for palabra in palabras:
+        if len(linea_actual) + len(palabra) + 1 <= 50:
+            if linea_actual != '':
+                linea_actual += " "
+            linea_actual += palabra
+        else:   
+            lineas.append(linea_actual)
+            linea_actual = palabra
+    if linea_actual:
+        lineas.append(linea_actual)
+
+    ancho = 0
+    for linea in lineas:
+        if len(linea) > ancho:
+            ancho = len(linea)
+
+    espaciadoParaUsuario = 60
+
+    if personaje == "Tú":
+        print(" " * (espaciadoParaUsuario - ancho - 4 ) + "╭" + "─" * (ancho + 2) + "╮")
+        for linea in lineas:
+            print(" " * (espaciadoParaUsuario - ancho - 4 ) + "│ " + linea.ljust(ancho) + " │")
+        print(" " * (espaciadoParaUsuario - ancho - 4) + "╰" + "─" * (ancho + 1) + "\|")
+        print(" " * espaciadoParaUsuario + personaje)
+    else:
+        print("  ╭" + "─" * (ancho + 2) + "╮")
+        for linea in lineas:
+            print("  │ " + linea.ljust(ancho) + " │")
+        print("  |/" + "─" * (ancho + 1) + "╯")
+        print('', personaje)
 
 
 def crearArchivoPreguntas():
@@ -362,6 +398,7 @@ def ortografia(entrada, listado):
         global entradaModificada
         global huboCorreccionOrtografica
         global cantCorreccionesOrtograficas
+        global articulos
         huboCorreccionOrtografica = False
         entradaOriginal = entrada
         cantCorreccionesOrtograficas = 0
@@ -389,12 +426,14 @@ def ortografia(entrada, listado):
                 while i < len(coincidencias) and  i < 3 :
                     if palabra == coincidencias[i]:
                         break
-                    print(f"\nPalabra no encontrada: '{palabra}'")
-                    print(f"¿Quisiste decir '{coincidencias[i]}'?")
-                    respuesta = input("Escriba 'si' para confirmar o 'no' para continuar: ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<> ")
+                    print(f"⚠︎ Palabra no encontrada: '{palabra}'")
+                    print(f"¿Quisiste decir '{coincidencias[i]}'? \n")
+                    print("Escriba 'si' para confirmar o 'no' para continuar:  ", end="")
+                    respuesta =  input("").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>=")
+                    print('\033[F\033[K', end='')
                     while respuesta not in ["si", "no"]:
                         respuesta = input(f"No entendí, ¿desea modificar la palabra {palabra} por {coincidencias[i]}? (si/no): ")
-                        respuesta = respuesta.lower().strip("¿?#$%&/()!¡ -_[]{.],;:<>")
+                        respuesta = respuesta.lower().strip("¿?#$%&/()!¡ -_[]{.],;:<>=")
 
                     posicion = lista_palabras.index(palabra)
                     if respuesta == 'si':
@@ -466,6 +505,7 @@ def preguntasFrecuentes():
     except KeyboardInterrupt:
         # Si el usuario interrumpe la ejecución, se maneja la excepción
         print("\nConversación finalizada, que la fuerza te acompañe.")
+        
     # Si el archivo no existe, se verifica y crea
     except FileNotFoundError:
         verificarArchivos()
@@ -776,7 +816,10 @@ def eleccionPersonaje(personaje):
                 print(f"\nElegiste hablar con {personaje.upper()}. Puedes hacerle preguntas o cambiar de personaje escribiendo 'cambiar personaje'.")
                 print("Escribe 'salir' o 'adios' para finalizar la conversación.\n")
 
-            entrada = input("Tú: ")
+            print("Tú: ", end="")
+            entrada = input()
+            print('\033[F\033[K', end='')  #sube una línea y la borra
+            textoPersonalizado("Tú", entrada)
 
             if entrada.lower() in ["salir", "adios"]:
                 print("Conversación finalizada, que la fuerza te acompañe.")
@@ -808,40 +851,40 @@ def eleccionPersonaje(personaje):
                     primeraVez = False
                     try:
                         
-                        entrada = entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
+                        entrada = entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>=")
                         entrada = ortografia(entrada,palabrasClaves)
                         if personaje == 'yoda':
                             respuesta = lectorPregunta(entrada, True)
                         else:
                             respuesta = lectorPregunta(entrada, False)
                         if respuesta == "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.":
-                            print(f"{personaje.upper()}:", respuesta)
+                            textoPersonalizado(personaje.upper(), respuesta)
                             respuesta = ''
                             agregarPregunta()
                             agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuestaAgregada, personaje.upper())
-                            print(f"{personaje.upper()}: Hazme otra pregunta")
+                            textoPersonalizado(personaje.upper(), 'Hazme otra pregunta')
                             """Una vez que se agrega la pregunta, se envia al usuario al inicio del programa para que pueda elegir con que personaje chatear."""
                             return eleccionPersonaje(personaje)
                         if respuesta == None:
-                            print(f"{personaje.upper()}: No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.")
+                            textoPersonalizado(personaje.upper(), ' No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.a')
                             respuesta = ''
                             agregarPregunta()
-                            print(f"{personaje.upper()}: Hazme otra pregunta")
+                            textoPersonalizado(personaje.upper(), 'Hazme otra pregunta')
                             return eleccionPersonaje(personaje)
                         sumarVecesPreguntado(numMejorIndice)
-                        print(f"{personaje.upper()}:", respuesta)
+                        textoPersonalizado(personaje.upper(), respuesta)
                         if huboCorreccionOrtografica == True:
-                            correcta = input("Era la respuesta correcta? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
+                            correcta = input("Era la respuesta correcta? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>=")
                             while correcta not in ["si", "no"]:
                                 correcta = input("No entendí, ¿era la respuesta correcta? (si/no): ").lower()
                             if correcta == 'no':
                                 agregarPregunta()
-                                print(f"{personaje.upper()}: Hazme otra pregunta")
+                                textoPersonalizado(personaje.upper(), 'Hazme otra pregunta')
                                 return eleccionPersonaje(personaje)
                             if correcta == 'si':
                                 if huboCorreccionOrtografica == True:
                                     sumarVecesPreguntado(numMejorIndice)
-                                print(f"{personaje.upper()}: Hazme otra pregunta")
+                                textoPersonalizado(personaje.upper(), 'Hazme otra pregunta')
                         agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuesta, personaje.upper())
                         respuesta=''
                         preguntaEnArchivo=''
