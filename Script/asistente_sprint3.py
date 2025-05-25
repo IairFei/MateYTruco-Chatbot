@@ -17,6 +17,7 @@ primeraVez = True
 esYoda = False
 agregoPregunta = False
 esPregFrecuente = False
+boo = True
 
 # Archivos y carpetas
 existeArchivoPreguntas = True
@@ -42,7 +43,11 @@ numMejorIndice = -1
 top3MasParecidas = []
 porcentajeAcierto = 0
 
-
+def borrarLineas(cant, boo):
+    if boo == True:
+        for i in range(cant):
+            print('\033[F\033[K', end='')
+            
 
 def textoPersonalizado(personaje, mensaje):
     palabras = mensaje.split()
@@ -393,6 +398,7 @@ def limpiadorFrases(input):
     except Exception as e:
         manejarError(e, "Error en el limpiador de frases.")
         return
+        
 def stem_basico(palabra):
     for sufijo in ['ando', 'iendo', 'cion', 'sion', 'mente', 'ado', 'ido', 'ar', 'er', 'ir', 'os', 'as', 'es']:
         if palabra.endswith(sufijo):
@@ -428,7 +434,7 @@ def ortografia(entrada, listado):
         lista_palabras = entrada.split()
         entrada_limpia = limpiadorFrases(entrada)
         salida = []
-
+        corregida = False
         for pal in listado:
             listado_stem = stem_basico(pal.lower()) 
                         
@@ -446,8 +452,9 @@ def ortografia(entrada, listado):
                     continue
 
                 i = 0
-                corregida = False
+
                 mostroLosiento = False
+                huboSUegrencia = len(coincidencias) > 0
                 while i < len(coincidencias) and i < 3:
                     if palabra == coincidencias[i]:
                         break
@@ -457,12 +464,10 @@ def ortografia(entrada, listado):
                     while respuesta not in ["si", "no"]:
                         respuesta = input(f"SYSTEM: No entendí, ¿desea modificar la palabra {palabra} por {coincidencias[i]}? (si/no): ")
                         respuesta = respuesta.lower().strip("¿?#$%&/()!¡-_[]{.],;:<=")
-                        print('\033[F\033[K', end='')
+                        borrarLineas(1,boo)
 
                     if respuesta == 'si':
-                        print('\033[F\033[K', end='')
-                        print('\033[F\033[K', end='')
-                        print('\033[F\033[K', end='')
+                        borrarLineas(3,boo)
                         print(f"SYSTEM: Se modifico '{palabra}' por '{coincidencias[i]}'")
                         cantCorreccionesOrtograficas += 1
                         palabra_corregida = coincidencias[i]
@@ -473,17 +478,21 @@ def ortografia(entrada, listado):
                         corregida = True
                         break
                     else:
-                        print('\033[F\033[K', end='')
-                        print('\033[F\033[K', end='')
+                        borrarLineas(2,boo)
                         if not mostroLosiento:
                             print("SYSTEM: Lo siento. Probemos con otra palabra:")
                             mostroLosiento = True
                     i += 1
-                if not corregida:
-                    print('\033[F\033[K', end='')
-                    print('SYSTEM: No se modifico ninguna palabra')
-                    salida.append(palabra)
+
+                if  corregida == False and huboSUegrencia: 
+                    borrarLineas(1,boo)
+                    print('SYSTEM: No se modifico ninguna palabra')   
+                     
+                if mostroLosiento == True and corregida == False:
+                    borrarLineas(1,boo)
+                salida.append(palabra)
             else:
+                
                 salida.append(palabra)
 
         entradaModificada = ' '.join(lista_palabras)
@@ -600,6 +609,7 @@ def lectorPregunta(userInput, esYoda):
 
 
 def inicioPrograma():
+    global boo
     """
     Inicia el programa principal del chatbot, permitiendo al usuario seleccionar un personaje para conversar.
     Verifica la existencia de archivos necesarios, muestra instrucciones, solicita el nombre del personaje,
@@ -612,7 +622,8 @@ def inicioPrograma():
     """
     try:
         verificarArchivos()
-        print(" Podés chatear con los siguientes personajes:")
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print(" Podés chatear con los siguientes personajes:")  
         print(" - R2D o Arturito")
         print(" - Chewbacca")
         print(" - Yoda")
@@ -921,7 +932,7 @@ def eleccionPersonaje(personaje):
 
             print("Tú: ", end="")
             entrada = input()
-            print('\033[F\033[K', end='')  #sube una línea y la borra
+            borrarLineas(1,boo)
             textoPersonalizado("Tú", entrada)
             entrada = entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>=")
             palabrasClaves.extend(pClaves)
@@ -980,7 +991,7 @@ def eleccionPersonaje(personaje):
                             return eleccionPersonaje(personaje)
                         textoPersonalizado(personaje.upper(), respuesta)
                         correcta = input("Era la respuesta correcta? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>=")
-                        print('\033[F\033[K', end='')
+                        borrarLineas(1,boo)
                         while correcta not in ["si", "no"]:
                             correcta = input("No entendí, ¿era la respuesta correcta? (si/no): ").lower()
                         if correcta == 'no':
@@ -1068,8 +1079,33 @@ def manejarError(e, mensaje):
         print(f"Error al guardar el error en el archivo de registro: {e}")
         
 # Ejecutar el programa principal
-ancho = 70
-print("-" * ancho)
-print("          BIENVENIDO AL MEJOR ASISTENTE DE STAR WARS          ")
-print("-" * ancho)
-inicioPrograma()
+def unicaVez():
+    try:
+        ancho = 70
+        print("-" * ancho)
+        print("          BIENVENIDO AL MEJOR ASISTENTE DE STAR WARS          ")
+        print("-" * ancho)
+        while True:
+            print("¿Dónde estás ejecutando el programa?")
+            print("1. Terminal")
+            print("2. IDLE")
+            opcion = input("Elegí 1 o 2: ").strip()
+
+            if opcion == '1':
+                boo = True
+                break
+            elif opcion == '2':
+                boo = False
+                break
+            else:
+                print("Opción no válida. Por favor, escribí 1 o 2.\n")
+
+        input('Presiona Enter para ver las instrucciones.')
+        inicioPrograma()
+    except KeyboardInterrupt:
+        print("\nConversación finalizada, que la fuerza te acompañe.")
+    except Exception as e:
+        manejarError(e, "Error en la ejecución inicial del programa.")
+        return
+    
+unicaVez()
