@@ -7,7 +7,7 @@ import json
 # Librerías originales
 articulos = ["fue","el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de", "que", "en", "por", "para", "con", "a", "y", "o", "si", "no", "como", "mas", "menos", "muy", "todo", "toda", "todos", "todas","quien", "quienes", "cual", "cuales", "donde", "cuando", "porque"]
 
-pClaves = ["cambiar", "personaje", "adios", "salir", 'r2d2','arturito', 'c-3po', 'yoda', 'chewbacca','c3po','preguntas','frecuentes','menu', 'volver']
+pClaves = ["cambiar", "personaje", "adios", "salir", 'r2d2','arturito', 'c-3po', 'yoda', 'chewbacca','c3po','preguntas','frecuentes','menu', 'volver','creditos','equipo','ayuda']
 
 vocalesTildes = ["á", "é", "í", "ó", "ú"]
 vocalesSinTilde = ['a', 'e', 'i', 'o', 'u']
@@ -217,18 +217,17 @@ def crearArchivoPreguntas():
     except Exception as e:
         manejarError(e, "Error al crear el archivo de preguntas")
         return
-def creditosFinales():
+def creditos():
     try:
-        os.system('cls' if os.name == 'nt' else 'clear')
-        print(""" 
+        print(r""" 
                 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
                 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⡰⠊⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀
-                ⠀⠀⠀⠀⠀⠀⠀⠀⡰⠈⠀⠀⠠⠂⠂⠀⠀⢀⣀⠀⠀⠀⢀⣀⣴⢟⠛⠉     ╭─────────────────────────────-────────────────╮
+                ⠀⠀⠀⠀⠀⠀⠀⠀⡰⠈⠀⠀⠠⠂⠂⠀⠀⢀⣀⠀⠀⠀⢀⣀⣴⢟⠛⠉    ╭─────────────────────────────-────────────────╮
                 ⠀⠀⠀⠀⠀⠀⠀⣾⣧⡠⣂⣤⣬⣲⣶⢷⣾⣛⠙⠳⠀⣤⣿⡿⠃⠂⠀⠀    │ CREDTOS:                                     |
-                ⣀⣀⣀⣀⣀⣀⡀⠛⢿⣷⠟⡋⣩⠻⣗⠀⠻⣝⢻⡌⠀⣍⡥⠊⠀⠀⠀⠀   │ Holm Ian                                     |
-                ⠈⠑⢝⡻⠿⣿⣿⣿⣾⡟⠘⢋⡉⠞⠒⠒⠋⠈⢲⣿⣿⡛⠁⠀⠀⠀⠀⠀   │ Feigelman Iair                               |
+                ⣀⣀⣀⣀⣀⣀⡀⠛⢿⣷⠟⡋⣩⠻⣗⠀⠻⣝⢻⡌⠀⣍⡥⠊⠀⠀⠀⠀    │ Holm Ian                                     |
+                ⠈⠑⢝⡻⠿⣿⣿⣿⣾⡟⠘⢋⡉⠞⠒⠒⠋⠈⢲⣿⣿⡛⠁⠀⠀⠀⠀⠀    │ Feigelman Iair                               |
                 ⠀⠀⠀⠈⠑⠢⠍⠙⣿⣿⣄⡀⣠⣎⡀⠤⢤⣢⣿⣿⡟⠀⠀⠀⠀⠀⠀⠀    | Cinti Valentino                              |
-                ⠀⠀⠀⠀⠀⠀⠀⠀⠙⠙⣿⣿⣿⣿⣿⣿⣛⣿⣿⣿⡅⠀⠀⠀⠀⠀⠀⠀     | Mora Diego                                   |
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠙⠙⣿⣿⣿⣿⣿⣿⣛⣿⣿⣿⡅⠀⠀⠀⠀⠀⠀⠀    | Mora Diego                                   |
                 ⠀⠀⠀⠀⠀⠀⠀⢀⣀⣴⣿⣿⣿⣿⣿⣿⣿⣿⢿⣫⢤⢙⢦⠰⣄⡀⠀⠀    | Guzman Kevin                                 |
                 ⠀⠀⠀⠀⠀⢠⣼⣿⣿⣿⣳⢻⣿⣿⣿⣿⣷⠾⠿⠋⠖⠄⠀⠙⠎⢷⡀⠀    |/─────────────────────────────────────────────╯ 
                 ⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣯⡁⢿⣿⣿⣶⣶⣶⠶⠞⢉⣇⡀⠀⣀⣼⣷⠀
@@ -236,9 +235,9 @@ def creditosFinales():
                 ⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡦⡦⢮⠀⢰⡙⡛⠿⣿⣿⣿⠂
                 ⠀⠀⠀⠸⣿⠻⣿⣿⣿⣿⣿⣿⣿⣿⠯⢥⠾⠛⠢⣴⡿⡻⣞⢦⡀⠉⠉⠀
                 ⠀⠀⠀⠀⠀⠁⠈⠉⠉⠉⠉⠉⠁⠀⠀⠀⠉⠉⠉⠀⠀⠈⠈⠈⠉⠁⠀         
-                ⠀⠀""")
+                """)
     except Exception as e:
-        manejarError(e, "Error en los creditos finales")
+        manejarError(e, "Error en los creditos ")
         return
 def verificarArchivos():
     """
@@ -505,6 +504,7 @@ def ortografia(entrada, listado):
 
 def preguntasFrecuentes():
     global esPregFrecuente
+    esPregFrecuente = True
     # Se inicializan las listas para almacenar preguntas y respuestas
     try:
         # Se verifica si el archivo de preguntas existe, si no existe, se crea
@@ -526,26 +526,27 @@ def preguntasFrecuentes():
         eleccionPregunta = input("¿Desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
         while eleccionPregunta not in ["si", "no"]:
             eleccionPregunta = input("No entendí, ¿desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
-            if eleccionPregunta == 'si':
-                try:
-                    preguntaElegida = int(input("Escriba el numero de la pregunta que desea hacer: "))
-                    while preguntaElegida > 3 or preguntaElegida < 1:
-                        preguntaElegida = int(input("No entendí, escriba el numero de la pregunta que desea hacer: "))
-                except ValueError:
-                    # Solicitar nuevamente el número de la pregunta hasta que sea válido
-                    while True:
-                        try:
-                            preguntaElegida = int(input("No entendí, escriba el número de la pregunta que desea hacer: "))
-                            if 1 <= preguntaElegida <= 3:
-                                break
-                            else:
-                                print("Por favor, ingrese un número válido entre 1 y 3.")
-                        except ValueError:
+        if eleccionPregunta == 'si':
+            try:
+                preguntaElegida = int(input("Escriba el numero de la pregunta que desea hacer: "))
+                while preguntaElegida > 3 or preguntaElegida < 1:
+                    preguntaElegida = int(input("No entendí, escriba el numero de la pregunta que desea hacer: "))
+            except ValueError:
+                # Solicitar nuevamente el número de la pregunta hasta que sea válido
+                while True:
+                    try:
+                        preguntaElegida = int(input("No entendí, escriba el número de la pregunta que desea hacer: "))
+                        if 1 <= preguntaElegida <= 3:
+                            break
+                        else:
                             print("Por favor, ingrese un número válido entre 1 y 3.")
-                busquedaTop3(top3, preguntaElegida, esPregFrecuente,esYoda)
+                    except ValueError:
+                        print("Por favor, ingrese un número válido entre 1 y 3.")
+            busquedaTop3(top3, preguntaElegida, esPregFrecuente,esYoda)
         return
     except KeyboardInterrupt:
         # Si el usuario interrumpe la ejecución, se maneja la excepción
+        creditos()
         print("\nConversación finalizada, que la fuerza te acompañe.")
         
     # Si el archivo no existe, se verifica y crea
@@ -600,6 +601,7 @@ def lectorPregunta(userInput, esYoda):
         return buscarRespuesta(userInput, questGroup, answGroup)
     except KeyboardInterrupt:
         # Si el usuario interrumpe la ejecución, se maneja la excepción
+        creditos()
         print("\nConversación finalizada, que la fuerza te acompañe.")
     # Si el archivo no existe, se verifica y crea
     except FileNotFoundError:
@@ -613,6 +615,16 @@ def lectorPregunta(userInput, esYoda):
         # Si ocurre un error al leer el archivo, se maneja la excepción
         return manejarError(e, "Error leyendo las preguntas. -- Lector de preguntas.")
 
+def ayuda():
+    """
+    Muestra un mensaje de ayuda al usuario con información sobre los comandos disponibles.
+    """
+    print("Comandos útiles:")
+    print(" - Para cambiar de personaje: escribir 'cambiar personaje'")
+    print(" - Para ver preguntas frecuentes: escribir 'frecuentes' o 'preguntas frecuentes'")
+    print(" - Para salir del programa: escribir 'salir' o 'adios'")
+    print(" - Para volver al menú principal: escribir 'volver a menu' o 'menu' o 'volver'")
+    print(" - Para ver los créditos : escribir 'creditos' o 'equipo'")
 
 def inicioPrograma():
     """
@@ -633,11 +645,7 @@ def inicioPrograma():
         print(" - Yoda")
         print(" - C-3PO o C3PO")
 
-        print("\n Comandos útiles:")
-        print(" - Para cambiar de personaje: escribir 'cambiar personaje'")
-        print(" - Para ver preguntas frecuentes: escribir 'frecuentes' o 'preguntas frecuentes'")
-        print(" - Para salir del programa: escribir 'salir' o 'adios'")
-        print(" - Para volver al menú principal: escribir 'volver a menu' o 'menu' o 'volver'")
+        ayuda()
         personaje = input("\nPor favor, escribí el nombre del personaje con el que querés hablar o algun comando: ")
         personaje = ortografia(personaje,pClaves)
         personaje = ' '.join(personaje)
@@ -649,6 +657,7 @@ def inicioPrograma():
             return inicioPrograma()
         eleccionPersonaje(personaje)
     except KeyboardInterrupt:
+        creditos()
         print("\nConversación finalizada, que la fuerza te acompañe.")
     except Exception as e:
         manejarError(e, "Error inesperado en el inicio del programa.")
@@ -804,6 +813,7 @@ def agregarPregunta():
         print("Por favor, vuelva a intentar.")
         agregarPregunta(entradaOriginal)
     except KeyboardInterrupt:
+        creditos()
         print("\nConversación finalizada, que la fuerza te acompañe.")
     except Exception as e:
         manejarError(e, "Error al agregar la pregunta.")
@@ -890,7 +900,7 @@ def busquedaTop3(listaTop3, preguntaElegida, esPregFrecuente, esYoda):
             quest = listaTop3[preguntaElegida][0][0]
         else:
             quest = listaTop3[preguntaElegida-1]  # Ajuste de índice para evitar out of range
-
+        print(f"\nPregunta elegida: ", quest)
         print(f"\nPregunta elegida: {quest.capitalize()}?")
         questGroup.append(quest.lower())
 
@@ -926,6 +936,7 @@ def busquedaTop3(listaTop3, preguntaElegida, esPregFrecuente, esYoda):
         return
 
     except KeyboardInterrupt:
+        creditos()
         print("\nConversación finalizada, que la fuerza te acompañe.")
 
     except FileNotFoundError:
@@ -957,12 +968,26 @@ def eleccionPersonaje(personaje):
         agregoPregunta = False
 
         while True:
+            if personaje.lower() in ["creditos", "equipo"]:
+                creditos()
+                input("Presione Enter para continuar...")
+                inicioPrograma()
+                break
             if personaje.lower() in ["salir", "adios"]:
+                creditos()
                 print("Conversación finalizada, que la fuerza te acompañe.")
+                break
+            if personaje.lower() in ["ayuda"]:
+                ayuda()
+                eleccionPersonaje(personaje)
                 break
             if personaje.lower() in ["volver a menu", "menu", "volver"]:
                 print("Volviendo al menú principal...")
                 return inicioPrograma()
+            if personaje.lower() in ["frecuentes", "preguntas frecuentes"]:
+                preguntasFrecuentes()
+                eleccionPersonaje(personaje)
+                break
             personaje = personaje.replace('-','')
             if personaje not in ['yoda', 'chewbacca', 'r2d2', 'c3po', 'arturito'] or personaje == '':
                 personaje = input('No entendí, ingrese el personaje nuevamente: ')
@@ -986,9 +1011,22 @@ def eleccionPersonaje(personaje):
             palabrasClaves.extend(pClaves)
             entrada = ortografia(entrada,palabrasClaves)
 
-            
+            if entradaModificada in ["ayuda"]:
+                ayuda()
+                eleccionPersonaje(personaje)
+                break
+            if entradaModificada in ["creditos", "equipo"]:
+                creditos()
+                input("Presione Enter para continuar...")
+                eleccionPersonaje(personaje)
+                break
             if entradaModificada in ["salir", "adios"]:
+                creditos()
                 print("Conversación finalizada, que la fuerza te acompañe.")
+                break
+            if entradaModificada in ["frecuentes", "preguntas frecuentes"]:
+                preguntasFrecuentes()
+                eleccionPersonaje(personaje)
                 break
             if entradaModificada in ["volver a menu", "menu", "volver"]:
                 print("Volviendo al menú principal...")
@@ -1084,10 +1122,12 @@ def eleccionPersonaje(personaje):
                         respuesta=''
                         preguntaEnArchivo=''
                     except KeyboardInterrupt:
+                        creditos()
                         print("\nConversación finalizada, que la fuerza te acompañe.")
                     except Exception as e:
                         manejarError(e, "Error procesando la pregunta.")
     except KeyboardInterrupt:
+        creditos()
         print("\nConversación finalizada, que la fuerza te acompañe.")
     except Exception as e:
         manejarError(e, "Error en la conversación.")
