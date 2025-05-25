@@ -5,10 +5,9 @@ import datetime
 import json
 
 # Librerías originales
-articulos = ["el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de", "que", "en",
- "quien", "por", "para", "con", "a", "y", "o", "si", "no", "como", "mas", "menos", "muy", "todo", "toda", "todos", "todas",'cual','fue','quienes']
+articulos = ["el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de", "que", "en", "por", "para", "con", "a", "y", "o", "si", "no", "como", "mas", "menos", "muy", "todo", "toda", "todos", "todas","quien", "quienes", "cual", "cuales", "donde", "cuando", "porque"]
 
-pClaves = ["cambiar", "personaje", "adios", "salir", 'r2d2', 'c-3po', 'yoda', 'chewbacca','c3po','preguntas','frecuentes','menu', 'volver']
+pClaves = ["cambiar", "personaje", "adios", "salir", 'r2d2','arturito', 'c-3po', 'yoda', 'chewbacca','c3po','preguntas','frecuentes','menu', 'volver']
 
 vocalesTildes = ["á", "é", "í", "ó", "ú"]
 vocalesSinTilde = ['a', 'e', 'i', 'o', 'u']
@@ -511,6 +510,8 @@ def preguntasFrecuentes():
                 preguntaElegida = int(input("No entendí, escriba el numero de la pregunta que desea hacer: "))
             esPregFrecuente = True
             busquedaTop3(top3, preguntaElegida, esPregFrecuente)
+            
+            input("Presione Enter para continuar...")
         return
     except KeyboardInterrupt:
         # Si el usuario interrumpe la ejecución, se maneja la excepción
@@ -596,10 +597,10 @@ def inicioPrograma():
     try:
         verificarArchivos()
         print(" Podés chatear con los siguientes personajes:")
-        print(" - R2D2")
+        print(" - R2D o Arturito")
         print(" - Chewbacca")
         print(" - Yoda")
-        print(" - C-3PO")
+        print(" - C-3PO o C3PO")
 
         print("\n Comandos útiles:")
         print(" - Para cambiar de personaje: escribir 'cambiar personaje'")
@@ -700,9 +701,9 @@ def agregarPregunta():
             preguntas_data = json.load(file)
 
         if huboCorreccionOrtografica == True:
-            entrada = entradaOriginal
-        else:
             entrada = entradaModificada
+        else:
+            entrada = entradaOriginal
         agrPregunta = input(f"Desea agregar la pregunta '{entrada}' al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]{.},;:<> ")
         while agrPregunta not in ["si", "no"]:
             agrPregunta = input("No entendí, ¿desea agregar la pregunta al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡ -_[]{.]},;:<>")
@@ -868,7 +869,7 @@ def eleccionPersonaje(personaje):
                 print("Volviendo al menú principal...")
                 return inicioPrograma()
             personaje = personaje.replace('-','')
-            if personaje not in ['yoda', 'chewbacca', 'r2d2', 'c3po'] or personaje == '':
+            if personaje not in ['yoda', 'chewbacca', 'r2d2', 'c3po', 'arturito'] or personaje == '':
                 personaje = input('No entendí, ingrese el personaje nuevamente: ')
                 try:
                     personaje = ortografia(personaje,pClaves)
@@ -908,11 +909,11 @@ def eleccionPersonaje(personaje):
                 continue
 
             match personaje.lower():
-                case 'r2d2' | 'chewbacca':
+                case 'r2d2' | 'chewbacca' | 'arturito':
                     primeraVez = False
                     frasesr2d2 = ['beep', 'Beep bep', 'Bep beep', 'Bpep', 'Beep beep beeep', 'bep']
                     fraseschewbacca = ['Grrrrowr', 'Hwaaurrgh', 'ghaawwu', 'huagg', 'Rrwaahhggg', 'Grrrruuughhh']
-                    if personaje == 'r2d2':
+                    if personaje == 'r2d2' or personaje == 'arturito':
                         print(f"{personaje.upper()}:", random.choice(frasesr2d2))
                     else:
                         print(f"{personaje.upper()}:", random.choice(fraseschewbacca))
@@ -960,7 +961,17 @@ def eleccionPersonaje(personaje):
                                     while preguntaElegida > 3 or preguntaElegida < 1:
                                         preguntaElegida = int(input("No entendí, escriba el numero de la pregunta que desea hacer: "))
                                 except ValueError:
-                                    preguntaElegida = int(input("No entendí, escriba el numero de la pregunta que desea hacer: "))
+                                    # Solicitar nuevamente el número de la pregunta hasta que sea válido
+                                    while True:
+                                        try:
+                                            preguntaElegida = int(input("No entendí, escriba el número de la pregunta que desea hacer: "))
+                                            if 1 <= preguntaElegida <= 3:
+                                                break
+                                            else:
+                                                print("Por favor, ingrese un número válido entre 1 y 3.")
+                                        except ValueError:
+                                            print("Por favor, ingrese un número válido entre 1 y 3.")
+
                                 if esYoda:
                                     busquedaTop3(top3MasParecidas[:4], preguntaElegida, esPregFrecuente, True)
                                 else:
