@@ -429,7 +429,9 @@ def ortografia(entrada, listado):
         entrada_limpia = limpiadorFrases(entrada)
         salida = []
 
-        listado_stem = [stem_basico(pal.lower()) for pal in listado]
+        for pal in listado:
+            listado_stem = stem_basico(pal.lower()) 
+                        
 
         for palabra in entrada_limpia:
             palabra = palabra.lower()
@@ -437,7 +439,7 @@ def ortografia(entrada, listado):
 
             if palabra_stem not in listado_stem:
                 try:
-                    coincidencias = difflib.get_close_matches(palabra, listado, n=3, cutoff=0.4)
+                    coincidencias = difflib.get_close_matches(palabra, listado, n=3, cutoff=0.5)
                 except Exception as e:
                     manejarError(e, "Error en la búsqueda de coincidencias.")
                     salida.append(palabra)
@@ -789,9 +791,9 @@ def buscarRespuesta(userInput, questGroup, answGroup):
                     mejorPuntaje = puntaje
                     mejorIndice = i
                     numMejorIndice = i
-                    porcentajeAcierto = densidad * 100
+                    porcentajeAcierto = densidad * 100 # PORCENTANJE DE ACIERTO
 
-        usados = set()
+        usados = set() #Listado para el top 3
         for puntaje, i, pregunta in coincidencias_lista:
             if i not in usados:
                 usados.add(i)
