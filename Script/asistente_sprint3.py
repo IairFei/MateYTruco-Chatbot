@@ -29,6 +29,7 @@ entradaModificada = ''
 respuestaAgregada = ''
 preguntaEnArchivo = ""
 preguntaAgregada = ""
+respuesta = ""
 
 # Datos nuevos
 newQuest = []
@@ -422,82 +423,99 @@ def stem_basico(palabra):
         return
 
 
-def ortografia(entrada: str, listado: list) -> list:
+def ortografia(entrada, listado):
     """
     Corrige errores ortográficos en una entrada de texto comparando cada palabra con un listado de palabras válidas.
-    Utiliza coincidencias aproximadas y solicita confirmación.
+    Parámetros:
+        entrada (str): La cadena de texto a corregir.
+        listado (list): Lista de palabras válidas para comparar y corregir.
+    Retorna:
+        list: Lista de palabras corregidas según el listado proporcionado. Si ocurre un error, retorna la entrada original.
+    Notas:
+        - Utiliza coincidencias aproximadas para sugerir correcciones ortográficas.
+        - Solicita confirmación al usuario antes de realizar una corrección.
+        - Corrige artículos definidos en la variable global 'articulos'.
+    Excepciones:
+        En caso de error, maneja la excepción y retorna la entrada original.
     """
-    global entradaOriginal, entradaModificada
-    global huboCorreccionOrtografica, cantCorreccionesOrtograficas, articulos
+    global entradaOriginal
+    global entradaModificada
+    global huboCorreccionOrtografica
+    global cantCorreccionesOrtograficas
+    global articulos
 
     huboCorreccionOrtografica = False
     entradaOriginal = entrada
     cantCorreccionesOrtograficas = 0
 
     try:
-        # Lista de palabras original y limpia
         lista_palabras = entrada.split()
         entrada_limpia = limpiadorFrases(entrada)
-
-        # Precalcular stems del listado
-        listado_stem = [stem_basico(pal.lower()) for pal in listado]
-
         salida = []
 
-        # Procesar cada palabra limpia
-        for idx, palabra in enumerate(entrada_limpia):
-            palabra_lower = palabra.lower()
-            # Saltar artículos directamente
-            if palabra_lower in articulos:
-                salida.append(palabra_lower)
-                continue
+        for pal in listado:
+            listado_stem = stem_basico(pal.lower()) 
 
-            palabra_stem = stem_basico(palabra_lower)
 
-            # Si no se encuentra su raíz en el listado, buscar sugerencias
+        for palabra in entrada_limpia:
+            palabra = palabra.lower()
+            palabra_stem = stem_basico(palabra)
+
             if palabra_stem not in listado_stem:
                 try:
-                    sugerencias = difflib.get_close_matches(palabra_lower, listado, n=3, cutoff=0.5)
+                    coincidencias = difflib.get_close_matches(palabra, listado, n=3, cutoff=0.5)
                 except Exception as e:
                     manejarError(e, "Error en la búsqueda de coincidencias.")
-                    salida.append(palabra_lower)
+                    salida.append(palabra)
                     continue
 
-                corregida = palabra_lower
-                # Iterar sugerencias y pedir confirmación
-                for sugerencia in sugerencias:
-                    print(f"SYSTEM: ⚠︎ Palabra no encontrada: '{palabra_lower}'")
-                    print(f"SYSTEM: ¿Quisiste decir '{sugerencia}'? (si/no): ", end="")
-                    respuesta = input().strip().lower()
-
-                    # Validar respuesta
-                    while respuesta not in ['si', 'no']:
-                        respuesta = input(f"SYSTEM: Por favor, 'si' o 'no': ").strip().lower()
+                i = 0
+                corregida = False
+                mostroLosiento = False
+                while i < len(coincidencias) and i < 3:
+                    if palabra == coincidencias[i]:
+                        break
+                    print(f"SYSTEM: ⚠︎ Palabra no encontrada: '{palabra}'")
+                    print(f"SYSTEM: ¿Quisiste decir '{coincidencias[i]}'? Escriba 'si' para confirmar o 'no' para continuar:  ", end="")
+                    respuesta = input("").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<=")
+                    while respuesta not in ["si", "no"]:
+                        respuesta = input(f"SYSTEM: No entendí, ¿desea modificar la palabra {palabra} por {coincidencias[i]}? (si/no): ")
+                        respuesta = respuesta.lower().strip("¿?#$%&/()!¡-_[]{.],;:<=")
+                        print('\033[F\033[K', end='')
 
                     if respuesta == 'si':
-                        borrarLineas(3, boo)
-                        print(f"SYSTEM: Se modificó '{palabra_lower}' por '{sugerencia}'")
-                        corregida = sugerencia
+                        print('\033[F\033[K', end='')
+                        print('\033[F\033[K', end='')
+                        print('\033[F\033[K', end='')
+                        print(f"SYSTEM: Se modifico '{palabra}' por '{coincidencias[i]}'")
                         cantCorreccionesOrtograficas += 1
+                        palabra_corregida = coincidencias[i]
+                        posicion = lista_palabras.index(palabra)
+                        lista_palabras[posicion] = palabra_corregida
+                        salida.append(palabra_corregida)
                         huboCorreccionOrtografica = True
+                        corregida = True
                         break
                     else:
-                        borrarLineas(2, boo)
-                        print("SYSTEM: Vale, probemos con otra sugerencia...")
-
-                # Si no se corrigió con ninguna sugerencia, informar
-                if corregida == palabra_lower and sugerencias:
-                    borrarLineas(1, boo)
-                    print("SYSTEM: No se modificó ninguna palabra.")
-
-                salida.append(corregida)
+                        print('\033[F\033[K', end='')
+                        print('\033[F\033[K', end='')
+                        if not mostroLosiento:
+                            print("SYSTEM: Lo siento. Probemos con otra palabra:")
+                            mostroLosiento = True
+                    i += 1
+                if not corregida:
+                    print('\033[F\033[K', end='')
+                    print('SYSTEM: No se modifico ninguna palabra')
+                    salida.append(palabra)
             else:
-                # Palabra correcta según stem
-                salida.append(palabra_lower)
+                salida.append(palabra)
 
-        entradaModificada = ' '.join(salida)
+        entradaModificada = ' '.join(lista_palabras)
         return salida
 
+    except Exception as e:
+        manejarError(e, "Error en la corrección ortográfica.")
+        return entradaOriginal
     except Exception as e:
         manejarError(e, "Error en la corrección ortográfica.")
         return lista_palabras  # Retornar lista original en caso de fallo
@@ -689,7 +707,6 @@ def agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaCorregida,
             file.write(f"Pregunta hecha por el usuario: {entradaCorregida}\n")
             if huboCorreccionOrtografica == True:
                 file.write(f"Pregunta sin correcion ortografica: {entradaOriginal}\n")
-                file.write(f"Pregunta en el archivo: {preguntaEnArchivo}\n")
             if agregoPregunta == True  and respuesta == "":
                 file.write(f"Pregunta en el archivo: {preguntaEnArchivo}\n")
                 file.write(f"Respuesta agregada por el usuario: Ocurrio un error, no se agrego una respuesta\n")
@@ -811,7 +828,7 @@ def agregarPregunta():
         else:
             respuestaAgregada=""
             agregoPregunta = False
-        return
+        return answer
     except FileNotFoundError:
         verificarArchivos()
         if existeArchivoPreguntas == False:
@@ -899,6 +916,8 @@ def busquedaTop3(listaTop3, preguntaElegida, esPregFrecuente, esYoda):
     quest = []
     answ = ""
     global entradaModificada
+    global preguntaEnArchivo
+    global respuestaAgregada
 
     try:
         with open("ArchivosDeLectura/preguntas.json", "r", encoding="utf-8") as file:
@@ -927,6 +946,9 @@ def busquedaTop3(listaTop3, preguntaElegida, esPregFrecuente, esYoda):
                         answ = item.get("respuesta", "")
         quest =quest.capitalize() + "?"
         answ = answ.capitalize()
+        preguntaEnArchivo = quest
+        respuestaAgregada = answ
+        print("Respuesta encontrada: ", answ)
         if esPregFrecuente:
             textoPersonalizado("Tú", quest)
             textoPersonalizado("SYSTEM", answ)
@@ -937,7 +959,6 @@ def busquedaTop3(listaTop3, preguntaElegida, esPregFrecuente, esYoda):
             else:
                 textoPersonalizado("Tú", quest)
                 textoPersonalizado("C-3PO", answ)
-        
         esPregFrecuente = False
         # Incrementar contador de uso
         for item in preguntas_data:
@@ -1122,10 +1143,12 @@ def eleccionPersonaje(personaje):
 
                                 if esYoda:
                                     busquedaTop3(top3MasParecidas[:4], preguntaElegida, False, True)
+                                    agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuesta, personaje.upper())
                                 else:
                                     busquedaTop3(top3MasParecidas[:4], preguntaElegida, False, False)
+                                    agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuesta, personaje.upper())
                             else:
-                                respuesta = agregarPregunta()
+                                agregarPregunta()
                                 agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuesta, personaje.upper())
                             textoPersonalizado(personaje.upper(), 'Hazme otra pregunta')
                             return eleccionPersonaje(personaje)
