@@ -1,1 +1,162 @@
 Registro de log:
+
+
+Fecha y hora: 2025-05-25 21:21:38.607043
+Pregunta hecha por el usuario: mato han solo
+Pregunta sin correcion ortografica: quien mato a han cholo
+Pregunta en el archivo: Quien mato a han solo?
+Pregunta en el archivo: Quien mato a han solo?
+Respuesta: Por su hijo, asesinado Han Solo fue. Ben Solo, también Kylo Ren llamado es, en “The Force Awakens”, ocurrió, mmm.
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 21:25:41.976921
+Pregunta hecha por el usuario: es chewie
+Pregunta sin correcion ortografica: quien es chewi
+Pregunta en el archivo: Quien es el wookie mas famoso?
+Pregunta en el archivo: Quien es el wookie mas famoso?
+Respuesta: El wookie mas famoso, mi amigo Chewbacca es. Compañero de Solo y copiloto del Halcón Milenario su rol es, hmm.
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 21:25:52.454857
+Pregunta hecha por el usuario: chewbacca
+Pregunta en el archivo: Quien es el wookie mas famoso?
+Respuesta: El wookie mas famoso, mi amigo Chewbacca es. Compañero de Solo y copiloto del Halcón Milenario su rol es, hmm.
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 21:27:03.605285
+Pregunta hecha por el usuario: es han solo
+Pregunta sin correcion ortografica: quien es han cholo
+Pregunta en el archivo: Que tipo de trabajo hacia han solo?
+Pregunta en el archivo: Que tipo de trabajo hacia han solo?
+Respuesta: Heroe de la Alianza Rebelde Han Solo fue, hmm. Contrabandista antes era.
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 21:27:30.474442
+Pregunta hecha por el usuario: es mejor coonductor galaxia
+Pregunta en el archivo: Que tipo de trabajo hacia han solo?
+Respuesta: Heroe de la Alianza Rebelde Han Solo fue, hmm. Contrabandista antes era.
+Porcentaje de acierto con las preguntas: 75.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 21:27:41.594180
+Pregunta hecha por el usuario: es han solo
+Pregunta sin correcion ortografica: quien es han soloo
+Pregunta en el archivo: Que tipo de trabajo hacia han solo?
+Pregunta en el archivo: Que tipo de trabajo hacia han solo?
+Respuesta: None
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 21:29:32.384289
+Pregunta hecha por el usuario: es r2d2
+Respuesta: El usuario decidio no agregar la pregunta 
+Porcentaje de acierto con las preguntas: 0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 21:31:19.359329
+Pregunta hecha por el usuario: quien chewbacca
+Pregunta sin correcion ortografica: quien es chewbacac
+Pregunta en el archivo: Quien es el wookie mas famoso?
+Pregunta en el archivo: Quien es el wookie mas famoso?
+Respuesta: El wookie mas famoso, mi amigo Chewbacca es. Compañero de Solo y copiloto del Halcón Milenario su rol es, hmm.
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 21:31:27.685694
+Pregunta hecha por el usuario: quien chewbacac
+Respuesta: El usuario decidio no agregar la pregunta 
+Porcentaje de acierto con las preguntas: 0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 21:45:16.201901
+Pregunta hecha por el usuario: quien creador star wars
+Respuesta: El usuario decidio no agregar la pregunta 
+Porcentaje de acierto con las preguntas: 0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 21:58:33.085662
+Pregunta hecha por el usuario: quien chewbacca
+Respuesta: El usuario decidio no agregar la pregunta 
+Porcentaje de acierto con las preguntas: 0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 21:58:34.968376
+Pregunta hecha por el usuario: quien chewbacca
+Respuesta: El usuario decidio no agregar la pregunta 
+Porcentaje de acierto con las preguntas: 0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 22:01:16.601436
+Pregunta hecha por el usuario: quien chewbacca
+Pregunta en el archivo: Quien es el wookie mas famoso?
+Respuesta: None
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 22:09:30.858957
+Pregunta hecha por el usuario: quien es chewbacca
+Pregunta en el archivo: Quien es el wookie mas famoso?
+Respuesta: None
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 22:14:51.800219
+Pregunta hecha por el usuario: es chewie
+Pregunta sin correcion ortografica: quien es chewi
+Pregunta en el archivo: Quien es el wookie mas famoso?
+Pregunta en el archivo: Quien es el wookie mas famoso?
+Respuesta: None
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 22:15:13.917879
+Pregunta hecha por el usuario: quiene s chewbacca
+Pregunta en el archivo: Quien es el wookie mas famoso?
+Respuesta: None
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 22:18:14.482210
+Pregunta hecha por el usuario: quien es chewbacca
+Pregunta en el archivo: Quien es el wookie mas famoso?
+Respuesta: None
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------

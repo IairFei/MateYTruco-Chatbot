@@ -71,3 +71,93 @@ Detalles del error: 'str' object has no attribute 'input'
 Error: Error en la conversación.
 Detalles del error: 'str' object has no attribute 'input'
 --------------------------------------------------
+
+Fecha y hora: 2025-05-25 18:59:23.420514
+Error: Error en la corrección ortográfica.
+Detalles del error: 'asd' is not in list
+--------------------------------------------------
+
+Fecha y hora: 2025-05-25 18:59:33.509542
+Error: Error al leer el archivo de preguntas para obtener palabras clave.
+Detalles del error: maximum recursion depth exceeded
+--------------------------------------------------
+
+Fecha y hora: 2025-05-25 18:59:33.510710
+Error: Error al leer el archivo de preguntas para obtener palabras clave.
+Detalles del error: maximum recursion depth exceeded
+--------------------------------------------------
+
+Fecha y hora: 2025-05-25 19:23:36.907654
+Error: Error en la corrección ortográfica.
+Detalles del error: cannot access local variable 'palabra_corregida' where it is not associated with a value
+--------------------------------------------------
+
+Fecha y hora: 2025-05-25 19:24:55.392368
+Error: Error al leer el archivo de preguntas para obtener palabras clave.
+Detalles del error: maximum recursion depth exceeded
+--------------------------------------------------
+
+Fecha y hora: 2025-05-25 19:24:55.393688
+Error: Error al leer el archivo de preguntas para obtener palabras clave.
+Detalles del error: maximum recursion depth exceeded
+--------------------------------------------------
+
+Fecha y hora: 2025-05-25 21:40:54.992652
+Error: Error procesando la pregunta.
+Detalles del error: cannot access local variable 'top3MasParecidas' where it is not associated with a value
+--------------------------------------------------
+
+Fecha y hora: 2025-05-25 21:58:24.049295
+Error: Error en la corrección ortográfica.
+Detalles del error: 'list' object has no attribute 'split'
+--------------------------------------------------
+
+Fecha y hora: 2025-05-25 21:58:24.049894
+Error: Error al filtrar preguntas.
+Detalles del error: cannot access local variable 'lista_palabras' where it is not associated with a value
+--------------------------------------------------
+
+Fecha y hora: 2025-05-25 21:58:24.050405
+Error: Error en la búsqueda de respuesta
+Detalles del error: 'NoneType' object has no attribute 'append'
+--------------------------------------------------
+
+Fecha y hora: 2025-05-25 21:58:33.714731
+Error: Error en la corrección ortográfica.
+Detalles del error: 'list' object has no attribute 'split'
+--------------------------------------------------
+
+Fecha y hora: 2025-05-25 21:58:33.715192
+Error: Error al filtrar preguntas.
+Detalles del error: cannot access local variable 'lista_palabras' where it is not associated with a value
+--------------------------------------------------
+
+Fecha y hora: 2025-05-25 21:58:33.715557
+Error: Error en la búsqueda de respuesta
+Detalles del error: 'NoneType' object has no attribute 'append'
+--------------------------------------------------
+
+Fecha y hora: 2025-05-25 21:59:20.051352
+Error: Error en la corrección ortográfica.
+Detalles del error: 'list' object has no attribute 'split'
+--------------------------------------------------
+
+Fecha y hora: 2025-05-25 21:59:20.052187
+Error: Error al filtrar preguntas.
+Detalles del error: cannot access local variable 'lista_palabras' where it is not associated with a value
+--------------------------------------------------
+
+Fecha y hora: 2025-05-25 21:59:22.017573
+Error: Error procesando la pregunta.
+Detalles del error: 'NoneType' object is not iterable
+--------------------------------------------------
+
+Fecha y hora: 2025-05-25 22:01:10.679733
+Error: Error en la corrección ortográfica.
+Detalles del error: 'list' object has no attribute 'split'
+--------------------------------------------------
+
+Fecha y hora: 2025-05-25 22:01:10.680454
+Error: Error al filtrar preguntas.
+Detalles del error: cannot access local variable 'lista_palabras' where it is not associated with a value
+--------------------------------------------------

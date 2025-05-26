@@ -61,8 +61,7 @@
         "preguntas": [
             "Cuando se estreno la sexta pelicula",
             "En que año se estreno Revenge of the Sith",
-            "En que año se estreno La Venganza de los Sith",
-            "frecuentes"
+            "En que año se estreno La Venganza de los Sith"
         ],
         "respuesta": "La sexta película, “Revenge of the Sith”, (La Venganza de los Sith), se estrenó en 2005.",
         "respuesta_yoda": "En 2005, “Revenge of the Sith” (La Venganza de los Sith), estrenada fue, sexta película, es.",
@@ -145,7 +144,7 @@
         ],
         "respuesta": "Han Solo fue asesinado por su hijo, Ben Solo/Kylo Ren, en la película “The Force Awakens” (El Despertar de la Fuerza), estrenada en 2015.",
         "respuesta_yoda": "Por su hijo, asesinado Han Solo fue. Ben Solo, también Kylo Ren llamado es, en “The Force Awakens”, ocurrió, mmm.",
-        "veces_preguntado": 100
+        "veces_preguntado": 102
     },
     {
         "preguntas": [
@@ -159,14 +158,14 @@
     },
     {
         "preguntas": [
-            "Cual es el nombre del droide que acompaña a R2-D2",
+            "Cual es el nombre del droide que acompaña a R2D2",
             "Quien es el droide dorado de Star Wars",
             "Quien es c3po",
             "c3po",
             "c-3po"
         ],
-        "respuesta": "Yo, el droide que acompaña a R2-D2 soy C-3PO. Soy un droide de protocolo diseñado para traducción.",
-        "respuesta_yoda": "C-3PO, el droide de protocolo que con R2-D2 va, es. Para traducción, programado fue.",
+        "respuesta": "Yo, el droide que acompaña a R2D2 soy C-3PO. Soy un droide de protocolo diseñado para traducción.",
+        "respuesta_yoda": "C-3PO, el droide de protocolo que con R2D2 va, es. Para traducción, programado fue.",
         "veces_preguntado": 0
     },
     {
@@ -190,7 +189,7 @@
         ],
         "respuesta": "Palpatine, también conocido como Darth Sidious, es un Sith que se convierte en Emperador del Imperio Galáctico.",
         "respuesta_yoda": "Palpatine, también Darth Sidious es. Emperador del Imperio Galáctico fue, sí. Haberlo descubierto antes, debimos.",
-        "veces_preguntado": 0
+        "veces_preguntado": 1
     },
     {
         "preguntas": [
@@ -337,8 +336,7 @@
             "Que es el Halcon Milenario",
             "De quien es el Halcon Milenario",
             "A quien pertenece el Halcon Milenario",
-            "Halcon",
-            "mato han solo"
+            "Halcon"
         ],
         "respuesta": "El Halcón Milenario es la nave mas icónica de Star Wars. Es pilotada por el contrabandista y rebelde Han Solo.",
         "respuesta_yoda": "Rápido y audaz, el Halcón Milenario, la nave del contrabandista Han Solo es.",
@@ -370,12 +368,11 @@
             "Quien es el compañero de han solo",
             "Quien es Chewbacca",
             "Quien es Chewie",
-            "Quien es Chubaca",
-            "mato han solo"
+            "chewbacca"
         ],
         "respuesta": "Chewbacca es el wookie mas famoso de Star Wars, también es el amigo de Han solo y copiloto del Halcón Milenario.",
         "respuesta_yoda": "El wookie mas famoso, mi amigo Chewbacca es. Compañero de Solo y copiloto del Halcón Milenario su rol es, hmm.",
-        "veces_preguntado": 2
+        "veces_preguntado": 5
     },
     {
         "preguntas": [
@@ -383,11 +380,13 @@
             "Que hace Han Solo",
             "De que trabaja Han Solo",
             "Quien es Han Solo",
-            "Han"
+            "Han",
+            "Han Solo",
+            "Quien es el mejor piloto de la galaxia"
         ],
         "respuesta": "Han solo era un contrabandista al servicio de Jabba el hutt que luego se unio a los rebeldes.",
         "respuesta_yoda": "Heroe de la Alianza Rebelde Han Solo fue, hmm. Contrabandista antes era.",
-        "veces_preguntado": 0
+        "veces_preguntado": 2
     },
     {
         "preguntas": [
@@ -535,8 +534,7 @@
             "Quien es Jango Fett",
             "Quien es el padre de Boba Fett",
             "De donde vienen los clones",
-            "Jango",
-            "frecuentes"
+            "Jango"
         ],
         "respuesta": "Jango Fett fue un cazarrecompensas mandaloriano. Su ADN se usó para crear el ejército clon y Boba Fett fue criado como su hijo.",
         "respuesta_yoda": "Clonador original, Jango Fett fue. A Boba crió como hijo, todos los clones su imagen tienen.",
@@ -1106,6 +1104,42 @@
         ],
         "respuesta": "Cassian Andor fue un espía de la Alianza Rebelde que participó en la misión de Rogue One para obtener los planos de la Estrella de la Muerte.",
         "respuesta_yoda": "Cassian, espía rebelde era. A Jyn ayudó, y por la causa dio todo, mmm.",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Hola",
+            "Hola amo",
+            "Hola maestro",
+            "Hola Yoda",
+            "buenas"
+        ],
+        "respuesta": "Hola amo, bienvenido a la galaxia de Star Wars. ¿En qué puedo ayudarte hoy?",
+        "respuesta_yoda": "Hola, bienvenido a la galaxia de Star Wars. ¿En qué puedo ayudarte hoy, hmm?",
+        "veces_preguntado": 1
+    },
+    {
+        "preguntas": [
+            "como estas?",
+            "como te encuentras",
+            "como va todo",
+            "como te va",
+            "como andas"
+        ],
+        "respuesta": "Estoy bien, gracias por preguntar. ¿En qué puedo ayudarte hoy?",
+        "respuesta_yoda": "Bien estoy, gracias por preguntar. ¿En qué puedo ayudarte hoy, hmm?",
+        "veces_preguntado": 0
+    },
+    {
+        "preguntas": [
+            "Que puedo preguntarte",
+            "Que preguntas puedes responder",
+            "Que temas manejas",
+            "Que puedo preguntarte sobre Star Wars",
+            "Que sabes de Star Wars"
+        ],
+        "respuesta": "Puedo ayudarte con: Películas (orden de estreno y cronológico, fechas y detalles de cada episodio), personajes (héroes, villanos, Jedi, Sith y sus relaciones familiares), facciones (República, Separatistas, Imperio, Rebelión, Primera Orden, Mandalorianos), planetas y especies (de Tatooine a Coruscant; humanos, Wookiees, Twi’leks, Hutts, criaturas), naves y droides (Halcón Milenario, X-Wing, Slave I, C-3PO, R2D2, IG-11), la Fuerza y eventos clave (Orden 66, batallas decisivas, profecías y legado).",
+        "respuesta_yoda": "Preguntas sobre películas, personajes, planetas, naves y más, puedo responder. Con gusto te ayudaré, sí.",
         "veces_preguntado": 0
     }
 ]
