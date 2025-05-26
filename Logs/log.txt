@@ -1,10 +1,26 @@
 Registro de log:
 
 
-Fecha y hora: 2025-05-25 21:21:38.607043
-Pregunta hecha por el usuario: mato han solo
-Pregunta sin correcion ortografica: quien mato a han cholo
-Pregunta en el archivo: Quien mato a han solo?
+Fecha y hora: 2025-05-25 23:25:10.014788
+Pregunta hecha por el usuario: quien es chewbacca
+Pregunta en el archivo: Quien es el wookie mas famoso?
+Respuesta: El wookie mas famoso, mi amigo Chewbacca es. Compañero de Solo y copiloto del Halcón Milenario su rol es, hmm.
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 23:25:23.152783
+Pregunta hecha por el usuario: quien es chewie
+Pregunta en el archivo: Quien es el wookie mas famoso?
+Respuesta: El wookie mas famoso, mi amigo Chewbacca es. Compañero de Solo y copiloto del Halcón Milenario su rol es, hmm.
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 23:25:32.502350
+Pregunta hecha por el usuario: como murio han solo
 Pregunta en el archivo: Quien mato a han solo?
 Respuesta: Por su hijo, asesinado Han Solo fue. Ben Solo, también Kylo Ren llamado es, en “The Force Awakens”, ocurrió, mmm.
 Porcentaje de acierto con las preguntas: 100.0%
@@ -12,150 +28,190 @@ Personaje: YODA
 
 ----------------------------------------
 
-Fecha y hora: 2025-05-25 21:25:41.976921
-Pregunta hecha por el usuario: es chewie
-Pregunta sin correcion ortografica: quien es chewi
-Pregunta en el archivo: Quien es el wookie mas famoso?
-Pregunta en el archivo: Quien es el wookie mas famoso?
-Respuesta: El wookie mas famoso, mi amigo Chewbacca es. Compañero de Solo y copiloto del Halcón Milenario su rol es, hmm.
+Fecha y hora: 2025-05-25 23:26:11.410728
+Pregunta hecha por el usuario: como murio han soto
+Pregunta agregada por el usuario al archivo: como murio han soto
+Respuesta agregada por el usuario: Asesinado por su hijo
+Porcentaje de acierto con las preguntas: No se tendra en cuenta el porcentaje ya que es una pregunta nueva agregada por el usuario
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 23:32:32.712346
+Pregunta hecha por el usuario: que puedo preguntarte
+Pregunta en el archivo: Que puedo preguntarte?
+Respuesta: Preguntas sobre películas, personajes, planetas, naves y más, puedo responder. Con gusto te ayudaré, sí.
 Porcentaje de acierto con las preguntas: 100.0%
 Personaje: YODA
 
 ----------------------------------------
 
-Fecha y hora: 2025-05-25 21:25:52.454857
-Pregunta hecha por el usuario: chewbacca
-Pregunta en el archivo: Quien es el wookie mas famoso?
-Respuesta: El wookie mas famoso, mi amigo Chewbacca es. Compañero de Solo y copiloto del Halcón Milenario su rol es, hmm.
+Fecha y hora: 2025-05-25 23:33:15.492936
+Pregunta hecha por el usuario: como murio han solo
+Pregunta en el archivo: Quien mato a han solo?
+Respuesta: Por su hijo, asesinado Han Solo fue. Ben Solo, también Kylo Ren llamado es, en “The Force Awakens”, ocurrió, mmm.
 Porcentaje de acierto con las preguntas: 100.0%
 Personaje: YODA
 
 ----------------------------------------
 
-Fecha y hora: 2025-05-25 21:27:03.605285
-Pregunta hecha por el usuario: es han solo
-Pregunta sin correcion ortografica: quien es han cholo
-Pregunta en el archivo: Que tipo de trabajo hacia han solo?
-Pregunta en el archivo: Que tipo de trabajo hacia han solo?
+Fecha y hora: 2025-05-25 23:33:33.889083
+Pregunta hecha por el usuario: como murio han solo
+Pregunta en el archivo: Quien mato a han solo?
+Respuesta: Por su hijo, asesinado Han Solo fue. Ben Solo, también Kylo Ren llamado es, en “The Force Awakens”, ocurrió, mmm.
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 23:33:58.211020
+Pregunta hecha por el usuario: como murio han solo
+Pregunta en el archivo: Quien mato a han solo?
+Respuesta: Han Solo fue asesinado por su hijo, Ben Solo/Kylo Ren, en la película “The Force Awakens” (El Despertar de la Fuerza), estrenada en 2015.
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: C3PO
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 23:34:33.627408
+Pregunta hecha por el usuario: hola
+Pregunta en el archivo: Hola?
+Respuesta: Hola amo, bienvenido a la galaxia de Star Wars. ¿En qué puedo ayudarte hoy?
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: C3PO
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 23:36:07.774672
+Pregunta hecha por el usuario: como estas
+Pregunta en el archivo: Como estas?
+Respuesta: Estoy bien, gracias por preguntar. ¿En qué puedo ayudarte hoy?
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: C3PO
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 23:38:46.450921
+Pregunta hecha por el usuario: como estas
+Pregunta en el archivo: Como estas?
+Respuesta: Estoy bien, gracias por preguntar. ¿En qué puedo ayudarte hoy?
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: C3PO
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 23:39:00.471651
+Pregunta hecha por el usuario: hola
+Pregunta en el archivo: Hola?
+Respuesta: Hola, bienvenido a la galaxia de Star Wars. ¿En qué puedo ayudarte hoy, hmm?
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 23:44:07.353649
+Pregunta hecha por el usuario: como estas
+Pregunta en el archivo: Como estas?
+Respuesta: Bien estoy, gracias por preguntar. ¿En qué puedo ayudarte hoy, hmm?
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 23:44:46.260760
+Pregunta hecha por el usuario: como estas
+Pregunta en el archivo: Como estas?
+Respuesta: Bien estoy, gracias por preguntar. ¿En qué puedo ayudarte hoy, hmm?
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 23:45:01.943808
+Pregunta hecha por el usuario: como estas
+Pregunta en el archivo: Como estas?
+Respuesta: Bien estoy, gracias por preguntar. ¿En qué puedo ayudarte hoy, hmm?
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 23:45:53.544738
+Pregunta hecha por el usuario: como estas
+Pregunta en el archivo: Como estas?
+Respuesta: Bien estoy, gracias por preguntar. ¿En qué puedo ayudarte hoy, hmm?
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 23:46:01.831389
+Pregunta hecha por el usuario: como estas
+Pregunta en el archivo: Como estas?
+Respuesta: Bien estoy, gracias por preguntar. ¿En qué puedo ayudarte hoy, hmm?
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 23:47:23.767166
+Pregunta hecha por el usuario: como estas
+Pregunta en el archivo: Como estas?
+Respuesta: Bien estoy, gracias por preguntar. ¿En qué puedo ayudarte hoy, hmm?
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 23:47:37.988044
+Pregunta hecha por el usuario: como estas
+Pregunta en el archivo: Como estas?
+Respuesta: Bien estoy, gracias por preguntar. ¿En qué puedo ayudarte hoy, hmm?
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 23:48:30.232004
+Pregunta hecha por el usuario: como estas
+Pregunta en el archivo: Como estas?
+Respuesta: Bien estoy, gracias por preguntar. ¿En qué puedo ayudarte hoy, hmm?
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 23:48:34.645749
+Pregunta hecha por el usuario: como estas
+Pregunta en el archivo: Como estas?
+Respuesta: Bien estoy, gracias por preguntar. ¿En qué puedo ayudarte hoy, hmm?
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 23:48:46.192574
+Pregunta hecha por el usuario: como estas
+Pregunta en el archivo: Como estas?
+Respuesta: Bien estoy, gracias por preguntar. ¿En qué puedo ayudarte hoy, hmm?
+Porcentaje de acierto con las preguntas: 100.0%
+Personaje: YODA
+
+----------------------------------------
+
+Fecha y hora: 2025-05-25 23:49:44.933702
+Pregunta hecha por el usuario: como se llama han solo
+Pregunta en el archivo: Quien mato a han solo?
 Respuesta: Heroe de la Alianza Rebelde Han Solo fue, hmm. Contrabandista antes era.
 Porcentaje de acierto con las preguntas: 100.0%
 Personaje: YODA
 
 ----------------------------------------
 
-Fecha y hora: 2025-05-25 21:27:30.474442
-Pregunta hecha por el usuario: es mejor coonductor galaxia
-Pregunta en el archivo: Que tipo de trabajo hacia han solo?
+Fecha y hora: 2025-05-25 23:49:44.933702
+Pregunta hecha por el usuario: como se llama han solo
+Pregunta en el archivo: Quien mato a han solo?
 Respuesta: Heroe de la Alianza Rebelde Han Solo fue, hmm. Contrabandista antes era.
-Porcentaje de acierto con las preguntas: 75.0%
-Personaje: YODA
-
-----------------------------------------
-
-Fecha y hora: 2025-05-25 21:27:41.594180
-Pregunta hecha por el usuario: es han solo
-Pregunta sin correcion ortografica: quien es han soloo
-Pregunta en el archivo: Que tipo de trabajo hacia han solo?
-Pregunta en el archivo: Que tipo de trabajo hacia han solo?
-Respuesta: None
-Porcentaje de acierto con las preguntas: 100.0%
-Personaje: YODA
-
-----------------------------------------
-
-Fecha y hora: 2025-05-25 21:29:32.384289
-Pregunta hecha por el usuario: es r2d2
-Respuesta: El usuario decidio no agregar la pregunta 
-Porcentaje de acierto con las preguntas: 0%
-Personaje: YODA
-
-----------------------------------------
-
-Fecha y hora: 2025-05-25 21:31:19.359329
-Pregunta hecha por el usuario: quien chewbacca
-Pregunta sin correcion ortografica: quien es chewbacac
-Pregunta en el archivo: Quien es el wookie mas famoso?
-Pregunta en el archivo: Quien es el wookie mas famoso?
-Respuesta: El wookie mas famoso, mi amigo Chewbacca es. Compañero de Solo y copiloto del Halcón Milenario su rol es, hmm.
-Porcentaje de acierto con las preguntas: 100.0%
-Personaje: YODA
-
-----------------------------------------
-
-Fecha y hora: 2025-05-25 21:31:27.685694
-Pregunta hecha por el usuario: quien chewbacac
-Respuesta: El usuario decidio no agregar la pregunta 
-Porcentaje de acierto con las preguntas: 0%
-Personaje: YODA
-
-----------------------------------------
-
-Fecha y hora: 2025-05-25 21:45:16.201901
-Pregunta hecha por el usuario: quien creador star wars
-Respuesta: El usuario decidio no agregar la pregunta 
-Porcentaje de acierto con las preguntas: 0%
-Personaje: YODA
-
-----------------------------------------
-
-Fecha y hora: 2025-05-25 21:58:33.085662
-Pregunta hecha por el usuario: quien chewbacca
-Respuesta: El usuario decidio no agregar la pregunta 
-Porcentaje de acierto con las preguntas: 0%
-Personaje: YODA
-
-----------------------------------------
-
-Fecha y hora: 2025-05-25 21:58:34.968376
-Pregunta hecha por el usuario: quien chewbacca
-Respuesta: El usuario decidio no agregar la pregunta 
-Porcentaje de acierto con las preguntas: 0%
-Personaje: YODA
-
-----------------------------------------
-
-Fecha y hora: 2025-05-25 22:01:16.601436
-Pregunta hecha por el usuario: quien chewbacca
-Pregunta en el archivo: Quien es el wookie mas famoso?
-Respuesta: None
-Porcentaje de acierto con las preguntas: 100.0%
-Personaje: YODA
-
-----------------------------------------
-
-Fecha y hora: 2025-05-25 22:09:30.858957
-Pregunta hecha por el usuario: quien es chewbacca
-Pregunta en el archivo: Quien es el wookie mas famoso?
-Respuesta: None
-Porcentaje de acierto con las preguntas: 100.0%
-Personaje: YODA
-
-----------------------------------------
-
-Fecha y hora: 2025-05-25 22:14:51.800219
-Pregunta hecha por el usuario: es chewie
-Pregunta sin correcion ortografica: quien es chewi
-Pregunta en el archivo: Quien es el wookie mas famoso?
-Pregunta en el archivo: Quien es el wookie mas famoso?
-Respuesta: None
-Porcentaje de acierto con las preguntas: 100.0%
-Personaje: YODA
-
-----------------------------------------
-
-Fecha y hora: 2025-05-25 22:15:13.917879
-Pregunta hecha por el usuario: quiene s chewbacca
-Pregunta en el archivo: Quien es el wookie mas famoso?
-Respuesta: None
-Porcentaje de acierto con las preguntas: 100.0%
-Personaje: YODA
-
-----------------------------------------
-
-Fecha y hora: 2025-05-25 22:18:14.482210
-Pregunta hecha por el usuario: quien es chewbacca
-Pregunta en el archivo: Quien es el wookie mas famoso?
-Respuesta: None
 Porcentaje de acierto con las preguntas: 100.0%
 Personaje: YODA
 

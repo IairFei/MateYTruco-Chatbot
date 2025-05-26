@@ -481,12 +481,10 @@ def ortografia(entrada, listado):
                     while respuesta not in ["si", "no"]:
                         respuesta = input(f"SYSTEM: No entendí, ¿desea modificar la palabra {palabra} por {coincidencias[i]}? (si/no): ")
                         respuesta = respuesta.lower().strip("¿?#$%&/()!¡-_[]{.],;:<=")
-                        print('\033[F\033[K', end='')
+                        borrarLineas(1, boo)
 
                     if respuesta == 'si':
-                        print('\033[F\033[K', end='')
-                        print('\033[F\033[K', end='')
-                        print('\033[F\033[K', end='')
+                        borrarLineas(3, boo)
                         print(f"SYSTEM: Se modifico '{palabra}' por '{coincidencias[i]}'")
                         cantCorreccionesOrtograficas += 1
                         palabra_corregida = coincidencias[i]
@@ -497,15 +495,12 @@ def ortografia(entrada, listado):
                         corregida = True
                         break
                     else:
-                        print('\033[F\033[K', end='')
-                        print('\033[F\033[K', end='')
+                        borrarLineas(2, boo)
                         if not mostroLosiento:
                             print("SYSTEM: Lo siento. Probemos con otra palabra:")
                             mostroLosiento = True
                     i += 1
                 if not corregida:
-                    print('\033[F\033[K', end='')
-                    print('SYSTEM: No se modifico ninguna palabra')
                     salida.append(palabra)
             else:
                 salida.append(palabra)
@@ -945,6 +940,7 @@ def busquedaTop3(listaTop3, preguntaElegida, esPregFrecuente, esYoda):
                     else:
                         answ = item.get("respuesta", "")
         quest =quest.capitalize() + "?"
+        print("")
         answ = answ.capitalize()
         preguntaEnArchivo = quest
         respuestaAgregada = answ
@@ -1118,46 +1114,54 @@ def eleccionPersonaje(personaje):
                             correcta = input("SYSTEM: No entendí, ¿era la respuesta correcta? (si/no): ").lower()
                         if correcta == 'no':
                             print("\nLas siguientes preguntas son las que más se parecen a la pregunta que hiciste:\n")
-                            for i, pregunta in enumerate(top3MasParecidas):
-                                if pregunta:
-                                    print(f"{i + 1}. ¿{pregunta.capitalize()}?")
-                            eleccionPregunta = input("SYSTEM: ¿Desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
-                            while eleccionPregunta not in ["si", "no"]:
-                                eleccionPregunta = input("SYSTEM: No entendí, ¿desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
-                            if eleccionPregunta == 'si':
-                                try:
-                                    preguntaElegida = int(input("SYSTEM: Escriba el numero de la pregunta que desea hacer: "))
-                                    while preguntaElegida > 3 or preguntaElegida < 1:
-                                        preguntaElegida = int(input("SYSTEM: No entendí, escriba el numero de la pregunta que desea hacer: "))
-                                except ValueError:
-                                    # Solicitar nuevamente el número de la pregunta hasta que sea válido
-                                    while True:
-                                        try:
-                                            preguntaElegida = int(input("SYSTEM: No entendí, escriba el número de la pregunta que desea hacer: "))
-                                            if 1 <= preguntaElegida <= 3:
-                                                break
-                                            else:
+                            if len(top3MasParecidas) >=2:
+                                for i, pregunta in enumerate(top3MasParecidas):
+                                    if pregunta:
+                                        print(f"{i + 1}. ¿{pregunta.capitalize()}?")
+                                eleccionPregunta = input("SYSTEM: ¿Desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
+                                while eleccionPregunta not in ["si", "no"]:
+                                    eleccionPregunta = input("SYSTEM: No entendí, ¿desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
+                                if eleccionPregunta == 'si':
+                                    try:
+                                        preguntaElegida = int(input("SYSTEM: Escriba el numero de la pregunta que desea hacer: "))
+                                        while preguntaElegida > 3 or preguntaElegida < 1:
+                                            preguntaElegida = int(input("SYSTEM: No entendí, escriba el numero de la pregunta que desea hacer: "))
+                                    except ValueError:
+                                        # Solicitar nuevamente el número de la pregunta hasta que sea válido
+                                        while True:
+                                            try:
+                                                preguntaElegida = int(input("SYSTEM: No entendí, escriba el número de la pregunta que desea hacer: "))
+                                                if 1 <= preguntaElegida <= 3:
+                                                    break
+                                                else:
+                                                    print("SYSTEM: Por favor, ingrese un número válido entre 1 y 3.")
+                                            except ValueError:
                                                 print("SYSTEM: Por favor, ingrese un número válido entre 1 y 3.")
-                                        except ValueError:
-                                            print("SYSTEM: Por favor, ingrese un número válido entre 1 y 3.")
 
-                                if esYoda:
-                                    busquedaTop3(top3MasParecidas[:4], preguntaElegida, False, True)
-                                    agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuesta, personaje.upper())
+                                    if esYoda:
+                                        busquedaTop3(top3MasParecidas[:4], preguntaElegida, False, True)
+                                        agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuesta, personaje.upper())
+                                    else:
+                                        busquedaTop3(top3MasParecidas[:4], preguntaElegida, False, False)
+                                        agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuesta, personaje.upper())
                                 else:
-                                    busquedaTop3(top3MasParecidas[:4], preguntaElegida, False, False)
+                                    agregarPregunta()
                                     agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuesta, personaje.upper())
+                                    textoPersonalizado(personaje.upper(), 'Hazme otra pregunta')
+                                    return eleccionPersonaje(personaje)
                             else:
-                                agregarPregunta()
-                                agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuesta, personaje.upper())
-                            textoPersonalizado(personaje.upper(), 'Hazme otra pregunta')
-                            return eleccionPersonaje(personaje)
+                                print("No hay suficientes preguntas similares para mostrar.")
+                                pass
                         else:
                             sumarVecesPreguntado(numMejorIndice)
                             textoPersonalizado(personaje.upper(), 'Hazme otra pregunta')
+                            agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuesta, personaje.upper())
+                            return eleccionPersonaje(personaje)
                         agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuesta, personaje.upper())
                         respuesta=''
                         preguntaEnArchivo=''
+                        textoPersonalizado(personaje.upper(), 'Hazme otra pregunta')
+                        return eleccionPersonaje(personaje)
                     except KeyboardInterrupt:
                         creditos()
                         print("\nSYSTEM: Conversación finalizada, que la fuerza te acompañe.")
