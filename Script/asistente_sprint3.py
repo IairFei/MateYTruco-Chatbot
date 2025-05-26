@@ -226,7 +226,7 @@ def creditos():
         print(r""" 
                 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
                 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⡰⠊⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀
-                ⠀⠀⠀⠀⠀⠀⠀⠀⡰⠈⠀⠀⠠⠂⠂⠀⠀⢀⣀⠀⠀⠀⢀⣀⣴⢟⠛⠉    ╭─────────────────────────────-────────────────╮
+                ⠀⠀⠀⠀⠀⠀⠀⠀⡰⠈⠀⠀⠠⠂⠂⠀⠀⢀⣀⠀⠀⠀⢀⣀⣴⢟⠛⠉    ╭──────────────────────────────────────────────╮
                 ⠀⠀⠀⠀⠀⠀⠀⣾⣧⡠⣂⣤⣬⣲⣶⢷⣾⣛⠙⠳⠀⣤⣿⡿⠃⠂⠀⠀    │ CREDTOS:                                     |
                 ⣀⣀⣀⣀⣀⣀⡀⠛⢿⣷⠟⡋⣩⠻⣗⠀⠻⣝⢻⡌⠀⣍⡥⠊⠀⠀⠀⠀    │ Holm Ian                                     |
                 ⠈⠑⢝⡻⠿⣿⣿⣿⣾⡟⠘⢋⡉⠞⠒⠒⠋⠈⢲⣿⣿⡛⠁⠀⠀⠀⠀⠀    │ Feigelman Iair                               |
@@ -542,6 +542,7 @@ def preguntasFrecuentes():
                             print("\nSYSTEM: Por favor, ingrese un número válido entre 1 y 3.")
                     except ValueError:
                         print("\nSYSTEM: Por favor, ingrese un número válido entre 1 y 3.")
+
             busquedaTop3(top3, preguntaElegida, True,esYoda)
         return
     except KeyboardInterrupt:
@@ -924,8 +925,8 @@ def busquedaTop3(listaTop3, preguntaElegida, esPregFrecuente, esYoda):
                         answ = item.get("respuesta_yoda", "")
                     else:
                         answ = item.get("respuesta", "")
-        quest = "Pregunta: " + quest.capitalize() + "?"
-        answ = "Respuesta: " + answ.capitalize()
+        quest =quest.capitalize() + "?"
+        answ = answ.capitalize()
         if esPregFrecuente:
             textoPersonalizado("Tú", quest)
             textoPersonalizado("SYSTEM", answ)
@@ -998,8 +999,7 @@ def eleccionPersonaje(personaje):
                 return inicioPrograma()
             if personaje.lower() in ["frecuentes", "preguntas frecuentes"]:
                 preguntasFrecuentes()
-                eleccionPersonaje(personaje)
-                break
+                return inicioPrograma()
             personaje = personaje.replace('-','')
             if personaje not in ['yoda', 'chewbacca', 'r2d2', 'c3po', 'arturito'] or personaje == '':
                 personaje = input('SYSTEM: No entendí, ingrese el personaje nuevamente: ')
@@ -1019,7 +1019,7 @@ def eleccionPersonaje(personaje):
             entrada = input()
             borrarLineas(1,boo)
             textoPersonalizado("Tú", entrada)
-            entrada = entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>=")
+            entrada = entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>=@+-*")
             palabrasClaves.extend(pClaves)
             entrada = ortografia(entrada,palabrasClaves)
 
@@ -1059,9 +1059,9 @@ def eleccionPersonaje(personaje):
                     frasesr2d2 = ['beep', 'Beep bep', 'Bep beep', 'Bpep', 'Beep beep beeep', 'bep']
                     fraseschewbacca = ['Grrrrowr', 'Hwaaurrgh', 'ghaawwu', 'huagg', 'Rrwaahhggg', 'Grrrruuughhh']
                     if personaje == 'r2d2' or personaje == 'arturito':
-                        print(f"{personaje.upper()}:", random.choice(frasesr2d2))
+                        textoPersonalizado(personaje.upper(), random.choice(frasesr2d2))
                     else:
-                        print(f"{personaje.upper()}:", random.choice(fraseschewbacca))
+                        textoPersonalizado(personaje.upper(), random.choice(fraseschewbacca))
 
                 case 'yoda' | 'c3po':
                     primeraVez = False
@@ -1091,7 +1091,7 @@ def eleccionPersonaje(personaje):
                         global porcentajeAcierto
                         textoPersonalizado(personaje.upper(), respuesta)
                         print(f'SYSTEM: Porcentaje de acierto con las preguntas: {porcentajeAcierto}% \n')
-                        correcta = input("SYSTEM: Era la respuesta correcta? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>=")
+                        correcta = input("SYSTEM: Era la respuesta correcta? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>=@+-*")
                         borrarLineas(1,boo)
                         while correcta not in ["si", "no"]:
                             correcta = input("SYSTEM: No entendí, ¿era la respuesta correcta? (si/no): ").lower()
