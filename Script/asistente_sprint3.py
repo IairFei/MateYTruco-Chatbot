@@ -478,12 +478,12 @@ def ortografia(entrada, listado):
                     print(f"SYSTEM: ⚠︎ Palabra no encontrada: '{palabra}'")
                     print(f"SYSTEM: ¿Quisiste decir '{coincidencias[i]}'? Escriba 'si' para confirmar o 'no' para continuar:  ", end="")
                     respuesta = input("").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<=")
-                    while respuesta not in ["si", "no"]:
+                    while respuesta not in ["si", "no",'s','n']:
                         respuesta = input(f"SYSTEM: No entendí, ¿desea modificar la palabra {palabra} por {coincidencias[i]}? (si/no): ")
                         respuesta = respuesta.lower().strip("¿?#$%&/()!¡-_[]{.],;:<=")
                         borrarLineas(1, boo)
 
-                    if respuesta == 'si':
+                    if respuesta in ["si", "s"]:
                         borrarLineas(3, boo)
                         print(f"SYSTEM: Se modifico '{palabra}' por '{coincidencias[i]}'")
                         cantCorreccionesOrtograficas += 1
@@ -537,9 +537,9 @@ def preguntasFrecuentes():
             #mostrar como string la pregunta
             print(f"{i+1}. {pregunta[0][0]}?")       
         eleccionPregunta = input("\nSYSTEM: ¿Desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
-        while eleccionPregunta not in ["si", "no"]:
+        while eleccionPregunta not in ["si", "no",'s','n']:
             eleccionPregunta = input("\nSYSTEM: No entendí, ¿desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
-        if eleccionPregunta == 'si':
+        if eleccionPregunta in ["si", "s"]:
             try:
                 preguntaElegida = int(input("\nSYSTEM: Escriba el numero de la pregunta que desea hacer: "))
                 while preguntaElegida > 3 or preguntaElegida < 1:
@@ -754,6 +754,7 @@ def agregarPregunta():
         Exception: Maneja cualquier otra excepción usando `manejarError`.
     """
     cont = 0
+    answer = ""
     try:
         global entradaOriginal
         global respuestaAgregada
@@ -767,10 +768,10 @@ def agregarPregunta():
         else:
             entrada = entradaOriginal
         agrPregunta = input(f"\nSYSTEM: Desea agregar la pregunta '{entrada}' al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]{.},;:<> ")
-        while agrPregunta not in ["si", "no"]:
+        while agrPregunta not in ["si", "no",'s','n']:
             agrPregunta = input("\nSYSTEM: No entendí, ¿desea agregar la pregunta al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡ -_[]{.]},;:<>")
 
-        if agrPregunta == 'si':
+        if agrPregunta in ["si", "s"]  :
             preguntaEnArchivo = True
             while preguntaEnArchivo == True:
                 ya_existe = False
@@ -1110,18 +1111,18 @@ def eleccionPersonaje(personaje):
                         print(f'SYSTEM: Porcentaje de acierto con las preguntas: {porcentajeAcierto}% \n')
                         correcta = input("SYSTEM: Era la respuesta correcta? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>=@+-*")
                         borrarLineas(1,boo)
-                        while correcta not in ["si", "no"]:
+                        while correcta not in ["si", "no",'s','n']:
                             correcta = input("SYSTEM: No entendí, ¿era la respuesta correcta? (si/no): ").lower()
-                        if correcta == 'no':
+                        if correcta == 'no' or correcta == 'n':
                             print("\nLas siguientes preguntas son las que más se parecen a la pregunta que hiciste:\n")
                             if len(top3MasParecidas) >=2:
                                 for i, pregunta in enumerate(top3MasParecidas):
                                     if pregunta:
                                         print(f"{i + 1}. ¿{pregunta.capitalize()}?")
                                 eleccionPregunta = input("SYSTEM: ¿Desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
-                                while eleccionPregunta not in ["si", "no"]:
+                                while eleccionPregunta not in ["si", "no",'s','n']:
                                     eleccionPregunta = input("SYSTEM: No entendí, ¿desea hacer una de estas preguntas? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>")
-                                if eleccionPregunta == 'si':
+                                if eleccionPregunta in ["si", "s"]:
                                     try:
                                         preguntaElegida = int(input("SYSTEM: Escriba el numero de la pregunta que desea hacer: "))
                                         while preguntaElegida > 3 or preguntaElegida < 1:
