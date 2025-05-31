@@ -423,7 +423,7 @@ def stem_basico(palabra):
         return
 
 
-def ortografia(entrada, listado):
+def ortografia(entrada, listado,umbral):
     """
     Corrige errores ortográficos en una entrada de texto comparando cada palabra con un listado de palabras válidas.
     Parámetros:
@@ -456,14 +456,18 @@ def ortografia(entrada, listado):
         for pal in listado:
             listado_stem = stem_basico(pal.lower()) 
 
-
         for palabra in entrada_limpia:
             palabra = palabra.lower()
             palabra_stem = stem_basico(palabra)
+            if len(palabra) <= 2 and palabra:
+                for letra in palabra:
+                    if letra in  ['e']:
+                        palabra = ''
+
 
             if palabra_stem not in listado_stem:
                 try:
-                    coincidencias = difflib.get_close_matches(palabra, listado, n=3, cutoff=0.5)
+                    coincidencias = difflib.get_close_matches(palabra, listado, n=3, cutoff=umbral)
                 except Exception as e:
                     manejarError(e, "Error en la búsqueda de coincidencias.")
                     salida.append(palabra)
@@ -666,7 +670,7 @@ def inicioPrograma():
 
         ayuda()
         personaje = input("\nSYSTEM: Por favor, escribí el nombre del personaje con el que querés hablar o algun comando: ")
-        personaje = ortografia(personaje,pClaves)
+        personaje = ortografia(personaje,pClaves,0.5)
 
         personaje = ' '.join(personaje)
         if personaje == '':
@@ -1022,7 +1026,7 @@ def eleccionPersonaje(personaje):
             if personaje not in ['yoda', 'chewbacca', 'r2d2', 'c3po', 'arturito'] or personaje == '':
                 personaje = input('SYSTEM: No entendí, ingrese el personaje nuevamente: ')
                 try:
-                    personaje = ortografia(personaje,pClaves)
+                    personaje = ortografia(personaje,pClaves,0.5)
                     personaje = ' '.join(personaje)
                     continue
                 except Exception as e:
@@ -1032,11 +1036,6 @@ def eleccionPersonaje(personaje):
             if primeraVez == True:
                 print(f"\nElegiste hablar con {personaje.upper()}. Puedes hacerle preguntas o cambiar de personaje escribiendo 'cambiar personaje'.")
                 print("Escribe 'salir' o 'adios' para finalizar la conversación.\n")
-                if primeraVez == True:
-                    if personaje.lower() == 'yoda':
-                        textoPersonalizado(personaje.upper(), "Mucho que aprender, tu tienes, sí. Preguntas sobre personajes, películas, planetas, especies, naves, droides, la Fuerza, batallas y curiosidades del universo Star Wars, responderé, hmm?")
-                    elif personaje.lower() in ['c3po', 'c-3po']:
-                        textoPersonalizado(personaje.upper(), "¡Bienvenido! Puedes preguntarme sobre personajes, películas, planetas, especies, naves, droides, la Fuerza, batallas y curiosidades del universo Star Wars. ¡Explora la galaxia con tus preguntas!")
 
             print("Tú: ", end="")
             entrada = input()
@@ -1044,7 +1043,9 @@ def eleccionPersonaje(personaje):
             textoPersonalizado("Tú", entrada)
             entrada = entrada.lower().strip("¿?#$%&/()!¡-_[]}{.,;:<>=@+-*")
             palabrasClaves.extend(pClaves)
-            entrada = ortografia(entrada,palabrasClaves)
+            global articulos
+            entrada = ortografia(entrada,articulos,0.6)
+            entrada = ortografia(entradaModificada,palabrasClaves,0.5)
 
             if entradaModificada in ["ayuda"]:
                 ayuda()
