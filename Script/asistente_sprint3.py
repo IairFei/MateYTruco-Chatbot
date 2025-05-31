@@ -1005,6 +1005,8 @@ def eleccionPersonaje(personaje):
     """
     # Se define la función eleccionPersonaje que permite al usuario elegir un personaje para interactuar
     try:
+        frasesr2d2 = ['beep', 'Beep bep', 'Bep beep', 'Bpep', 'Beep beep beeep', 'bep']
+        fraseschewbacca = ['Grrrrowr', 'Hwaaurrgh', 'ghaawwu', 'huagg', 'Rrwaahhggg', 'Grrrruuughhh']
         global agregoPregunta
         global preguntaEnArchivo
         preguntaEnArchivo = ""
@@ -1045,7 +1047,10 @@ def eleccionPersonaje(personaje):
                         textoPersonalizado(personaje.upper(), "Mucho que aprender, tu tienes, sí. Preguntas sobre personajes, películas, planetas, especies, naves, droides, la Fuerza, batallas y curiosidades del universo Star Wars, responderé, hmm?")
                     elif personaje.lower() in ['c3po', 'c-3po']:
                         textoPersonalizado(personaje.upper(), "¡Bienvenido! Puedes preguntarme sobre personajes, películas, planetas, especies, naves, droides, la Fuerza, batallas y curiosidades del universo Star Wars. ¡Explora la galaxia con tus preguntas!")
-
+                    elif personaje.lower() in ['chewbacca']:
+                        textoPersonalizado(personaje.upper(), random.choice(fraseschewbacca))
+                    elif personaje.lower() in ['r2d2', 'arturito']:
+                        textoPersonalizado(personaje.upper(), random.choice(frasesr2d2))
             print("Tú: ", end="")
             entrada = input()
             borrarLineas(1,boo)
@@ -1087,8 +1092,6 @@ def eleccionPersonaje(personaje):
             match personaje.lower():
                 case 'r2d2' | 'chewbacca' | 'arturito':
                     primeraVez = False
-                    frasesr2d2 = ['beep', 'Beep bep', 'Bep beep', 'Bpep', 'Beep beep beeep', 'bep']
-                    fraseschewbacca = ['Grrrrowr', 'Hwaaurrgh', 'ghaawwu', 'huagg', 'Rrwaahhggg', 'Grrrruuughhh']
                     if personaje == 'r2d2' or personaje == 'arturito':
                         textoPersonalizado(personaje.upper(), random.choice(frasesr2d2))
                     else:
