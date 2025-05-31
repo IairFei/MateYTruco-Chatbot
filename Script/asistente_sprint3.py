@@ -5,9 +5,9 @@ import datetime
 import json
 
 # Librerías originales
-articulos = ["fue","el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de", "que", "en", "por", "para", "con", "a", "y", "o", "si", "no", "como", "mas", "menos", "muy", "todo", "toda", "todos", "todas","quien", "quienes", "cual", "cuales", "donde", "cuando", "porque"]
+articulos = ["fue","el","la","los","las","un","una","unos","unas","al","del","es","de","que","en","por","para","con","a","y","o","si","no","como","mas","menos","muy","todo","toda","todos","todas","quien","quienes","cual","cuales","donde","cuando","porque"]
 
-pClaves = ["cambiar", "personaje", "adios", "salir", 'r2d2','arturito', 'c-3po', 'yoda', 'chewbacca','c3po','preguntas','frecuentes','menu', 'volver','creditos','equipo','ayuda']
+pClaves = ["cambiar","personaje","adios","salir",'r2d2','arturito','c-3po','yoda','darth','vader','chewbacca','c3po','preguntas','frecuentes','menu','volver','creditos','equipo','ayuda']
 
 vocalesTildes = ["á", "é", "í", "ó", "ú"]
 vocalesSinTilde = ['a', 'e', 'i', 'o', 'u']
@@ -768,10 +768,13 @@ def agregarPregunta():
         else:
             entrada = entradaOriginal
         agrPregunta = input(f"\nSYSTEM: Desea agregar la pregunta '{entrada}' al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]{.},;:<> ")
-        while agrPregunta not in ["si", "no",'s','n']:
+        while agrPregunta not in ["si", "no",'s','n','salir','adios']:
             agrPregunta = input("\nSYSTEM: No entendí, ¿desea agregar la pregunta al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡ -_[]{.]},;:<>")
 
-        if agrPregunta in ["si", "s"]  :
+        if agrPregunta in ["salir", "adios"]:
+            return eleccionPersonaje(agrPregunta)
+            
+        elif agrPregunta in ["si", "s"]  :
             preguntaEnArchivo = True
             while preguntaEnArchivo == True:
                 ya_existe = False
@@ -1020,8 +1023,12 @@ def eleccionPersonaje(personaje):
             if personaje.lower() in ["frecuentes", "preguntas frecuentes"]:
                 preguntasFrecuentes()
                 return inicioPrograma()
-            personaje = personaje.replace('-','')
-            if personaje not in ['yoda', 'chewbacca', 'r2d2', 'c3po', 'arturito'] or personaje == '':
+            personaje = personaje.replace('-','').lower()
+            if personaje == 'vader':
+                personaje = 'darth vader'
+            elif personaje == 'arturito':
+                personaje = 'r2d2'
+            if personaje not in ['yoda', 'chewbacca', 'r2d2', 'c3po','darth vader'] or personaje == '':
                 personaje = input('SYSTEM: No entendí, ingrese el personaje nuevamente: ')
                 try:
                     personaje = ortografia(personaje,pClaves)
@@ -1043,6 +1050,8 @@ def eleccionPersonaje(personaje):
                         textoPersonalizado(personaje.upper(), random.choice(fraseschewbacca))
                     elif personaje.lower() in ['r2d2', 'arturito']:
                         textoPersonalizado(personaje.upper(), random.choice(frasesr2d2))
+                    else:
+                        textoPersonalizado(personaje.upper(), "Yo, soy, tu guía. Te enseñaré todo sobre personajes, películas, planetas, especies, naves, droides, la Fuerza, batallas y curiosidades del universo Star Wars para que juntos podamos dominar la galaxia. *Respiración*")
             print("Tú: ", end="")
             entrada = input()
             borrarLineas(1,boo)
@@ -1089,7 +1098,7 @@ def eleccionPersonaje(personaje):
                     else:
                         textoPersonalizado(personaje.upper(), random.choice(fraseschewbacca))
 
-                case 'yoda' | 'c3po':
+                case 'yoda' | 'c3po' | 'darth vader':
                     primeraVez = False
                     try:
                         if personaje == 'yoda':
@@ -1097,10 +1106,17 @@ def eleccionPersonaje(personaje):
                             respuesta = lectorPregunta(entrada, True)
                         else:
                             esYoda = False
-                            respuesta = lectorPregunta(entrada, False)
+                            if personaje == 'c3po':
+                                respuesta = lectorPregunta(entrada, False)
+                            else:
+                                respuestaVader = lectorPregunta(entrada, False)+' *Respiración*'
+                                respuesta = lectorPregunta(entrada, False)
 
                         if respuesta == "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.":
-                            textoPersonalizado(personaje.upper(), respuesta)
+                            if personaje != 'darth vader':
+                                textoPersonalizado(personaje.upper(), respuesta)
+                            else:
+                                textoPersonalizado(personaje.upper(), respuestaVader)
                             respuesta = ''
                             agregarPregunta()
                             agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuestaAgregada, personaje.upper())
