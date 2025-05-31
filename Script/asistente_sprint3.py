@@ -5,9 +5,9 @@ import datetime
 import json
 
 # Librerías originales
-articulos = ["fue","el", "la", "los", "las", "un", "una", "unos", "unas", "al", "del", "es", "de", "que", "en", "por", "para", "con", "a", "y", "o", "si", "no", "como", "mas", "menos", "muy", "todo", "toda", "todos", "todas","quien", "quienes", "cual", "cuales", "donde", "cuando", "porque"]
+articulos = ["fue","el","la","los","las","un","una","unos","unas","al","del","es","de","que","en","por","para","con","a","y","o","si","no","como","mas","menos","muy","todo","toda","todos","todas","quien","quienes","cual","cuales","donde","cuando","porque"]
 
-pClaves = ["cambiar", "personaje", "adios", "salir", 'r2d2','arturito', 'c-3po', 'yoda', 'chewbacca','c3po','preguntas','frecuentes','menu', 'volver','creditos','equipo','ayuda']
+pClaves = ["cambiar","personaje","adios","salir",'r2d2','arturito','c-3po','yoda','darth','vader','chewbacca','c3po','preguntas','frecuentes','menu','volver','creditos','equipo','ayuda']
 
 vocalesTildes = ["á", "é", "í", "ó", "ú"]
 vocalesSinTilde = ['a', 'e', 'i', 'o', 'u']
@@ -17,6 +17,7 @@ primeraVez = True
 esYoda = False
 agregoPregunta = False
 boo = True
+preguntaNoEncontrada = False
 
 # Archivos y carpetas
 existeArchivoPreguntas = True
@@ -232,9 +233,9 @@ def creditos():
                 ⣀⣀⣀⣀⣀⣀⡀⠛⢿⣷⠟⡋⣩⠻⣗⠀⠻⣝⢻⡌⠀⣍⡥⠊⠀⠀⠀⠀    │ Holm Ian                                     |
                 ⠈⠑⢝⡻⠿⣿⣿⣿⣾⡟⠘⢋⡉⠞⠒⠒⠋⠈⢲⣿⣿⡛⠁⠀⠀⠀⠀⠀    │ Feigelman Iair                               |
                 ⠀⠀⠀⠈⠑⠢⠍⠙⣿⣿⣄⡀⣠⣎⡀⠤⢤⣢⣿⣿⡟⠀⠀⠀⠀⠀⠀⠀    | Cinti Valentino                              |
-                ⠀⠀⠀⠀⠀⠀⠀⠀⠙⠙⣿⣿⣿⣿⣿⣿⣛⣿⣿⣿⡅⠀⠀⠀⠀⠀⠀⠀    | Mora Diego                                   |
-                ⠀⠀⠀⠀⠀⠀⠀⢀⣀⣴⣿⣿⣿⣿⣿⣿⣿⣿⢿⣫⢤⢙⢦⠰⣄⡀⠀⠀    | Guzman Kevin                                 |
-                ⠀⠀⠀⠀⠀⢠⣼⣿⣿⣿⣳⢻⣿⣿⣿⣿⣷⠾⠿⠋⠖⠄⠀⠙⠎⢷⡀⠀    |/─────────────────────────────────────────────╯ 
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠙⠙⣿⣿⣿⣿⣿⣿⣛⣿⣿⣿⡅⠀⠀⠀⠀⠀⠀⠀    |/─────────────────────────────────────────────╯ 
+                ⠀⠀⠀⠀⠀⠀⠀⢀⣀⣴⣿⣿⣿⣿⣿⣿⣿⣿⢿⣫⢤⢙⢦⠰⣄⡀⠀⠀ 
+                ⠀⠀⠀⠀⠀⢠⣼⣿⣿⣿⣳⢻⣿⣿⣿⣿⣷⠾⠿⠋⠖⠄⠀⠙⠎⢷⡀⠀    
                 ⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣯⡁⢿⣿⣿⣶⣶⣶⠶⠞⢉⣇⡀⠀⣀⣼⣷⠀
                 ⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣧⡾⢉⡛⠿⠢⢌⢀⣾⣿⣿⣿⣿⣿⣿⠀
                 ⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡦⡦⢮⠀⢰⡙⡛⠿⣿⣿⣿⠂
@@ -701,31 +702,35 @@ def agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaCorregida,
     
     try:
         global porcentajeAcierto
+        global preguntaNoEncontrada
         with open("Logs/log.txt", "a", encoding="utf-8") as file:
             file.write("\nFecha y hora: " + str(datetime.datetime.now()) + "\n")
             file.write(f"Pregunta hecha por el usuario: {entradaCorregida}\n")
             if huboCorreccionOrtografica == True:
                 file.write(f"Pregunta sin correcion ortografica: {entradaOriginal}\n")
-            if agregoPregunta == True  and respuesta == "":
+            if preguntaNoEncontrada == True and agregoPregunta == False and respuesta == "" and primeraVez == False:
+                file.write(f"Pregunta no encontrada en el archivo: {entradaOriginal}\n")
+                file.write(f"Porcentaje de acierto con las preguntas: 0%\n")
+            elif agregoPregunta == True  and respuesta == "":
                 file.write(f"Pregunta en el archivo: {preguntaEnArchivo}\n")
                 file.write(f"Respuesta agregada por el usuario: Ocurrio un error, no se agrego una respuesta\n")
                 file.write(f"Porcentaje de acierto con las preguntas: {porcentajeAcierto}%\n")
             elif agregoPregunta == False and respuesta == "":
                 file.write(f"Respuesta: El usuario decidio no agregar la pregunta \n")
-                file.write(f"Porcentaje de acierto con las preguntas: 0%\n")
+                if preguntaNoEncontrada == False:
+                    file.write(f"Porcentaje de acierto con las preguntas: 0%\n")
             elif agregoPregunta == True and respuesta != "":
                 file.write(f"Pregunta agregada por el usuario al archivo: {preguntaAgregada}\n")
                 file.write(f"Respuesta agregada por el usuario: {respuestaAgregada}\n")
                 file.write(f"Porcentaje de acierto con las preguntas: No se tendra en cuenta el porcentaje ya que es una pregunta nueva agregada por el usuario\n")
-            elif agregoPregunta == False and respuesta != "" and primeraVez == False:
+            elif agregoPregunta == False and respuesta != "" and primeraVez == False and preguntaNoEncontrada == False:
                 file.write(f"Pregunta en el archivo: {preguntaEnArchivo}\n")
                 file.write(f"Respuesta: {respuesta}\n") 
                 file.write(f"Porcentaje de acierto con las preguntas: {porcentajeAcierto}%\n")
-            else:
-                file.write("Error")
             file.write(f"Personaje: {personaje}\n")        
             file.write("\n")
             file.write("----------------------------------------\n")
+            preguntaEnArchivo = False
     except FileNotFoundError:
         with open("Logs/log.txt", "w", encoding="utf-8") as file:
             verificarArchivos()
@@ -772,10 +777,13 @@ def agregarPregunta():
         else:
             entrada = entradaOriginal
         agrPregunta = input(f"\nSYSTEM: Desea agregar la pregunta '{entrada}' al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡-_[]{.},;:<> ")
-        while agrPregunta not in ["si", "no",'s','n']:
+        while agrPregunta not in ["si", "no",'s','n','salir','adios']:
             agrPregunta = input("\nSYSTEM: No entendí, ¿desea agregar la pregunta al sistema? (si/no): ").lower().strip("¿?#$%&/()!¡ -_[]{.]},;:<>")
 
-        if agrPregunta in ["si", "s"]  :
+        if agrPregunta in ["salir", "adios"]:
+            return eleccionPersonaje(agrPregunta)
+            
+        elif agrPregunta in ["si", "s"]  :
             preguntaEnArchivo = True
             while preguntaEnArchivo == True:
                 ya_existe = False
@@ -826,6 +834,8 @@ def agregarPregunta():
                     print("SYSTEM: Por favor, vuelva a intentar.\n")
                     agregarPregunta(preguntaAgregada)
         else:
+            global respuesta
+            respuesta=""
             respuestaAgregada=""
             agregoPregunta = False
         return answer
@@ -904,6 +914,7 @@ def buscarRespuesta(userInput, questGroup, answGroup):
             preguntaEnArchivo = preguntaEnArchivo.capitalize() + "?"
             return answGroup[mejorIndice][0]
 
+        
         return "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema."
 
     except Exception as e:
@@ -1001,6 +1012,8 @@ def eleccionPersonaje(personaje):
     """
     # Se define la función eleccionPersonaje que permite al usuario elegir un personaje para interactuar
     try:
+        frasesr2d2 = ['beep', 'Beep bep', 'Bep beep', 'Bpep', 'Beep beep beeep', 'bep']
+        fraseschewbacca = ['Grrrrowr', 'Hwaaurrgh', 'ghaawwu', 'huagg', 'Rrwaahhggg', 'Grrrruuughhh']
         global agregoPregunta
         global preguntaEnArchivo
         preguntaEnArchivo = ""
@@ -1022,8 +1035,12 @@ def eleccionPersonaje(personaje):
             if personaje.lower() in ["frecuentes", "preguntas frecuentes"]:
                 preguntasFrecuentes()
                 return inicioPrograma()
-            personaje = personaje.replace('-','')
-            if personaje not in ['yoda', 'chewbacca', 'r2d2', 'c3po', 'arturito'] or personaje == '':
+            personaje = personaje.replace('-','').lower()
+            if personaje == 'vader':
+                personaje = 'darth vader'
+            elif personaje == 'arturito':
+                personaje = 'r2d2'
+            if personaje not in ['yoda', 'chewbacca', 'r2d2', 'c3po','darth vader'] or personaje == '':
                 personaje = input('SYSTEM: No entendí, ingrese el personaje nuevamente: ')
                 try:
                     personaje = ortografia(personaje,pClaves,0.5)
@@ -1036,7 +1053,17 @@ def eleccionPersonaje(personaje):
             if primeraVez == True:
                 print(f"\nElegiste hablar con {personaje.upper()}. Puedes hacerle preguntas o cambiar de personaje escribiendo 'cambiar personaje'.")
                 print("Escribe 'salir' o 'adios' para finalizar la conversación.\n")
-
+                if primeraVez == True:
+                    if personaje.lower() == 'yoda':
+                        textoPersonalizado(personaje.upper(), "Mucho que aprender, tu tienes, sí. Preguntas sobre personajes, películas, planetas, especies, naves, droides, la Fuerza, batallas y curiosidades del universo Star Wars, responderé, hmm?")
+                    elif personaje.lower() in ['c3po', 'c-3po']:
+                        textoPersonalizado(personaje.upper(), "¡Bienvenido! Puedes preguntarme sobre personajes, películas, planetas, especies, naves, droides, la Fuerza, batallas y curiosidades del universo Star Wars. ¡Explora la galaxia con tus preguntas!")
+                    elif personaje.lower() in ['chewbacca']:
+                        textoPersonalizado(personaje.upper(), random.choice(fraseschewbacca))
+                    elif personaje.lower() in ['r2d2', 'arturito']:
+                        textoPersonalizado(personaje.upper(), random.choice(frasesr2d2))
+                    else:
+                        textoPersonalizado(personaje.upper(), "Yo, soy, tu guía. Te enseñaré todo sobre personajes, películas, planetas, especies, naves, droides, la Fuerza, batallas y curiosidades del universo Star Wars para que juntos podamos dominar la galaxia. *Respiración*")
             print("Tú: ", end="")
             entrada = input()
             borrarLineas(1,boo)
@@ -1080,14 +1107,12 @@ def eleccionPersonaje(personaje):
             match personaje.lower():
                 case 'r2d2' | 'chewbacca' | 'arturito':
                     primeraVez = False
-                    frasesr2d2 = ['beep', 'Beep bep', 'Bep beep', 'Bpep', 'Beep beep beeep', 'bep']
-                    fraseschewbacca = ['Grrrrowr', 'Hwaaurrgh', 'ghaawwu', 'huagg', 'Rrwaahhggg', 'Grrrruuughhh']
                     if personaje == 'r2d2' or personaje == 'arturito':
                         textoPersonalizado(personaje.upper(), random.choice(frasesr2d2))
                     else:
                         textoPersonalizado(personaje.upper(), random.choice(fraseschewbacca))
 
-                case 'yoda' | 'c3po':
+                case 'yoda' | 'c3po' | 'darth vader':
                     primeraVez = False
                     try:
                         if personaje == 'yoda':
@@ -1095,11 +1120,20 @@ def eleccionPersonaje(personaje):
                             respuesta = lectorPregunta(entrada, True)
                         else:
                             esYoda = False
-                            respuesta = lectorPregunta(entrada, False)
+                            if personaje == 'c3po':
+                                respuesta = lectorPregunta(entrada, False)
+                            else:
+                                respuestaVader = lectorPregunta(entrada, False)+' *Respiración*'
+                                respuesta = lectorPregunta(entrada, False)
 
                         if respuesta == "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema.":
-                            textoPersonalizado(personaje.upper(), respuesta)
+                            if personaje != 'darth vader':
+                                textoPersonalizado(personaje.upper(), respuesta)
+                            else:
+                                textoPersonalizado(personaje.upper(), respuestaVader)
                             respuesta = ''
+                            global preguntaNoEncontrada
+                            preguntaNoEncontrada = True
                             agregarPregunta()
                             agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuestaAgregada, personaje.upper())
                             textoPersonalizado(personaje.upper(), 'Hazme otra pregunta' )
@@ -1120,6 +1154,9 @@ def eleccionPersonaje(personaje):
                         while correcta not in ["si", "no",'s','n']:
                             correcta = input("SYSTEM: No entendí, ¿era la respuesta correcta? (si/no): ").lower()
                         if correcta == 'no' or correcta == 'n':
+                            preguntaNoEncontrada = True
+                            respuesta = ''
+                            agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuesta, personaje.upper())
                             print("\nLas siguientes preguntas son las que más se parecen a la pregunta que hiciste:\n")
                             if len(top3MasParecidas) >=2:
                                 for i, pregunta in enumerate(top3MasParecidas):
