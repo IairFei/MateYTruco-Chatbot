@@ -17,6 +17,7 @@ primeraVez = True
 esYoda = False
 agregoPregunta = False
 boo = True
+preguntaNoEncontrada = False
 
 # Archivos y carpetas
 existeArchivoPreguntas = True
@@ -232,9 +233,9 @@ def creditos():
                 ⣀⣀⣀⣀⣀⣀⡀⠛⢿⣷⠟⡋⣩⠻⣗⠀⠻⣝⢻⡌⠀⣍⡥⠊⠀⠀⠀⠀    │ Holm Ian                                     |
                 ⠈⠑⢝⡻⠿⣿⣿⣿⣾⡟⠘⢋⡉⠞⠒⠒⠋⠈⢲⣿⣿⡛⠁⠀⠀⠀⠀⠀    │ Feigelman Iair                               |
                 ⠀⠀⠀⠈⠑⠢⠍⠙⣿⣿⣄⡀⣠⣎⡀⠤⢤⣢⣿⣿⡟⠀⠀⠀⠀⠀⠀⠀    | Cinti Valentino                              |
-                ⠀⠀⠀⠀⠀⠀⠀⠀⠙⠙⣿⣿⣿⣿⣿⣿⣛⣿⣿⣿⡅⠀⠀⠀⠀⠀⠀⠀    | Mora Diego                                   |
-                ⠀⠀⠀⠀⠀⠀⠀⢀⣀⣴⣿⣿⣿⣿⣿⣿⣿⣿⢿⣫⢤⢙⢦⠰⣄⡀⠀⠀    | Guzman Kevin                                 |
-                ⠀⠀⠀⠀⠀⢠⣼⣿⣿⣿⣳⢻⣿⣿⣿⣿⣷⠾⠿⠋⠖⠄⠀⠙⠎⢷⡀⠀    |/─────────────────────────────────────────────╯ 
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠙⠙⣿⣿⣿⣿⣿⣿⣛⣿⣿⣿⡅⠀⠀⠀⠀⠀⠀⠀    |/─────────────────────────────────────────────╯ 
+                ⠀⠀⠀⠀⠀⠀⠀⢀⣀⣴⣿⣿⣿⣿⣿⣿⣿⣿⢿⣫⢤⢙⢦⠰⣄⡀⠀⠀ 
+                ⠀⠀⠀⠀⠀⢠⣼⣿⣿⣿⣳⢻⣿⣿⣿⣿⣷⠾⠿⠋⠖⠄⠀⠙⠎⢷⡀⠀    
                 ⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣯⡁⢿⣿⣿⣶⣶⣶⠶⠞⢉⣇⡀⠀⣀⣼⣷⠀
                 ⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣧⡾⢉⡛⠿⠢⢌⢀⣾⣿⣿⣿⣿⣿⣿⠀
                 ⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡦⡦⢮⠀⢰⡙⡛⠿⣿⣿⣿⠂
@@ -697,31 +698,35 @@ def agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaCorregida,
     
     try:
         global porcentajeAcierto
+        global preguntaNoEncontrada
         with open("Logs/log.txt", "a", encoding="utf-8") as file:
             file.write("\nFecha y hora: " + str(datetime.datetime.now()) + "\n")
             file.write(f"Pregunta hecha por el usuario: {entradaCorregida}\n")
             if huboCorreccionOrtografica == True:
                 file.write(f"Pregunta sin correcion ortografica: {entradaOriginal}\n")
-            if agregoPregunta == True  and respuesta == "":
+            if preguntaNoEncontrada == True and agregoPregunta == False and respuesta == "" and primeraVez == False:
+                file.write(f"Pregunta no encontrada en el archivo: {entradaOriginal}\n")
+                file.write(f"Porcentaje de acierto con las preguntas: 0%\n")
+            elif agregoPregunta == True  and respuesta == "":
                 file.write(f"Pregunta en el archivo: {preguntaEnArchivo}\n")
                 file.write(f"Respuesta agregada por el usuario: Ocurrio un error, no se agrego una respuesta\n")
                 file.write(f"Porcentaje de acierto con las preguntas: {porcentajeAcierto}%\n")
             elif agregoPregunta == False and respuesta == "":
                 file.write(f"Respuesta: El usuario decidio no agregar la pregunta \n")
-                file.write(f"Porcentaje de acierto con las preguntas: 0%\n")
+                if preguntaNoEncontrada == False:
+                    file.write(f"Porcentaje de acierto con las preguntas: 0%\n")
             elif agregoPregunta == True and respuesta != "":
                 file.write(f"Pregunta agregada por el usuario al archivo: {preguntaAgregada}\n")
                 file.write(f"Respuesta agregada por el usuario: {respuestaAgregada}\n")
                 file.write(f"Porcentaje de acierto con las preguntas: No se tendra en cuenta el porcentaje ya que es una pregunta nueva agregada por el usuario\n")
-            elif agregoPregunta == False and respuesta != "" and primeraVez == False:
+            elif agregoPregunta == False and respuesta != "" and primeraVez == False and preguntaNoEncontrada == False:
                 file.write(f"Pregunta en el archivo: {preguntaEnArchivo}\n")
                 file.write(f"Respuesta: {respuesta}\n") 
                 file.write(f"Porcentaje de acierto con las preguntas: {porcentajeAcierto}%\n")
-            else:
-                file.write("Error")
             file.write(f"Personaje: {personaje}\n")        
             file.write("\n")
             file.write("----------------------------------------\n")
+            preguntaEnArchivo = False
     except FileNotFoundError:
         with open("Logs/log.txt", "w", encoding="utf-8") as file:
             verificarArchivos()
@@ -825,6 +830,8 @@ def agregarPregunta():
                     print("SYSTEM: Por favor, vuelva a intentar.\n")
                     agregarPregunta(preguntaAgregada)
         else:
+            global respuesta
+            respuesta=""
             respuestaAgregada=""
             agregoPregunta = False
         return answer
@@ -903,6 +910,7 @@ def buscarRespuesta(userInput, questGroup, answGroup):
             preguntaEnArchivo = preguntaEnArchivo.capitalize() + "?"
             return answGroup[mejorIndice][0]
 
+        
         return "No tengo respuesta para esa pregunta, lo siento. Vamos a agregar la pregunta al sistema."
 
     except Exception as e:
@@ -1118,6 +1126,8 @@ def eleccionPersonaje(personaje):
                             else:
                                 textoPersonalizado(personaje.upper(), respuestaVader)
                             respuesta = ''
+                            global preguntaNoEncontrada
+                            preguntaNoEncontrada = True
                             agregarPregunta()
                             agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuestaAgregada, personaje.upper())
                             textoPersonalizado(personaje.upper(), 'Hazme otra pregunta' )
@@ -1138,6 +1148,9 @@ def eleccionPersonaje(personaje):
                         while correcta not in ["si", "no",'s','n']:
                             correcta = input("SYSTEM: No entendí, ¿era la respuesta correcta? (si/no): ").lower()
                         if correcta == 'no' or correcta == 'n':
+                            preguntaNoEncontrada = True
+                            respuesta = ''
+                            agregarInteraccionLogs(entradaOriginal, preguntaEnArchivo, entradaModificada, respuesta, personaje.upper())
                             print("\nLas siguientes preguntas son las que más se parecen a la pregunta que hiciste:\n")
                             if len(top3MasParecidas) >=2:
                                 for i, pregunta in enumerate(top3MasParecidas):
