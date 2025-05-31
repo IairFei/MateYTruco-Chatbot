@@ -1032,6 +1032,11 @@ def eleccionPersonaje(personaje):
             if primeraVez == True:
                 print(f"\nElegiste hablar con {personaje.upper()}. Puedes hacerle preguntas o cambiar de personaje escribiendo 'cambiar personaje'.")
                 print("Escribe 'salir' o 'adios' para finalizar la conversación.\n")
+                if primeraVez == True:
+                    if personaje.lower() == 'yoda':
+                        textoPersonalizado(personaje.upper(), "Mucho que aprender, tu tienes, sí. Preguntas sobre personajes, películas, planetas, especies, naves, droides, la Fuerza, batallas y curiosidades del universo Star Wars, responderé, hmm?")
+                    elif personaje.lower() in ['c3po', 'c-3po']:
+                        textoPersonalizado(personaje.upper(), "¡Bienvenido! Puedes preguntarme sobre personajes, películas, planetas, especies, naves, droides, la Fuerza, batallas y curiosidades del universo Star Wars. ¡Explora la galaxia con tus preguntas!")
 
             print("Tú: ", end="")
             entrada = input()
